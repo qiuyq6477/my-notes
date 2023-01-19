@@ -37,7 +37,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Games104/1. 游戏引擎导论.md",
+                "file": "Games104/3. 如何构建游戏世界.md",
                 "mode": "source",
                 "source": false
               }
@@ -68,7 +68,7 @@
             }
           }
         ],
-        "currentTab": 4
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -134,7 +134,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Games104/2. 引擎架构分层.md",
+                "file": "Games104/3. 如何构建游戏世界.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -151,7 +151,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Games104/2. 引擎架构分层.md",
+                "file": "Games104/3. 如何构建游戏世界.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -174,7 +174,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Games104/2. 引擎架构分层.md"
+                "file": "Games104/3. 如何构建游戏世界.md"
               }
             }
           }
@@ -198,11 +198,11 @@
       "workspaces:Manage workspace layouts": false
     }
   },
-  "active": "1defc4c80e0e5863",
+  "active": "ebb71765d15fb2e8",
   "lastOpenFiles": [
-    "Games104/3. 如何构建游戏世界.md",
-    "Games104/2. 引擎架构分层.md",
     "Games104/1. 游戏引擎导论.md",
+    "Games104/2. 引擎架构分层.md",
+    "Games104/3. 如何构建游戏世界.md",
     "Lua源码分析/2. 字符串.md",
     "Lua源码分析/1. 数据类型.md",
     "Lua源码分析/image/luatype2.png",
