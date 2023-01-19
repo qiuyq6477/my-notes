@@ -30,9 +30,21 @@
                 "source": false
               }
             }
+          },
+          {
+            "id": "ebb71765d15fb2e8",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Games104/1. 游戏引擎导论.md",
+                "mode": "source",
+                "source": false
+              }
+            }
           }
         ],
-        "currentTab": 1
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -82,7 +94,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 233.5
   },
   "right": {
     "id": "111a6d1c35f9d354",
@@ -98,7 +110,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Lua源码分析/2. 字符串.md",
+                "file": "Games104/1. 游戏引擎导论.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -115,7 +127,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Lua源码分析/2. 字符串.md",
+                "file": "Games104/1. 游戏引擎导论.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -138,7 +150,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Lua源码分析/2. 字符串.md"
+                "file": "Games104/1. 游戏引擎导论.md"
               }
             }
           }
@@ -162,10 +174,10 @@
       "workspaces:Manage workspace layouts": false
     }
   },
-  "active": "e935855efc2c8362",
+  "active": "ebb71765d15fb2e8",
   "lastOpenFiles": [
-    "Lua源码分析/1. 数据类型.md",
     "Lua源码分析/2. 字符串.md",
+    "Lua源码分析/1. 数据类型.md",
     "Lua源码分析/image/luatype2.png",
     "Lua源码分析/image/luatype3.png",
     "Lua源码分析/image/luatype1.png",
