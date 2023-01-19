@@ -54,9 +54,21 @@
                 "source": false
               }
             }
+          },
+          {
+            "id": "1defc4c80e0e5863",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Games104/2. 引擎架构分层.md",
+                "mode": "source",
+                "source": false
+              }
+            }
           }
         ],
-        "currentTab": 3
+        "currentTab": 4
       }
     ],
     "direction": "vertical"
@@ -186,10 +198,11 @@
       "workspaces:Manage workspace layouts": false
     }
   },
-  "active": "8be6792c2bfe3300",
+  "active": "1defc4c80e0e5863",
   "lastOpenFiles": [
-    "Games104/1. 游戏引擎导论.md",
+    "Games104/3. 如何构建游戏世界.md",
     "Games104/2. 引擎架构分层.md",
+    "Games104/1. 游戏引擎导论.md",
     "Lua源码分析/2. 字符串.md",
     "Lua源码分析/1. 数据类型.md",
     "Lua源码分析/image/luatype2.png",
