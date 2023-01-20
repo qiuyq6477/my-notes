@@ -4,95 +4,45 @@
     "type": "split",
     "children": [
       {
-        "id": "e0d7ab5333b5f1c3",
-        "type": "tabs",
+        "id": "73ec2cc08aefde57",
+        "type": "split",
         "children": [
           {
-            "id": "40207ca697e07747",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Lua源码分析/1. 数据类型.md",
-                "mode": "source",
-                "source": false
+            "id": "b7a2945ba915ee97",
+            "type": "tabs",
+            "children": [
+              {
+                "id": "c9125e0dd82e45e7",
+                "type": "leaf",
+                "state": {
+                  "type": "markdown",
+                  "state": {
+                    "file": "Games104/13. 引擎工具链基础.md",
+                    "mode": "source",
+                    "source": false
+                  }
+                }
               }
-            }
+            ]
           },
           {
-            "id": "e935855efc2c8362",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Lua源码分析/2. 字符串.md",
-                "mode": "source",
-                "source": false
+            "id": "0794b6461cc4a6ef",
+            "type": "tabs",
+            "children": [
+              {
+                "id": "682eb7cf1f264d7f",
+                "type": "leaf",
+                "state": {
+                  "type": "pdf",
+                  "state": {
+                    "file": "Games104/Lecture/GAMES104_Lecture13.pdf"
+                  }
+                }
               }
-            }
-          },
-          {
-            "id": "ebb71765d15fb2e8",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Games104/3. 如何构建游戏世界.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "14e4c14050d48b86",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Games104/4. 游戏引擎中的渲染实践.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "22a230cb5fa9cb5c",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Games104/13. 引擎工具链基础.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "8be6792c2bfe3300",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Games104/2. 引擎架构分层.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "1defc4c80e0e5863",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Games104/2. 引擎架构分层.md",
-                "mode": "source",
-                "source": false
-              }
-            }
+            ]
           }
         ],
-        "currentTab": 4
+        "direction": "horizontal"
       }
     ],
     "direction": "vertical"
@@ -142,7 +92,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 233.5
+    "width": 200,
+    "collapsed": true
   },
   "right": {
     "id": "111a6d1c35f9d354",
@@ -222,17 +173,17 @@
       "workspaces:Manage workspace layouts": false
     }
   },
-  "active": "22a230cb5fa9cb5c",
+  "active": "879a64d514d99fc0",
   "lastOpenFiles": [
-    "Games104/2. 引擎架构分层.md",
-    "Games104/1. 游戏引擎导论.md",
+    "Games104/Lecture/GAMES104_Lecture13.pdf",
     "Games104/13. 引擎工具链基础.md",
+    "Games104/2. 引擎架构分层.md",
+    "Games104/Assignment/PA01：Build and Run Pilot Engine.pdf",
+    "Games104/Lecture/GAMES104_Lecture14_Tool Chains_Applications & Advanced Topic.pdf",
+    "Games104/Untitled.md",
+    "Games104/1. 游戏引擎导论.md",
     "Games104/4. 游戏引擎中的渲染实践.md",
     "Games104/3. 如何构建游戏世界.md",
-    "Lua源码分析/2. 字符串.md",
-    "Lua源码分析/1. 数据类型.md",
-    "Lua源码分析/image/luatype2.png",
-    "Lua源码分析/image/luatype3.png",
-    "Lua源码分析/image/luatype1.png"
+    "Lua源码分析/2. 字符串.md"
   ]
 }
