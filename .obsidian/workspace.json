@@ -18,7 +18,7 @@
                 "state": {
                   "type": "markdown",
                   "state": {
-                    "file": "Games104/13. 引擎工具链基础.md",
+                    "file": "Games104/15. 游戏引擎的GamePlay玩法系统基础.md",
                     "mode": "source",
                     "source": false
                   }
@@ -28,11 +28,9 @@
                 "id": "7ac26d5c7658ee04",
                 "type": "leaf",
                 "state": {
-                  "type": "markdown",
+                  "type": "image",
                   "state": {
-                    "file": "Games104/15. 游戏引擎的GamePlay玩法系统基础.md",
-                    "mode": "source",
-                    "source": false
+                    "file": "Games104/image/Pasted image 20230121215047.png"
                   }
                 }
               },
@@ -46,8 +44,7 @@
                   }
                 }
               }
-            ],
-            "currentTab": 1
+            ]
           },
           {
             "id": "0794b6461cc4a6ef",
@@ -198,17 +195,17 @@
       "workspaces:Manage workspace layouts": false
     }
   },
-  "active": "7ac26d5c7658ee04",
+  "active": "c9125e0dd82e45e7",
   "lastOpenFiles": [
     "Games104/13. 引擎工具链基础.md",
+    "Games104/image/Pasted image 20230121215047.png",
+    "Games104/15. 游戏引擎的GamePlay玩法系统基础.md",
     "Games104/Lecture/GAMES104_Lecture15_Gameplay Complexity and Building Blocks.pdf",
     "Games104/image/Pasted image 20230121111019.png",
     "Games104/14. 引擎工具高级概念与应用.md",
     "Games104/Lecture/GAMES104_Lecture14_Tool Chains_Applications & Advanced Topic.pdf",
     "Games104/image/Pasted image 20230120200217.png",
     "Games104/image/Pasted image 20230120195135.png",
-    "Games104/image/Pasted image 20230120195122.png",
-    "Games104/image/Pasted image 20230120182120.png",
-    "Games104/image/Pasted image 20230120182028.png"
+    "Games104/image/Pasted image 20230120195122.png"
   ]
 }
