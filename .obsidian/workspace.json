@@ -10,7 +10,7 @@
           {
             "id": "b7a2945ba915ee97",
             "type": "tabs",
-            "dimension": 47.00934579439252,
+            "dimension": 47.0533208606174,
             "children": [
               {
                 "id": "c9125e0dd82e45e7",
@@ -39,15 +39,15 @@
           {
             "id": "0794b6461cc4a6ef",
             "type": "tabs",
-            "dimension": 52.99065420560748,
+            "dimension": 52.9466791393826,
             "children": [
               {
-                "id": "76cf68a5b673e4e0",
+                "id": "c675a43982136a2d",
                 "type": "leaf",
                 "state": {
                   "type": "pdf",
                   "state": {
-                    "file": "Games104/Lecture/GAMES104_Lecture14_Tool Chains_Applications & Advanced Topic.pdf"
+                    "file": "Games104/Lecture/GAMES104_Lecture15_Gameplay Complexity and Building Blocks.pdf"
                   }
                 }
               }
@@ -121,7 +121,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Games104/13. 引擎工具链基础.md",
+                "file": "Games104/Lecture/GAMES104_Lecture15_Gameplay Complexity and Building Blocks.pdf",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -138,7 +138,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Games104/13. 引擎工具链基础.md",
+                "file": "Games104/Lecture/GAMES104_Lecture15_Gameplay Complexity and Building Blocks.pdf",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -161,7 +161,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Games104/13. 引擎工具链基础.md"
+                "file": "Games104/Lecture/GAMES104_Lecture15_Gameplay Complexity and Building Blocks.pdf"
               }
             }
           }
@@ -185,10 +185,10 @@
       "workspaces:Manage workspace layouts": false
     }
   },
-  "active": "c9125e0dd82e45e7",
+  "active": "c675a43982136a2d",
   "lastOpenFiles": [
-    "Games104/image/Pasted image 20230121111019.png",
     "Games104/13. 引擎工具链基础.md",
+    "Games104/image/Pasted image 20230121111019.png",
     "Games104/14. 引擎工具高级概念与应用.md",
     "Games104/Lecture/GAMES104_Lecture14_Tool Chains_Applications & Advanced Topic.pdf",
     "Games104/image/Pasted image 20230120200217.png",
