@@ -10,6 +10,7 @@
           {
             "id": "b7a2945ba915ee97",
             "type": "tabs",
+            "dimension": 47.00934579439252,
             "children": [
               {
                 "id": "c9125e0dd82e45e7",
@@ -22,20 +23,31 @@
                     "source": false
                   }
                 }
+              },
+              {
+                "id": "171a3d019832a8a3",
+                "type": "leaf",
+                "state": {
+                  "type": "image",
+                  "state": {
+                    "file": "Games104/image/Pasted image 20230121111019.png"
+                  }
+                }
               }
             ]
           },
           {
             "id": "0794b6461cc4a6ef",
             "type": "tabs",
+            "dimension": 52.99065420560748,
             "children": [
               {
-                "id": "682eb7cf1f264d7f",
+                "id": "76cf68a5b673e4e0",
                 "type": "leaf",
                 "state": {
                   "type": "pdf",
                   "state": {
-                    "file": "Games104/Lecture/GAMES104_Lecture13.pdf"
+                    "file": "Games104/Lecture/GAMES104_Lecture14_Tool Chains_Applications & Advanced Topic.pdf"
                   }
                 }
               }
@@ -92,7 +104,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200,
+    "width": 326.5,
     "collapsed": true
   },
   "right": {
@@ -173,17 +185,17 @@
       "workspaces:Manage workspace layouts": false
     }
   },
-  "active": "879a64d514d99fc0",
+  "active": "c9125e0dd82e45e7",
   "lastOpenFiles": [
-    "Games104/Lecture/GAMES104_Lecture13.pdf",
+    "Games104/image/Pasted image 20230121111019.png",
     "Games104/13. 引擎工具链基础.md",
-    "Games104/2. 引擎架构分层.md",
-    "Games104/Assignment/PA01：Build and Run Pilot Engine.pdf",
+    "Games104/14. 引擎工具高级概念与应用.md",
     "Games104/Lecture/GAMES104_Lecture14_Tool Chains_Applications & Advanced Topic.pdf",
-    "Games104/Untitled.md",
-    "Games104/1. 游戏引擎导论.md",
-    "Games104/4. 游戏引擎中的渲染实践.md",
-    "Games104/3. 如何构建游戏世界.md",
-    "Lua源码分析/2. 字符串.md"
+    "Games104/image/Pasted image 20230120200217.png",
+    "Games104/image/Pasted image 20230120195135.png",
+    "Games104/image/Pasted image 20230120195122.png",
+    "Games104/image/Pasted image 20230120182120.png",
+    "Games104/image/Pasted image 20230120182028.png",
+    "Games104/image/Pasted image 20230119164100.png"
   ]
 }
