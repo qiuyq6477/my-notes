@@ -28,15 +28,11 @@
                 "id": "dbb7d697eb4613a3",
                 "type": "leaf",
                 "state": {
-                  "type": "canvas",
+                  "type": "markdown",
                   "state": {
-                    "file": "Games104/Misc/Stear Behaviors.canvas",
-                    "viewState": {
-                      "x": 0,
-                      "y": 0,
-                      "zoom": 0,
-                      "snapToGrid": false
-                    }
+                    "file": "Games104/16. 基础AI.md",
+                    "mode": "source",
+                    "source": false
                   }
                 }
               }
@@ -128,7 +124,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Games104/Misc/Stear Behaviors.canvas",
+                "file": "Games104/16. 基础AI.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -145,7 +141,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Games104/Misc/Stear Behaviors.canvas",
+                "file": "Games104/16. 基础AI.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -168,7 +164,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Games104/Misc/Stear Behaviors.canvas"
+                "file": "Games104/16. 基础AI.md"
               }
             }
           }
@@ -192,8 +188,9 @@
       "workspaces:Manage workspace layouts": false
     }
   },
-  "active": "879a64d514d99fc0",
+  "active": "dbb7d697eb4613a3",
   "lastOpenFiles": [
+    "Games104/Misc/Stear Behaviors.canvas",
     "Games104/16. 基础AI.md",
     "Games104/15. 游戏引擎的GamePlay玩法系统基础.md",
     "Games104/Lecture/GAMES104_Lecture16_GameplaySystemsBasicArtificialIntelligence.pdf",
@@ -202,7 +199,6 @@
     "Games104/Lecture/GAMES104_Lecture15_Gameplay Complexity and Building Blocks.pdf",
     "Games104/image/Pasted image 20230121111019.png",
     "Games104/14. 引擎工具高级概念与应用.md",
-    "Games104/Lecture/GAMES104_Lecture14_Tool Chains_Applications & Advanced Topic.pdf",
-    "Games104/image/Pasted image 20230120200217.png"
+    "Games104/Lecture/GAMES104_Lecture14_Tool Chains_Applications & Advanced Topic.pdf"
   ]
 }
