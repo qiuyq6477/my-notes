@@ -4,13 +4,13 @@
     "type": "split",
     "children": [
       {
-        "id": "73ec2cc08aefde57",
+        "id": "e9cc80b4b35079d6",
         "type": "split",
         "children": [
           {
-            "id": "b7a2945ba915ee97",
+            "id": "0794b6461cc4a6ef",
             "type": "tabs",
-            "dimension": 47.0533208606174,
+            "dimension": 46.728971962616825,
             "children": [
               {
                 "id": "c9125e0dd82e45e7",
@@ -25,39 +25,32 @@
                 }
               },
               {
-                "id": "7ac26d5c7658ee04",
+                "id": "dbb7d697eb4613a3",
                 "type": "leaf",
                 "state": {
-                  "type": "image",
+                  "type": "markdown",
                   "state": {
-                    "file": "Games104/image/Pasted image 20230121215047.png"
-                  }
-                }
-              },
-              {
-                "id": "171a3d019832a8a3",
-                "type": "leaf",
-                "state": {
-                  "type": "image",
-                  "state": {
-                    "file": "Games104/image/Pasted image 20230121111019.png"
+                    "file": "Games104/16. 基础AI.md",
+                    "mode": "source",
+                    "source": false
                   }
                 }
               }
-            ]
+            ],
+            "currentTab": 1
           },
           {
-            "id": "0794b6461cc4a6ef",
+            "id": "d4a8b7e9bb9ec8f7",
             "type": "tabs",
-            "dimension": 52.9466791393826,
+            "dimension": 53.271028037383175,
             "children": [
               {
-                "id": "c675a43982136a2d",
+                "id": "03d11e514f4e5cdf",
                 "type": "leaf",
                 "state": {
                   "type": "pdf",
                   "state": {
-                    "file": "Games104/Lecture/GAMES104_Lecture15_Gameplay Complexity and Building Blocks.pdf"
+                    "file": "Games104/Lecture/GAMES104_Lecture16_GameplaySystemsBasicArtificialIntelligence.pdf"
                   }
                 }
               }
@@ -131,7 +124,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Games104/15. 游戏引擎的GamePlay玩法系统基础.md",
+                "file": "Games104/16. 基础AI.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -148,7 +141,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Games104/15. 游戏引擎的GamePlay玩法系统基础.md",
+                "file": "Games104/16. 基础AI.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -171,7 +164,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Games104/15. 游戏引擎的GamePlay玩法系统基础.md"
+                "file": "Games104/16. 基础AI.md"
               }
             }
           }
@@ -195,17 +188,17 @@
       "workspaces:Manage workspace layouts": false
     }
   },
-  "active": "c9125e0dd82e45e7",
+  "active": "dbb7d697eb4613a3",
   "lastOpenFiles": [
+    "Games104/15. 游戏引擎的GamePlay玩法系统基础.md",
+    "Games104/Lecture/GAMES104_Lecture16_GameplaySystemsBasicArtificialIntelligence.pdf",
     "Games104/13. 引擎工具链基础.md",
     "Games104/image/Pasted image 20230121215047.png",
-    "Games104/15. 游戏引擎的GamePlay玩法系统基础.md",
     "Games104/Lecture/GAMES104_Lecture15_Gameplay Complexity and Building Blocks.pdf",
     "Games104/image/Pasted image 20230121111019.png",
     "Games104/14. 引擎工具高级概念与应用.md",
     "Games104/Lecture/GAMES104_Lecture14_Tool Chains_Applications & Advanced Topic.pdf",
     "Games104/image/Pasted image 20230120200217.png",
-    "Games104/image/Pasted image 20230120195135.png",
-    "Games104/image/Pasted image 20230120195122.png"
+    "Games104/image/Pasted image 20230120195135.png"
   ]
 }
