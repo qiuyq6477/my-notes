@@ -23,6 +23,16 @@
                     "source": false
                   }
                 }
+              },
+              {
+                "id": "589fa4e13fd214f6",
+                "type": "leaf",
+                "state": {
+                  "type": "image",
+                  "state": {
+                    "file": "Games104/image/Pasted image 20230124104503.png"
+                  }
+                }
               }
             ]
           },
@@ -177,15 +187,15 @@
   },
   "active": "80b281789f7b06af",
   "lastOpenFiles": [
-    "Games104/Lecture/GAMES104_Lecture18_Online Gaming Architecture - Fundamentals.pdf",
+    "Games104/image/Pasted image 20230124135017.png",
     "Games104/18. 网络游戏的架构基础.md",
+    "Games104/image/Pasted image 20230124104503.png",
+    "Games104/Lecture/GAMES104_Lecture18_Online Gaming Architecture - Fundamentals.pdf",
     "Games104/image/Pasted image 20230122181056.png",
     "Games104/16. 基础AI.md",
     "Games104/image/Pasted image 20230121223411.png",
     "Games104/15. 游戏引擎的GamePlay玩法系统基础.md",
     "Games104/Misc/Stear Behaviors.canvas",
-    "Games104/Lecture/GAMES104_Lecture16_GameplaySystemsBasicArtificialIntelligence.pdf",
-    "Games104/13. 引擎工具链基础.md",
-    "Games104/image/Pasted image 20230121215047.png"
+    "Games104/Lecture/GAMES104_Lecture16_GameplaySystemsBasicArtificialIntelligence.pdf"
   ]
 }
