@@ -4,57 +4,35 @@
     "type": "split",
     "children": [
       {
-        "id": "e9cc80b4b35079d6",
-        "type": "split",
+        "id": "d8df4f159046f68d",
+        "type": "tabs",
         "children": [
           {
-            "id": "0794b6461cc4a6ef",
-            "type": "tabs",
-            "dimension": 46.728971962616825,
-            "children": [
-              {
-                "id": "80b281789f7b06af",
-                "type": "leaf",
-                "state": {
-                  "type": "markdown",
-                  "state": {
-                    "file": "Games104/18. 网络游戏的架构基础.md",
-                    "mode": "source",
-                    "source": false
-                  }
-                }
-              },
-              {
-                "id": "589fa4e13fd214f6",
-                "type": "leaf",
-                "state": {
-                  "type": "image",
-                  "state": {
-                    "file": "Games104/image/Pasted image 20230124104503.png"
-                  }
-                }
+            "id": "39c623fbcace9b5c",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Games104/1. 游戏引擎导论.md",
+                "mode": "source",
+                "source": false
               }
-            ]
+            }
           },
           {
-            "id": "d4a8b7e9bb9ec8f7",
-            "type": "tabs",
-            "dimension": 53.271028037383175,
-            "children": [
-              {
-                "id": "21747cb0cfc0acaf",
-                "type": "leaf",
-                "state": {
-                  "type": "pdf",
-                  "state": {
-                    "file": "Games104/Lecture/GAMES104_Lecture18_Online Gaming Architecture - Fundamentals.pdf"
-                  }
-                }
+            "id": "a230283d5e0f7048",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "读书号视频剪辑/1.2 读书号变现流程.md",
+                "mode": "source",
+                "source": false
               }
-            ]
+            }
           }
         ],
-        "direction": "horizontal"
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -104,8 +82,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 326.5,
-    "collapsed": true
+    "width": 326.5
   },
   "right": {
     "id": "111a6d1c35f9d354",
@@ -121,7 +98,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Games104/18. 网络游戏的架构基础.md",
+                "file": "读书号视频剪辑/1.2 读书号变现流程.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -138,7 +115,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Games104/18. 网络游戏的架构基础.md",
+                "file": "读书号视频剪辑/1.2 读书号变现流程.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -161,7 +138,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Games104/18. 网络游戏的架构基础.md"
+                "file": "读书号视频剪辑/1.2 读书号变现流程.md"
               }
             }
           }
@@ -185,17 +162,20 @@
       "workspaces:Manage workspace layouts": false
     }
   },
-  "active": "80b281789f7b06af",
+  "active": "a230283d5e0f7048",
   "lastOpenFiles": [
-    "Games104/image/Pasted image 20230124135017.png",
-    "Games104/18. 网络游戏的架构基础.md",
+    "Games104/1. 游戏引擎导论.md",
+    "读书号视频剪辑/1.2 读书号变现流程.md",
+    "读书号视频剪辑",
     "Games104/image/Pasted image 20230124104503.png",
+    "Games104/19. 网络游戏的进阶架构.md",
+    "Games104/image/Pasted image 20230124152046.png",
+    "Games104/Lecture/GAMES104_PPT_Lecture 19_Online Gaming Architecture-Advanced Topics.pdf",
+    "Games104/18. 网络游戏的架构基础.md",
+    "Games104/image/Pasted image 20230124135017.png",
     "Games104/Lecture/GAMES104_Lecture18_Online Gaming Architecture - Fundamentals.pdf",
     "Games104/image/Pasted image 20230122181056.png",
     "Games104/16. 基础AI.md",
-    "Games104/image/Pasted image 20230121223411.png",
-    "Games104/15. 游戏引擎的GamePlay玩法系统基础.md",
-    "Games104/Misc/Stear Behaviors.canvas",
-    "Games104/Lecture/GAMES104_Lecture16_GameplaySystemsBasicArtificialIntelligence.pdf"
+    "Games104/image/Pasted image 20230121223411.png"
   ]
 }
