@@ -114,9 +114,55 @@
                 "source": false
               }
             }
+          },
+          {
+            "id": "7f65e317de5eac8f",
+            "type": "leaf",
+            "state": {
+              "type": "image",
+              "state": {
+                "file": "读书号视频剪辑/Image/Pasted image 20230408222722.png"
+              }
+            }
+          },
+          {
+            "id": "c2573c207c35ebcb",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "读书号视频剪辑/3.3 剪辑内容的定位.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "6c43548b44347b9c",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "读书号视频剪辑/4.1 直播变现.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "48023b801da543f7",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "读书号视频剪辑/4.2 怎么做成交率高的直播.md",
+                "mode": "source",
+                "source": false
+              }
+            }
           }
         ],
-        "currentTab": 8
+        "currentTab": 12
       }
     ],
     "direction": "vertical"
@@ -182,7 +228,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "读书号视频剪辑/3.2 上架书籍.md",
+                "file": "读书号视频剪辑/4.2 怎么做成交率高的直播.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -199,7 +245,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "读书号视频剪辑/3.2 上架书籍.md",
+                "file": "读书号视频剪辑/4.2 怎么做成交率高的直播.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -222,7 +268,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "读书号视频剪辑/3.2 上架书籍.md"
+                "file": "读书号视频剪辑/4.2 怎么做成交率高的直播.md"
               }
             }
           }
@@ -246,13 +292,21 @@
       "workspaces:Manage workspace layouts": false
     }
   },
-  "active": "3d26c14350a14f40",
+  "active": "48023b801da543f7",
   "lastOpenFiles": [
-    "读书号视频剪辑/3.1 读书号避坑指南.md",
+    "Pasted image 20230408230733.png",
+    "Pasted image 20230408230533.png",
+    "Pasted image 20230408230140.png",
+    "读书号视频剪辑/4.1 直播变现.md",
+    "读书号视频剪辑/4.2 怎么做成交率高的直播.md",
+    "读书号视频剪辑/3.3 剪辑内容的定位.md",
+    "读书号视频剪辑/Image/Pasted image 20230408222722.png",
+    "读书号视频剪辑/Image/Pasted image 20230408222823.png",
+    "读书号视频剪辑/Image",
+    "读书号视频剪辑/Image/Pasted image 20230408225213.png",
     "读书号视频剪辑/3.2 上架书籍.md",
-    "Pasted image 20230408222823.png",
-    "Pasted image 20230408222805.png",
-    "Pasted image 20230408222722.png",
+    "读书号视频剪辑/3.1 读书号避坑指南.md",
+    "读书号视频剪辑/Image/Pasted image 20230408222805.png",
     "读书号视频剪辑/1.7 什么样的视频容易成为爆款.md",
     "读书号视频剪辑/个人账号规划.md",
     "读书号视频剪辑/1.6 变现效率最高的玩法.md",
@@ -269,7 +323,6 @@
     "Games104/image/Pasted image 20230124135017.png",
     "Games104/Lecture/GAMES104_Lecture18_Online Gaming Architecture - Fundamentals.pdf",
     "Games104/image/Pasted image 20230122181056.png",
-    "Games104/16. 基础AI.md",
-    "Games104/image/Pasted image 20230121223411.png"
+    "Games104/16. 基础AI.md"
   ]
 }
