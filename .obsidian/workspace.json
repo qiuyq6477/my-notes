@@ -102,9 +102,21 @@
                 "source": false
               }
             }
+          },
+          {
+            "id": "3d26c14350a14f40",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "读书号视频剪辑/3.2 上架书籍.md",
+                "mode": "source",
+                "source": false
+              }
+            }
           }
         ],
-        "currentTab": 7
+        "currentTab": 8
       }
     ],
     "direction": "vertical"
@@ -170,7 +182,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "读书号视频剪辑/3.1 读书号避坑指南.md",
+                "file": "读书号视频剪辑/3.2 上架书籍.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -187,7 +199,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "读书号视频剪辑/3.1 读书号避坑指南.md",
+                "file": "读书号视频剪辑/3.2 上架书籍.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -210,7 +222,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "读书号视频剪辑/3.1 读书号避坑指南.md"
+                "file": "读书号视频剪辑/3.2 上架书籍.md"
               }
             }
           }
@@ -234,10 +246,14 @@
       "workspaces:Manage workspace layouts": false
     }
   },
-  "active": "f578b878835cddbf",
+  "active": "3d26c14350a14f40",
   "lastOpenFiles": [
-    "读书号视频剪辑/1.7 什么样的视频容易成为爆款.md",
     "读书号视频剪辑/3.1 读书号避坑指南.md",
+    "读书号视频剪辑/3.2 上架书籍.md",
+    "Pasted image 20230408222823.png",
+    "Pasted image 20230408222805.png",
+    "Pasted image 20230408222722.png",
+    "读书号视频剪辑/1.7 什么样的视频容易成为爆款.md",
     "读书号视频剪辑/个人账号规划.md",
     "读书号视频剪辑/1.6 变现效率最高的玩法.md",
     "读书号视频剪辑/1.4 如何从零开始搭建读书号.md",
