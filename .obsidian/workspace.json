@@ -4,35 +4,22 @@
     "type": "split",
     "children": [
       {
-        "id": "d8df4f159046f68d",
+        "id": "f48405cdc1fb7754",
         "type": "tabs",
         "children": [
           {
-            "id": "39c623fbcace9b5c",
+            "id": "86829a9a607ee5ae",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Games104/1. 游戏引擎导论.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "a230283d5e0f7048",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "读书号视频剪辑/1.2 读书号变现流程.md",
+                "file": "Entitas_ZH/1.1 The-Basics.md",
                 "mode": "source",
                 "source": false
               }
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -98,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "读书号视频剪辑/1.2 读书号变现流程.md",
+                "file": "Entitas_ZH/1.1 The-Basics.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -115,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "读书号视频剪辑/1.2 读书号变现流程.md",
+                "file": "Entitas_ZH/1.1 The-Basics.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -138,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "读书号视频剪辑/1.2 读书号变现流程.md"
+                "file": "Entitas_ZH/1.1 The-Basics.md"
               }
             }
           }
@@ -162,20 +149,52 @@
       "workspaces:Manage workspace layouts": false
     }
   },
-  "active": "a230283d5e0f7048",
+  "active": "879a64d514d99fc0",
   "lastOpenFiles": [
-    "Games104/1. 游戏引擎导论.md",
-    "读书号视频剪辑/1.2 读书号变现流程.md",
-    "读书号视频剪辑",
+    "Entitas_ZH/CookBook/000_introduction.md",
+    "Entitas_ZH/CookBook/3_recipes/301_hello_world.md",
+    "Entitas_ZH/CookBook/3_recipes",
+    "Entitas_ZH/CookBook/1_ingredients/108_reactive_system.md",
+    "Entitas_ZH/CookBook/1_ingredients/107_system.md",
+    "Entitas_ZH/CookBook/1_ingredients/106_index.md",
+    "Entitas_ZH/CookBook/1_ingredients/105_collector.md",
+    "Entitas_ZH/CookBook/1_ingredients/104_group.md",
+    "Entitas_ZH/CookBook/1_ingredients/103_context.md",
+    "Entitas_ZH/CookBook/1_ingredients/102_entity.md",
+    "Entitas_ZH/CookBook/1_ingredients/101_component.md",
+    "Entitas_ZH/CookBook/1_ingredients",
+    "Entitas_ZH/CookBook",
+    "Entitas_ZH/1. Introduction-to-Entitas.md",
+    "Entitas_ZH/1.1 The-Basics.md",
+    "Entitas_ZH/Generate-your-first-component.md",
+    "Entitas_ZH/How-to-configure-a-file-watcher-to-automatically-run-code-generator.md",
+    "Entitas_ZH/Made-With-Entitas.md",
+    "Entitas_ZH/Matcher-Examples-(Groups).md",
+    "Entitas_ZH/Unity-integration.md",
+    "Entitas_ZH/Setup-Entitas-and-Unity-in-different-projects.md",
+    "Entitas_ZH/Plugin-Pipeline.md",
+    "Entitas_ZH/Tutorials/Unity-Tutorial-Hello-World.md",
+    "Entitas_ZH/Overview.md",
+    "Entitas_ZH/0.5 Example-projects.md",
+    "Entitas_ZH/0.4 Tools-and-Extensions.md",
+    "Entitas_ZH/0.3 Unity-Installation-Guide.md",
+    "Entitas_ZH/0.2 Roadmap.md",
+    "Entitas_ZH/0.1 FAQ.md",
+    "Entitas_ZH/Tutorials",
+    "Entitas_ZH",
     "Games104/image/Pasted image 20230124104503.png",
-    "Games104/19. 网络游戏的进阶架构.md",
-    "Games104/image/Pasted image 20230124152046.png",
-    "Games104/Lecture/GAMES104_PPT_Lecture 19_Online Gaming Architecture-Advanced Topics.pdf",
-    "Games104/18. 网络游戏的架构基础.md",
-    "Games104/image/Pasted image 20230124135017.png",
+    "读书号视频剪辑",
+    "Games104/image/Pasted image 20230124211300.png",
+    "Games104/image/Pasted image 20230124183813.png",
+    "Games104/image/Pasted image 20230124181918.png",
+    "Games104/image/Pasted image 20230124171910.png",
+    "Games104/image/Pasted image 20230124171302.png",
+    "Games104/image/Pasted image 20230124154909.png",
+    "Games104/image/Pasted image 20230124154746.png",
+    "Games104/image/Pasted image 20230124154336.png",
+    "Games104/image/Pasted image 20230124154251.png",
     "Games104/Lecture/GAMES104_Lecture18_Online Gaming Architecture - Fundamentals.pdf",
-    "Games104/image/Pasted image 20230122181056.png",
-    "Games104/16. 基础AI.md",
-    "Games104/image/Pasted image 20230121223411.png"
+    "Games104/Misc/Stear Behaviors.canvas",
+    "Games104/Lecture/GAMES104_Lecture16_GameplaySystemsBasicArtificialIntelligence.pdf"
   ]
 }
