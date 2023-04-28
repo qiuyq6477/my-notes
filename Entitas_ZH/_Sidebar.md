@@ -3,7 +3,7 @@
 - [[0. Tutorials|Tutorials]]
 - [[0.1 FAQ|FAQ]]
 - [[0.2 Roadmap|https://d1qnbzgad6pxy3.cloudfront.net/assets/images/maps/GA.gif]]
-- [[0.3 Unity-Installation-Guide|Unity-Installation-Guide]]
+- [[1. Unity-Installation-Guide|Unity-Installation-Guide]]
 - [[0.4 Tools-and-Extensions| Tools-and-Extensions]]
 - [[0.5 Example-projects| Example-projects]]
 ### Manual
