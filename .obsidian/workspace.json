@@ -18,8 +18,21 @@
                 "source": false
               }
             }
+          },
+          {
+            "id": "8a7610bb944f0bd0",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "消息队列/1. 主题和队列的区别.md",
+                "mode": "source",
+                "source": false
+              }
+            }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -85,7 +98,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "读书号视频剪辑/4.2 怎么做成交率高的直播.md",
+                "file": "消息队列/1. 主题和队列的区别.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +115,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "读书号视频剪辑/4.2 怎么做成交率高的直播.md",
+                "file": "消息队列/1. 主题和队列的区别.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +138,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "读书号视频剪辑/4.2 怎么做成交率高的直播.md"
+                "file": "消息队列/1. 主题和队列的区别.md"
               }
             }
           }
@@ -149,8 +162,11 @@
       "workspaces:Manage workspace layouts": false
     }
   },
-  "active": "ea3ceda5aedfbbd2",
+  "active": "8a7610bb944f0bd0",
   "lastOpenFiles": [
+    "读书号视频剪辑/4.2 怎么做成交率高的直播.md",
+    "消息队列/1. 主题和队列的区别.md",
+    "消息队列",
     "读书号视频剪辑/个人账号规划.md",
     "读书号视频剪辑/Image/Pasted image 20230408230140.png",
     "读书号视频剪辑/Image/Pasted image 20230408230733.png",
@@ -180,8 +196,6 @@
     "Entitas_ZH/CookBook/1_ingredients/107_system.md",
     "Entitas_ZH/CookBook/1_ingredients/106_index.md",
     "Entitas_ZH/CookBook/1_ingredients/105_collector.md",
-    "Entitas_ZH/CookBook/1_ingredients/104_group.md",
-    "Entitas_ZH/CookBook/1_ingredients/103_context.md",
     "Entitas_ZH/CookBook/1_ingredients",
     "Entitas_ZH/CookBook",
     "Entitas_ZH/Tutorials",
