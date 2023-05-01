@@ -8,12 +8,12 @@
         "type": "tabs",
         "children": [
           {
-            "id": "86829a9a607ee5ae",
+            "id": "ea3ceda5aedfbbd2",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Entitas_ZH/Tutorials/2. Unity-Tutorial---Simple-Entity-View-and-Movement.md",
+                "file": "读书号视频剪辑/4.2 怎么做成交率高的直播.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Entitas_ZH/Tutorials/2. Unity-Tutorial---Simple-Entity-View-and-Movement.md",
+                "file": "读书号视频剪辑/4.2 怎么做成交率高的直播.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Entitas_ZH/Tutorials/2. Unity-Tutorial---Simple-Entity-View-and-Movement.md",
+                "file": "读书号视频剪辑/4.2 怎么做成交率高的直播.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Entitas_ZH/Tutorials/2. Unity-Tutorial---Simple-Entity-View-and-Movement.md"
+                "file": "读书号视频剪辑/4.2 怎么做成交率高的直播.md"
               }
             }
           }
@@ -149,10 +149,22 @@
       "workspaces:Manage workspace layouts": false
     }
   },
-  "active": "86829a9a607ee5ae",
+  "active": "ea3ceda5aedfbbd2",
   "lastOpenFiles": [
-    "Entitas_ZH/Tutorials/1. Unity-Tutorial-Hello-World.md",
+    "读书号视频剪辑/个人账号规划.md",
+    "读书号视频剪辑/Image/Pasted image 20230408230140.png",
+    "读书号视频剪辑/Image/Pasted image 20230408230733.png",
+    "读书号视频剪辑/Image/Pasted image 20230408230533.png",
+    "Entitas_ZH/Tutorials/2. Unity-Tutorial---Simple-Entity-View-and-Movement.md",
     "Entitas_ZH/Setup/2. How-to-setup-a-new-Github-project-with-Unity-and-tests.md",
+    "Showcase.md",
+    "The Basics.md",
+    "Introduction.md",
+    "Installation.md",
+    "Examples.md",
+    "Detailed setup.md",
+    "Code Generator.md",
+    "Entitas_ZH/Tutorials/1. Unity-Tutorial-Hello-World.md",
     "Entitas_ZH/Setup/1. Unity-Installation-Guide.md",
     "Entitas_ZH/0. Tutorials.md",
     "Entitas_ZH/Setup",
@@ -170,17 +182,8 @@
     "Entitas_ZH/CookBook/1_ingredients/105_collector.md",
     "Entitas_ZH/CookBook/1_ingredients/104_group.md",
     "Entitas_ZH/CookBook/1_ingredients/103_context.md",
-    "Entitas_ZH/CookBook/1_ingredients/102_entity.md",
-    "Entitas_ZH/CookBook/1_ingredients/101_component.md",
     "Entitas_ZH/CookBook/1_ingredients",
     "Entitas_ZH/CookBook",
-    "Entitas_ZH/1. Introduction-to-Entitas.md",
-    "Entitas_ZH/Generate-your-first-component.md",
-    "Entitas_ZH/How-to-configure-a-file-watcher-to-automatically-run-code-generator.md",
-    "Entitas_ZH/Made-With-Entitas.md",
-    "Entitas_ZH/Matcher-Examples-(Groups).md",
-    "Entitas_ZH/Unity-integration.md",
-    "Entitas_ZH/Setup-Entitas-and-Unity-in-different-projects.md",
     "Entitas_ZH/Tutorials",
     "Entitas_ZH",
     "Games104/image/Pasted image 20230124104503.png",
@@ -191,9 +194,6 @@
     "Games104/image/Pasted image 20230124171910.png",
     "Games104/image/Pasted image 20230124171302.png",
     "Games104/image/Pasted image 20230124154909.png",
-    "Games104/image/Pasted image 20230124154746.png",
-    "Games104/image/Pasted image 20230124154336.png",
-    "Games104/image/Pasted image 20230124154251.png",
     "Games104/Lecture/GAMES104_Lecture18_Online Gaming Architecture - Fundamentals.pdf",
     "Games104/Misc/Stear Behaviors.canvas",
     "Games104/Lecture/GAMES104_Lecture16_GameplaySystemsBasicArtificialIntelligence.pdf"
