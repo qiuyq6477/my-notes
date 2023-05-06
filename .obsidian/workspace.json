@@ -13,13 +13,24 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Entitas_ZH/Tutorials/2. Unity-Tutorial---Simple-Entity-View-and-Movement.md",
+                "file": "Entitas_ZH/CookBook/1_ingredients/101_component.md",
                 "mode": "source",
                 "source": false
               }
             }
+          },
+          {
+            "id": "42834f222dbb91e6",
+            "type": "leaf",
+            "state": {
+              "type": "release-notes",
+              "state": {
+                "currentVersion": "1.2.7"
+              }
+            }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -64,6 +75,14 @@
               "type": "starred",
               "state": {}
             }
+          },
+          {
+            "id": "bd85678952a4525d",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {}
+            }
           }
         ]
       }
@@ -85,7 +104,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Entitas_ZH/Tutorials/2. Unity-Tutorial---Simple-Entity-View-and-Movement.md",
+                "file": "Entitas_ZH/CookBook/1_ingredients/101_component.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +121,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Entitas_ZH/Tutorials/2. Unity-Tutorial---Simple-Entity-View-and-Movement.md",
+                "file": "Entitas_ZH/CookBook/1_ingredients/101_component.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +144,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Entitas_ZH/Tutorials/2. Unity-Tutorial---Simple-Entity-View-and-Movement.md"
+                "file": "Entitas_ZH/CookBook/1_ingredients/101_component.md"
               }
             }
           }
@@ -149,8 +168,9 @@
       "workspaces:Manage workspace layouts": false
     }
   },
-  "active": "86829a9a607ee5ae",
+  "active": "42834f222dbb91e6",
   "lastOpenFiles": [
+    "Entitas_ZH/Tutorials/2. Unity-Tutorial---Simple-Entity-View-and-Movement.md",
     "读书号视频剪辑/个人账号规划.md",
     "读书号视频剪辑/Image/Pasted image 20230408225213.png",
     "读书号视频剪辑/Image/Pasted image 20230408222823.png",
@@ -186,7 +206,6 @@
     "Entitas_ZH/CookBook/1_ingredients/107_system.md",
     "Entitas_ZH/CookBook/1_ingredients/106_index.md",
     "Entitas_ZH/CookBook/1_ingredients/105_collector.md",
-    "Entitas_ZH/CookBook/1_ingredients/104_group.md",
     "Entitas_ZH/CookBook/1_ingredients",
     "Entitas_ZH/CookBook",
     "Entitas_ZH/Tutorials",
