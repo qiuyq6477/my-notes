@@ -30,9 +30,21 @@
                 "source": false
               }
             }
+          },
+          {
+            "id": "5ddde4e4f2177a8f",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "抽象语法树/什么是抽象语法树.md",
+                "mode": "source",
+                "source": false
+              }
+            }
           }
         ],
-        "currentTab": 1
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -82,7 +94,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 326.5
+    "width": 241.5
   },
   "right": {
     "id": "111a6d1c35f9d354",
@@ -98,7 +110,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "消息队列/1. 主题和队列的区别.md",
+                "file": "抽象语法树/什么是抽象语法树.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -115,7 +127,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "消息队列/1. 主题和队列的区别.md",
+                "file": "抽象语法树/什么是抽象语法树.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -138,7 +150,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "消息队列/1. 主题和队列的区别.md"
+                "file": "抽象语法树/什么是抽象语法树.md"
               }
             }
           }
@@ -162,10 +174,13 @@
       "workspaces:Manage workspace layouts": false
     }
   },
-  "active": "8a7610bb944f0bd0",
+  "active": "879a64d514d99fc0",
   "lastOpenFiles": [
-    "读书号视频剪辑/4.2 怎么做成交率高的直播.md",
+    "正则表达式",
     "消息队列/1. 主题和队列的区别.md",
+    "抽象语法树/什么是抽象语法树.md",
+    "抽象语法树",
+    "读书号视频剪辑/4.2 怎么做成交率高的直播.md",
     "消息队列",
     "读书号视频剪辑/个人账号规划.md",
     "读书号视频剪辑/Image/Pasted image 20230408230140.png",
@@ -194,8 +209,6 @@
     "Entitas_ZH/CookBook/3_recipes",
     "Entitas_ZH/CookBook/1_ingredients/108_reactive_system.md",
     "Entitas_ZH/CookBook/1_ingredients/107_system.md",
-    "Entitas_ZH/CookBook/1_ingredients/106_index.md",
-    "Entitas_ZH/CookBook/1_ingredients/105_collector.md",
     "Entitas_ZH/CookBook/1_ingredients",
     "Entitas_ZH/CookBook",
     "Entitas_ZH/Tutorials",
@@ -209,7 +222,6 @@
     "Games104/image/Pasted image 20230124171302.png",
     "Games104/image/Pasted image 20230124154909.png",
     "Games104/Lecture/GAMES104_Lecture18_Online Gaming Architecture - Fundamentals.pdf",
-    "Games104/Misc/Stear Behaviors.canvas",
-    "Games104/Lecture/GAMES104_Lecture16_GameplaySystemsBasicArtificialIntelligence.pdf"
+    "Games104/Misc/Stear Behaviors.canvas"
   ]
 }
