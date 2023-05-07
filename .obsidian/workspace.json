@@ -42,9 +42,19 @@
                 "source": false
               }
             }
+          },
+          {
+            "id": "613354c93a6175ab",
+            "type": "leaf",
+            "state": {
+              "type": "release-notes",
+              "state": {
+                "currentVersion": "1.2.7"
+              }
+            }
           }
         ],
-        "currentTab": 2
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -87,6 +97,14 @@
             "type": "leaf",
             "state": {
               "type": "starred",
+              "state": {}
+            }
+          },
+          {
+            "id": "ff904bfeb6d97d15",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
               "state": {}
             }
           }
@@ -174,7 +192,7 @@
       "workspaces:Manage workspace layouts": false
     }
   },
-  "active": "879a64d514d99fc0",
+  "active": "613354c93a6175ab",
   "lastOpenFiles": [
     "正则表达式",
     "消息队列/1. 主题和队列的区别.md",
