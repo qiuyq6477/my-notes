@@ -1,5 +1,6 @@
-# Inter-context communication in Entitas 0.39.0
 Caveat: It should be noted that this example was derived for a network game where inputs are transmitted via the server.
+
+>警告：应该注意的是，此示例是针对通过服务器传输输入的网络游戏派生的。
 
 What we want is to be able to have some thing happen on one players input context that propagates across the network to effect the game context of other players, and their own. A simple button clicking process is detailed below, where a button widget transmits a user action into the entitas systems and behaviours. 
 
