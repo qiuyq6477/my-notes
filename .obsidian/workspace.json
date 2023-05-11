@@ -18,19 +18,8 @@
                 "source": false
               }
             }
-          },
-          {
-            "id": "42834f222dbb91e6",
-            "type": "leaf",
-            "state": {
-              "type": "release-notes",
-              "state": {
-                "currentVersion": "1.2.7"
-              }
-            }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -168,7 +157,7 @@
       "workspaces:Manage workspace layouts": false
     }
   },
-  "active": "42834f222dbb91e6",
+  "active": "86829a9a607ee5ae",
   "lastOpenFiles": [
     "Entitas_ZH/Tutorials/2. Unity-Tutorial---Simple-Entity-View-and-Movement.md",
     "读书号视频剪辑/个人账号规划.md",
