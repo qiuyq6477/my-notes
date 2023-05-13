@@ -37,24 +37,14 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "抽象语法树/什么是抽象语法树.md",
+                "file": "TurnBaseStrategyGame/Note.md",
                 "mode": "source",
                 "source": false
               }
             }
-          },
-          {
-            "id": "613354c93a6175ab",
-            "type": "leaf",
-            "state": {
-              "type": "release-notes",
-              "state": {
-                "currentVersion": "1.2.7"
-              }
-            }
           }
         ],
-        "currentTab": 3
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -128,7 +118,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "抽象语法树/什么是抽象语法树.md",
+                "file": "TurnBaseStrategyGame/Note.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -145,7 +135,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "抽象语法树/什么是抽象语法树.md",
+                "file": "TurnBaseStrategyGame/Note.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -168,7 +158,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "抽象语法树/什么是抽象语法树.md"
+                "file": "TurnBaseStrategyGame/Note.md"
               }
             }
           }
@@ -192,11 +182,13 @@
       "workspaces:Manage workspace layouts": false
     }
   },
-  "active": "613354c93a6175ab",
+  "active": "5ddde4e4f2177a8f",
   "lastOpenFiles": [
+    "抽象语法树/什么是抽象语法树.md",
+    "TurnBaseStrategyGame/Note.md",
+    "TurnBaseStrategyGame",
     "正则表达式",
     "消息队列/1. 主题和队列的区别.md",
-    "抽象语法树/什么是抽象语法树.md",
     "抽象语法树",
     "读书号视频剪辑/4.2 怎么做成交率高的直播.md",
     "消息队列",
@@ -232,14 +224,12 @@
     "Entitas_ZH/Tutorials",
     "Entitas_ZH",
     "Games104/image/Pasted image 20230124104503.png",
-    "读书号视频剪辑",
     "Games104/image/Pasted image 20230124211300.png",
     "Games104/image/Pasted image 20230124183813.png",
     "Games104/image/Pasted image 20230124181918.png",
     "Games104/image/Pasted image 20230124171910.png",
     "Games104/image/Pasted image 20230124171302.png",
     "Games104/image/Pasted image 20230124154909.png",
-    "Games104/Lecture/GAMES104_Lecture18_Online Gaming Architecture - Fundamentals.pdf",
     "Games104/Misc/Stear Behaviors.canvas"
   ]
 }
