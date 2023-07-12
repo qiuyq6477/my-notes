@@ -16,6 +16,9 @@
 - [ ] hit_count不能放在skill_list中
 - [ ] skill_start, pos, atk_def_num移除
 - [ ] 技能编辑器，给event添加C/S标记，如果和server有关，自动导出到服务器
+- [ ] 飞行曲线飞到终点后，继续沿着当前切线方向飞向目标
+- [ ] 修改lua端曲线实现方式
+- [ ] c#热更新方式，injectfix
 
 
 
