@@ -4,59 +4,20 @@
     "type": "split",
     "children": [
       {
-        "id": "f48405cdc1fb7754",
+        "id": "109cc50b778cda64",
         "type": "tabs",
         "children": [
           {
-            "id": "ea3ceda5aedfbbd2",
+            "id": "cb100c2aa509df4a",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "image",
               "state": {
-                "file": "读书号视频剪辑/4.2 怎么做成交率高的直播.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "8a7610bb944f0bd0",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "消息队列/1. 主题和队列的区别.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "5ddde4e4f2177a8f",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "TurnBaseStrategyGame/TurnBase-Note.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "e6367a4201957777",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "TurnBaseStrategyGame/ThirdPerson-Note.md",
-                "mode": "source",
-                "source": false
+                "file": "MOBA/HOK客户端业务框架.png"
               }
             }
           }
-        ],
-        "currentTab": 3
+        ]
       }
     ],
     "direction": "vertical"
@@ -130,7 +91,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "TurnBaseStrategyGame/ThirdPerson-Note.md",
+                "file": "MOBA/HOK客户端业务框架.png",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -147,7 +108,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "TurnBaseStrategyGame/ThirdPerson-Note.md",
+                "file": "MOBA/HOK客户端业务框架.png",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -170,7 +131,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "TurnBaseStrategyGame/ThirdPerson-Note.md"
+                "file": "MOBA/HOK客户端业务框架.png"
               }
             }
           }
@@ -194,8 +155,29 @@
       "workspaces:Manage workspace layouts": false
     }
   },
-  "active": "e6367a4201957777",
+  "active": "cb100c2aa509df4a",
   "lastOpenFiles": [
+    "MOBA/HOK战斗系统框架.png",
+    "MOBA/Untitled.md",
+    "MOBA/HOK知识体系结构.png",
+    "MOBA/HOK客户端业务框架.png",
+    "MOBA/HOK技能运行框架.png",
+    "MOBA/HOK服务器业务框架.png",
+    "MOBA",
+    "TurnBaseStrategyGame/RPG-Game.md",
+    "设计模式/命令模式/Command.md",
+    "设计模式/单例模式/Singleton.md",
+    "设计模式/命令模式",
+    "设计模式/单例模式",
+    "设计模式",
+    "Work/TODO.md",
+    "Work",
+    "TurnBaseStrategyGame/uml.md",
+    "PDF/thinkCScpp.pdf",
+    "PDF/lua programing gem-dual-tranlsated.pdf",
+    "PDF/level-up-your-code-with-game-programming-patterns.pdf",
+    "PDF/gnu-c-language-manual.pdf",
+    "PDF/build_your_own_database_from_scratch-dual-tranlsated.pdf",
     "TurnBaseStrategyGame/TurnBase-Note.md",
     "TurnBaseStrategyGame/ThirdPerson-Note.md",
     "TurnBaseStrategyGame/单例模式.md",
@@ -215,33 +197,11 @@
     "Entitas_ZH/CodeGenerator/3.2 Codegen-Preprocessing.md",
     "Entitas_ZH/CodeGenerator/3.1 Codegen-Configuration.md",
     "Entitas_ZH/CodeGenerator/3. Plugin-Pipeline.md",
-    "Entitas_ZH/CodeGenerator/2. Codegen-Common-Plugin-Properties.md",
-    "Entitas_ZH/CodeGenerator/1. Code-Generator.md",
-    "Entitas_ZH/CodeGenerator",
-    "抽象语法树/什么是抽象语法树.md",
-    "TurnBaseStrategyGame",
-    "正则表达式",
-    "消息队列/1. 主题和队列的区别.md",
-    "抽象语法树",
-    "读书号视频剪辑/4.2 怎么做成交率高的直播.md",
-    "消息队列",
-    "读书号视频剪辑/个人账号规划.md",
     "读书号视频剪辑/Image/Pasted image 20230408230140.png",
     "读书号视频剪辑/Image/Pasted image 20230408230733.png",
     "读书号视频剪辑/Image/Pasted image 20230408230533.png",
-    "Entitas_ZH/Tutorials/2. Unity-Tutorial---Simple-Entity-View-and-Movement.md",
-    "Entitas_ZH/Setup",
-    "Entitas_ZH/CookBook/3_recipes",
-    "Entitas_ZH/CookBook/1_ingredients",
-    "Entitas_ZH/CookBook",
-    "Entitas_ZH/Tutorials",
     "Games104/image/Pasted image 20230124104503.png",
     "Games104/image/Pasted image 20230124211300.png",
-    "Games104/image/Pasted image 20230124183813.png",
-    "Games104/image/Pasted image 20230124181918.png",
-    "Games104/image/Pasted image 20230124171910.png",
-    "Games104/image/Pasted image 20230124171302.png",
-    "Games104/image/Pasted image 20230124154909.png",
     "Games104/Misc/Stear Behaviors.canvas"
   ]
 }
