@@ -1,4 +1,7 @@
 [
   "obsidian-git",
-  "highlightr-plugin"
+  "highlightr-plugin",
+  "obsidian-local-images-plus",
+  "obsidian-plantuml",
+  "obsidian-outliner"
 ]
