@@ -1,0 +1,207 @@
+{
+  "main": {
+    "id": "73fe44f4a9c76bbc",
+    "type": "split",
+    "children": [
+      {
+        "id": "109cc50b778cda64",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "cb100c2aa509df4a",
+            "type": "leaf",
+            "state": {
+              "type": "image",
+              "state": {
+                "file": "MOBA/HOK客户端业务框架.png"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "0ae151c234fe84e0",
+    "type": "split",
+    "children": [
+      {
+        "id": "a1eaeee061436215",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "879a64d514d99fc0",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "bbbefc344fdc8c97",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "8243f295b462def1",
+            "type": "leaf",
+            "state": {
+              "type": "starred",
+              "state": {}
+            }
+          },
+          {
+            "id": "ff904bfeb6d97d15",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 241.5
+  },
+  "right": {
+    "id": "111a6d1c35f9d354",
+    "type": "split",
+    "children": [
+      {
+        "id": "f83084b85e9f33c0",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "6d49675a83b1add3",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "MOBA/HOK客户端业务框架.png",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "7e5bdc33562620b7",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "MOBA/HOK客户端业务框架.png",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "60f453a27139ddbb",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              }
+            }
+          },
+          {
+            "id": "7a546296c20fd9ea",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "MOBA/HOK客户端业务框架.png"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "audio-recorder:Start/stop recording": false,
+      "markdown-importer:Open format converter": false,
+      "workspaces:Manage workspace layouts": false
+    }
+  },
+  "active": "cb100c2aa509df4a",
+  "lastOpenFiles": [
+    "MOBA/HOK战斗系统框架.png",
+    "MOBA/Untitled.md",
+    "MOBA/HOK知识体系结构.png",
+    "MOBA/HOK客户端业务框架.png",
+    "MOBA/HOK技能运行框架.png",
+    "MOBA/HOK服务器业务框架.png",
+    "MOBA",
+    "TurnBaseStrategyGame/RPG-Game.md",
+    "设计模式/命令模式/Command.md",
+    "设计模式/单例模式/Singleton.md",
+    "设计模式/命令模式",
+    "设计模式/单例模式",
+    "设计模式",
+    "Work/TODO.md",
+    "Work",
+    "TurnBaseStrategyGame/uml.md",
+    "PDF/thinkCScpp.pdf",
+    "PDF/lua programing gem-dual-tranlsated.pdf",
+    "PDF/level-up-your-code-with-game-programming-patterns.pdf",
+    "PDF/gnu-c-language-manual.pdf",
+    "PDF/build_your_own_database_from_scratch-dual-tranlsated.pdf",
+    "TurnBaseStrategyGame/TurnBase-Note.md",
+    "TurnBaseStrategyGame/ThirdPerson-Note.md",
+    "TurnBaseStrategyGame/单例模式.md",
+    "Entitas_ZH/Tutorials/3. Inter-context-communication-in-Entitas-0.39.0.md",
+    "Entitas_ZH/Tutorials/1. Unity-Tutorial-Hello-World.md",
+    "Entitas_ZH/CodeGenerator/Custom-Code-Generator-Tips-And-Tricks.md",
+    "Entitas_ZH/CodeGenerator/Codegen-Generation.md",
+    "Entitas_ZH/CodeGenerator/Code-generation-shortcut-for-Visual-Studio.md",
+    "Entitas_ZH/CodeGenerator/7. Default-Code-Generator-Plugins.md",
+    "Entitas_ZH/CodeGenerator/6. Default-Codegen-Data.md",
+    "Entitas_ZH/CodeGenerator/5. Default-Plugin-Configuration.md",
+    "Entitas_ZH/CodeGenerator/4. Codegen-Doctors.md",
+    "Entitas_ZH/CodeGenerator/3.6 Codegen-Results.md",
+    "Entitas_ZH/CodeGenerator/3.5 Codegen-Postprocessing.md",
+    "Entitas_ZH/CodeGenerator/3.4 Codegen-Data-Providers.md",
+    "Entitas_ZH/CodeGenerator/3.3 Codegen-Parsing-and-Caching.md",
+    "Entitas_ZH/CodeGenerator/3.2 Codegen-Preprocessing.md",
+    "Entitas_ZH/CodeGenerator/3.1 Codegen-Configuration.md",
+    "Entitas_ZH/CodeGenerator/3. Plugin-Pipeline.md",
+    "读书号视频剪辑/Image/Pasted image 20230408230140.png",
+    "读书号视频剪辑/Image/Pasted image 20230408230733.png",
+    "读书号视频剪辑/Image/Pasted image 20230408230533.png",
+    "Games104/image/Pasted image 20230124104503.png",
+    "Games104/image/Pasted image 20230124211300.png",
+    "Games104/Misc/Stear Behaviors.canvas"
+  ]
+}
