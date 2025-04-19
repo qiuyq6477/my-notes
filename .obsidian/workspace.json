@@ -8,27 +8,29 @@
         "type": "tabs",
         "children": [
           {
-            "id": "0575cfefbed7a93f",
+            "id": "e7f03dd3d84a522f",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Games104/2. 引擎架构分层.md",
+                "file": "垃圾回收算法/cc++内存泄露检测（MLD）.md",
                 "mode": "source",
                 "source": false
-              }
+              },
+              "icon": "lucide-file",
+              "title": "cc++内存泄露检测（MLD）"
             }
           },
           {
-            "id": "675682a7160e0f30",
+            "id": "b9ffc32338ce3b55",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "release-notes",
               "state": {
-                "file": "WebDev/Learn Path.md",
-                "mode": "source",
-                "source": false
-              }
+                "currentVersion": "1.8.9"
+              },
+              "icon": "lucide-book-up",
+              "title": "Release Notes 1.8.9"
             }
           }
         ],
@@ -51,8 +53,11 @@
             "state": {
               "type": "file-explorer",
               "state": {
-                "sortOrder": "alphabetical"
-              }
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
             }
           },
           {
@@ -67,7 +72,9 @@
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical"
-              }
+              },
+              "icon": "lucide-search",
+              "title": "Search"
             }
           },
           {
@@ -75,7 +82,9 @@
             "type": "leaf",
             "state": {
               "type": "starred",
-              "state": {}
+              "state": {},
+              "icon": "lucide-file",
+              "title": "Plugin no longer active"
             }
           },
           {
@@ -83,7 +92,9 @@
             "type": "leaf",
             "state": {
               "type": "bookmarks",
-              "state": {}
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
             }
           }
         ]
@@ -106,7 +117,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "WebDev/Learn Path.md",
+                "file": "CSharp/plinq.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -114,7 +125,9 @@
                 "searchQuery": "",
                 "backlinkCollapsed": false,
                 "unlinkedCollapsed": true
-              }
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks for plinq"
             }
           },
           {
@@ -123,10 +136,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "WebDev/Learn Path.md",
+                "file": "CSharp/plinq.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
-              }
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links from plinq"
             }
           },
           {
@@ -137,7 +152,9 @@
               "state": {
                 "sortOrder": "frequency",
                 "useHierarchy": true
-              }
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
             }
           },
           {
@@ -146,8 +163,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "WebDev/Learn Path.md"
-              }
+                "file": "CSharp/plinq.md"
+              },
+              "icon": "lucide-list",
+              "title": "Outline of plinq"
             }
           }
         ]
@@ -171,13 +190,28 @@
       "workspaces:Manage workspace layouts": false
     }
   },
-  "active": "675682a7160e0f30",
+  "active": "b9ffc32338ce3b55",
   "lastOpenFiles": [
-    "WebDev/flexbox.md",
+    "图形学/大纲.md",
+    "图形学/d2c618d4ce2c126b02b763ff8c442754_MD5.png",
+    "multithread programming/glue double link list.md",
+    "图形学",
+    "UnrealEngine/KeyClass.md",
+    "multithread programming",
+    "UnrealEngine/WorldSetting.md",
+    "UnrealEngine/LevelBlueprint.md",
+    "CSharp/plinq.md",
+    "UnrealEngine",
+    "CSharp/task.md",
+    "CSharp/thread.md",
+    "Games104/2. 引擎架构分层.md",
+    "CSharp/img/Pasted image 20240818223124.png",
+    "CSharp/img",
     "WebDev/Learn Path.md",
+    "CSharp",
+    "WebDev/flexbox.md",
     "WebDev/picture/css-float.png",
     "WebDev/picture",
-    "Games104/2. 引擎架构分层.md",
     "Games104/3. 如何构建游戏世界.md",
     "UIToolKit/Instruction.md",
     "Rethinking Asynchronous JavaScript/3. thunks.md",
@@ -189,36 +223,20 @@
     "Rethinking Asynchronous JavaScript/exercises/ex1/ex1-fixed.js",
     "Rethinking Asynchronous JavaScript/exercises/ex1/ex1-fixed.md",
     "Rethinking Asynchronous JavaScript/exercises/ex1/ex1-fixed",
-    "Rethinking Asynchronous JavaScript/exercises/ex5/ex5.js",
-    "Rethinking Asynchronous JavaScript/exercises/ex5/asq.bundle.js",
-    "Rethinking Asynchronous JavaScript/exercises/ex5/ex5-fixed.html",
     "Rethinking Asynchronous JavaScript/exercises/ex5/README.md",
-    "Rethinking Asynchronous JavaScript/exercises/ex5/ex5-fixed.js",
-    "Rethinking Asynchronous JavaScript/exercises/ex5/ex5.html",
     "Rethinking Asynchronous JavaScript/exercises/ex2/README.md",
     "Rethinking Asynchronous JavaScript/exercises/ex3/README.md",
     "Rethinking Asynchronous JavaScript/exercises/ex4/README.md",
     "Rethinking Asynchronous JavaScript/exercises/ex10/README.md",
     "Rethinking Asynchronous JavaScript/exercises/ex8/README.md",
     "Rethinking Asynchronous JavaScript/exercises/ex6/README.md",
-    "Rethinking Asynchronous JavaScript/exercises/ex7/README.md",
-    "Rethinking Asynchronous JavaScript/exercises/ex9/README.md",
-    "Rethinking Asynchronous JavaScript/1.  parallel vs async.md",
-    "多人游戏开发/concepts.md",
-    "2d game physics/什么是游戏物理.md",
-    "build rpc with c/数据序列化和反序列化.md",
     "MOBA/HOK战斗系统框架.png",
-    "MOBA/Untitled.md",
     "MOBA/HOK知识体系结构.png",
     "MOBA/HOK客户端业务框架.png",
     "MOBA/HOK技能运行框架.png",
     "MOBA/HOK服务器业务框架.png",
-    "TurnBaseStrategyGame/RPG-Game.md",
-    "设计模式/命令模式/Command.md",
     "读书号视频剪辑/Image/Pasted image 20230408230140.png",
     "读书号视频剪辑/Image/Pasted image 20230408230733.png",
-    "读书号视频剪辑/Image/Pasted image 20230408230533.png",
-    "Games104/image/Pasted image 20230124104503.png",
     "Games104/Misc/Stear Behaviors.canvas"
   ]
 }

@@ -338,9 +338,36 @@ flex: 1;//等效于上面
 
 
 
+### display grid 
+https://appbrewery.github.io/grid-vs-flexbox/
+https://appbrewery.github.io/grid-sizing/
+```
+.container{
+	display: grid;
+	//1
+	grid-template-columns: 1fr 1fr ;//按照比例分配宽度,还可以使用px，rem，但是窗口宽高变化后无法自适应
+	grid-template-rows: 1fr 1fr;
+	//2
+	grid-templeate: 1fr 1fr / 1fr 1fr;//
+	//3
+	grid-template-columns: 100px auto; //第二列会填充剩余宽度
+	grid-template-rows: 100px auto; // 会根据内容自适应高度
+	//4
+	grid-template-columns: 100px minmax(200px, 400px);
+	//5
+	grid-template-columns: repeat(2, 200px); // 重复200px 2次
+	grid-template-columns: 200px 200px;等价于上面
+	gap: 1px;
 
+	// 当item的数量多于定义的colum * row时，多出来的item应用下面定义的宽高，如果下面的属性没有定义，自动匹配宽度，但是高度根据内容自适应
+	grid-auto-rows: 200px;
+	grid-auto-columns: 200px;
+}
+```
 
+fr: fractional ratio
 
+### grid item placement
 
 
 
