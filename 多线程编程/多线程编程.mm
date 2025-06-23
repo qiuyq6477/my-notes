@@ -73,8 +73,8 @@
 </stylenode>
 </map_styles>
 </hook>
-<hook NAME="AutomaticEdgeColor" COUNTER="13" RULE="ON_BRANCH_CREATION"/>
-<node TEXT="线程的基础知识" POSITION="bottom_or_right" ID="ID_1846002380" CREATED="1744124609710" MODIFIED="1744125970932">
+<hook NAME="AutomaticEdgeColor" COUNTER="15" RULE="ON_BRANCH_CREATION"/>
+<node TEXT="线程的基础知识" FOLDED="true" POSITION="bottom_or_right" ID="ID_1846002380" CREATED="1744124609710" MODIFIED="1744125970932">
 <edge COLOR="#ff00ff"/>
 <node TEXT="什么是线程" POSITION="bottom_or_right" ID="ID_1725359145" CREATED="1744123242474" MODIFIED="1744125976377">
 <node TEXT="一个进程至少有一个线程" ID="ID_163606816" CREATED="1744123253147" MODIFIED="1744123281872"/>
@@ -244,7 +244,7 @@
 <node TEXT="joinable thread 可以转换为 detached thread，反之亦然" POSITION="bottom_or_right" ID="ID_1108160761" CREATED="1744296916181" MODIFIED="1744298433505"/>
 <node TEXT="通过 pthread_create 创建的线程默认是 joinable 的" POSITION="bottom_or_right" ID="ID_1544956219" CREATED="1744296729271" MODIFIED="1744298440216"/>
 </node>
-<node TEXT="Thread Cancellation" POSITION="bottom_or_right" ID="ID_585610713" CREATED="1744381210708" MODIFIED="1744381219704">
+<node TEXT="Thread Cancellation" FOLDED="true" POSITION="bottom_or_right" ID="ID_585610713" CREATED="1744381210708" MODIFIED="1744381219704">
 <edge COLOR="#7c007c"/>
 <node TEXT="同一个进程下，任意一个线程可以取消任意一个其他的线程，线程一旦被取消，生命就结束了" ID="ID_561056662" CREATED="1744381227183" MODIFIED="1744381277000"/>
 <node TEXT="只有一个线程被设置了可以取消，其他线程才可以取消" ID="ID_688058179" CREATED="1744424104124" MODIFIED="1744424123594"/>
@@ -436,7 +436,7 @@
 <node TEXT="当需要检查多个条件是否满足时，需要同时检查所有条件，避免虚假唤醒" ID="ID_1918742509" CREATED="1744518201877" MODIFIED="1744518262493"/>
 </node>
 </node>
-<node TEXT="线程屏障（Thread Barirer）" ID="ID_1765259200" CREATED="1744530714194" MODIFIED="1744532907972">
+<node TEXT="线程屏障（Thread Barirer）" FOLDED="true" ID="ID_1765259200" CREATED="1744530714194" MODIFIED="1744532907972">
 <node TEXT="会阻塞线程，直到达到指定数量的线程后，恢复所有阻塞的线程，最后一个线程不会阻塞，会直接通过thread barirer，并且会发送一个信号给其中一个阻塞的线程，阻塞的线程收到后恢复执行，并且也会发送一个信号给其他阻塞的线程，直到最后一个阻塞的线程，最后一个线程不会再发送信号，因为已经没有必要了" ID="ID_832830774" CREATED="1744531276372" MODIFIED="1744532195027"/>
 <node TEXT="数据结构" ID="ID_78981693" CREATED="1744532019191" MODIFIED="1744532025681">
 <node TEXT="typedef struct th_barrier_ {&#xa;&#xa; &#x9;uint32_t threshold_count;&#xa;&#x9;uint32_t curr_wait_count;&#xa;&#x9;pthread_cond_t cv;&#xa;&#x9;pthread_mutex_t mutex;&#xa;&#x9;bool is_ready_again;&#xa;&#x9;pthread_cond_t busy_cv;&#xa;} th_barrier_t;" ID="ID_730093430" CREATED="1744532025920" MODIFIED="1744532028172"/>
@@ -445,7 +445,7 @@
 <node TEXT="void thread_barrier_wait ( th_barrier_t *barrier) {&#xa;         pthread_mutex_lock (&amp;barrier-&gt;mutex);&#xa;         while (barrier-&gt;is_ready_again == false ) {&#xa;                  pthread_cond_wait(&amp;barrier-&gt;busy_cv,&#xa;                                    &amp;barrier-&gt;mutex);&#xa;         }&#xa;         if ( barrier-&gt;curr_wait_count + 1 == barrier-&gt;threshold_count ) {&#xa;                  barrier-&gt;is_ready_again = false;&#xa;                  pthread_cond_signal(&amp;barrier-&gt;cv);&#xa;                  pthread_mutex_unlock (&amp;barrier-&gt;mutex);&#xa;                  return;&#xa;         }&#xa;         barrier-&gt;curr_wait_count++;&#xa;         pthread_cond_wait(&amp;barrier-&gt;cv, &amp;barrier-&gt;mutex);&#xa;         barrier-&gt;curr_wait_count--;&#xa;         if (barrier-&gt;curr_wait_count == 0) {&#xa;                  barrier-&gt;is_ready_again = true;&#xa;                  pthread_cond_broadcast(&amp;barrier-&gt;busy_cv);&#xa;    }&#xa;         else {&#xa;                  pthread_cond_signal(&amp;barrier-&gt;cv);&#xa;         }&#xa;         pthread_mutex_unlock (&amp;barrier-&gt;mutex);&#xa;}" ID="ID_1439811661" CREATED="1744532062371" MODIFIED="1744532102959"/>
 </node>
 </node>
-<node TEXT="自旋锁（Spin Locks）" FOLDED="true" ID="ID_764221966" CREATED="1744532218482" MODIFIED="1744532900291">
+<node TEXT="自旋锁（Spin Locks）" ID="ID_764221966" CREATED="1744532218482" MODIFIED="1744532900291">
 <node TEXT="类似于互斥锁，互斥锁阻塞时会发生上下文切换，而上下文切换比较昂贵，因此，自旋锁阻塞时会让线程在原地循环（自旋），持续占用 CPU 周期，避免上下文切换带来的开销。" ID="ID_1631775196" CREATED="1744532936386" MODIFIED="1744533057134"/>
 <node TEXT="原理" ID="ID_1811597355" CREATED="1744533077935" MODIFIED="1744533085029">
 <node TEXT="加锁（pthread_spinlock_lock）" ID="ID_372379655" CREATED="1744533091480" MODIFIED="1744533092535">
@@ -544,6 +544,24 @@
 <node TEXT="简单互斥：替代互斥锁（如sem_init(&amp;mutex, 0, 1)）。" ID="ID_196359167" CREATED="1744543124059" MODIFIED="1744543125591"/>
 </node>
 </node>
+<node TEXT="递归锁（Recursive Mutex）" ID="ID_1271560779" CREATED="1746086948079" MODIFIED="1746086972138">
+<node TEXT="普通的互斥锁锁定一次后再次锁定会发生死锁" ID="ID_149525114" CREATED="1746087305533" MODIFIED="1746087329210"/>
+<node TEXT="递归锁重复锁定不会发生死锁，锁定的次数和解锁的次数要一样" ID="ID_1341192793" CREATED="1746087329627" MODIFIED="1746087359454"/>
+<node TEXT="pthread库可以通过pthread_mutexattr来设置递归锁" ID="ID_165809629" CREATED="1746087368760" MODIFIED="1746087410851"/>
+<node TEXT="实现" ID="ID_871012789" CREATED="1746087626813" MODIFIED="1746087630831">
+<node TEXT="要求" ID="ID_41212052" CREATED="1746087631272" MODIFIED="1746087635581">
+<node TEXT="T1通过递归锁锁定之后，其他的线程尝试锁定会阻塞自己" ID="ID_1156594219" CREATED="1746087635854" MODIFIED="1746087676160"/>
+<node TEXT="T2只有在T1释放了所有的递归锁之后才可以恢复执行" ID="ID_1654985611" CREATED="1746087676853" MODIFIED="1746087710470"/>
+<node TEXT="锁定次数等于解锁次数" ID="ID_1874220418" CREATED="1746087732023" MODIFIED="1746087748331"/>
+<node TEXT="尝试解锁一个已经解锁了的递归锁会发生错误" ID="ID_41509401" CREATED="1746087749056" MODIFIED="1746087765757"/>
+</node>
+</node>
+</node>
+<node TEXT="读写锁（Read/Write Locks）" ID="ID_1227327697" CREATED="1746088257191" MODIFIED="1746088267073">
+<node TEXT="普通互斥锁同时只有一个线程可以进入临界区" ID="ID_350622698" CREATED="1746088585290" MODIFIED="1746088608813"/>
+<node TEXT="使用读写锁的话，可以允许多个读的线程进入临界区，而不会发生阻塞" ID="ID_93035268" CREATED="1746088612170" MODIFIED="1746088640095"/>
+<node TEXT="读写锁锁定时需要特别制定当前是读锁还是写锁" ID="ID_1578465935" CREATED="1746088733106" MODIFIED="1746088753836"/>
+</node>
 </node>
 <node TEXT="死锁" FOLDED="true" ID="ID_767171003" CREATED="1744449305540" MODIFIED="1744449596900">
 <node TEXT="形成的四个必要条件" ID="ID_929122749" CREATED="1744449309137" MODIFIED="1744449595016">
@@ -612,6 +630,29 @@
 <node TEXT="好处" ID="ID_1195902092" CREATED="1744722997912" MODIFIED="1744723003010">
 <node TEXT="应用程序无需调用 pthread_create() 来创建新线程，这带来了性能上的改善。因为 pthread_create() 是对 clone() 系统调用的封装，而系统调用通常开销较大，创建线程的过程涉及到一系列复杂的系统资源分配和设置操作。通过使用线程池，避免了频繁地创建新线程，从而节省了系统资源和时间，提高了应用程序的运行效率。" ID="ID_1695909024" CREATED="1744723012994" MODIFIED="1744723016056"/>
 <node TEXT="线程池对应用程序能够创建的线程数量设置了上限。这在资源受限的环境中非常有用，因为过多的线程可能会导致系统资源（如内存、CPU 时间等）的过度消耗，从而影响系统的整体性能甚至导致系统崩溃。通过限制线程数量，线程池可以确保应用程序在可用资源的范围内运行，避免资源耗尽的问题。" ID="ID_1090173895" CREATED="1744723037840" MODIFIED="1744723038888"/>
+</node>
+</node>
+<node TEXT="线程同步数据结构" POSITION="bottom_or_right" ID="ID_1894496334" CREATED="1746071230976" MODIFIED="1746071239267">
+<edge COLOR="#ff00ff"/>
+<node TEXT="Thread Barrier" FOLDED="true" POSITION="bottom_or_right" ID="ID_695055060" CREATED="1746069700084" MODIFIED="1746071241857">
+<node TEXT="让一组线程在某个特定的代码点（屏障点）前 “集合”。当每个线程执行到屏障点时，会被暂时阻塞，直到达到预先设定数量的线程都到达该点。此时，所有被阻塞的线程会同时解除阻塞，继续执行后续代码。" ID="ID_1468337248" CREATED="1746069869820" MODIFIED="1746069871274"/>
+<node TEXT="应用场景" ID="ID_334889180" CREATED="1746069889974" MODIFIED="1746069890881">
+<node TEXT="并行计算中的阶段同步：例如，多个线程分别处理数据的不同部分，处理完成后需要汇总结果（如归约计算）。此时，所有线程需在屏障点等待，确保数据全部处理完毕后再进入汇总阶段。" ID="ID_510431580" CREATED="1746069898378" MODIFIED="1746069901529"/>
+<node TEXT="多线程初始化：确保所有线程完成初始化操作（如资源加载、配置检查）后，再统一开始执行核心逻辑，避免因部分线程未准备好导致的错误。" ID="ID_550239803" CREATED="1746069906074" MODIFIED="1746069906943"/>
+<node TEXT="流水线任务：在流水线架构中，前一阶段的所有任务完成后，下一阶段的任务才能启动，屏障可用于阶段之间的同步。" ID="ID_916605782" CREATED="1746069912192" MODIFIED="1746069913016"/>
+</node>
+</node>
+<node TEXT="Event Pair" POSITION="bottom_or_right" ID="ID_1598722743" CREATED="1746071270159" MODIFIED="1746071369261">
+<node TEXT="用于在一对线程之间实现严格的交替执行。" ID="ID_1109662683" CREATED="1746071370177" MODIFIED="1746071371157"/>
+<node TEXT="可以使用信号量（Semaphores）实现相同的功能。" ID="ID_319278021" CREATED="1746071449525" MODIFIED="1746071462363"/>
+<node TEXT="T1 的行为规则" ID="ID_1367910054" CREATED="1746071398358" MODIFIED="1746071399285">
+<node TEXT="发送消息后等待：当线程 T1 发送一条消息后，它会进入等待状态" ID="ID_865385484" CREATED="1746071410385" MODIFIED="1746071411222"/>
+<node TEXT="发送下一条消息的条件：T1 只有在收到前一条消息的回复后，才能发送下一条消息。这确保了 T1 和 T2 之间的消息交互是有序的，不会出现 T1 连续发送多条消息而 T2 无法及时处理的情况。" ID="ID_8949099" CREATED="1746071420287" MODIFIED="1746071421231"/>
+</node>
+<node TEXT="T2 的行为规则" ID="ID_370910633" CREATED="1746071404325" MODIFIED="1746071409500">
+<node TEXT="发送消息后等待：线程 T2 发送消息后也会进入等待状态。" ID="ID_1053560265" CREATED="1746071433536" MODIFIED="1746071434285"/>
+<node TEXT="发送下一条消息的条件：T2 同样只有在收到前一条消息的回复后，才能发送下一条消息。" ID="ID_1639830137" CREATED="1746071439101" MODIFIED="1746071440141"/>
+</node>
 </node>
 </node>
 </node>
