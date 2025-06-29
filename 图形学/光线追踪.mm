@@ -80,7 +80,7 @@
 <node TEXT="全局光照" ID="ID_943025734" CREATED="1750490463748" MODIFIED="1750490467739"/>
 <node TEXT="BRDF，镜面反射" ID="ID_258218421" CREATED="1750493956734" MODIFIED="1750493969289"/>
 </node>
-<node TEXT="光线追踪" FOLDED="true" POSITION="bottom_or_right" ID="ID_655857836" CREATED="1750495318952" MODIFIED="1750495330432">
+<node TEXT="光线追踪" POSITION="bottom_or_right" ID="ID_655857836" CREATED="1750495318952" MODIFIED="1750495330432">
 <edge COLOR="#00007c"/>
 <node TEXT="光线追踪基本原理" POSITION="top_or_left" ID="ID_1424533972" CREATED="1750489160143" MODIFIED="1750495339445">
 <node TEXT="球体方程" ID="ID_1214950321" CREATED="1750690193546" MODIFIED="1750690197395">
@@ -316,7 +316,22 @@
 <node TEXT="如果你可以将场景划分为“房间”，那么你可以制作一张表，列出从任何给定的房间可以看到的房间。当稍后渲染场景时，你只需要弄清楚相机所在的房间，然后你就可以安全地忽略所有标记为“不可见”的房间，从而在渲染过程中节省大量资源。当然，代价就是这样需要更多的预处理时间和更加固定不变的场景。如果你对这个主题感兴趣，请阅读关于BSP分区和门户系统（portal  system）的内容。" ID="ID_1862512021" CREATED="1750862421690" MODIFIED="1750862430498"/>
 </node>
 </node>
-<node TEXT="线性插值顶点属性值" ID="ID_1654864381" CREATED="1751093948665" MODIFIED="1751093950159"/>
+<node TEXT="背面剔除" ID="ID_1437682341" CREATED="1751201918817" MODIFIED="1751201981803">
+<node TEXT="如果视线向量和这个箭头（实际上是三角形的法向量）形成的角度小于90°，则三角形是正面的；否则，它是背面的" ID="ID_1877190756" CREATED="1751201977734" MODIFIED="1751201983482">
+<node TEXT="\latex \boldsymbol{N} \cdot \boldsymbol{V} &lt;= 0 背面" ID="ID_660503699" CREATED="1751202136867" MODIFIED="1751202188206">
+<font SIZE="14"/>
+</node>
+<node TEXT="\latex \boldsymbol{N} \cdot \boldsymbol{V} &gt; 0 正面" ID="ID_1350176799" CREATED="1751202163372" MODIFIED="1751202192993">
+<font SIZE="14"/>
+</node>
+<node TEXT="N取决于三角形顶点的顺序，顶点顺序是顺时针还是逆时针决定了法线方向" ID="ID_815722767" CREATED="1751202273101" MODIFIED="1751202320042"/>
+</node>
+<node TEXT="需要对我们的3D模型施加一个限制条件：它们必须是封闭的（closed）。封闭物体有一个有趣的特性，即无论模型或相机的方位如何，物体正向表面的集合完全覆盖背向表面的集合。这意味着我们根本不需要绘制背向的表面，可以节省宝贵的计算时间。" ID="ID_1596382126" CREATED="1751201997614" MODIFIED="1751202061232"/>
+</node>
+<node TEXT="深度缓冲" ID="ID_1147780276" CREATED="1751201926593" MODIFIED="1751201931254">
+<node TEXT="不能直接使用z值，不是线性插值的，要用1/z" ID="ID_1224911272" CREATED="1751207370221" MODIFIED="1751207387527"/>
+</node>
+<node TEXT="着色" ID="ID_1479048851" CREATED="1751207401167" MODIFIED="1751207404463"/>
 </node>
 <node TEXT="opengl" POSITION="bottom_or_right" ID="ID_730432956" CREATED="1751070634575" MODIFIED="1751070640954">
 <edge COLOR="#007c7c"/>
@@ -336,8 +351,8 @@
 </node>
 </node>
 <node TEXT="API" ID="ID_1896332690" CREATED="1751072123219" MODIFIED="1751072128078">
-<node TEXT="Shader相关" ID="ID_1671831043" CREATED="1751073974513" MODIFIED="1751073980502">
-<node TEXT="使用流程" FOLDED="true" ID="ID_77828901" CREATED="1751075589874" MODIFIED="1751075600880">
+<node TEXT="Shader相关" FOLDED="true" ID="ID_1671831043" CREATED="1751073974513" MODIFIED="1751073980502">
+<node TEXT="使用流程" ID="ID_77828901" CREATED="1751075589874" MODIFIED="1751075600880">
 <node TEXT="glCreateShader" POSITION="bottom_or_right" ID="ID_1325747072" CREATED="1751073980994" MODIFIED="1751073989971">
 <node TEXT="GL_VERTEX_SHADER：顶点着色器（处理顶点位置、颜色等）" ID="ID_616267138" CREATED="1751073996868" MODIFIED="1751074106075"/>
 <node TEXT="GL_FRAGMENT_SHADER：片段着色器（处理像素颜色输出）" ID="ID_656926080" CREATED="1751074004848" MODIFIED="1751074114498"/>
@@ -399,6 +414,10 @@
 <node TEXT="location：由glGetUniformLocation返回的变量位置。" ID="ID_1089681468" CREATED="1751108593273" MODIFIED="1751108593273"/>
 <node TEXT="v0：要设置的整数值。" ID="ID_690787052" CREATED="1751108593273" MODIFIED="1751108593273"/>
 </node>
+<node TEXT="uniform缓冲对象(UBO)" ID="ID_1495327880" CREATED="1751183098297" MODIFIED="1751183126784">
+<node TEXT="可以将着⾊器中的多个uniform组合在⼀起，并⼀次将它们都发送出去。对于具有许多uniform的着⾊器程序，这样做通常会⽐单独设置每个uniform值更加有效" ID="ID_1393390107" CREATED="1751183134672" MODIFIED="1751183169662"/>
+<node TEXT="使用 uniform缓冲对象，可以将 uniform分成多个组。例如，可以有用于每帧更新一次的 uniform，以及每个对象更新一次的 uniform。每帧的视图投影变化不会超过一次，然而每个 actor 都会有一个不同的世界变换矩阵。这样，可以在帧的开头只在一次函数调用中更新所有针对此帧的uniform。同样，也可以针对每个对象分别更新所有针对此对象的 uniform。要实现这一点，必须更改在着色器中声明 uniform的方式，以及在C++代码中镜像该数据的方式" ID="ID_1500856441" CREATED="1751183226857" MODIFIED="1751183229075"/>
+</node>
 </node>
 </node>
 <node TEXT="顶点相关" FOLDED="true" ID="ID_750711262" CREATED="1751074725278" MODIFIED="1751074736514">
@@ -451,8 +470,10 @@
 <node TEXT="index：要启用的顶点属性索引" ID="ID_1429027682" CREATED="1751092267285" MODIFIED="1751092270295"/>
 <node TEXT="作用：默认情况下，顶点属性是禁用的，必须显式启用才能使用" ID="ID_338157517" CREATED="1751092278789" MODIFIED="1751092882036"/>
 </node>
+<node TEXT="glDeleteBuffers" ID="ID_773528651" CREATED="1751169927082" MODIFIED="1751169935254"/>
+<node TEXT="glDeleteVertexArrays" ID="ID_1335378823" CREATED="1751169940335" MODIFIED="1751169941686"/>
 </node>
-<node TEXT="绘制相关" FOLDED="true" ID="ID_1214515754" CREATED="1751074781482" MODIFIED="1751074787790">
+<node TEXT="绘制相关" ID="ID_1214515754" CREATED="1751074781482" MODIFIED="1751074787790">
 <node TEXT="glClearColor" POSITION="bottom_or_right" ID="ID_1865845922" CREATED="1751072128350" MODIFIED="1751072135224">
 <node TEXT="设置用来重置缓冲区时填充的颜色" ID="ID_1926162419" CREATED="1751072209899" MODIFIED="1751072223656"/>
 </node>
@@ -465,6 +486,10 @@
 </node>
 <node TEXT="glPointSize" POSITION="bottom_or_right" ID="ID_841514183" CREATED="1751074788272" MODIFIED="1751074789316"/>
 <node TEXT="glPolygonMode" POSITION="bottom_or_right" ID="ID_355735527" CREATED="1751075007669" MODIFIED="1751075009321"/>
+<node TEXT="glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)" POSITION="bottom_or_right" ID="ID_672619900" CREATED="1751185084399" MODIFIED="1751185105784">
+<node TEXT="打开颜色缓冲区混合，默认禁用" ID="ID_487781221" CREATED="1751185109196" MODIFIED="1751185129225"/>
+<node TEXT="glEnable(GL_BLEND)" ID="ID_1897183807" CREATED="1751185133172" MODIFIED="1751185142081"/>
+</node>
 <node TEXT="glDrawArrays" POSITION="bottom_or_right" ID="ID_298941127" CREATED="1751073821104" MODIFIED="1751073822613">
 <node TEXT="mode" ID="ID_949966341" CREATED="1751073834191" MODIFIED="1751073843649">
 <node TEXT="GL_TRIANGLES" ID="ID_1933967887" CREATED="1751073845176" MODIFIED="1751073851692"/>
@@ -648,7 +673,7 @@
 </node>
 <node TEXT="显卡上的纹理单元。" POSITION="bottom_or_right" ID="ID_985494309" CREATED="1751107160381" MODIFIED="1751107160381"/>
 </node>
-<node TEXT="使用方法" FOLDED="true" ID="ID_704468718" CREATED="1751108991820" MODIFIED="1751108995918">
+<node TEXT="使用方法" ID="ID_704468718" CREATED="1751108991820" MODIFIED="1751108995918">
 <node TEXT="1. 纹理数据加载并生成纹理对象" ID="ID_1750775690" CREATED="1751109361781" MODIFIED="1751109764176">
 <node ID="ID_796966857" CREATED="1751109399071" MODIFIED="1751109781122"><richcontent TYPE="NODE">
 
@@ -670,7 +695,7 @@
 </node>
 </node>
 <node TEXT="上传数据到gpu" POSITION="bottom_or_right" ID="ID_1604019828" CREATED="1751109382445" MODIFIED="1751109391310">
-<node TEXT="if (data) {&#xa;    // 上传图像数据到当前绑定的纹理对象&#xa;    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);&#xa;   &#xa;    // 生成多级渐远纹理（Mipmaps）&#xa;    glGenerateMipmap(GL_TEXTURE_2D);&#xa;} else {&#xa;    printf(&quot;Failed to load texture\n&quot;);&#xa;}&#xa;stbi_image_free(data);  // 释放CPU端图像数据" ID="ID_1118443944" CREATED="1751109391877" MODIFIED="1751109393416">
+<node TEXT="if (data) {&#xa;    // 上传图像数据到当前绑定的纹理对象，此时data也可以释放了&#xa;    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);&#xa;   &#xa;    // 生成多级渐远纹理（Mipmaps）&#xa;    glGenerateMipmap(GL_TEXTURE_2D);&#xa;} else {&#xa;    printf(&quot;Failed to load texture\n&quot;);&#xa;}&#xa;stbi_image_free(data);  // 释放CPU端图像数据" ID="ID_1118443944" CREATED="1751109391877" MODIFIED="1751184275201">
 <node TEXT="glTexImage2D 参数说明：" FOLDED="true" POSITION="bottom_or_right" ID="ID_1622118056" CREATED="1751109412867" MODIFIED="1751109416790">
 <node ID="ID_863742960" CREATED="1751109417584" MODIFIED="1751109417584"><richcontent TYPE="NODE">
 
@@ -842,6 +867,8 @@
 </node>
 </node>
 <node TEXT="各向异性过滤" ID="ID_14121319" CREATED="1751110601275" MODIFIED="1751110603808"/>
+<node TEXT="最临近过滤" ID="ID_1550214602" CREATED="1751184140008" MODIFIED="1751184147188"/>
+<node TEXT="双线性过滤" ID="ID_973578067" CREATED="1751184147378" MODIFIED="1751184152682"/>
 <node TEXT="TODO" ID="ID_799979864" CREATED="1751110948701" MODIFIED="1751110970004">
 <node TEXT="使用纹理单元来存储“高度图”以生成地形，以及存储“阴影贴图”以有效地为场景添加阴影" ID="ID_1207361849" CREATED="1751110973267" MODIFIED="1751110973267"/>
 <node TEXT="着色器还可以向纹理写入数据，允许着色器修改纹理图像，甚至将一个纹理的一部分复制到另一个纹理的某个部分" ID="ID_1271706941" CREATED="1751110984581" MODIFIED="1751110985688"/>
@@ -979,7 +1006,7 @@
 </node>
 </node>
 </node>
-<node TEXT="Phong着色" FOLDED="true" POSITION="bottom_or_right" ID="ID_152418855" CREATED="1751116730813" MODIFIED="1751120868574">
+<node TEXT="Phong着色" POSITION="bottom_or_right" ID="ID_152418855" CREATED="1751116730813" MODIFIED="1751120868574">
 <node TEXT="在片段着色器中计算" ID="ID_422451739" CREATED="1751118560003" MODIFIED="1751118571067"/>
 <node TEXT="流程" ID="ID_847880113" CREATED="1751118991677" MODIFIED="1751120868573">
 <node TEXT="c++代码" ID="ID_1971829827" CREATED="1751118638943" MODIFIED="1751118728759">
@@ -1024,6 +1051,7 @@
 <node TEXT="有多种光和/或多个纹理" ID="ID_224002343" CREATED="1751120462688" MODIFIED="1751120463722"/>
 </node>
 </node>
+<node TEXT="阴影" ID="ID_1184105590" CREATED="1751121179722" MODIFIED="1751121183138"/>
 </node>
 <node TEXT="GLSL" ID="ID_1000558199" CREATED="1751075250671" MODIFIED="1751075252918">
 <node TEXT="vertex" ID="ID_777997110" CREATED="1751075253717" MODIFIED="1751075259455">
@@ -1056,6 +1084,23 @@
 </node>
 <node TEXT="解决方法" ID="ID_115762181" CREATED="1751097100585" MODIFIED="1751097101471">
 <node TEXT="让可能产生冲突的物体之间有一些微小偏移，使其表面不再共面，从而避免深度值冲突" ID="ID_996038099" CREATED="1751097115432" MODIFIED="1751097128104"/>
+</node>
+</node>
+<node TEXT="深度缓冲" ID="ID_483414551" CREATED="1751191947591" MODIFIED="1751191952695">
+<node TEXT="&#x9;SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);" ID="ID_276344377" CREATED="1751191985815" MODIFIED="1751191993942"/>
+<node TEXT="glEnable(GL_DEPTH_TEST);" ID="ID_1438707794" CREATED="1751191995597" MODIFIED="1751192016898"/>
+<node TEXT="glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);" ID="ID_1123000044" CREATED="1751192019327" MODIFIED="1751192020621"/>
+<node TEXT="按照z缓冲区的规定，在具有透明物体的场景中不能使用z缓冲。" ID="ID_1888091544" CREATED="1751192057490" MODIFIED="1751192058619"/>
+<node TEXT="如果要渲染透明的对象" ID="ID_1135230828" CREATED="1751192246776" MODIFIED="1751192267573">
+<node TEXT="1，用z缓冲来渲染不透明对象" POSITION="bottom_or_right" ID="ID_1432454151" CREATED="1751192285547" MODIFIED="1751192308703"/>
+<node TEXT="2，禁用深度缓冲区写入，并按从前到后的顺序渲染透明对象。" POSITION="bottom_or_right" ID="ID_1595918093" CREATED="1751192299001" MODIFIED="1751192312172"/>
+<node TEXT="在渲染像素时，应该测试每个像素的深度，以确保不透明对象后面的透明像素不会被绘制。虽然上述方案意味着对于透明对象，会使用画家算法进行渲染，但透明对象的数量有望非常小。" POSITION="bottom_or_right" ID="ID_930223102" CREATED="1751192095751" MODIFIED="1751192294418"/>
+</node>
+<node TEXT="如果要同时渲染精灵和3d的对象" ID="ID_59575797" CREATED="1751192164054" MODIFIED="1751192369690">
+<node TEXT="1,在禁用alpha 混合并启用z缓冲的情况下，渲染所有3D对象。" ID="ID_428616383" CREATED="1751192187375" MODIFIED="1751192228649"/>
+<node TEXT="2,在启用alpha 混合并禁用z缓冲的情况下，渲染所有精灵。" ID="ID_1552593266" CREATED="1751192201400" MODIFIED="1751192396633"/>
+<node TEXT="原因：因为精灵渲染使用 Alpha 混合来支持具有透明度的纹理。然而alpha 混合不能与Z缓冲很好地协作" ID="ID_1805026530" CREATED="1751192420765" MODIFIED="1751192462232"/>
+<node TEXT="结果：所有2D 精灵都会显示在3D 场景的顶部" ID="ID_1568552143" CREATED="1751192467565" MODIFIED="1751192482268"/>
 </node>
 </node>
 </node>
@@ -1172,6 +1217,9 @@
 </node>
 <node TEXT="在着色器的每次调用中，不会变，不会被线性插值，但是顶点属性会被线性插值" ID="ID_563541996" CREATED="1751093983065" MODIFIED="1751094036220"/>
 </node>
+<node TEXT="顶点索引" POSITION="bottom_or_right" ID="ID_1170867919" CREATED="1751170092455" MODIFIED="1751170097000">
+<node TEXT="使用顶点可以减少顶点着色器调用次数" ID="ID_1423931816" CREATED="1751170097472" MODIFIED="1751170139071"/>
+</node>
 </node>
 <node TEXT="直接发送给统一变量。" ID="ID_302124011" CREATED="1751091243967" MODIFIED="1751091245277"/>
 <node TEXT="TODO" ID="ID_1369973444" CREATED="1751098941202" MODIFIED="1751098942657">
@@ -1180,7 +1228,7 @@
 </node>
 </node>
 </node>
-<node TEXT="数学" POSITION="top_or_left" ID="ID_1614820575" CREATED="1750776198280" MODIFIED="1750776201448">
+<node TEXT="数学" POSITION="bottom_or_right" ID="ID_1614820575" CREATED="1750776198280" MODIFIED="1750776201448">
 <edge COLOR="#7c007c"/>
 <node TEXT="矩阵" ID="ID_556654557" CREATED="1750776201578" MODIFIED="1751077453988">
 <node TEXT="旋转矩阵" ID="ID_1469351974" CREATED="1750777683012" MODIFIED="1750777689018">
@@ -1245,6 +1293,7 @@
 </node>
 <node TEXT="\latex \[&#xa;A = \frac{q}{\text{aspectRatio}}&#xa;\]" ID="ID_22281390" CREATED="1751086280216" MODIFIED="1751086287474">
 <font SIZE="12"/>
+<node TEXT="aspectRatio = height / width" ID="ID_792294984" CREATED="1751191641176" MODIFIED="1751191653086"/>
 </node>
 <node TEXT="\latex&#xa;\[&#xa;B = \frac{Z_{\text{near}} + Z_{\text{far}}}{Z_{\text{near}} - Z_{\text{far}}}&#xa;\]&#xa;&#xa;" ID="ID_249271091" CREATED="1751086178386" MODIFIED="1751086212512">
 <font SIZE="12"/>
@@ -1304,8 +1353,17 @@
 <node TEXT="逆矩阵" ID="ID_60644978" CREATED="1751076833973" MODIFIED="1751076836948"/>
 </node>
 </node>
+<node TEXT="通 过 对 每 个 变 换 矩 阵 进 ⾏ 转 置 ， 可 以 实 现 ⾏ 向 量 和 列 向 量 之 间 的 切 换" POSITION="bottom_or_right" ID="ID_1263534289" CREATED="1751182152376" MODIFIED="1751182155977">
+<node TEXT="行向量右乘，列向量左乘" ID="ID_903825708" CREATED="1751182163592" MODIFIED="1751182180260"/>
+<node TEXT="\latex $ {q}\&apos; = qTR $" ID="ID_188029360" CREATED="1751182216875" MODIFIED="1751182439526">
+<font SIZE="14"/>
 </node>
-<node TEXT="向量" ID="ID_1714979182" CREATED="1751077458654" MODIFIED="1751077464977">
+<node TEXT="\latex {q}\&apos; = R^TT^Tq" ID="ID_1684921920" CREATED="1751182299457" MODIFIED="1751182439529">
+<font SIZE="14"/>
+</node>
+</node>
+</node>
+<node TEXT="向量" FOLDED="true" ID="ID_1714979182" CREATED="1751077458654" MODIFIED="1751077464977">
 <node TEXT="w = 0，代表向量，w = 1，代表点" POSITION="bottom_or_right" ID="ID_830421109" CREATED="1750776209033" MODIFIED="1750776247400"/>
 <node TEXT="3D中的任何点在齐次坐标中都有无限多种表现形式，w=1的这个点为齐次坐标中的正则表示（canonical  representation），除以w转换为正则形式(笛卡尔坐标)" POSITION="bottom_or_right" ID="ID_1466992453" CREATED="1750776214924" MODIFIED="1750778844750"/>
 <node TEXT="向量表示大小和方向，没有位置" POSITION="bottom_or_right" ID="ID_1647497937" CREATED="1751077516977" MODIFIED="1751077531396"/>
@@ -1375,6 +1433,55 @@
 <node TEXT="任意两个不共线向量都定义了一个平面" ID="ID_863880357" CREATED="1751085154229" MODIFIED="1751085163401"/>
 </node>
 </node>
+</node>
+<node TEXT="欧拉角" FOLDED="true" ID="ID_1061000796" CREATED="1751185936711" MODIFIED="1751185939735">
+<node TEXT="通过三次绕不同轴的旋转来定义刚体方向，旋转顺序和轴的选择决定了不同的欧拉角类型" POSITION="bottom_or_right" ID="ID_761667077" CREATED="1751186013504" MODIFIED="1751186015975"/>
+<node TEXT="绕 x 轴旋转（偏航，Yaw）" POSITION="bottom_or_right" ID="ID_988294447" CREATED="1751186028592" MODIFIED="1751186028592"/>
+<node TEXT="绕 y 轴旋转（俯仰，Pitch）" POSITION="bottom_or_right" ID="ID_671486731" CREATED="1751186028592" MODIFIED="1751186028592"/>
+<node TEXT="绕 z 轴旋转（滚转，Roll）" POSITION="bottom_or_right" ID="ID_1818979819" CREATED="1751186028593" MODIFIED="1751186028593"/>
+<node TEXT="局限性" POSITION="bottom_or_right" ID="ID_305638509" CREATED="1751186069861" MODIFIED="1751186070846">
+<node TEXT="万向节锁（Gimbal Lock）：当第二次旋转使两个旋转轴重合时（如俯仰角为 ±90° 时，偏航轴与滚转轴重合），会导致自由度丢失，出现计算奇异点。" ID="ID_870963810" CREATED="1751186079427" MODIFIED="1751186080798"/>
+<node TEXT="旋转顺序依赖：不同的旋转顺序（如 ZXY、YXZ）会导致不同的欧拉角，需明确约定顺序。" ID="ID_1171303571" CREATED="1751186087782" MODIFIED="1751186094750"/>
+<node TEXT="非连续性：欧拉角在奇异点附近的微小变化可能导致角度值的剧烈跳变，影响控制稳定性。" ID="ID_992172334" CREATED="1751186099517" MODIFIED="1751186100501"/>
+</node>
+</node>
+<node TEXT="四元数" FOLDED="true" ID="ID_1615181631" CREATED="1751185939897" MODIFIED="1751185945474">
+<node TEXT="3D 图形使用单位四元数，单位四元数是数值大小为1的四元数。四元数具有一个向量分量和一个标量分量。" ID="ID_1613731224" CREATED="1751186285785" MODIFIED="1751186287640">
+<node TEXT="\latex $q = [q_v, q_s]$" ID="ID_389831987" CREATED="1751186324197" MODIFIED="1751186347311">
+<font SIZE="18"/>
+</node>
+</node>
+<node TEXT="四 元 数 的 向 量 和 标 量 的 计 算 取 决 于 标 准 化 的 旋 转 轴 a 和 旋 转 ⾓ 度 0" FOLDED="true" ID="ID_158581365" CREATED="1751186299332" MODIFIED="1751186300837">
+<node TEXT="\latex \[&#xa;q_v = \hat{a} \sin \frac{\theta}{2}&#xa;\]" ID="ID_572815266" CREATED="1751186349863" MODIFIED="1751186524673">
+<font SIZE="18"/>
+</node>
+<node TEXT="\latex \[&#xa;q_s = \cos \frac{\theta}{2}&#xa;\]" ID="ID_199174667" CREATED="1751186514785" MODIFIED="1751186524670">
+<font SIZE="18"/>
+</node>
+</node>
+<node TEXT="假设飞船处于位置S，初始朝向为x轴，需要让其旋转，面向任意点P" ID="ID_290167621" CREATED="1751186534749" MODIFIED="1751186600115">
+<node TEXT="1， 计 算 从 飞 船 到 任 意 点 “ P ” 的 向 量 ， 并&#xa;标 准 化 该 向 量" ID="ID_1710876824" CREATED="1751186601340" MODIFIED="1751186612719">
+<node TEXT="\latex \[&#xa;\text{NewFacing} = \frac{P - S}{\| P - S \|}&#xa;\]" ID="ID_1761376809" CREATED="1751186640079" MODIFIED="1751186683182">
+<font SIZE="18"/>
+</node>
+</node>
+<node TEXT="2， 使 ⽤ 叉 积 运 算 来 计 算 飞 船 原 始 朝 向 和 新 朝 向 之 间 的 旋 转 轴 ， 并 标 准 化 该 向" ID="ID_1298205723" CREATED="1751186615284" MODIFIED="1751186622572">
+<node TEXT="\latex \[&#xa;\hat{a} = \frac{\langle 1, 0, 0 \rangle \times \text{NewFacing}}{\| \langle 1, 0, 0 \rangle \times \text{NewFacing} \|}&#xa;\]" ID="ID_51997809" CREATED="1751186665717" MODIFIED="1751186683181">
+<font SIZE="18"/>
+</node>
+</node>
+<node TEXT="3，使 ⽤ 点 积 运 算 和 反 余 弦 来 计 算 旋 转 ⾓ 度" ID="ID_1794815828" CREATED="1751186627384" MODIFIED="1751186628671">
+<node TEXT="\latex \[&#xa;\theta = \arccos\left( \langle 1, 0, 0 \rangle \cdot \text{NewFacing} \right)&#xa;\]" ID="ID_1248729460" CREATED="1751186676138" MODIFIED="1751186683179">
+<font SIZE="18"/>
+</node>
+</node>
+<node TEXT="4，将得到的旋转轴和旋转角带入四元数公式，得到四元数" ID="ID_760153980" CREATED="1751186696205" MODIFIED="1751186723930"/>
+<node TEXT="需要注意计算前需要验证新朝向和原始朝向是不平行的，如果平行，点乘结果是0" ID="ID_1828800389" CREATED="1751186739679" MODIFIED="1751186787494"/>
+</node>
+<node TEXT="对四元数应用其他旋转" ID="ID_163367691" CREATED="1751186817698" MODIFIED="1751186824730"/>
+<node TEXT="通过四元数旋转向量" ID="ID_1463050180" CREATED="1751186875613" MODIFIED="1751186882229"/>
+<node TEXT="球面线形插值" ID="ID_1750769200" CREATED="1751186898108" MODIFIED="1751186902349"/>
+<node TEXT="将四元数转换为矩阵" ID="ID_500185545" CREATED="1751186939820" MODIFIED="1751186945924"/>
 </node>
 </node>
 </node>
