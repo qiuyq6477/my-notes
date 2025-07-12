@@ -336,7 +336,7 @@
 <node TEXT="opengl" POSITION="bottom_or_right" ID="ID_730432956" CREATED="1751070634575" MODIFIED="1751070640954">
 <edge COLOR="#007c7c"/>
 <node TEXT="理论" ID="ID_1023323253" CREATED="1751072118400" MODIFIED="1751072122925">
-<node TEXT="渲染管线" ID="ID_1683980452" CREATED="1751074921578" MODIFIED="1751074925257">
+<node TEXT="渲染管线" FOLDED="true" ID="ID_1683980452" CREATED="1751074921578" MODIFIED="1751074925257">
 <node TEXT="应用程序" ID="ID_336204190" CREATED="1751074926398" MODIFIED="1751075123366"/>
 <node TEXT="顶点着色器" POSITION="bottom_or_right" ID="ID_293358386" CREATED="1751074853651" MODIFIED="1751074884847"/>
 <node TEXT="曲面细分着色器" POSITION="bottom_or_right" ID="ID_871553115" CREATED="1751074890139" MODIFIED="1751074895240"/>
@@ -474,6 +474,10 @@
 <node TEXT="glDeleteVertexArrays" ID="ID_1335378823" CREATED="1751169940335" MODIFIED="1751169941686"/>
 </node>
 <node TEXT="绘制相关" ID="ID_1214515754" CREATED="1751074781482" MODIFIED="1751074787790">
+<node TEXT="glViewport" POSITION="bottom_or_right" ID="ID_971245430" CREATED="1752289397539" MODIFIED="1752289421785">
+<node TEXT="前两个参数设置窗口左下角的位置。第三个和第四个参数以像素为单位设置渲染窗口的宽度和高度" ID="ID_290629107" CREATED="1752289422651" MODIFIED="1752289442658"/>
+<node TEXT="在幕后，OpenGL 使用通过`glViewport`指定的数据，将其处理的二维坐标转换为屏幕上的坐标。" ID="ID_1862847110" CREATED="1752289443107" MODIFIED="1752289443741"/>
+</node>
 <node TEXT="glClearColor" POSITION="bottom_or_right" ID="ID_1865845922" CREATED="1751072128350" MODIFIED="1751072135224">
 <node TEXT="设置用来重置缓冲区时填充的颜色" ID="ID_1926162419" CREATED="1751072209899" MODIFIED="1751072223656"/>
 </node>
@@ -483,6 +487,7 @@
 <node TEXT="颜色缓冲区" ID="ID_63978620" CREATED="1751072178309" MODIFIED="1751072191290"/>
 </node>
 <node TEXT="GL_DEPTH_BUFFER_BIT" ID="ID_1447522704" CREATED="1751075674631" MODIFIED="1751075675622"/>
+<node TEXT="GL_STENCIL_BUFFER_BIT" ID="ID_269338839" CREATED="1752289566654" MODIFIED="1752289567770"/>
 </node>
 <node TEXT="glPointSize" POSITION="bottom_or_right" ID="ID_841514183" CREATED="1751074788272" MODIFIED="1751074789316"/>
 <node TEXT="glPolygonMode" POSITION="bottom_or_right" ID="ID_355735527" CREATED="1751075007669" MODIFIED="1751075009321"/>
@@ -501,7 +506,7 @@
 <node TEXT="总共要绘制的顶点数" ID="ID_1604767867" CREATED="1751073867691" MODIFIED="1751073876376"/>
 </node>
 </node>
-<node TEXT="实例化渲染" FOLDED="true" POSITION="bottom_or_right" ID="ID_13324156" CREATED="1751096144112" MODIFIED="1751096162401">
+<node TEXT="实例化渲染" POSITION="bottom_or_right" ID="ID_13324156" CREATED="1751096144112" MODIFIED="1751096162401">
 <node TEXT="glDrawArraysInstanced" ID="ID_1047013009" CREATED="1751094797571" MODIFIED="1751094799645">
 <node TEXT="mode：渲染图元类型（如 GL_TRIANGLES、GL_POINTS 等）。" ID="ID_1478355213" CREATED="1751096040519" MODIFIED="1751096040519"/>
 <node TEXT="first：从顶点数组的第几个元素开始渲染。" ID="ID_1922037980" CREATED="1751096040519" MODIFIED="1751096040519"/>
@@ -884,7 +889,7 @@
 </node>
 </node>
 </node>
-<node TEXT="光照" ID="ID_1628914802" CREATED="1751111456044" MODIFIED="1751111461717">
+<node TEXT="光照" FOLDED="true" ID="ID_1628914802" CREATED="1751111456044" MODIFIED="1751111461717">
 <node TEXT="光照的影响" FOLDED="true" POSITION="bottom_or_right" ID="ID_1249244803" CREATED="1751111605591" MODIFIED="1751111648388">
 <node TEXT="光源类型及其环境、漫反射和镜面反射特性；" ID="ID_1781206296" CREATED="1751111662462" MODIFIED="1751111662462"/>
 <node TEXT="对象材质的环境、漫反射和镜面反射特征；" POSITION="bottom_or_right" ID="ID_534908070" CREATED="1751111662462" MODIFIED="1751111662462"/>
@@ -1226,6 +1231,55 @@
 <node TEXT="统一块，这是一种类似于C中的struct的用于统一变量的机制。甚至可以设置统一块从缓冲区接收数据" ID="ID_1915772453" CREATED="1751098945528" MODIFIED="1751098945528"/>
 <node TEXT="着色器存储块，它本质上是一个着色器可以写入的缓冲区" ID="ID_1916048576" CREATED="1751098951621" MODIFIED="1751098952634"/>
 </node>
+</node>
+<node TEXT="核心模式和立即模式" ID="ID_1616515229" CREATED="1752288247893" MODIFIED="1752288291638">
+<node TEXT="核心模式" ID="ID_181473830" CREATED="1752288291886" MODIFIED="1752288302243">
+<node TEXT="调用函数可直接绘图，如 glBegin/glEnd 包裹顶点绘制，简单易上手" ID="ID_1132759479" CREATED="1752288322214" MODIFIED="1752288323858"/>
+<node TEXT="底层封装多，硬件调度不灵活，效率低，无法满足复杂场景性能需求" ID="ID_1550812777" CREATED="1752288327754" MODIFIED="1752288328682"/>
+</node>
+<node TEXT="立即模式" ID="ID_1894395281" CREATED="1752288302526" MODIFIED="1752288304757">
+<node TEXT="需手动管理渲染流程（如顶点缓冲、着色器），灵活度高，可深度优化性能" ID="ID_933319234" CREATED="1752288332559" MODIFIED="1752288338463"/>
+<node TEXT="学习曲线陡，需掌握缓冲区、着色器等底层概念，理解图形渲染管线细节" ID="ID_1332359335" CREATED="1752288338915" MODIFIED="1752288340090"/>
+</node>
+</node>
+<node TEXT="状态机" ID="ID_1687739838" CREATED="1752288346483" MODIFIED="1752288354478">
+<node TEXT="OpenGL本身是一个大型状态机：由一组变量组成，这些变量定义了OpenGL当前应如何运行。OpenGL的状态通常被称为OpenGL上下文。使用OpenGL时，我们通常通过设置一些选项、操作一些缓冲区，然后使用当前上下文进行渲染来改变其状态" ID="ID_814983692" CREATED="1752288355353" MODIFIED="1752288390026">
+<node TEXT="改变上下文的状态更改函数" ID="ID_600383235" CREATED="1752288418635" MODIFIED="1752288435778"/>
+<node TEXT="根据OpenGL当前状态执行某些操作的状态使用函数" ID="ID_1542469978" CREATED="1752288436690" MODIFIED="1752288547740"/>
+</node>
+<node TEXT="在OpenGL中，对象是一组选项的集合，这些选项代表了OpenGL状态的一个子集。可以在应用程序中定义多个对象，设置它们的选项。在需要时激活对应的对象" FOLDED="true" ID="ID_819276962" CREATED="1752288549326" MODIFIED="1752288680467">
+<node TEXT="// The State of OpenGL&#xa;struct OpenGL_Context {&#xa;  &#x9;...&#xa;  &#x9;object_name* object_Window_Target;&#xa;  &#x9;...  &#xa;};" ID="ID_1860485257" CREATED="1752288558311" MODIFIED="1752288559436"/>
+<node TEXT="// create object&#xa;unsigned int objectId = 0;&#xa;glGenObject(1, &amp;objectId);&#xa;// bind/assign object to context&#xa;glBindObject(GL_WINDOW_TARGET, objectId);&#xa;// set options of object currently bound to GL_WINDOW_TARGET&#xa;glSetObjectOption(GL_WINDOW_TARGET, GL_OPTION_WINDOW_WIDTH,  800);&#xa;glSetObjectOption(GL_WINDOW_TARGET, GL_OPTION_WINDOW_HEIGHT, 600);&#xa;// set context target back to default&#xa;glBindObject(GL_WINDOW_TARGET, 0);" ID="ID_1984613406" CREATED="1752288563911" MODIFIED="1752288589762" MAX_WIDTH="20 cm"/>
+</node>
+<node TEXT="glad" ID="ID_1523356988" CREATED="1752289009666" MODIFIED="1752289012710">
+<node TEXT="由于OpenGL实际上只是一个标准/规范，因此需要由驱动程序制造商来实现该规范，使其成为特定显卡支持的驱动程序。由于OpenGL驱动程序有许多不同的版本，其大多数函数的位置在编译时是未知的，需要在运行时进行查询。那么，开发人员的任务就是检索他/她需要的函数的位置，并将它们存储在函数指针中以供后续使用。检索这些位置是特定于操作系统的" ID="ID_1869529539" CREATED="1752289013300" MODIFIED="1752289014540">
+<node TEXT="// define the function&apos;s prototype&#xa;typedef void (*GL_GENBUFFERS) (GLsizei, GLuint*);&#xa;// find the function and assign it to a function pointer&#xa;GL_GENBUFFERS glGenBuffers  = (GL_GENBUFFERS)wglGetProcAddress(&quot;glGenBuffers&quot;);&#xa;// function can now be called as normal&#xa;unsigned int buffer;&#xa;glGenBuffers(1, &amp;buffer);" ID="ID_119660026" CREATED="1752289019711" MODIFIED="1752289031359"/>
+<node TEXT="对于每个可能需要但尚未声明的函数都要这样做，这是一个繁琐的过程" ID="ID_378391761" CREATED="1752289032395" MODIFIED="1752289033303"/>
+</node>
+<node TEXT="https://glad.dav1d.de/" ID="ID_1428044464" CREATED="1752289034917" MODIFIED="1752289120496"/>
+</node>
+</node>
+<node TEXT="渲染流水线" ID="ID_1894757437" CREATED="1752298551181" MODIFIED="1752298554522">
+<node TEXT="应用阶段" ID="ID_734005385" CREATED="1752298829267" MODIFIED="1752298838477">
+<node TEXT="定义顶点" ID="ID_1572729346" CREATED="1752298838780" MODIFIED="1752298842776">
+<node TEXT="float vertices[] = {&#xa;    -0.5f, -0.5f, 0.0f,&#xa;     0.5f, -0.5f, 0.0f,&#xa;     0.0f,  0.5f, 0.0f&#xa;}; " ID="ID_1053690807" CREATED="1752298843267" MODIFIED="1752298844017"/>
+</node>
+<node TEXT="传送数据到gpu" ID="ID_1400327308" CREATED="1752298935767" MODIFIED="1752298941426">
+<node TEXT="在GPU上创建内存来存储顶点数据，配置OpenGL解释该内存的方式，并指定如何将数据发送到显卡。" ID="ID_328045849" CREATED="1752298941652" MODIFIED="1752298942571">
+<node TEXT="从CPU向显卡发送数据相对较慢，所以只要有可能，我们就尽量一次性发送尽可能多的数据。" ID="ID_714698083" CREATED="1752298979714" MODIFIED="1752298980428"/>
+</node>
+</node>
+</node>
+<node TEXT="顶点着色器，它以单个顶点作为输入。顶点着色器的主要目的是将3D坐标转换为不同的3D坐标，并且顶点着色器允许我们对顶点属性进行一些基本处理。" ID="ID_353558347" CREATED="1752298554862" MODIFIED="1752298563594">
+<node TEXT="一旦顶点坐标在顶点着色器中处理完毕，它们应该处于标准化设备坐标中。任何超出此范围的坐标将被丢弃/裁剪，并且不会在屏幕上显示。" ID="ID_1184302914" CREATED="1752298743300" MODIFIED="1752298755326"/>
+<node TEXT="然后，你的归一化设备坐标（NDC）将通过视口变换，使用你通过`glViewport`提供的数据转换为屏幕空间坐标。得到的屏幕空间坐标随后会被光栅化转换为片段，作为片段着色器的输入。" ID="ID_1529051888" CREATED="1752298773042" MODIFIED="1752298790129"/>
+</node>
+<node TEXT="几何着色器将构成图元的一组顶点作为输入，并能够通过发出新的顶点以形成新的（或其他）图元来生成其他形状。" ID="ID_1754622470" CREATED="1752298584578" MODIFIED="1752298585741"/>
+<node TEXT="图元装配阶段将来自顶点（或几何）着色器的所有顶点（如果选择GL_POINTS，则为单个顶点）作为输入，这些顶点构成一个或多个图元，并将给定图元形状中的所有点进行装配" ID="ID_985780500" CREATED="1752298596842" MODIFIED="1752298597330"/>
+<node TEXT="光栅化阶段，在该阶段，生成的图元会映射到最终屏幕上相应的像素，从而生成片段供片段着色器使用。" ID="ID_261200210" CREATED="1752298621390" MODIFIED="1752298640660"/>
+<node TEXT="执行裁剪操作。裁剪会丢弃视野之外的所有片段，以提高性能。" ID="ID_417684784" CREATED="1752298641029" MODIFIED="1752298641488"/>
+<node TEXT="片段着色器的主要目的是计算一个像素的最终颜色，通常所有高级OpenGL特效都在这个阶段发生。通常片段着色器包含有关3D场景的数据，它可以用这些数据来计算最终的像素颜色（比如光照、阴影、光的颜色等等）。" ID="ID_815201378" CREATED="1752298659379" MODIFIED="1752298659812"/>
+<node TEXT="透明度测试与混合阶段。这个阶段会检查片段相应的深度（和模板）值，并利用这些值来判断生成的片段是在其他对象之前还是之后，进而决定是否应该丢弃它。该阶段还会检查透明度值（透明度值定义了对象的不透明度），并相应地对对象进行混合。" ID="ID_802121385" CREATED="1752298681650" MODIFIED="1752298685912"/>
 </node>
 </node>
 <node TEXT="数学" POSITION="bottom_or_right" ID="ID_1614820575" CREATED="1750776198280" MODIFIED="1750776201448">
