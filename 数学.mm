@@ -94,7 +94,7 @@
 <node TEXT="在特定方向上有特定长度的箭头" ID="ID_998763492" CREATED="1751631104692" MODIFIED="1751631125362"/>
 <node TEXT="学了矩阵之后，就多了一种表示形式，可以用矩阵来表达向量" ID="ID_1931291389" CREATED="1751779207019" MODIFIED="1751779234946"/>
 </node>
-<node TEXT="向量运算" ID="ID_611883732" CREATED="1751631173211" MODIFIED="1751631192406">
+<node TEXT="向量运算" FOLDED="true" ID="ID_611883732" CREATED="1751631173211" MODIFIED="1751631192406">
 <node TEXT="向量减法" ID="ID_595061016" CREATED="1751631779473" MODIFIED="1751631793210">
 <node TEXT="c = a - b" ID="ID_908414568" CREATED="1751631960103" MODIFIED="1751632082050"/>
 <node TEXT="c是从b到a的位移" ID="ID_1431005615" CREATED="1751632046472" MODIFIED="1751635511992"/>
@@ -113,6 +113,10 @@
 <node TEXT="长度为1的向量" ID="ID_631323995" CREATED="1751984298521" MODIFIED="1751984337051"/>
 <node TEXT="将向量除以它的长度，就可以得到它的单位向量" ID="ID_1364813876" CREATED="1751984339799" MODIFIED="1751984363581"/>
 <node TEXT="用来代表方向" ID="ID_1230349099" CREATED="1751984365105" MODIFIED="1751984373215"/>
+</node>
+<node TEXT="零向量" ID="ID_1596245141" CREATED="1752502437273" MODIFIED="1752502444554">
+<node TEXT="任意向量乘以0得到的就是零向量 " ID="ID_322153031" CREATED="1752502458890" MODIFIED="1752502493179"/>
+<node TEXT="零向量的方向是任意的" ID="ID_1129866491" CREATED="1752502493365" MODIFIED="1752502507148"/>
 </node>
 <node TEXT="向量加法" ID="ID_1481008107" CREATED="1751631220382" MODIFIED="1751631789161">
 <node TEXT="三角形法则" ID="ID_1147784480" CREATED="1751631223301" MODIFIED="1751984441369">
@@ -240,7 +244,7 @@
 </node>
 </node>
 </node>
-<node TEXT="向量变换" POSITION="bottom_or_right" ID="ID_575040432" CREATED="1751685140163" MODIFIED="1751685181307">
+<node TEXT="向量变换" FOLDED="true" POSITION="bottom_or_right" ID="ID_575040432" CREATED="1751685140163" MODIFIED="1751685181307">
 <node TEXT="将向量作为输入并返回新向量的函数，可以应用于二维或三维向量" ID="ID_466066207" CREATED="1751685155573" MODIFIED="1751685158918"/>
 <node TEXT="向量变换之间可以组合" POSITION="bottom_or_right" ID="ID_1369484880" CREATED="1751682653057" MODIFIED="1751687228854">
 <node TEXT="通过函数的组合可以对现有的向量变换进行组合，从而创建与依次应用现有向量变换等价的新变换" ID="ID_627846615" CREATED="1751685202947" MODIFIED="1751685204300"/>
@@ -260,7 +264,7 @@
 <node TEXT="单位矩阵" ID="ID_203889110" CREATED="1751783910112" MODIFIED="1751783918642"/>
 </node>
 </node>
-<node TEXT="几何变换" POSITION="bottom_or_right" ID="ID_1988611001" CREATED="1751631211342" MODIFIED="1751682649236">
+<node TEXT="几何变换" FOLDED="true" POSITION="bottom_or_right" ID="ID_1988611001" CREATED="1751631211342" MODIFIED="1751682649236">
 <node TEXT="平移" ID="ID_293326394" CREATED="1751682587176" MODIFIED="1751682594101">
 <node TEXT="def translate_by(translation):&#xa;    def new_function(v):&#xa;        return add(translation,v)&#xa;    return new_function" ID="ID_500168707" CREATED="1751683250772" MODIFIED="1751683252058"/>
 </node>
@@ -293,6 +297,9 @@
 <node TEXT="def slant_xy(vector):&#xa;    x,y,z = vector&#xa;    return (x+y, y, z)" ID="ID_1213539442" CREATED="1751683001206" MODIFIED="1751683003084"/>
 </node>
 </node>
+<node TEXT="向量组" POSITION="bottom_or_right" ID="ID_1437186826" CREATED="1752502757530" MODIFIED="1752502762136">
+<node TEXT="有多个相同维数的向量组成的集合叫做向量组" ID="ID_325163527" CREATED="1752502762351" MODIFIED="1752502786168"/>
+</node>
 <node TEXT="线性组合" POSITION="bottom_or_right" ID="ID_112849598" CREATED="1751685277851" MODIFIED="1751685283590">
 <node TEXT="一个向量集合的线性组合是它们的标量乘积之和" ID="ID_1012870305" CREATED="1751688071082" MODIFIED="1751688080567">
 <node TEXT="3u-2v是向量u和v的线性组合。&#xa;0.6u-v+6w是向量uvw的线性组合" ID="ID_676725470" CREATED="1751688103724" MODIFIED="1751688173567"/>
@@ -304,7 +311,89 @@
 </node>
 <node TEXT="线性变换既是良态的又容易计算，因为用很少的数据就可以指定一个线性变换。" ID="ID_1275347909" CREATED="1751685404115" MODIFIED="1751685406001"/>
 </node>
-<node TEXT="线性变换" POSITION="bottom_or_right" ID="ID_1833761559" CREATED="1751682619023" MODIFIED="1751682622529">
+<node TEXT="线性相关和线性无关" POSITION="bottom_or_right" ID="ID_896074545" CREATED="1752502648444" MODIFIED="1752502661488">
+<node TEXT="定义" ID="ID_1490829302" CREATED="1752503437350" MODIFIED="1752503439733">
+<node TEXT="\latex 设 $\alpha_1, \alpha_2, \ldots, \alpha_n$ 是数域 $\mathbb{F}$ 上的向量空间 $V$ 中的向量，$k_1, k_2, \ldots, k_n \in \mathbb{F}$，则表达式&#xa;\[&#xa;k_1\alpha_1 + k_2\alpha_2 + \cdots + k_n\alpha_n&#xa;\]&#xa;称为向量组 $\{\alpha_1, \alpha_2, \ldots, \alpha_n\}$ 的一个\textbf{线性组合}，系数 $k_1, k_2, \ldots, k_n$ 称为组合系数。" POSITION="bottom_or_right" ID="ID_1176237362" CREATED="1752502662881" MODIFIED="1752503421932" MAX_WIDTH="20 cm">
+<font SIZE="12"/>
+</node>
+<node TEXT="\latex 若存在不全为零的数 $k_1, k_2, \ldots, k_n \in \mathbb{F}$，使得&#xa;\[&#xa;k_1\alpha_1 + k_2\alpha_2 + \cdots + k_n\alpha_n = \mathbf{0}&#xa;\]&#xa;则称向量组 $\{\alpha_1, \alpha_2, \ldots, \alpha_n\}$\textbf{线性相关}。" POSITION="bottom_or_right" ID="ID_496598397" CREATED="1752503393795" MODIFIED="1752503421935" MAX_WIDTH="20 cm">
+<font SIZE="12"/>
+</node>
+<node TEXT="\latex 若仅当 $k_1 = k_2 = \cdots = k_n = 0$ 时，上述等式才成立，则称向量组 $\{\alpha_1, \alpha_2, \ldots, \alpha_n\}$\textbf{线性无关}。" POSITION="bottom_or_right" ID="ID_522326579" CREATED="1752503404021" MODIFIED="1752503421935" MAX_WIDTH="20 cm">
+<font SIZE="12"/>
+</node>
+</node>
+<node TEXT="二维空间中的线性相关与无关" ID="ID_1022745652" CREATED="1752503573725" MODIFIED="1752503574034">
+<node TEXT="两个向量线性相关当且仅当它们共线（即方向相同或相反）。此时，其中一个向量可以表示为另一个向量的数乘。" ID="ID_1834250247" CREATED="1752503592905" MODIFIED="1752503621767" MAX_WIDTH="10 cm"/>
+</node>
+<node TEXT="三维空间中的线性相关与无关" ID="ID_1211036158" CREATED="1752503578472" MODIFIED="1752503578791">
+<node TEXT="三个向量线性相关当且仅当它们共面。此时，其中一个向量可以表示为另外两个向量的线性组合。" ID="ID_1400606826" CREATED="1752503605457" MODIFIED="1752503621771" MAX_WIDTH="10 cm"/>
+</node>
+<node TEXT="重要性质" ID="ID_146749345" CREATED="1752503704955" MODIFIED="1752503708171">
+<node TEXT="若向量组中包含零向量，则该向量组必线性相关。" POSITION="bottom_or_right" ID="ID_1727223802" CREATED="1752503690379" MODIFIED="1752503690673"/>
+<node TEXT="零向量单独构成的向量组线性相关；" POSITION="bottom_or_right" ID="ID_1118068469" CREATED="1752503723349" MODIFIED="1752503730564"/>
+<node TEXT="非零向量单独构成的向量组线性无关" POSITION="bottom_or_right" ID="ID_828980221" CREATED="1752503739718" MODIFIED="1752503740038"/>
+<node TEXT="若向量组的一部分线性相关，则整个向量组线性相关；反之，若整个向量组线性无关，则其任意部分组线性无关" POSITION="bottom_or_right" ID="ID_1544343358" CREATED="1752503751936" MODIFIED="1752503752243"/>
+<node TEXT="若向量组中向量的个数超过向量的维数，则该向量组必线性相关。" POSITION="bottom_or_right" ID="ID_1033743081" CREATED="1752503708367" MODIFIED="1752503708940"/>
+</node>
+<node TEXT="判定方法" ID="ID_925045094" CREATED="1752503767130" MODIFIED="1752503770256">
+<node TEXT="定义法" ID="ID_1731177838" CREATED="1752503782340" MODIFIED="1752503789986">
+<node TEXT="将向量方程转化为线性方程组（若向量以坐标形式给出）；" ID="ID_844957031" CREATED="1752503790165" MODIFIED="1752503790861"/>
+<node TEXT="若方程组有非零解，则向量组线性相关；" ID="ID_380348809" CREATED="1752503796517" MODIFIED="1752503802846"/>
+<node TEXT="若方程组仅有零解，则向量组线性无关。" ID="ID_1122853968" CREATED="1752503806722" MODIFIED="1752503806954"/>
+<node TEXT="举例" ID="ID_1270490409" CREATED="1752503898987" MODIFIED="1752503903049">
+<node TEXT="\latex \[&#xa;\alpha_1 = (1, 2, 3),\ \alpha_2 = (4, 5, 6),\ \alpha_3 = (7, 8, 9)&#xa;\]" ID="ID_1223713740" CREATED="1752503903202" MODIFIED="1752503907865"/>
+<node TEXT="\latex \[&#xa;\begin{cases}&#xa;k_1 + 4k_2 + 7k_3 = 0 \\&#xa;2k_1 + 5k_2 + 8k_3 = 0 \\&#xa;3k_1 + 6k_2 + 9k_3 = 0&#xa;\end{cases}&#xa;\]" ID="ID_470178012" CREATED="1752503912790" MODIFIED="1752503914638"/>
+<node TEXT="\latex \[&#xa;k_1 = -k_3,\ k_2 = -2k_3&#xa;\]" ID="ID_1481522533" CREATED="1752503920166" MODIFIED="1752503921617"/>
+<node TEXT="因此这个向量组是线性相关的" ID="ID_133010551" CREATED="1752503932577" MODIFIED="1752503945056"/>
+</node>
+</node>
+<node TEXT="矩阵秩法" ID="ID_337113858" CREATED="1752503814269" MODIFIED="1752503814539"/>
+<node TEXT="行列式法" ID="ID_1950395946" CREATED="1752503821428" MODIFIED="1752503821727"/>
+</node>
+</node>
+<node TEXT="向量空间" POSITION="bottom_or_right" ID="ID_670882695" CREATED="1752504005998" MODIFIED="1752504013320">
+<node TEXT="定义" ID="ID_1392958094" CREATED="1752505744309" MODIFIED="1752505751650">
+<node TEXT="向量空间就是向量的集合，向量需要满足以下条件" POSITION="bottom_or_right" ID="ID_1953421167" CREATED="1752504547303" MODIFIED="1752505646754">
+<node TEXT="向量加法" ID="ID_1426007252" CREATED="1752504739816" MODIFIED="1752504748391">
+<node TEXT="\latex 封闭性：$\boldsymbol{u} + \boldsymbol{v} \in V$；" ID="ID_1441923077" CREATED="1752504748624" MODIFIED="1752504755336"/>
+<node TEXT="\latex 交换律：$\boldsymbol{u} + \boldsymbol{v} = \boldsymbol{v} + \boldsymbol{u}" ID="ID_1745133155" CREATED="1752504762700" MODIFIED="1752504764327"/>
+<node TEXT="\latex 结合律：$(\boldsymbol{u} + \boldsymbol{v}) + \boldsymbol{w} = \boldsymbol{u} + (\boldsymbol{v} + \boldsymbol{w})$" ID="ID_1843441330" CREATED="1752504770720" MODIFIED="1752504772131"/>
+<node TEXT="\latex 零向量存在：存在 $\boldsymbol{0} \in V$，使得对任意 $\boldsymbol{u}$，有 $\boldsymbol{u} + \boldsymbol{0} = \boldsymbol{u}$；" ID="ID_1161613594" CREATED="1752504779366" MODIFIED="1752504780918"/>
+<node TEXT="\latex 负向量存在：对任意 $\boldsymbol{u}$，存在 $-\boldsymbol{u} \in V$，使得 $\boldsymbol{u} + (-\boldsymbol{u}) = \boldsymbol{0}$" ID="ID_326785538" CREATED="1752504787479" MODIFIED="1752504788955"/>
+</node>
+<node TEXT="标量乘法" ID="ID_1479945458" CREATED="1752504793109" MODIFIED="1752504797856">
+<node TEXT="\latex 封闭性：$k\boldsymbol{u} \in V$" ID="ID_881542513" CREATED="1752504798817" MODIFIED="1752504835004"/>
+<node TEXT="\latex 分配律 1：$k(\boldsymbol{u} + \boldsymbol{v}) = k\boldsymbol{u} + k\boldsymbol{v}$" ID="ID_111952349" CREATED="1752504839954" MODIFIED="1752505277417">
+<font BOLD="false"/>
+</node>
+<node TEXT="\latex 分配律 2：$(k + l)\boldsymbol{u} = k\boldsymbol{u} + l\boldsymbol{u}$" ID="ID_1584803306" CREATED="1752504847570" MODIFIED="1752504849023"/>
+<node TEXT="\latex 结合律：$k(l\boldsymbol{u}) = (kl)\boldsymbol{u}$" ID="ID_1985849232" CREATED="1752504853407" MODIFIED="1752504854998"/>
+<node TEXT="\latex 单位元:$1\boldsymbol{u} = \boldsymbol{u}$" ID="ID_586505033" CREATED="1752504859632" MODIFIED="1752504871933"/>
+<node TEXT="\latex 零向量存在：对任意 $\boldsymbol{u}$，有 $\boldsymbol{u} \cdot 0 = \boldsymbol{0}$；" ID="ID_326425152" CREATED="1752504779366" MODIFIED="1752505562144"/>
+</node>
+</node>
+<node TEXT="也就意味着任意向量的线性组合也在这个集合中" POSITION="bottom_or_right" ID="ID_788520823" CREATED="1752504911236" MODIFIED="1752505728614"/>
+</node>
+<node TEXT="种类" ID="ID_1542377421" CREATED="1752505760512" MODIFIED="1752505763316">
+<node TEXT="\latex 坐标向量空间被表示为 \mathbb{R}^n, n代表维度" ID="ID_601839393" CREATED="1752505838893" MODIFIED="1752505893387">
+<node TEXT="\latex \textbf{零维}（zero-demensional）空间 $\mathbb{R}^0$" ID="ID_252347240" CREATED="1752506071237" MODIFIED="1752506077324">
+<node TEXT="这是坐标数为零的向量集，可以被描述为空的元组或继承自Vector的类Vec0" ID="ID_349615307" CREATED="1752506109951" MODIFIED="1752506116090"/>
+</node>
+<node TEXT="\latex 所有实数（包括整数、分数和像π这样的无理数）的集合被表示为 $\mathbb{R}$" ID="ID_633074614" CREATED="1752506146281" MODIFIED="1752506190589" MAX_WIDTH="12 cm">
+<node TEXT="数和向量是同一种对象" ID="ID_1053516921" CREATED="1752506251210" MODIFIED="1752506258212"/>
+</node>
+<node TEXT="\latex 二维平面表示为 $\mathbb{R}^2$，三维空间表示为 $\mathbb{R}^3$" POSITION="bottom_or_right" ID="ID_631093962" CREATED="1752506038559" MODIFIED="1752506041182"/>
+</node>
+<node TEXT="数学函数也可以当作向量" ID="ID_1280004359" CREATED="1752506233670" MODIFIED="1752506242465">
+<node TEXT="它的维度是无限的" ID="ID_694168956" CREATED="1752506281906" MODIFIED="1752506286542"/>
+</node>
+<node TEXT="矩阵" ID="ID_29451134" CREATED="1752508572751" MODIFIED="1752508575444">
+<node TEXT="如果矩阵有n行m列，它代表了一个从m维空间到n维空间的线性函数" ID="ID_231368295" CREATED="1752508697981" MODIFIED="1752508735106"/>
+</node>
+</node>
+</node>
+<node TEXT="线性变换" FOLDED="true" POSITION="bottom_or_right" ID="ID_1833761559" CREATED="1751682619023" MODIFIED="1751682622529">
 <node TEXT="什么是线性变换" ID="ID_613567283" CREATED="1751684444054" MODIFIED="1751802572691">
 <node TEXT="一种良态（well-behaved）的向量变换，对于向量加法和标量乘法，在执行变换之后仍然保持了向量加法和标量乘法。如果不满足这两个条件，则不是线性变换" POSITION="bottom_or_right" ID="ID_834112315" CREATED="1751687614121" MODIFIED="1751687957501">
 <node TEXT="\latex $ T(\boldsymbol{u}) +T(\boldsymbol{v}) = T(\boldsymbol{u} + \boldsymbol{v}) $" ID="ID_1558308968" CREATED="1751687824201" MODIFIED="1751687880879">
@@ -455,7 +544,7 @@
 <node TEXT="将所有基向量的变换结果并排为列，就能得到矩阵" ID="ID_40600744" CREATED="1751805193325" MODIFIED="1751805218448"/>
 </node>
 </node>
-<node TEXT="矩阵" POSITION="bottom_or_right" ID="ID_748089277" CREATED="1751709488645" MODIFIED="1751709491647">
+<node TEXT="矩阵" FOLDED="true" POSITION="bottom_or_right" ID="ID_748089277" CREATED="1751709488645" MODIFIED="1751709491647">
 <node TEXT="线性变换可以表示为矩阵" ID="ID_1222559254" CREATED="1751709772542" MODIFIED="1751805652374">
 <node TEXT="矩阵的列是将变换应用于标准基向量的结果。" POSITION="bottom_or_right" ID="ID_1394960113" CREATED="1751711595784" MODIFIED="1751711607007"/>
 </node>
@@ -630,7 +719,7 @@
 <node TEXT="弧度没有单位" ID="ID_556161150" CREATED="1751632768758" MODIFIED="1751632769446"/>
 <node TEXT="不需要记住三角函数的图像，可以直接用极坐标来推导" POSITION="bottom_or_right" ID="ID_364132543" CREATED="1751635136053" MODIFIED="1751635157287"/>
 </node>
-<node TEXT="极坐标（polar coordinates）" ID="ID_1791719026" CREATED="1751632352094" MODIFIED="1751632389534">
+<node TEXT="极坐标（polar coordinates）" FOLDED="true" ID="ID_1791719026" CREATED="1751632352094" MODIFIED="1751632389534">
 <node TEXT="使用（length，angle）来表示" ID="ID_1042168494" CREATED="1751632408676" MODIFIED="1751632815936"/>
 <node TEXT="转换成笛卡尔坐标" ID="ID_1339818160" CREATED="1751632467846" MODIFIED="1751632475287">
 <node TEXT="\latex x = r * \cos(\theta)" ID="ID_553968918" CREATED="1751632475691" MODIFIED="1751632564693">

@@ -351,7 +351,7 @@
 </node>
 </node>
 <node TEXT="API" ID="ID_1896332690" CREATED="1751072123219" MODIFIED="1751072128078">
-<node TEXT="Shader相关" ID="ID_1671831043" CREATED="1751073974513" MODIFIED="1751073980502">
+<node TEXT="Shader相关" FOLDED="true" ID="ID_1671831043" CREATED="1751073974513" MODIFIED="1751073980502">
 <node TEXT="使用流程" ID="ID_77828901" CREATED="1751075589874" MODIFIED="1751075600880">
 <node TEXT="glCreateShader" POSITION="bottom_or_right" ID="ID_1325747072" CREATED="1751073980994" MODIFIED="1751073989971">
 <node TEXT="GL_VERTEX_SHADER：顶点着色器（处理顶点位置、颜色等）" ID="ID_616267138" CREATED="1751073996868" MODIFIED="1751074106075"/>
@@ -420,7 +420,7 @@
 </node>
 </node>
 </node>
-<node TEXT="顶点相关" ID="ID_750711262" CREATED="1751074725278" MODIFIED="1751074736514">
+<node TEXT="顶点相关" FOLDED="true" ID="ID_750711262" CREATED="1751074725278" MODIFIED="1751074736514">
 <node TEXT="生成缓冲区" ID="ID_620850841" CREATED="1752398788506" MODIFIED="1752398792742">
 <node TEXT="glGenVertexArrays" POSITION="bottom_or_right" ID="ID_615654439" CREATED="1751074741160" MODIFIED="1751074751608">
 <node TEXT="n：需要生成的 VAO 数量" ID="ID_375008396" CREATED="1751091736310" MODIFIED="1751091738167"/>
@@ -490,7 +490,7 @@
 <node TEXT="glDeleteVertexArrays" POSITION="bottom_or_right" ID="ID_1335378823" CREATED="1751169940335" MODIFIED="1751169941686"/>
 </node>
 </node>
-<node TEXT="绘制相关" ID="ID_1214515754" CREATED="1751074781482" MODIFIED="1751074787790">
+<node TEXT="绘制相关" FOLDED="true" ID="ID_1214515754" CREATED="1751074781482" MODIFIED="1751074787790">
 <node TEXT="glViewport" POSITION="bottom_or_right" ID="ID_971245430" CREATED="1752289397539" MODIFIED="1752289421785">
 <node TEXT="前两个参数设置窗口左下角的位置。第三个和第四个参数以像素为单位设置渲染窗口的宽度和高度" ID="ID_290629107" CREATED="1752289422651" MODIFIED="1752289442658"/>
 <node TEXT="在幕后，OpenGL 使用通过`glViewport`指定的数据，将其处理的二维坐标转换为屏幕上的坐标。" ID="ID_1862847110" CREATED="1752289443107" MODIFIED="1752289443741"/>
@@ -927,7 +927,7 @@
 </node>
 </node>
 </node>
-<node TEXT="光照" FOLDED="true" ID="ID_1628914802" CREATED="1751111456044" MODIFIED="1751111461717">
+<node TEXT="光照" ID="ID_1628914802" CREATED="1751111456044" MODIFIED="1751111461717">
 <node TEXT="光照的影响" FOLDED="true" POSITION="bottom_or_right" ID="ID_1249244803" CREATED="1751111605591" MODIFIED="1751111648388">
 <node TEXT="光源类型及其环境、漫反射和镜面反射特性；" ID="ID_1781206296" CREATED="1751111662462" MODIFIED="1751111662462"/>
 <node TEXT="对象材质的环境、漫反射和镜面反射特征；" POSITION="bottom_or_right" ID="ID_534908070" CREATED="1751111662462" MODIFIED="1751111662462"/>
@@ -1067,7 +1067,7 @@
 </node>
 </node>
 </node>
-<node TEXT="Blinn-Phong着色" FOLDED="true" POSITION="bottom_or_right" ID="ID_158555555" CREATED="1751119418269" MODIFIED="1751119438302">
+<node TEXT="Blinn-Phong着色" POSITION="bottom_or_right" ID="ID_158555555" CREATED="1751119418269" MODIFIED="1751119438302">
 <node TEXT="计算反射向量非常费时，不在计算反射向量，而是通过计算L+V得到角平分线H，计算H和N的夹角，H和N的夹角刚好等于视线和反射向量夹角的一半" ID="ID_669841303" CREATED="1751119488509" MODIFIED="1751119647380"/>
 <node TEXT="顶点着色器" ID="ID_520580790" CREATED="1751119691448" MODIFIED="1751119696725">
 <node TEXT="varyingVertPos = (mv_matrix * vec4(vertPos,1.0)).xyz;&#xa;varyingLightDir = light.position - varyingVertPos;&#xa;varyingNormal = (norm_matrix * vec4(vertNormal,1.0)).xyz;&#xa;         &#xa;varyingHalfVector =&#xa;                  normalize(normalize(varyingLightDir)&#xa;                  + normalize(-varyingVertPos)).xyz;&#xa;&#xa;gl_Position = proj_matrix * mv_matrix * vec4(vertPos,1.0);" ID="ID_1711700303" CREATED="1751119697015" MODIFIED="1751119731347"/>
@@ -1076,7 +1076,7 @@
 <node TEXT="// normalize the light, normal, and view vectors:&#xa; vec3 L = normalize(varyingLightDir);&#xa; vec3 N = normalize(varyingNormal);&#xa; vec3 V = normalize(-varyingVertPos);&#xa; &#xa; // 计算光照向量和法向量的夹角&#xa; float cosTheta = dot(L,N);&#xa; &#xa; // 归一化角平分线向量&#xa; vec3 H = normalize(varyingHalfVector);&#xa; &#xa; // 得到他们之间的夹角&#xa; float cosPhi = dot(H,N);&#xa;&#xa; // compute ADS contributions (per pixel):&#xa; vec3 ambient = ((globalAmbient * material.ambient) + (light.ambient * material.ambient)).xyz;&#xa; vec3 diffuse = light.diffuse.xyz * material.diffuse.xyz * max(cosTheta,0.0);&#xa; vec3 specular = light.specular.xyz * material.specular.xyz * pow(max(cosPhi,0.0), material.shininess*3.0);&#xa; fragColor = vec4((ambient + diffuse + specular), 1.0);" ID="ID_547908011" CREATED="1751119717056" MODIFIED="1751119836035"/>
 </node>
 </node>
-<node TEXT="结合光照与纹理" FOLDED="true" POSITION="bottom_or_right" ID="ID_1944830114" CREATED="1751120311743" MODIFIED="1751120313069">
+<node TEXT="结合光照与纹理" POSITION="bottom_or_right" ID="ID_1944830114" CREATED="1751120311743" MODIFIED="1751120313069">
 <node TEXT="纹理图像很写实地反映了物体真实的表面外观" FOLDED="true" ID="ID_1126366531" CREATED="1751120331485" MODIFIED="1751120445061">
 <node TEXT="在片段着色器中完全将材质特性去除掉，之后使用纹理取样所得纹理颜色代替材质的ADS值" ID="ID_604580419" CREATED="1751120351278" MODIFIED="1751120355178"/>
 <node TEXT="fragColor = textureColor * ( ambientLight + diffuseLight ) + specularLight" ID="ID_624191353" CREATED="1751120362235" MODIFIED="1751120363804">
@@ -1129,7 +1129,7 @@
 <node TEXT="让可能产生冲突的物体之间有一些微小偏移，使其表面不再共面，从而避免深度值冲突" ID="ID_996038099" CREATED="1751097115432" MODIFIED="1751097128104"/>
 </node>
 </node>
-<node TEXT="深度缓冲" ID="ID_483414551" CREATED="1751191947591" MODIFIED="1751191952695">
+<node TEXT="深度缓冲" FOLDED="true" ID="ID_483414551" CREATED="1751191947591" MODIFIED="1751191952695">
 <node TEXT="&#x9;SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);" ID="ID_276344377" CREATED="1751191985815" MODIFIED="1751191993942"/>
 <node TEXT="glEnable(GL_DEPTH_TEST);" ID="ID_1438707794" CREATED="1751191995597" MODIFIED="1751192016898"/>
 <node TEXT="glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);" ID="ID_1123000044" CREATED="1751192019327" MODIFIED="1751192020621"/>
@@ -1147,8 +1147,8 @@
 </node>
 </node>
 </node>
-<node TEXT="如何把数据发送给OpenGL管线" ID="ID_1617799317" CREATED="1751091177566" MODIFIED="1751091236682">
-<node TEXT="通过顶点属性的缓冲区" ID="ID_489801058" CREATED="1751091237901" MODIFIED="1751091393392">
+<node TEXT="如何把数据发送给OpenGL管线" FOLDED="true" ID="ID_1617799317" CREATED="1751091177566" MODIFIED="1752589989978">
+<node TEXT="通过顶点属性的缓冲区" FOLDED="true" ID="ID_489801058" CREATED="1751091237901" MODIFIED="1751091393392">
 <node TEXT="流程" ID="ID_1526083623" CREATED="1751091393794" MODIFIED="1751091397676">
 <node TEXT="只做一次的步骤" POSITION="bottom_or_right" ID="ID_1912191049" CREATED="1751091307166" MODIFIED="1751091311886">
 <node TEXT="创建一个缓冲区" POSITION="bottom_or_right" ID="ID_1460783287" CREATED="1751091276367" MODIFIED="1751091276367"/>
@@ -1268,7 +1268,7 @@
 </node>
 </node>
 <node TEXT="直接发送给统一变量。" ID="ID_302124011" CREATED="1751091243967" MODIFIED="1751091245277"/>
-<node TEXT="TODO" ID="ID_1369973444" CREATED="1751098941202" MODIFIED="1751098942657">
+<node TEXT="TODO" ID="ID_1369973444" CREATED="1751098941202" MODIFIED="1752589989977">
 <node TEXT="统一块，这是一种类似于C中的struct的用于统一变量的机制。甚至可以设置统一块从缓冲区接收数据" ID="ID_1915772453" CREATED="1751098945528" MODIFIED="1751098945528"/>
 <node TEXT="着色器存储块，它本质上是一个着色器可以写入的缓冲区" ID="ID_1916048576" CREATED="1751098951621" MODIFIED="1751098952634"/>
 </node>
@@ -1283,7 +1283,7 @@
 <node TEXT="学习曲线陡，需掌握缓冲区、着色器等底层概念，理解图形渲染管线细节" ID="ID_1332359335" CREATED="1752288338915" MODIFIED="1752288340090"/>
 </node>
 </node>
-<node TEXT="状态机" ID="ID_1687739838" CREATED="1752288346483" MODIFIED="1752288354478">
+<node TEXT="状态机" FOLDED="true" ID="ID_1687739838" CREATED="1752288346483" MODIFIED="1752288354478">
 <node TEXT="OpenGL本身是一个大型状态机：由一组变量组成，这些变量定义了OpenGL当前应如何运行。OpenGL的状态通常被称为OpenGL上下文。使用OpenGL时，我们通常通过设置一些选项、操作一些缓冲区，然后使用当前上下文进行渲染来改变其状态" ID="ID_814983692" CREATED="1752288355353" MODIFIED="1752288390026">
 <node TEXT="改变上下文的状态更改函数" ID="ID_600383235" CREATED="1752288418635" MODIFIED="1752288435778"/>
 <node TEXT="根据OpenGL当前状态执行某些操作的状态使用函数" ID="ID_1542469978" CREATED="1752288436690" MODIFIED="1752288547740"/>
