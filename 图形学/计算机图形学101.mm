@@ -318,10 +318,10 @@
 <node TEXT="第一种推导方式" POSITION="bottom_or_right" ID="ID_610607206" CREATED="1752411669862" MODIFIED="1752411674989">
 <node TEXT="将frustum挤压成cuboid，然后使用正交投影" POSITION="bottom_or_right" ID="ID_1978822353" CREATED="1752373208759" MODIFIED="1752374414698">
 <node TEXT="f平面中心坐标不变，所有点的z坐标不变" ID="ID_212960791" CREATED="1752373281244" MODIFIED="1752377189471">
-<arrowlink DESTINATION="ID_1977316882" STARTINCLINATION="20.66667 pt;11.33333 pt;" ENDINCLINATION="462 pt;-59.33333 pt;"/>
+<arrowlink DESTINATION="ID_1977316882" STARTINCLINATION="20.66667 pt;11.33333 pt;" ENDINCLINATION="462 pt;-58.66667 pt;"/>
 </node>
 <node TEXT="因为n平面所有坐标在挤压后不会改变" ID="ID_1907645723" CREATED="1752373312470" MODIFIED="1752377196136">
-<arrowlink DESTINATION="ID_78110571" STARTINCLINATION="224 pt;0 pt;" ENDINCLINATION="83.33333 pt;-34.66667 pt;"/>
+<arrowlink DESTINATION="ID_78110571" STARTINCLINATION="224 pt;0 pt;" ENDINCLINATION="83.33333 pt;-34 pt;"/>
 </node>
 <node TEXT="四维齐次坐标同时乘一个数，3d坐标不变" ID="ID_818778094" CREATED="1752374676327" MODIFIED="1752374715209"/>
 </node>
@@ -492,7 +492,7 @@
 <node TEXT="shading point 的法线" ID="ID_21554030" CREATED="1752590700884" MODIFIED="1752590833058"/>
 </node>
 </node>
-<node TEXT="在shading point计算光照" ID="ID_1825182321" CREATED="1752590747156" MODIFIED="1752590760635">
+<node TEXT="Blinn-Phong Reflectance Model" ID="ID_1536937016" CREATED="1752589766750" MODIFIED="1752589779489">
 <node TEXT="Diffuse reflection（漫反射）" POSITION="bottom_or_right" ID="ID_1370006277" CREATED="1752589824552" MODIFIED="1752590788148">
 <node TEXT="将光视为能量，shading point越亮接受到的能量越多" ID="ID_1510962072" CREATED="1752591086504" MODIFIED="1752591126680"/>
 <node TEXT="根据能量守恒定律，光的能量在扩散的过程中是不变的，但是扩散的范围越来越大，单位面积上的能量是逐渐衰减的，距离光源单位距离的能量强度是I，距离光源r的光源强度是I/r2，与距离的平方成反比。TODO：如何推导的" ID="ID_774992681" CREATED="1752591318843" MODIFIED="1752592407252"/>
@@ -501,12 +501,255 @@
 <node TEXT="当光垂直于shading point，接收到的能量最多，90度就接受不到了" POSITION="bottom_or_right" ID="ID_244325857" CREATED="1752591129207" MODIFIED="1752591266536"/>
 </node>
 <node TEXT="kd：能量吸收率还是反射率？漫反射系数，可以是一个向量，代表rgb的吸收率，眼睛看到的光是这个shading point反射的光，不是他吸收的光，如果是1，代表这个点完全不吸收能量，0代表全部被吸收了，看起来就是黑色" ID="ID_1391861972" CREATED="1752591879075" MODIFIED="1752592350837"/>
-<node TEXT="与view dir无关，不管在哪看，shading point的颜色都是一样的" ID="ID_409089249" CREATED="1752592092753" MODIFIED="1752592289026"/>
+<node TEXT="光照射到物体上，朝四遍八方反射出去，与view dir无关，不管在哪看，shading point的颜色都是一样的" ID="ID_409089249" CREATED="1752592092753" MODIFIED="1752763290056"/>
+<node TEXT="\latex \[&#xa;L_d = k_d \bigl( I / r^2 \bigr) \max(0, \mathbf{n} \cdot \mathbf{l})&#xa;\]" ID="ID_530309438" CREATED="1752762942813" MODIFIED="1752762955829">
+<font SIZE="16"/>
+<node TEXT="\latex $L_d = {\text{diffusely reflected light}} $" ID="ID_1597260700" CREATED="1752762964057" MODIFIED="1752763019697">
+<font SIZE="16"/>
 </node>
-<node TEXT="Specular highlights（镜面高光）" POSITION="bottom_or_right" ID="ID_610712654" CREATED="1752589803590" MODIFIED="1752590777365"/>
-<node TEXT="Ambient lighting（环境光）" POSITION="bottom_or_right" ID="ID_1369947398" CREATED="1752589829540" MODIFIED="1752590793214"/>
+<node TEXT="\latex $ {k_d} = {\text{diffuse coefficient (color)}} $" ID="ID_654562013" CREATED="1752763027260" MODIFIED="1752763084314" MAX_WIDTH="20 cm">
+<font SIZE="16"/>
+<node TEXT="可以直接是纹理颜色" ID="ID_767234318" CREATED="1752896458195" MODIFIED="1752896462620"/>
 </node>
-<node TEXT="Blinn-Phong Reflectance Model" ID="ID_1536937016" CREATED="1752589766750" MODIFIED="1752589779489"/>
+<node TEXT="\latex ${I/r^2} = {\text{energy arrived at the shading point}}$" ID="ID_211156188" CREATED="1752763048972" MODIFIED="1752763084314" MAX_WIDTH="20 cm">
+<font SIZE="16"/>
+</node>
+<node TEXT="\latex {\max(0, \mathbf{n} \cdot \mathbf{l})} = {\text{energy received by the shading point}}" ID="ID_561941852" CREATED="1752763065562" MODIFIED="1752763084311" MAX_WIDTH="20 cm">
+<font SIZE="16"/>
+</node>
+</node>
+</node>
+<node TEXT="Specular highlights（镜面高光）" POSITION="bottom_or_right" ID="ID_610712654" CREATED="1752589803590" MODIFIED="1752590777365">
+<node TEXT="view dir 和 light dir 的反射方向越接近，就越能看到高光，但是反射向量计算复杂，计算半程向量更为简单" ID="ID_663261844" CREATED="1752763571972" MODIFIED="1752765215787"/>
+<node TEXT="半程向量" ID="ID_890172151" CREATED="1752763604562" MODIFIED="1752764563529">
+<node TEXT="\latex \mathbf{h} = \text{bisection}(\mathbf{v}, \mathbf{l}) \\&#xa;    = \frac{\mathbf{v} + \mathbf{l}}{\|\mathbf{v} + \mathbf{l}\|}" ID="ID_915163028" CREATED="1752764563655" MODIFIED="1752764747451">
+<font SIZE="16"/>
+</node>
+</node>
+<node TEXT="\latex $ L_s = k_s \left( \frac{I}{r^2} \right) \max(0, \cos \alpha)^p \\&#xa;             = k_s \left( \frac{I}{r^2} \right) \max(0, \mathbf{n} \cdot \mathbf{h})^p $" POSITION="bottom_or_right" ID="ID_569224700" CREATED="1752764663451" MODIFIED="1752764747453">
+<font SIZE="16"/>
+<node TEXT="\latex ${L_s} ={\text{specularly reflected light}}$" ID="ID_688442355" CREATED="1752764826870" MODIFIED="1752764864005">
+<font SIZE="16"/>
+</node>
+<node TEXT="\latex ${k_s} = {\text{specular coefficient}}$" ID="ID_67287164" CREATED="1752764838100" MODIFIED="1752764880565">
+<font SIZE="16"/>
+</node>
+<node TEXT="\latex $ {\mathbf{n} \cdot \mathbf{h}} = {\text{dot product for specular term}} $" ID="ID_451794264" CREATED="1752764845259" MODIFIED="1752764876716">
+<font SIZE="16"/>
+</node>
+<node TEXT="p，一般取值在100到200" ID="ID_1948906956" CREATED="1752765283289" MODIFIED="1752765322859"/>
+</node>
+</node>
+<node TEXT="Ambient lighting（环境光）" POSITION="bottom_or_right" ID="ID_1369947398" CREATED="1752589829540" MODIFIED="1752590793214">
+<node TEXT="环境光的最大特点是与具体光照方向、物体位置 / 角度无关。不管光线从哪来、物体表面朝向如何，环境光都 “无脑” 给物体表面加一个基础颜色。这是为了模拟现实中 “间接光”（比如光线经多次反射后，无明确方向的漫射光），但做了极大简化" ID="ID_673503893" CREATED="1752764079583" MODIFIED="1752765253251"/>
+<node TEXT="\latex $ L_a = k_a \, I_a$" ID="ID_127366477" CREATED="1752764967425" MODIFIED="1752764976555">
+<font SIZE="16"/>
+<node TEXT="\latex ${L_a} = {\text{reflected ambient light}}$" ID="ID_265740133" CREATED="1752764982045" MODIFIED="1752765024865">
+<font SIZE="16"/>
+</node>
+<node TEXT="\latex ${k_a} = {\text{ambient coefficient}}$" ID="ID_1240502" CREATED="1752764994058" MODIFIED="1752765024875">
+<font SIZE="16"/>
+</node>
+<node TEXT="\latex ${I_a} = {\text{ambient light intensity}}$" ID="ID_1120683231" CREATED="1752764999927" MODIFIED="1752765024876">
+<font SIZE="16"/>
+</node>
+</node>
+<node TEXT="TODO：全局光照" ID="ID_40306882" CREATED="1752764249742" MODIFIED="1752764256775"/>
+</node>
+<node TEXT="\latex $L&#xa;= L_a + L_d + L_s \\&#xa;= k_a \, I_a + k_d \left( \frac{I}{r^2} \right) \max(0, \mathbf{n} \cdot \mathbf{l}) + k_s \left( \frac{I}{r^2} \right) \max(0, \mathbf{n} \cdot \mathbf{h})^p $" ID="ID_201535555" CREATED="1752764939738" MODIFIED="1752765104839" MAX_WIDTH="20 cm">
+<font SIZE="16"/>
+</node>
+</node>
+<node TEXT="着色频率" ID="ID_107366112" CREATED="1752765442416" MODIFIED="1752765445641">
+<node TEXT="面片着色（flat shading)" ID="ID_1056263502" CREATED="1752765445913" MODIFIED="1752765554643">
+<node TEXT="计算三角形的法线" ID="ID_309447451" CREATED="1752765555103" MODIFIED="1752765564907"/>
+</node>
+<node TEXT="顶点着色（gouraud shading）" ID="ID_642387823" CREATED="1752765452294" MODIFIED="1752765661908">
+<node TEXT="求顶点的法线，在顶点计算着色，然后在三角形内部插值" ID="ID_432491910" CREATED="1752765596355" MODIFIED="1752765647154"/>
+</node>
+<node TEXT="片元着色（phong shading）" ID="ID_1003556121" CREATED="1752765457816" MODIFIED="1752765671745">
+<node TEXT="求顶点的法线，然后在三角形内部插值法线，在每一个像素上计算着色" ID="ID_130749029" CREATED="1752765672085" MODIFIED="1752765708406"/>
+</node>
+<node TEXT="最终的效果取决于物体的面数，面数越多，三者的区别越小。如果面数超过了像素数量，面片着色的效率反而比片元着色的效率低了" ID="ID_1043431874" CREATED="1752765970849" MODIFIED="1752766032590"/>
+</node>
+<node TEXT="如何计算顶点的法线" POSITION="bottom_or_right" ID="ID_786883190" CREATED="1752766148397" MODIFIED="1752766154139">
+<node TEXT="球模型" ID="ID_1350384805" CREATED="1752766154357" MODIFIED="1752766164581"/>
+<node TEXT="连接这个顶点的所有平面的法线的加权平均" ID="ID_337424367" CREATED="1752766164989" MODIFIED="1752766191593"/>
+</node>
+<node TEXT="如何插值顶点间的法线" POSITION="bottom_or_right" ID="ID_859719726" CREATED="1752766249122" MODIFIED="1752766261033">
+<node TEXT="重心坐标" ID="ID_1613725017" CREATED="1752766261182" MODIFIED="1752766266926"/>
+</node>
+<node TEXT="材质和着色的关系" POSITION="bottom_or_right" ID="ID_1698444349" CREATED="1752843754726" MODIFIED="1752843762524"/>
+</node>
+<node TEXT="纹理映射" ID="ID_1155156813" CREATED="1752843234856" MODIFIED="1752843239426">
+<node TEXT="如何将三维空间的上的点映射到纹理上，将三维模型展开到平面上" ID="ID_1805144587" CREATED="1752843239660" MODIFIED="1752843350608"/>
+<node TEXT="纹理可以被一个模型重复使用，不同的顶点映射到了相同的纹理坐标，需要纹理在设立时上下和左右衔接，这种纹理称为tiled，（使用算法wang tiled生成）" ID="ID_1810154265" CREATED="1752843519570" MODIFIED="1752843602618"/>
+<node TEXT="纹理坐标" ID="ID_822408061" CREATED="1752897872253" MODIFIED="1752897882142">
+<node TEXT="纹理坐标是连续的浮点值，用于描述纹理空间中的任意位置。例如，u=0.3 表示纹理宽度的 30% 处，v=0.7 表示纹理高度的 70% 处。" ID="ID_445073535" CREATED="1752897889497" MODIFIED="1752897902820"/>
+<node TEXT="UV 坐标与纹理分辨率无关，允许开发者在不修改顶点数据的情况下更换不同尺寸的纹理" ID="ID_1303536022" CREATED="1752897920892" MODIFIED="1752897921221"/>
+</node>
+<node TEXT="Texel坐标" ID="ID_1233636915" CREATED="1752897928254" MODIFIED="1752897947448">
+<node TEXT="Texel 坐标是离散的整数索引，直接对应纹理图像中的像素位置。一张512x512的纹理，texel的坐标范围在0&lt;= x &lt;512, 0&lt;= y &lt;5123" ID="ID_733035339" CREATED="1752897945708" MODIFIED="1752897995576"/>
+<node TEXT="连续的 UV 坐标需要映射到离散的 Texel 坐标，必然存在精度丢失问题" ID="ID_1867477832" CREATED="1752898013298" MODIFIED="1752898014180"/>
+</node>
+<node TEXT="纹理坐标到 Texel 坐标的转换公式" ID="ID_501218618" CREATED="1752898021683" MODIFIED="1752898048999">
+<node TEXT="将 UV 坐标 (u,v) 转换为 Texel 坐标 (x,y) 的公式为" ID="ID_556521882" CREATED="1752898062832" MODIFIED="1752898073498"/>
+<node TEXT="\latex x = u \times \text{纹理宽度} - 0.5" ID="ID_1987571058" CREATED="1752898084938" MODIFIED="1752898153600">
+<font SIZE="14"/>
+</node>
+<node TEXT="\latex y = v \times \text{纹理高度} - 0.5" ID="ID_1319721866" CREATED="1752898148676" MODIFIED="1752898153597">
+<font SIZE="14"/>
+</node>
+<node TEXT="减 0.5 是为了将坐标原点从纹理左上角调整到第一个 Texel 的中心" POSITION="bottom_or_right" ID="ID_735596167" CREATED="1752897382944" MODIFIED="1752899936641">
+<node TEXT="\latex \textbf{未减 0.5 时}：  \\&#xa;UV 坐标 $(0, 0)$ 对应 Texel $(0, 0)$ 的左上角（而非中心），导致边缘采样偏差。" ID="ID_133313306" CREATED="1752900014510" MODIFIED="1752900186995"/>
+<node TEXT="\latex \textbf{减 0.5 后}： \\ &#xa;UV 坐标 $(0, 0)$ 对应 Texel $(-0.5, -0.5)$，即第一个 Texel $(0, 0)$ 的中心，消除了边缘偏差。" ID="ID_301288281" CREATED="1752900194925" MODIFIED="1752900207458"/>
+</node>
+<node TEXT="举例" POSITION="bottom_or_right" ID="ID_842850593" CREATED="1752900378043" MODIFIED="1752900380814">
+<node TEXT="假设纹理宽度为 4，UV 坐标 (0.25,0.25) 应对应第二个 Texel 的中心" ID="ID_1878881630" CREATED="1752900381040" MODIFIED="1752900398984" MAX_WIDTH="20 cm"/>
+<node TEXT="\latex $\text{texel}_x = (0.25 \times 4) - 0.5 = 1 - 0.5 = 0.5$" POSITION="bottom_or_right" ID="ID_656364403" CREATED="1752900234895" MODIFIED="1752900351696" MAX_WIDTH="20 cm">
+<font SIZE="14"/>
+<node TEXT="\latex 结果 $0.5$ 恰好是 Texel $(0)$ 和 $(1)$ 之间的中心位置。 " ID="ID_1647333615" CREATED="1752900249313" MODIFIED="1752900251974"/>
+</node>
+<node TEXT="\latex $\text{texel}_x = \operatorname{floor}(0.25 \times 4) - 0.5 = 0 - 0.5 = -0.5$" POSITION="bottom_or_right" ID="ID_518392584" CREATED="1752900257046" MODIFIED="1752900351693" MAX_WIDTH="20 cm">
+<font SIZE="14"/>
+<node TEXT="\latex 结果 $-0.5$ 对应 Texel $(0)$ 的左侧，导致采样位置偏移。 " ID="ID_1615913395" CREATED="1752900269256" MODIFIED="1752900272699"/>
+</node>
+</node>
+</node>
+<node TEXT="纹理映射过程" ID="ID_344646063" CREATED="1752897305187" MODIFIED="1752898614510">
+<node TEXT="从屏幕空间到模型表面的映射" ID="ID_932124090" CREATED="1752897308155" MODIFIED="1752897312921">
+<node TEXT="通过光栅化确定屏幕像素对应的模型表面位置（即重心坐标插值）" ID="ID_1783294607" CREATED="1752897324672" MODIFIED="1752897325538"/>
+<node TEXT="使用模型的纹理坐标（UV 坐标）将表面位置转换到纹理空间。" ID="ID_1507968479" CREATED="1752897328854" MODIFIED="1752897689606"/>
+<node TEXT="屏幕像素坐标-&gt;模型表面位置-&gt;纹理坐标" ID="ID_240677997" CREATED="1752897692960" MODIFIED="1752897723761"/>
+</node>
+<node TEXT="纹理坐标到 Texel 坐标的转换" ID="ID_913199474" CREATED="1752897316219" MODIFIED="1752897316512"/>
+<node TEXT="根据 Texel 坐标计算颜色值" ID="ID_1119842256" CREATED="1752897320236" MODIFIED="1752897320597"/>
+</node>
+<node TEXT="纹理放大（Texture Magnification）" ID="ID_813644292" CREATED="1752898403464" MODIFIED="1752898695141">
+<node TEXT="当 3D 模型的表面在屏幕上占据的像素数多于纹理图像本身的像素数时（例如，模型靠近相机时），就会出现纹理放大的需求" ID="ID_1289213164" CREATED="1752896894920" MODIFIED="1752896895705"/>
+<node TEXT="当纹理被放大时，屏幕上的一个像素可能对应纹理中的多个 Texel" ID="ID_247064120" CREATED="1752898579470" MODIFIED="1752898581318"/>
+<node TEXT="纹理太小导致" ID="ID_976031040" CREATED="1752904609568" MODIFIED="1752904615158"/>
+</node>
+<node TEXT="纹理缩小" ID="ID_45107336" CREATED="1752904589218" MODIFIED="1752904596104">
+<node TEXT="像素在纹理上的覆盖范围" ID="ID_1413457895" CREATED="1752904616674" MODIFIED="1752905308769">
+<node TEXT="在一个texel的范围内，直接查询即可，（point query）" ID="ID_342945627" CREATED="1752905309088" MODIFIED="1752905330768"/>
+<node TEXT="像素覆盖了很多的texel（range query），需要去范围内所有的texel的平均值" ID="ID_977542996" CREATED="1752905331241" MODIFIED="1752905354645">
+<node TEXT="range query分了很多种，有求平均值的，也有求最大最小值的" ID="ID_1686733551" CREATED="1752905355811" MODIFIED="1752905379050"/>
+</node>
+</node>
+</node>
+<node TEXT="纹理过滤方法" ID="ID_1244553171" CREATED="1752906528221" MODIFIED="1752906532610">
+<node TEXT="最近邻采样（Nearest Neighbor Sampling）" POSITION="bottom_or_right" ID="ID_1084994325" CREATED="1752896911553" MODIFIED="1752896913883">
+<node TEXT="直接选择离目标点最近的整数 Texel" POSITION="bottom_or_right" ID="ID_335159476" CREATED="1752896918995" MODIFIED="1752898752478"/>
+<node TEXT="当 Texel 坐标为非整数时，结果可能跳变，导致锯齿或像素块效应" POSITION="bottom_or_right" ID="ID_1274433922" CREATED="1752898758814" MODIFIED="1752898759093"/>
+<node TEXT="\latex&#xa;\[&#xa;\text{采样位置} = \bigl( \operatorname{round}(u_{\text{texel}}),\ \operatorname{round}(v_{\text{texel}}) \bigr)&#xa;\]" POSITION="bottom_or_right" ID="ID_783208727" CREATED="1752899039263" MODIFIED="1752899045541">
+<font SIZE="14"/>
+</node>
+</node>
+<node TEXT="双线性插值（Bilinear Interpolation）" FOLDED="true" POSITION="bottom_or_right" ID="ID_453097771" CREATED="1752896933338" MODIFIED="1752896933641">
+<node TEXT="对目标点周围的 4 个 Texel 进行加权平均，权重由距离决定" ID="ID_117746360" CREATED="1752896938109" MODIFIED="1752898765129"/>
+<node TEXT="平滑过渡，减少锯齿，尤其适用于放大场景" ID="ID_771521492" CREATED="1752898768752" MODIFIED="1752898769010"/>
+<node TEXT="通过两次线性插值（水平和垂直方向）计算最终颜色" ID="ID_403463526" CREATED="1752898787045" MODIFIED="1752898787299"/>
+<node TEXT="步骤" ID="ID_513850065" CREATED="1752899076868" MODIFIED="1752899080954">
+<node TEXT="\latex \textbf{确定 4 个相邻 Texel:} &#xa;例如，Texel 坐标 $(255.3, 255.7)$ 对应的 4 个点为： \\&#xa;(255, 255),\ (256, 255),\ (255, 256),\ (256, 256)&#xa;" ID="ID_1211078358" CREATED="1752899081165" MODIFIED="1752899185247" MAX_WIDTH="20 cm">
+<font SIZE="14" BOLD="true"/>
+</node>
+<node TEXT="\latex $s = 255.3 - 255 = 0.3$（U 方向小数部分） " ID="ID_405102186" CREATED="1752899099539" MODIFIED="1752899138147" MAX_WIDTH="20 cm">
+<font SIZE="14"/>
+</node>
+<node TEXT="\latex $t = 255.7 - 255 = 0.7$（V 方向小数部分） " ID="ID_1608062283" CREATED="1752899105543" MODIFIED="1752899138147" MAX_WIDTH="20 cm">
+<font SIZE="14"/>
+</node>
+<node TEXT="\latex \textbf{水平方向:} 对上下两行分别插值 \\&#xa;&#xa;\text{Row1} = (1 - s) \cdot \text{Texel}(255, 255) + s \cdot \text{Texel}(256, 255)\\&#xa;&#xa;\text{Row2} = (1 - s) \cdot \text{Texel}(255, 256) + s \cdot \text{Texel}(256, 256)&#xa;" ID="ID_181725936" CREATED="1752899118100" MODIFIED="1752899172945" MAX_WIDTH="20 cm">
+<font SIZE="14"/>
+</node>
+<node TEXT="\latex \textbf{垂直方向:} 对两次结果再插值 \\&#xa;\text{最终颜色} = (1 - t) \cdot \text{Row1} + t \cdot \text{Row2}&#xa;" ID="ID_142612575" CREATED="1752899121592" MODIFIED="1752899269255" MAX_WIDTH="20 cm">
+<font SIZE="14"/>
+</node>
+</node>
+<node TEXT="代码实现" ID="ID_1789492199" CREATED="1752898975575" MODIFIED="1752898988550">
+<node TEXT="// 双线性插值纹理采样&#xa;Color bilinear_sample(Texture texture, float u, float v) {&#xa;    // 将归一化坐标转换为Texel坐标&#xa;    float texel_u = u * texture.width - 0.5f;&#xa;    float texel_v = v * texture.height - 0.5f;&#xa;   &#xa;    // 计算相邻4个Texel的坐标&#xa;    int u0 = (int)texel_u;&#xa;    int v0 = (int)texel_v;&#xa;    int u1 = u0 + 1;&#xa;    int v1 = v0 + 1;&#xa;   &#xa;    // 确保坐标在纹理范围内&#xa;    u0 = clamp(u0, 0, texture.width - 1);&#xa;    v0 = clamp(v0, 0, texture.height - 1);&#xa;    u1 = clamp(u1, 0, texture.width - 1);&#xa;    v1 = clamp(v1, 0, texture.height - 1);&#xa;   &#xa;    // 计算小数部分（权重）&#xa;    float s = texel_u - u0;&#xa;    float t = texel_v - v0;&#xa;   &#xa;    // 获取4个Texel的颜色&#xa;    Color c00 = texture.get_pixel(u0, v0);&#xa;    Color c10 = texture.get_pixel(u1, v0);&#xa;    Color c01 = texture.get_pixel(u0, v1);&#xa;    Color c11 = texture.get_pixel(u1, v1);&#xa;   &#xa;    // 水平方向插值&#xa;    Color row1 = lerp(c00, c10, s);  // row1 = (1-s)*c00 + s*c10&#xa;    Color row2 = lerp(c01, c11, s);  // row2 = (1-s)*c01 + s*c11&#xa;   &#xa;    // 垂直方向插值&#xa;    return lerp(row1, row2, t);      // result = (1-t)*row1 + t*row2&#xa;}" ID="ID_67124828" CREATED="1752898988723" MODIFIED="1752899307757" MAX_WIDTH="20 cm"/>
+</node>
+</node>
+<node TEXT="Bicubic" POSITION="bottom_or_right" ID="ID_112849964" CREATED="1752904479617" MODIFIED="1752904481999"/>
+<node TEXT="三线性插值（Trilinear Interpolation）" POSITION="bottom_or_right" ID="ID_828973657" CREATED="1752896953603" MODIFIED="1752896954569">
+<node TEXT="在双线性插值基础上，增加对 ** 多级渐远纹理（Mipmaps）** 的插值。" POSITION="bottom_or_right" ID="ID_404363320" CREATED="1752896948441" MODIFIED="1752896948730"/>
+</node>
+<node TEXT="各向异性过滤（Anisotropic Filtering）" POSITION="bottom_or_right" ID="ID_1956683422" CREATED="1752896959865" MODIFIED="1752896967016">
+<node TEXT="当纹理倾斜显示时，使用椭圆区域内的多个 Texel 样本进行加权平均" ID="ID_1685337549" CREATED="1752898804793" MODIFIED="1752898823764"/>
+<node TEXT="放大且倾斜的纹理（如地面、墙面），需处理非整数 Texel 坐标在长轴方向的密集分布" ID="ID_1091571609" CREATED="1752898828973" MODIFIED="1752898829332"/>
+</node>
+</node>
+<node TEXT="Mipmap" POSITION="bottom_or_right" ID="ID_40839415" CREATED="1752905399386" MODIFIED="1752905401543">
+<node TEXT="可以用来做范围查询" ID="ID_609502305" CREATED="1752905408563" MODIFIED="1752905455569"/>
+<node TEXT="特点" ID="ID_442135854" CREATED="1752905457603" MODIFIED="1752905470276">
+<node TEXT="查询速度非常快" POSITION="bottom_or_right" ID="ID_185402938" CREATED="1752905416198" MODIFIED="1752905479592"/>
+<node TEXT="近似的" POSITION="bottom_or_right" ID="ID_552225366" CREATED="1752905423971" MODIFIED="1752905431381"/>
+<node TEXT="只能做正方形的查询" POSITION="bottom_or_right" ID="ID_1365839212" CREATED="1752905431794" MODIFIED="1752905448974"/>
+</node>
+<node TEXT="比没有使用mipmap的纹理的大小之多了1/3" ID="ID_228390820" CREATED="1752905826599" MODIFIED="1752905848671"/>
+</node>
+</node>
+<node TEXT="如何在三角形内部做任何属性的插值" FOLDED="true" ID="ID_1256182637" CREATED="1752848210064" MODIFIED="1752848221100">
+<node TEXT="可以插值哪些属性" ID="ID_826402959" CREATED="1752848301281" MODIFIED="1752848308370">
+<node TEXT="纹理坐标" ID="ID_238334426" CREATED="1752848309334" MODIFIED="1752848318625"/>
+<node TEXT="颜色" ID="ID_358160855" CREATED="1752848318821" MODIFIED="1752848322390"/>
+<node TEXT="法线" ID="ID_1547049940" CREATED="1752848323095" MODIFIED="1752848327469"/>
+<node TEXT="位置" ID="ID_1532103822" CREATED="1752849446543" MODIFIED="1752849449595"/>
+<node TEXT="深度" ID="ID_434980946" CREATED="1752849449750" MODIFIED="1752849452519"/>
+<node TEXT="材质属性" ID="ID_470378860" CREATED="1752849452753" MODIFIED="1752849457568"/>
+</node>
+<node TEXT="如何插值" ID="ID_593224812" CREATED="1752848367952" MODIFIED="1752848370525">
+<node TEXT="重心坐标" ID="ID_420319875" CREATED="1752848370724" MODIFIED="1752848374385">
+<node TEXT="三角形平面上任意一个点都可以表示为三角形三个点的线性组合，线性组合的系数总和是1" ID="ID_1698034573" CREATED="1752848434892" MODIFIED="1752848481964"/>
+<node TEXT="重心坐标（Barycentric Coordinates）是定义在三角形上的一种坐标系统，用于描述三角形所在平面内任意一点的位置。" ID="ID_1449081809" CREATED="1752850089167" MODIFIED="1752850089658"/>
+<node TEXT="对于三角形ABC，平面内任意一点P(x,y)可以表示为：" ID="ID_1971514670" CREATED="1752850130804" MODIFIED="1752850164925">
+<node TEXT="\latex (x, y) = \alpha A + \beta B + \gamma C" POSITION="bottom_or_right" ID="ID_1636413441" CREATED="1752848617365" MODIFIED="1752848631730">
+<font SIZE="16"/>
+</node>
+<node TEXT="需要满足系数和约束：" POSITION="bottom_or_right" ID="ID_507063529" CREATED="1752850173245" MODIFIED="1752850179438">
+<node TEXT="\latex \alpha + \beta + \gamma = 1" POSITION="bottom_or_right" ID="ID_1762652825" CREATED="1752848626564" MODIFIED="1752848631725">
+<font SIZE="16"/>
+<node TEXT="TODO：为了限制这个点在三角形的平面内" ID="ID_850459271" CREATED="1752848953103" MODIFIED="1752848972938"/>
+</node>
+</node>
+<node TEXT="只有当三个系数都大于等于0时，p点才在三角形内部" POSITION="bottom_or_right" ID="ID_354889910" CREATED="1752850252459" MODIFIED="1752850268626"/>
+</node>
+<node TEXT="从几何上来看，是各个子三角形与总三角形的面积比" ID="ID_1446096203" CREATED="1752850193049" MODIFIED="1752850221224">
+<node TEXT="\latex \alpha = \frac{A_A}{A_A + A_B + A_C}&#xa;" POSITION="bottom_or_right" ID="ID_704523233" CREATED="1752849894620" MODIFIED="1752849924332">
+<font SIZE="16"/>
+<node TEXT="\latex = \frac{ - (x - x_B)(y_C - y_B) + (y - y_B)(x_C - x_B) }{ - (x_A - x_B)(y_C - y_B) + (y_A - y_B)(x_C - x_B) } &#xa;" POSITION="bottom_or_right" ID="ID_1035774047" CREATED="1752849935599" MODIFIED="1752850281016" MAX_WIDTH="20 cm">
+<font SIZE="16"/>
+</node>
+<node TEXT="A点对面的小三角形" POSITION="bottom_or_right" ID="ID_809319747" CREATED="1752850334204" MODIFIED="1752850346433"/>
+</node>
+<node TEXT="\latex \beta = \frac{A_B}{A_A + A_B + A_C} \\" POSITION="bottom_or_right" ID="ID_268541742" CREATED="1752849909520" MODIFIED="1752849924331">
+<font SIZE="16"/>
+<node TEXT="\latex  = \frac{ - (x - x_C)(y_A - y_C) + (y - y_C)(x_A - x_C) }{ - (x_B - x_C)(y_A - y_C) + (y_B - y_C)(x_A - x_C) }&#xa;" POSITION="bottom_or_right" ID="ID_1829474617" CREATED="1752849947872" MODIFIED="1752850302584" MAX_WIDTH="20 cm">
+<font SIZE="16"/>
+</node>
+</node>
+<node TEXT="\latex \gamma = \frac{A_C}{A_A + A_B + A_C}" POSITION="bottom_or_right" ID="ID_379398102" CREATED="1752849918477" MODIFIED="1752849924328">
+<font SIZE="16"/>
+<node TEXT="\latex = 1 - \alpha - \beta" POSITION="bottom_or_right" ID="ID_1717330119" CREATED="1752849954632" MODIFIED="1752850295726" MAX_WIDTH="20 cm">
+<font SIZE="16"/>
+</node>
+</node>
+</node>
+<node TEXT="\latex 重心坐标 = (\alpha, \beta, \gamma)" ID="ID_207378830" CREATED="1752848638002" MODIFIED="1752848672755">
+<font SIZE="16"/>
+</node>
+<node TEXT="需要注意的地方" ID="ID_1057984083" CREATED="1752850428013" MODIFIED="1752850432998">
+<node TEXT="投影变换的影响" ID="ID_1337115834" CREATED="1752850500593" MODIFIED="1752850501871">
+<node TEXT="3D 三角形投影到 2D 屏幕后，重心坐标会发生变化（因为投影会拉伸 / 压缩三角形）" POSITION="bottom_or_right" ID="ID_1264639408" CREATED="1752850441654" MODIFIED="1752850449339">
+<node TEXT="若直接用 2D 投影后的坐标计算重心坐标，再插值 3D 属性（如深度、法线），会导致误差甚至错误（比如深度插值错误，引发 Z-fighting）" ID="ID_268184764" CREATED="1752850463681" MODIFIED="1752850477652"/>
+<node TEXT="在 3D 空间中计算重心坐标，先插值再投影。即对 3D 顶点属性（如 3D 坐标、法线），用三维重心坐标插值，再将结果投影到屏幕" ID="ID_822917807" CREATED="1752850471844" MODIFIED="1752850473966"/>
+</node>
+<node TEXT="# 透视矫正插值示例（以深度值为例）&#xa;def perspective_correct_interpolation(u, v, w, d0, d1, d2, z0, z1, z2):&#xa;    &quot;&quot;&quot;&#xa;    透视矫正的深度插值&#xa;   &#xa;    参数:&#xa;    u, v, w - 重心坐标&#xa;    d0, d1, d2 - 待插值的属性值（如深度、纹理坐标）&#xa;    z0, z1, z2 - 顶点的实际深度值&#xa;    &quot;&quot;&quot;&#xa;    # 计算透视矫正权重&#xa;    inv_z = u/z0 + v/z1 + w/z2&#xa;    u_persp = u/(z0 * inv_z)&#xa;    v_persp = v/(z1 * inv_z)&#xa;    w_persp = w/(z2 * inv_z)&#xa;   &#xa;    # 使用矫正后的权重插值&#xa;    return u_persp * d0 + v_persp * d1 + w_persp * d2" POSITION="bottom_or_right" ID="ID_100438387" CREATED="1752851878725" MODIFIED="1752851890401" MAX_WIDTH="20 cm"/>
+</node>
+</node>
+</node>
+</node>
 </node>
 </node>
 </node>
