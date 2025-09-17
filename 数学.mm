@@ -87,14 +87,32 @@
 <edge COLOR="#0000ff"/>
 <node TEXT="向量" ID="ID_1582085686" CREATED="1751630803575" MODIFIED="1751630808648">
 <node TEXT="描述一个向量的三种方式" ID="ID_527711099" CREATED="1751631056836" MODIFIED="1751631063502">
-<node TEXT="有序数对" ID="ID_1649524561" CREATED="1751631063735" MODIFIED="1751984660044">
-<node TEXT="笛卡尔坐标系下的坐标" ID="ID_198023954" CREATED="1751984660459" MODIFIED="1751984671761"/>
+<node TEXT="平面上相对于原点的一个点" ID="ID_461722920" CREATED="1751631078563" MODIFIED="1751631102368">
+<node TEXT="一般横向书写，（x，y）" ID="ID_1303852195" CREATED="1754115162609" MODIFIED="1754115172335"/>
 </node>
-<node TEXT="平面上相对于原点的一个点" ID="ID_461722920" CREATED="1751631078563" MODIFIED="1751631102368"/>
-<node TEXT="在特定方向上有特定长度的箭头" ID="ID_998763492" CREATED="1751631104692" MODIFIED="1751631125362"/>
-<node TEXT="学了矩阵之后，就多了一种表示形式，可以用矩阵来表达向量" ID="ID_1931291389" CREATED="1751779207019" MODIFIED="1751779234946"/>
+<node TEXT="在特定方向上有特定长度的箭头" ID="ID_998763492" CREATED="1751631104692" MODIFIED="1751631125362">
+<node TEXT="因此不必从原点开始，由方向和长度决定，与位置无关" ID="ID_1281376213" CREATED="1754115069387" MODIFIED="1754115104264"/>
+<node TEXT="一般竖向书写，类似于矩阵的形式" ID="ID_1924573239" CREATED="1754115175514" MODIFIED="1754115268537"/>
 </node>
-<node TEXT="向量运算" FOLDED="true" ID="ID_611883732" CREATED="1751631173211" MODIFIED="1751631192406">
+</node>
+<node TEXT="向量运算" ID="ID_611883732" CREATED="1751631173211" MODIFIED="1751631192406">
+<node TEXT="向量加法" ID="ID_1481008107" CREATED="1751631220382" MODIFIED="1751631789161">
+<node TEXT="三角形法则" ID="ID_1147784480" CREATED="1751631223301" MODIFIED="1751984441369">
+<node TEXT="特定方向上的一段特定距离" ID="ID_638630260" CREATED="1751631253760" MODIFIED="1751631280809"/>
+<node TEXT="添加一个向量意味着移动或平移一个现有的点或点的集合。" ID="ID_489075724" CREATED="1751631297694" MODIFIED="1751631299061"/>
+<node TEXT="首尾相加" ID="ID_866586571" CREATED="1751984441844" MODIFIED="1751984453546"/>
+</node>
+<node TEXT="平行四边形法则" ID="ID_433269443" CREATED="1751632300986" MODIFIED="1751984432629">
+<node TEXT="向量和就是对角线" ID="ID_1011304856" CREATED="1751632314203" MODIFIED="1751632322845"/>
+</node>
+</node>
+<node TEXT="标量乘法" ID="ID_662522385" CREATED="1751631670484" MODIFIED="1751631683948">
+<node TEXT="分量都按相同的标量进行缩放，得到的向量长度是原长度的倍，且与原向量的方向相同。" ID="ID_363245316" CREATED="1751631703585" MODIFIED="1751635390396"/>
+<node TEXT="给定一个向量v，乘以-1，可以得到它的负向量" ID="ID_1817827208" CREATED="1751631887621" MODIFIED="1751631928237">
+<node TEXT="对一个3d模型的所有向量应用-1，会发生什么？会改变三角形的方向，如果原三角形的顶点是按逆时针排列的，镜像之后会按顺时针排列，法线指向相反方向" ID="ID_130917549" CREATED="1751682012851" MODIFIED="1751682129514"/>
+</node>
+<node TEXT="对于任一向量，负向量具有相同的长度，但指向相反的方向。" POSITION="bottom_or_right" ID="ID_531269594" CREATED="1751631869309" MODIFIED="1751631870788"/>
+</node>
 <node TEXT="向量减法" ID="ID_595061016" CREATED="1751631779473" MODIFIED="1751631793210">
 <node TEXT="c = a - b" ID="ID_908414568" CREATED="1751631960103" MODIFIED="1751632082050"/>
 <node TEXT="c是从b到a的位移" ID="ID_1431005615" CREATED="1751632046472" MODIFIED="1751635511992"/>
@@ -117,23 +135,6 @@
 <node TEXT="零向量" ID="ID_1596245141" CREATED="1752502437273" MODIFIED="1752502444554">
 <node TEXT="任意向量乘以0得到的就是零向量 " ID="ID_322153031" CREATED="1752502458890" MODIFIED="1752502493179"/>
 <node TEXT="零向量的方向是任意的" ID="ID_1129866491" CREATED="1752502493365" MODIFIED="1752502507148"/>
-</node>
-<node TEXT="向量加法" ID="ID_1481008107" CREATED="1751631220382" MODIFIED="1751631789161">
-<node TEXT="三角形法则" ID="ID_1147784480" CREATED="1751631223301" MODIFIED="1751984441369">
-<node TEXT="特定方向上的一段特定距离" ID="ID_638630260" CREATED="1751631253760" MODIFIED="1751631280809"/>
-<node TEXT="添加一个向量意味着移动或平移一个现有的点或点的集合。" ID="ID_489075724" CREATED="1751631297694" MODIFIED="1751631299061"/>
-<node TEXT="首尾相加" ID="ID_866586571" CREATED="1751984441844" MODIFIED="1751984453546"/>
-</node>
-<node TEXT="平行四边形法则" ID="ID_433269443" CREATED="1751632300986" MODIFIED="1751984432629">
-<node TEXT="向量和就是对角线" ID="ID_1011304856" CREATED="1751632314203" MODIFIED="1751632322845"/>
-</node>
-</node>
-<node TEXT="标量乘法" ID="ID_662522385" CREATED="1751631670484" MODIFIED="1751631683948">
-<node TEXT="分量都按相同的标量进行缩放，得到的向量长度是原长度的倍，且与原向量的方向相同。" ID="ID_363245316" CREATED="1751631703585" MODIFIED="1751635390396"/>
-<node TEXT="给定一个向量v，乘以-1，可以得到它的负向量" ID="ID_1817827208" CREATED="1751631887621" MODIFIED="1751631928237">
-<node TEXT="对一个3d模型的所有向量应用-1，会发生什么？会改变三角形的方向，如果原三角形的顶点是按逆时针排列的，镜像之后会按顺时针排列，法线指向相反方向" ID="ID_130917549" CREATED="1751682012851" MODIFIED="1751682129514"/>
-</node>
-<node TEXT="对于任一向量，负向量具有相同的长度，但指向相反的方向。" POSITION="bottom_or_right" ID="ID_531269594" CREATED="1751631869309" MODIFIED="1751631870788"/>
 </node>
 <node TEXT="点积" ID="ID_1173882905" CREATED="1751635575709" MODIFIED="1751635578082">
 <node TEXT="点积（也叫内积）是对两个向量的运算，返回一个标量。" ID="ID_401377936" CREATED="1751638439988" MODIFIED="1751638456860"/>
@@ -880,9 +881,9 @@
 <node TEXT="知道一个向量是其他一些向量的线性组合，如何找到这个线性组合" ID="ID_1847517908" CREATED="1752990688533" MODIFIED="1752994195218"/>
 </node>
 </node>
-<node TEXT="求解线性方程组" FOLDED="true" POSITION="bottom_or_right" ID="ID_1929594057" CREATED="1752994790803" MODIFIED="1752994795816">
+<node TEXT="求解线性方程组" POSITION="bottom_or_right" ID="ID_1929594057" CREATED="1752994790803" MODIFIED="1752994795816">
 <node TEXT="求解线性方程组。就是寻找直线、平面或更高维度对象的交点。" ID="ID_546210158" CREATED="1752996212013" MODIFIED="1752996229057"/>
-<node TEXT="二维空间中直线表示为线性方程" ID="ID_552693627" CREATED="1752994975154" MODIFIED="1753022161293">
+<node TEXT="二维空间中直线表示为线性方程" FOLDED="true" ID="ID_552693627" CREATED="1752994975154" MODIFIED="1753022161293">
 <node TEXT="表示形式" ID="ID_27774023" CREATED="1752996257995" MODIFIED="1752996263531">
 <node TEXT="\latex $r(t) = u + t \cdot v$" POSITION="bottom_or_right" ID="ID_887360914" CREATED="1752995514074" MODIFIED="1752995518817">
 <font SIZE="14"/>
@@ -953,7 +954,7 @@
 </node>
 </node>
 </node>
-<node TEXT="三维空间中平面表示为线性方程" ID="ID_1362015098" CREATED="1753022142995" MODIFIED="1753022158105">
+<node TEXT="三维空间中平面表示为线性方程" FOLDED="true" ID="ID_1362015098" CREATED="1753022142995" MODIFIED="1753022158105">
 <node TEXT="给定三维空间中的一个点和一个向量，存在一个与向量垂直并通过该点的唯一平面。" ID="ID_602567560" CREATED="1753022388902" MODIFIED="1753022394812"/>
 <node TEXT="推导过程" ID="ID_1328392016" CREATED="1753023205888" MODIFIED="1753023208579">
 <node TEXT="前提" ID="ID_358073256" CREATED="1753023248574" MODIFIED="1753023250996">
@@ -986,6 +987,286 @@
 </node>
 <node TEXT="通过解线性方程来改变向量的基" POSITION="bottom_or_right" ID="ID_284363946" CREATED="1753024737674" MODIFIED="1753024738033">
 <node TEXT="解线性方程组相当于使用不同的基重写向量。" ID="ID_1510279281" CREATED="1753024767737" MODIFIED="1753024770764"/>
+</node>
+<node TEXT="定义" POSITION="bottom_or_right" ID="ID_226343965" CREATED="1753108017554" MODIFIED="1753108020065">
+<node TEXT="\latex R" POSITION="bottom_or_right" ID="ID_131719109" CREATED="1753108443901" MODIFIED="1753108460100">
+<node TEXT="\latex 用R表示所有实数的集合，即数轴。其中包含像0、32、\(- \pi\)、104等数字。" POSITION="bottom_or_right" ID="ID_278298701" CREATED="1753108219742" MODIFIED="1753108299558" MAX_WIDTH="20 cm"/>
+<node TEXT="\latex 设\(n\)为正整数。我们定义\(\(R^{n}\)\)为所有由实数\(\((x_{1}, x_{2}, x_{3}, ..., x_{n})\)\)组成的有序\(n\)元组。" POSITION="bottom_or_right" ID="ID_1634216514" CREATED="1753108248368" MODIFIED="1753108296514" MAX_WIDTH="20 cm">
+<node TEXT="\latex 一个由实数组成的n元组被称为\(R^{n}\)中的一个点" POSITION="bottom_or_right" ID="ID_378505603" CREATED="1753108323911" MODIFIED="1753108325646"/>
+<node TEXT="\latex 换句话说，\(R^{n}\) 仅仅是所有由 n 个实数组成的（有序）列表的集合。例如，\((0, \frac{3}{2},-\pi)\) 和 (1, 2, 3) 是 \(R^{3}\) 的点。" POSITION="bottom_or_right" ID="ID_839827090" CREATED="1753108340550" MODIFIED="1753108360525"/>
+</node>
+<node TEXT="\latex 使用这些空间的作用在于，能够通过\(R^{n}\)的点来标记各种感兴趣的对象，比如几何对象和方程组的解。" POSITION="bottom_or_right" ID="ID_1119529675" CREATED="1753108409760" MODIFIED="1753108503541" MAX_WIDTH="20 cm"/>
+</node>
+<node TEXT="线性方程" POSITION="bottom_or_right" ID="ID_1695709453" CREATED="1753107858716" MODIFIED="1753107866166">
+<node TEXT="定义" ID="ID_838619711" CREATED="1753107866392" MODIFIED="1753107870288"/>
+<node TEXT="直线的方程定义" POSITION="bottom_or_right" ID="ID_1658666794" CREATED="1753110235661" MODIFIED="1753110236042">
+<node TEXT="二元一次方程" POSITION="bottom_or_right" ID="ID_1564924158" CREATED="1753108748418" MODIFIED="1753108758040">
+<node TEXT="定义了平面内的一条直线" ID="ID_584430842" CREATED="1753108758235" MODIFIED="1753108859877"/>
+<node TEXT="二元一次方程组求解就是求直线的交点" ID="ID_1154044270" CREATED="1753108768669" MODIFIED="1753108783934"/>
+<node TEXT="有一个解就是有一个交点" ID="ID_738255731" CREATED="1753108784500" MODIFIED="1753108795517"/>
+<node TEXT="无数个解直线重合" ID="ID_1310855725" CREATED="1753108795892" MODIFIED="1753108804028"/>
+<node TEXT="无解直线平行" ID="ID_1185604527" CREATED="1753108804702" MODIFIED="1753108812176"/>
+</node>
+<node TEXT="\latex 在二维空间（$\mathbb{R}^2$）中，一条直线可由一个线性方程定义，例如 $x + y = 1$，这是直线的隐式方程，可改写为 $y = 1 - x$，表示斜率和截距确定的直线。 " POSITION="bottom_or_right" ID="ID_1965727140" CREATED="1753110378330" MODIFIED="1753110421823" MAX_WIDTH="20 cm"/>
+<node TEXT="\latex 在三维空间（$\mathbb{R}^3$）中，一条直线由两个线性方程的交集定义，例如方程组： &#xa;        \[&#xa;        \begin{cases}&#xa;        x + y + z = 1 \\&#xa;        x - z = 0&#xa;        \end{cases}&#xa;        \] &#xa;        其解集中的点同时满足两个方程，构成一条直线。 " POSITION="bottom_or_right" ID="ID_1211663139" CREATED="1753110411812" MODIFIED="1753110417565" MAX_WIDTH="20 cm"/>
+</node>
+<node TEXT="平面方程的定义" POSITION="bottom_or_right" ID="ID_463603049" CREATED="1753110454411" MODIFIED="1753110460864">
+<node TEXT="\latex 在三维空间（$\mathbb{R}^3$）中，一个平面由一个线性方程定义，例如 $x + y + z = 1$，这是平面的隐式方程，表示满足该方程的所有点构成的无限延展的平坦曲面。 " POSITION="bottom_or_right" ID="ID_410840112" CREATED="1753110430227" MODIFIED="1753110615821" MAX_WIDTH="15 cm"/>
+</node>
+<node TEXT="\latex 更一般地，$n$维空间中，一个含 $n$ 个变量的线性方程定义一个“$(n\!-\!1)$-平面”（如四维空间中的 $x + y + z + w = 1$ 定义一个 $3$-平面）。" POSITION="bottom_or_right" ID="ID_350987461" CREATED="1753110440754" MODIFIED="1753110609336" MAX_WIDTH="15 cm"/>
+<node TEXT="\latex 含\(n\)个变量的方程组的解是\(n\)维空间中“\(&quot; (n-1)\) - 平面”的交集。" POSITION="bottom_or_right" ID="ID_321777005" CREATED="1753110587494" MODIFIED="1753110592174"/>
+</node>
+<node TEXT="线性方程组" POSITION="bottom_or_right" ID="ID_661440072" CREATED="1753107970826" MODIFIED="1753107974067">
+<node TEXT="线性方程组是由若干个线性方程组成的集合" ID="ID_920982475" CREATED="1753107974224" MODIFIED="1753107980235">
+<node TEXT="\latex &#xa;\[\left\{\begin{array}{c}x + 2y + 3z = 6 \\ 2x - 3y + 2z = 14 \\ 3x + y - z = -2 .\end{array}\right.\]" ID="ID_769914389" CREATED="1753107985265" MODIFIED="1753107993033"/>
+<node TEXT="\latex \((x, y, z)=(1,-2,3)\)" ID="ID_327128134" CREATED="1753108188954" MODIFIED="1753108201921"/>
+</node>
+<node TEXT="方程组的解" POSITION="bottom_or_right" ID="ID_1253386913" CREATED="1753108025635" MODIFIED="1753108030336">
+<node TEXT="\latex 方程组的解是一组数字\(x, y, z, ...\)，这些数字能使所有方程同时成立。" ID="ID_224109722" CREATED="1753108030540" MODIFIED="1753108691191"/>
+<node TEXT="含有n个变量的方程组的一个解是一个由n个数组成的列表。" POSITION="bottom_or_right" ID="ID_377531298" CREATED="1753108156293" MODIFIED="1753108176879"/>
+<node TEXT="方程组的解集是所有解的集合。" POSITION="bottom_or_right" ID="ID_1370362208" CREATED="1753108053552" MODIFIED="1753108057875"/>
+<node TEXT="方程组不一定有解" POSITION="bottom_or_right" ID="ID_1199256161" CREATED="1753108092632" MODIFIED="1753108101655"/>
+<node TEXT="如果一个方程组没有解，则称其为不相容的（inconsistent）&#xa;否则，称其为相容的（consistent）" POSITION="bottom_or_right" ID="ID_1031020585" CREATED="1753108112635" MODIFIED="1754114931340"/>
+</node>
+</node>
+<node TEXT="线性方程组求解" POSITION="bottom_or_right" ID="ID_1693323148" CREATED="1753109982946" MODIFIED="1753110726758">
+<node TEXT="行变换" FOLDED="true" ID="ID_707963655" CREATED="1753110727620" MODIFIED="1753111452653">
+<node TEXT="三个交换方法" ID="ID_1081631830" CREATED="1753194141274" MODIFIED="1753194146687">
+<node TEXT="缩放： 将方程的两边乘以一个非零数。" POSITION="bottom_or_right" ID="ID_405182437" CREATED="1753110773290" MODIFIED="1753193848381"/>
+<node TEXT="替换： 将一个方程的倍数加到另一个方程上，用结果替换第二个方程。" POSITION="bottom_or_right" ID="ID_1846061278" CREATED="1753110780269" MODIFIED="1753193845332"/>
+<node TEXT="交换： 交换两个方程。" POSITION="bottom_or_right" ID="ID_544895479" CREATED="1753110784832" MODIFIED="1753193851622"/>
+</node>
+<node TEXT="对矩阵进行行操作的过程不会改变相应线性方程组的解集！" POSITION="bottom_or_right" ID="ID_368863572" CREATED="1753193876161" MODIFIED="1753193877658"/>
+<node TEXT="如果两个矩阵可以通过进行若干次行操作从一个得到另一个，则称它们是 行等价的。因此，等价矩阵的线性方程具有 相同的解集。" POSITION="bottom_or_right" ID="ID_1215403816" CREATED="1753193886648" MODIFIED="1753193892482"/>
+</node>
+<node TEXT="增广矩阵" FOLDED="true" ID="ID_1416379890" CREATED="1753110827064" MODIFIED="1753110843363">
+<node TEXT="\latex \[&#xa;\begin{cases}&#xa;\phantom{2}x + 2y + 3z = \phantom{-}6 \\&#xa;2x - 3y + 2z = 14 \\&#xa;3x + \phantom{3}y - \phantom{3}z = -2&#xa;\end{cases}&#xa;\stackrel{\text{becomes}}{\longrightarrow}&#xa;\left(&#xa;\begin{array}{ccc|c}&#xa;1 &amp; 2 &amp; 3 &amp; \phantom{-}6 \\&#xa;2 &amp; -3 &amp; 2 &amp; 14 \\&#xa;3 &amp; 1 &amp; -1 &amp; -2&#xa;\end{array}&#xa;\right)&#xa;\]" ID="ID_1526899344" CREATED="1753193797246" MODIFIED="1753193808792" MAX_WIDTH="20 cm">
+<font SIZE="14"/>
+</node>
+<node TEXT="垂直线代表等号的位置" ID="ID_1046165633" CREATED="1753193818942" MODIFIED="1753193828383"/>
+<node TEXT="判断一个增广矩阵是否为（简化）行阶梯形时，增广列并没有什么特殊之处。只需忽略那条竖线即可。" ID="ID_1492844583" CREATED="1753194110726" MODIFIED="1753194111261"/>
+<node TEXT="对于增广矩阵，化为简化行阶梯形后，可直接根据矩阵写出方程组的解，无需额外复杂计算" ID="ID_797733470" CREATED="1753194182521" MODIFIED="1753194399339"/>
+</node>
+<node TEXT="行阶梯形矩阵" FOLDED="true" ID="ID_755169722" CREATED="1753111471460" MODIFIED="1753111563293">
+<node TEXT="（Row Echelon Form）" ID="ID_1205071844" CREATED="1753111563629" MODIFIED="1753111564464"/>
+<node TEXT="条件" ID="ID_1846456196" CREATED="1753111477456" MODIFIED="1753111480779">
+<node TEXT="所有零行（元素全为 0 的行）位于矩阵底部；" ID="ID_765114213" CREATED="1753111480932" MODIFIED="1753111481699"/>
+<node TEXT="每行的第一个非零元素（称为 “主元”，pivot）的列索引，大于其上方行的主元的列索引（即主元位置依次右移）；" ID="ID_764013788" CREATED="1753111492501" MODIFIED="1753111492887"/>
+<node TEXT="主元正下方的所有元素均为 0" ID="ID_1322674867" CREATED="1753111503804" MODIFIED="1753111512928"/>
+</node>
+<node TEXT="行阶梯形矩阵可通过 “回代法” 求解对应线性方程组" ID="ID_1945080897" CREATED="1753111667514" MODIFIED="1753111667927"/>
+</node>
+<node TEXT="简化行阶梯形矩阵" FOLDED="true" ID="ID_1810999729" CREATED="1753111556958" MODIFIED="1753111560036">
+<node TEXT="（Reduced Row Echelon Form）" ID="ID_1385995529" CREATED="1753111560374" MODIFIED="1753111561164"/>
+<node TEXT="满足行阶梯形矩阵的所有条件，且额外满足：" ID="ID_183952367" CREATED="1753111571777" MODIFIED="1753111572130">
+<node TEXT="每个主元的值为 1" ID="ID_254123256" CREATED="1753111580557" MODIFIED="1753111589815"/>
+<node TEXT="每个主元所在列的其他元素（主元上方和下方）均为 0" ID="ID_1294556435" CREATED="1753111596691" MODIFIED="1753111597326"/>
+</node>
+<node TEXT="简化行阶梯形矩阵可直接读出方程组的解" ID="ID_1837697035" CREATED="1753111675171" MODIFIED="1753111675753"/>
+</node>
+<node TEXT="行简化算法" FOLDED="true" ID="ID_994004066" CREATED="1753194225019" MODIFIED="1753194225358">
+<node TEXT="每个矩阵都唯一地等价于一个简化行阶梯形矩阵" ID="ID_1919791577" CREATED="1753194232878" MODIFIED="1753194232878"/>
+<node TEXT="行简化算法（Row Reduction Algorithm，也称为高斯消元法）是将矩阵化为行阶梯形（Row Echelon Form）或简化行阶梯形（Reduced Row Echelon Form）的系统步骤，其核心是通过一系列行操作将矩阵转化为便于求解线性方程组的形式" ID="ID_1701659024" CREATED="1753194326208" MODIFIED="1753194327064"/>
+<node TEXT="步骤" ID="ID_503749850" CREATED="1753194502918" MODIFIED="1753194505428">
+<node TEXT="第一步：处理第一列（首列）" ID="ID_177999775" CREATED="1753194505581" MODIFIED="1753194506611">
+<node TEXT="Step 1a（交换行）：若第一列中，第一行的元素为 0，则将第一行与下方某行（首列元素非零）交换，使第一行首列有非零元素（便于后续操作）。" ID="ID_1667705230" CREATED="1753194530372" MODIFIED="1753194531730"/>
+<node TEXT="Step 1b（缩放行）：将第一行缩放（乘以首列元素的倒数），使第一行的首非零元素（主元，Pivot）变为 1。" ID="ID_1580355556" CREATED="1753194535604" MODIFIED="1753194535878"/>
+<node TEXT="Step 1c（清除下方元素）：对第一行下方的所有行，通过行替换操作（用 “当前行 - 首列元素 × 第一行”），消除这些行首列的元素（使其变为 0）。" ID="ID_1518616437" CREATED="1753194539915" MODIFIED="1753194540181"/>
+</node>
+<node TEXT="第二步：处理第二列（次列）" ID="ID_460496067" CREATED="1753194545280" MODIFIED="1753194545514">
+<node TEXT="Step 2a（交换行）：忽略第一行，对剩余行重复 Step 1a：若第二列中，第二行的元素为 0，则将第二行与下方某行（第二列元素非零）交换，使第二行第二列有非零元素。" ID="ID_1062056673" CREATED="1753194549767" MODIFIED="1753194550493"/>
+<node TEXT="Step 2b（缩放行）：将第二行缩放，使第二行的首非零元素（主元）变为 1。" ID="ID_1351794786" CREATED="1753194554352" MODIFIED="1753194554566"/>
+<node TEXT="Step 2c（清除下方和上方元素）：" ID="ID_1319040234" CREATED="1753194562303" MODIFIED="1753194562620">
+<node TEXT="对第二行下方的所有行，通过行替换消除其第二列的元素（变为 0）；" ID="ID_1374788144" CREATED="1753194566638" MODIFIED="1753194567572"/>
+<node TEXT="（若目标是简化行阶梯形）对第二行上方的第一行，同样通过行替换消除其第二列的元素（变为 0）。" ID="ID_960561195" CREATED="1753194571935" MODIFIED="1753194572253"/>
+</node>
+</node>
+<node TEXT="对第三列、第四列…… 重复上述步骤（Step 3a、3b、3c……），直到：" ID="ID_768022416" CREATED="1753194582836" MODIFIED="1753194583109">
+<node TEXT="所有非零行的主元均已确定，且主元位置依次右移（每行主元列索引 &gt; 上一行主元列索引）；" ID="ID_1474266858" CREATED="1753194587993" MODIFIED="1753194588885"/>
+<node TEXT="所有零行（元素全为 0 的行）位于矩阵底部。" ID="ID_743302243" CREATED="1753194592558" MODIFIED="1753194592826"/>
+</node>
+<node TEXT="化为简化行阶梯形" ID="ID_85983163" CREATED="1753194603086" MODIFIED="1753194603332">
+<node TEXT="若需得到简化行阶梯形，需额外对每一行主元上方的元素进行清除：从最后一个主元开始，通过行替换操作，将主元所在列的上方元素均变为 0，确保每个主元是其所在列的唯一非零元素" ID="ID_1360642633" CREATED="1753194608721" MODIFIED="1753194609619"/>
+</node>
+</node>
+<node TEXT="https://textbooks.math.gatech.edu/ila/demos/rowred2.html" ID="ID_592616018" CREATED="1753194858141" MODIFIED="1753194859001"/>
+</node>
+<node TEXT="线性方程组的参数形式" FOLDED="true" ID="ID_1722055184" CREATED="1753194955033" MODIFIED="1753194955395">
+<node TEXT="通过行简化算法将增广矩阵化为简化行阶梯形后，将非自由变量（主元变量）用自由变量表示得到的" ID="ID_530575499" CREATED="1753194998771" MODIFIED="1753195000053">
+<node TEXT="将增广矩阵化为简化行阶梯形" ID="ID_1937952770" CREATED="1753195008187" MODIFIED="1753195009118">
+<node TEXT="通过行交换、缩放和替换等操作，将方程组对应的增广矩阵转化为简化行阶梯形（满足主元为 1，主元所在列其他元素为 0，主元位置依次右移）。" ID="ID_1105439609" CREATED="1753195013831" MODIFIED="1753195014788"/>
+</node>
+<node TEXT="识别主元列和自由变量" ID="ID_448986912" CREATED="1753195018731" MODIFIED="1753195018956">
+<node TEXT="主元列：包含主元（每行第一个非零元素）的列，对应非自由变量（可由自由变量表示的变量）。" ID="ID_1472794601" CREATED="1753195024611" MODIFIED="1753195025297"/>
+<node TEXT="非主元列：不包含主元的列，对应自由变量（可任意取值的变量）。" ID="ID_1713607053" CREATED="1753195028843" MODIFIED="1753195029069"/>
+</node>
+<node TEXT="用自由变量表示非自由变量" ID="ID_414023153" CREATED="1753195039086" MODIFIED="1753195039347"/>
+</node>
+<node TEXT="举例" ID="ID_814033923" CREATED="1753195578779" MODIFIED="1753195580854">
+<node TEXT="原始线性方程组" ID="ID_1909434507" CREATED="1753195581128" MODIFIED="1753195582498">
+<node TEXT="\latex \[&#xa;\begin{cases}&#xa;2x + \phantom{2}y + 12z = \phantom{-}1 \\&#xa;\phantom{2}x + 2y + \phantom{3}9z = -1&#xa;\end{cases}&#xa;\]" ID="ID_354174624" CREATED="1753195587014" MODIFIED="1753195589596"/>
+</node>
+<node TEXT="增广矩阵形式" ID="ID_461638149" CREATED="1753195631443" MODIFIED="1753195632383">
+<node TEXT="\latex \[&#xa;\left(&#xa;\begin{array}{ccc|c}&#xa;2 &amp; 1 &amp; 12 &amp; \phantom{-}1 \\&#xa;1 &amp; 2 &amp; 9 &amp; -1&#xa;\end{array}&#xa;\right)&#xa;\]" POSITION="bottom_or_right" ID="ID_631284174" CREATED="1753195594836" MODIFIED="1753195596140"/>
+</node>
+<node TEXT="行简化阶梯形" ID="ID_1882097138" CREATED="1753195639252" MODIFIED="1753195639530">
+<node TEXT="\latex \[&#xa;\left(&#xa;\begin{array}{ccc|c}&#xa;1 &amp; \textcolor{red}{0} &amp; 5 &amp; \phantom{-}1 \\&#xa;0 &amp; 1 &amp; 2 &amp; -1&#xa;\end{array}&#xa;\right)&#xa;\]" POSITION="bottom_or_right" ID="ID_1634573354" CREATED="1753195600826" MODIFIED="1753195602092"/>
+</node>
+<node TEXT="回代得到简化方程组" ID="ID_1812366331" CREATED="1753195648327" MODIFIED="1753195648650">
+<node TEXT="\latex \[&#xa;\begin{cases}&#xa;x + 5z = \phantom{-}1 \\&#xa;y + 2z = -1&#xa;\end{cases}&#xa;\]" POSITION="bottom_or_right" ID="ID_1053594502" CREATED="1753195607188" MODIFIED="1753195608558"/>
+</node>
+<node TEXT="参数化解的形式" ID="ID_525571729" CREATED="1753195667821" MODIFIED="1753195668104">
+<node TEXT="\latex \[&#xa;\begin{cases}&#xa;x = \phantom{-}1 - 5z \\&#xa;y = -1 - 2z&#xa;\end{cases}&#xa;\]" POSITION="bottom_or_right" ID="ID_491487367" CREATED="1753195622782" MODIFIED="1753195624092"/>
+<node TEXT="z就是自由变量" POSITION="bottom_or_right" ID="ID_10493318" CREATED="1753195673647" MODIFIED="1753195680230"/>
+<node TEXT="这个线性方程组有无数个解" POSITION="bottom_or_right" ID="ID_1237744791" CREATED="1753195691778" MODIFIED="1753195699441"/>
+</node>
+</node>
+</node>
+<node TEXT="增广矩阵的简化行阶梯形的三种可能性" FOLDED="true" ID="ID_1302387520" CREATED="1753195162424" MODIFIED="1753195166304">
+<node ID="ID_451418024" CREATED="1753195174984" MODIFIED="1753195275745"><richcontent TYPE="NODE">
+
+<html>
+  <head>
+    
+  </head>
+  <body>
+    <p class="p1">
+      最后一列是主元列。 线性方程组没有解，即解集为空。
+    </p>
+  </body>
+</html>
+</richcontent>
+<node TEXT="\latex \[&#xa;\left(&#xa;\begin{array}{cc|c}&#xa;1 &amp; 0 &amp; 0 \\&#xa;0 &amp; 1 &amp; 0 \\&#xa;0 &amp; 0 &amp; \textcolor{red}{1}&#xa;\end{array}&#xa;\right)&#xa;\]" ID="ID_454538291" CREATED="1753195390204" MODIFIED="1753195419162">
+<font SIZE="12"/>
+</node>
+</node>
+<node TEXT="除了最后一列之外，每一列都是主元列。 线性方程组有一个唯一的解" ID="ID_13654054" CREATED="1753195191876" MODIFIED="1753195256491">
+<node TEXT="\latex \[&#xa;\left(&#xa;\begin{array}{ccc|c}&#xa;1 &amp; 0 &amp; 0 &amp; a \\&#xa;0 &amp; 1 &amp; 0 &amp; b \\&#xa;0 &amp; 0 &amp; 1 &amp; c&#xa;\end{array}&#xa;\right)&#xa;\]" ID="ID_1971993149" CREATED="1753195403814" MODIFIED="1753195419162">
+<font SIZE="12"/>
+</node>
+</node>
+<node TEXT="最后一列不是主列，而且其他某些列也不是主列。 在这种情况下，线性方程组有无穷多个解" ID="ID_45497989" CREATED="1753195204747" MODIFIED="1753195299799">
+<node TEXT="\latex \[&#xa;\left(&#xa;\begin{array}{cccc|c}&#xa;1 &amp; \textcolor{red}{-2} &amp; 0 &amp; \textcolor{blue}{3} &amp; 1 \\&#xa;0 &amp; \textcolor{red}{0} &amp; 1 &amp; \textcolor{blue}{4} &amp; -1&#xa;\end{array}&#xa;\right),&#xa;\]" ID="ID_387222721" CREATED="1753195411386" MODIFIED="1753195419158">
+<font SIZE="12"/>
+</node>
+</node>
+</node>
+<node TEXT="隐式方程与参数化方程" FOLDED="true" ID="ID_1718009193" CREATED="1753195823786" MODIFIED="1753196656792">
+<node TEXT="隐式方程与参数化方程是同一几何对象的 “两面”：隐式方程通过约束条件定义对象，参数化方程通过参数遍历生成对象，二者等价且可相互转换，分别适用于不同的问题场景（如判断点是否在对象上 vs 生成对象上的点）" ID="ID_337405587" CREATED="1753195829773" MODIFIED="1753195830804"/>
+<node TEXT="隐式方程" ID="ID_1461786300" CREATED="1753195840244" MODIFIED="1753195840502">
+<node TEXT="\latex 直接描述几何对象上的点满足的约束条件，通常形式为： &#xa;    \[ F(x_1, x_2, \dots, x_n) = 0 \] &#xa;    其中 \( x_1, x_2, \dots, x_n \) 是变量（如坐标）" ID="ID_1227707043" CREATED="1753195985003" MODIFIED="1753195993762"/>
+<node TEXT="\latex 直线（二维空间）：\( x + y = 1 \)，表示所有满足“横纵坐标之和为1”的点 \( (x, y) \) 的集合；" POSITION="bottom_or_right" ID="ID_808397264" CREATED="1753196053930" MODIFIED="1753196055566"/>
+<node TEXT="\latex 平面（三维空间）：\( x + y + z = 1 \)，表示所有满足“三个坐标之和为1”的点 \( (x, y, z) \) 的集合" POSITION="bottom_or_right" ID="ID_1221579400" CREATED="1753196062129" MODIFIED="1753196063464"/>
+</node>
+<node TEXT="参数化方程" ID="ID_1809168467" CREATED="1753196072872" MODIFIED="1753196656791">
+<node TEXT="\latex 通过参数间接描述几何对象，将对象上的点表示为参数的函数，形式为： &#xa;    \[ (x_1, x_2, \dots, x_n) = f(t_1, t_2, \dots, t_k) \] &#xa;    其中 \( t_1, t_2, \dots, t_k \) 是参数（可任意取值）" ID="ID_243342690" CREATED="1753196078886" MODIFIED="1753196127152" MAX_WIDTH="12 cm"/>
+<node TEXT="\latex 直线（二维空间）：\( (x, y) = (t, 1-t) \ (t \in \mathbb{R}) \)，通过参数 \( t \) 遍历所有点" POSITION="bottom_or_right" ID="ID_664862190" CREATED="1753196003709" MODIFIED="1753196021025" MAX_WIDTH="20 cm"/>
+<node TEXT="\latex 平面（三维空间）：\( (x, y, z) = (1-t-w, t, w) \ (t, w \in \mathbb{R}) \)，通过参数 \( t, w \) 遍历所有点" POSITION="bottom_or_right" ID="ID_1071107683" CREATED="1753196014800" MODIFIED="1753196023749" MAX_WIDTH="20 cm"/>
+</node>
+<node TEXT="核心关系：描述同一对象的不同视角" ID="ID_442369353" CREATED="1753196170819" MODIFIED="1753196171057">
+<node TEXT="隐式方程和参数化方程描述的是同一个几何对象" ID="ID_903159278" CREATED="1753196183844" MODIFIED="1753196184560"/>
+<node TEXT="\latex 隐式方程 \( x + y = 1 \) 与参数化方程 \( (x, y) = (t, 1-t) \) 都表示同一条直线（前者通过“约束条件”定义，后者通过“参数遍历”定义）" ID="ID_1010793390" CREATED="1753196193405" MODIFIED="1753196250486" MAX_WIDTH="15 cm"/>
+</node>
+<node TEXT="转换关系" ID="ID_761618679" CREATED="1753196201987" MODIFIED="1753196202231">
+<node TEXT="参数→隐式：" ID="ID_1423835383" CREATED="1753196210556" MODIFIED="1753196290992">
+<node TEXT="消去参数，得到变量约束关系" ID="ID_1707064236" CREATED="1753196291708" MODIFIED="1753196292688"/>
+<node TEXT="\latex 由 \( x = t,\ y = 1-t \) 消去 \( t \)，可得 \( x + y = 1 \)" ID="ID_767696164" CREATED="1753196222908" MODIFIED="1753196225837"/>
+</node>
+<node TEXT="隐式→参数：" ID="ID_1194551863" CREATED="1753196217033" MODIFIED="1753196298016">
+<node TEXT="引入参数，将变量表示为参数的函数（解出部分变量，其余为参数）" ID="ID_1642242522" CREATED="1753196300151" MODIFIED="1753196300945"/>
+<node TEXT="\latex 由 \( x + y + z = 1 \) 解出 \( x = 1-y-z \)，令 \( y = t,\ z = w \)，可得参数化方程： &#xa;\[ (x, y, z) = (1-t-w,\ t,\ w) \] " ID="ID_1625494409" CREATED="1753196231673" MODIFIED="1753196318587" MAX_WIDTH="20 cm"/>
+</node>
+</node>
+<node TEXT="举例" ID="ID_138982596" CREATED="1753196837135" MODIFIED="1753196840072">
+<node TEXT="2d直线" POSITION="bottom_or_right" ID="ID_376323898" CREATED="1753109772406" MODIFIED="1753196804555">
+<node TEXT="\latex 隐式方程形式：  x + y = 1 \\&#xa;参数形式：  ((x, y) = (t, 1 - t))（(t \in R)）\\&#xa;说明：(t)为参数，标记直线上的点&#xa;" ID="ID_1626625317" CREATED="1753109779694" MODIFIED="1753196751695"/>
+</node>
+<node TEXT="3d直线" POSITION="bottom_or_right" ID="ID_232484453" CREATED="1753109803256" MODIFIED="1753196810976">
+<node TEXT="\latex 示例：隐式方程形式： (\begin{cases}x + y + z = 1 \ x - z = 0\end{cases})&#xa;                  参数形式： ((x, y, z) = (t, 1 - 2t, t))（(t \in R)）&#xa;                  说明：需1个参数，对应一维直线" ID="ID_377716612" CREATED="1753109819268" MODIFIED="1753196769515"/>
+</node>
+<node TEXT="平面" POSITION="bottom_or_right" ID="ID_26009944" CREATED="1753109827058" MODIFIED="1753196795880">
+<node TEXT="\latex 示例：隐式方程形式： (x + y + z = 1)\\&#xa;参数形式： ((x, y, z) = (1 - t - w, t, w))（(t, w \in R)）\\&#xa;说明：需2个参数，对应二维平面" ID="ID_1582528313" CREATED="1753109831369" MODIFIED="1753196784114"/>
+</node>
+<node TEXT="特殊情况：唯一解时无需参数描述" POSITION="bottom_or_right" ID="ID_1633169101" CREATED="1753109861985" MODIFIED="1753109935129"/>
+</node>
+</node>
+</node>
+<node TEXT="向量方程" POSITION="bottom_or_right" ID="ID_1067007840" CREATED="1754116845431" MODIFIED="1754116848888">
+<node TEXT="是一个涉及向量的线性组合且系数可能为未知的方程" ID="ID_653566517" CREATED="1754116850344" MODIFIED="1754116863135"/>
+<node TEXT="判断一个向量方程是否有解，与判断一个给定向量是否是其他给定向量的线性组合是一样的。" ID="ID_1131442302" CREATED="1754116893510" MODIFIED="1754116899952"/>
+<node TEXT="向量方程的整个意义在于，为我们提供了一种不同的、更几何化的视角来观察线性方程组。" ID="ID_1897030902" CREATED="1754116925980" MODIFIED="1754116934448"/>
+<node TEXT="如果向量方程有解，则对应的线性方程组也有解，反之亦然" ID="ID_778624260" CREATED="1754117097144" MODIFIED="1754117146184"/>
+<node TEXT="求解向量方程" ID="ID_1324073607" CREATED="1754117480041" MODIFIED="1754117480414">
+<node TEXT="\latex \[&#xa;x_1 \boldsymbol{v}_1 + x_2 \boldsymbol{v}_2 + \cdots + x_k \boldsymbol{v}_k = \boldsymbol{b}&#xa;\]" ID="ID_1884822388" CREATED="1754117489640" MODIFIED="1754117492500">
+<node TEXT="\latex $\boldsymbol{v}_1, \boldsymbol{v}_2, \ldots, \boldsymbol{v}_k, \boldsymbol{b} 是向量 \\&#xa;x_1, x_2, … ,x_k 是未知标量  $" ID="ID_379948545" CREATED="1754117508036" MODIFIED="1754117618053"/>
+</node>
+<node TEXT="\latex \[&#xa;\left(&#xa;\begin{array}{c|c|c|c|c}&#xa;  &amp;   &amp;   &amp;   &amp; \\&#xa;\boldsymbol{v}_1 &amp; \boldsymbol{v}_2 &amp; \cdots &amp; \boldsymbol{v}_k &amp; \boldsymbol{b} \\&#xa;  &amp;   &amp;   &amp;   &amp; \\&#xa;\end{array}&#xa;\right)&#xa;\]" ID="ID_567501427" CREATED="1754117559200" MODIFIED="1754117562145"/>
+<node TEXT="可以转换为增广矩阵并求解" ID="ID_504002574" CREATED="1754117632147" MODIFIED="1754117643650"/>
+</node>
+<node TEXT="举例" ID="ID_1897108174" CREATED="1754117001430" MODIFIED="1754117004218">
+<node TEXT="向量方程形式" ID="ID_122381532" CREATED="1754117040747" MODIFIED="1754117089773">
+<node TEXT="\latex \[&#xa;x\begin{pmatrix} 1 \\ 2 \\ 6 \end{pmatrix} + y\begin{pmatrix} -1 \\ -2 \\ -1 \end{pmatrix} = \begin{pmatrix} 8 \\ 16 \\ 3 \end{pmatrix}&#xa;\]" POSITION="bottom_or_right" ID="ID_1148979427" CREATED="1754117004650" MODIFIED="1754117007706"/>
+</node>
+<node TEXT="线性方程组形式" ID="ID_129977304" CREATED="1754117048110" MODIFIED="1754117094364">
+<node TEXT="\latex \[&#xa;\begin{cases}&#xa;\phantom{2}x - \phantom{2}y = \phantom{1}8 \\&#xa;2x - 2y = 16 \\&#xa;6x - \phantom{2}y = \phantom{1}3&#xa;\end{cases}&#xa;\]" POSITION="bottom_or_right" ID="ID_1964623356" CREATED="1754117014111" MODIFIED="1754117017087"/>
+</node>
+<node TEXT="向量 (8, 16, 3) 是否是向量 (1, 2, 6) 和 (−1, 2,−1) 的线性组合" POSITION="bottom_or_right" ID="ID_1001968475" CREATED="1754117028255" MODIFIED="1754117028630"/>
+</node>
+</node>
+<node TEXT="矩阵方程" POSITION="bottom_or_right" ID="ID_1503312558" CREATED="1754118835662" MODIFIED="1754123318038">
+<node TEXT="\latex 一个 \textbf{矩阵方程} 是指形如 $A\boldsymbol{x} = \boldsymbol{b}$ 的方程，其中： \\&#xa;- $A$ 是一个 $m \times n$ 矩阵， \\&#xa;- $\boldsymbol{b}$ 是 $\mathbb{R}^m$ 中的一个向量，\\ &#xa;- $\boldsymbol{x}$ 是一个系数 $x_1,\ x_2,\ \ldots,\ x_n$ 未知的向量。 " ID="ID_1775414316" CREATED="1754123164275" MODIFIED="1754123321912" HGAP_QUANTITY="17.33333 pt" VSHIFT_QUANTITY="33.33333 pt">
+<font SIZE="12"/>
+<node TEXT="\latex \[&#xa;Ax = \begin{pmatrix}&#xa;\mid &amp; \mid &amp; &amp; \mid \\&#xa;v_1 &amp; v_2 &amp; \cdots &amp; v_n \\&#xa;\mid &amp; \mid &amp; &amp; \mid&#xa;\end{pmatrix}&#xa;\begin{pmatrix}&#xa;x_1 \\&#xa;x_2 \\&#xa;\vdots \\&#xa;x_n&#xa;\end{pmatrix}&#xa;= x_1 v_1 + x_2 v_2 + \cdots + x_n v_n&#xa;\]" POSITION="bottom_or_right" ID="ID_1990840210" CREATED="1754118839323" MODIFIED="1754122982172" MAX_WIDTH="20 cm">
+<font SIZE="14"/>
+</node>
+<node TEXT="\latex \[&#xa;Ax = \begin{pmatrix}&#xa;\multicolumn{1}{c}{---} r_1 \multicolumn{1}{c}{---} \\&#xa;\multicolumn{1}{c}{---} r_2 \multicolumn{1}{c}{---} \\&#xa;\vdots \\&#xa;\multicolumn{1}{c}{---} r_m \multicolumn{1}{c}{---}&#xa;\end{pmatrix}&#xa;x&#xa;=&#xa;\begin{pmatrix}&#xa;r_1 x \\&#xa;r_2 x \\&#xa;\vdots \\&#xa;r_m x&#xa;\end{pmatrix}&#xa;\]" POSITION="bottom_or_right" ID="ID_1319351939" CREATED="1754123633269" MODIFIED="1754123640569">
+<font SIZE="14"/>
+</node>
+<node TEXT="如果A 是一个m ×n 矩阵（m 行，n 列），那么当x 有n个元素时，Ax 是有意义的。乘积Ax 有m 个元素。" POSITION="bottom_or_right" ID="ID_1954178168" CREATED="1754122952250" MODIFIED="1754122959509"/>
+</node>
+<node TEXT="矩阵和向量乘法的性质" ID="ID_236429656" CREATED="1754122996752" MODIFIED="1754123028755">
+<node TEXT="\latex 设 $A$ 是一个 $m \times n$ 矩阵，设 $\boldsymbol{u}, \boldsymbol{v}$ 是 $\mathbb{R}^n$ 中的向量，设 $c$ 是一个标量。那么： " ID="ID_1196022275" CREATED="1754123029105" MODIFIED="1754123243211">
+<font SIZE="12"/>
+</node>
+<node TEXT="\latex $A(\boldsymbol{u} + \boldsymbol{v}) = A\boldsymbol{u} + A\boldsymbol{v}$ " ID="ID_1338921126" CREATED="1754123132062" MODIFIED="1754123172085">
+<font SIZE="12"/>
+</node>
+<node TEXT="\latex $A(c\boldsymbol{u}) = cA\boldsymbol{u}$ " ID="ID_1679360734" CREATED="1754123138139" MODIFIED="1754123172085">
+<font SIZE="12"/>
+</node>
+</node>
+<node TEXT="给定一个特定的 b，Ax = b 的所有解是什么？" ID="ID_1469695494" CREATED="1754123281463" MODIFIED="1754123282207"/>
+<node TEXT=" b 的所有选择有哪些，使得 Ax = b 是一致的？" ID="ID_1794067578" CREATED="1754123288137" MODIFIED="1754123288447"/>
+</node>
+<node TEXT="思考线性系统的几种形式" POSITION="bottom_or_right" ID="ID_1349154569" CREATED="1754117663098" MODIFIED="1754123468842">
+<node TEXT="方程组" ID="ID_956677750" CREATED="1754117671015" MODIFIED="1754117679084">
+<node TEXT="\latex \[&#xa;\begin{cases}&#xa;2x_1 + 3x_2 - 2x_3 = 7 \\&#xa;x_1 - x_2 - 3x_3 = 5&#xa;\end{cases}&#xa;\]" ID="ID_1230198783" CREATED="1754117826177" MODIFIED="1754122975754">
+<font SIZE="14"/>
+</node>
+</node>
+<node TEXT="增广矩阵" ID="ID_768624250" CREATED="1754117679524" MODIFIED="1754117683227">
+<node TEXT="\latex \[&#xa;\left(&#xa;\begin{array}{ccc|c}&#xa;2 &amp; 3 &amp; -2 &amp; 7 \\&#xa;1 &amp; -1 &amp; -3 &amp; 5&#xa;\end{array}&#xa;\right)&#xa;\]" ID="ID_1614586128" CREATED="1754117836206" MODIFIED="1754122975754">
+<font SIZE="14" BOLD="true"/>
+</node>
+</node>
+<node TEXT="向量方程" ID="ID_849657850" CREATED="1754117683393" MODIFIED="1754117688989">
+<node TEXT="几何形式" ID="ID_1198739012" CREATED="1754117689194" MODIFIED="1754117697191"/>
+<node TEXT="\latex \[&#xa;x_1 \begin{pmatrix} 2 \\ 1 \end{pmatrix} + x_2 \begin{pmatrix} 3 \\ -1 \end{pmatrix} + x_3 \begin{pmatrix} -2 \\ -3 \end{pmatrix} = \begin{pmatrix} 7 \\ 5 \end{pmatrix}&#xa;\]" ID="ID_330783496" CREATED="1754117844020" MODIFIED="1754122975754">
+<font SIZE="14"/>
+</node>
+</node>
+<node TEXT="矩阵方程" ID="ID_1255655836" CREATED="1754123490939" MODIFIED="1754123494719">
+<node TEXT="\latex \[&#xa;\begin{pmatrix} 2 &amp; 3 &amp; -2 \\ 1 &amp; -1 &amp; -3 \end{pmatrix}&#xa;\begin{pmatrix} x_1 \\ x_2 \\ x_3 \end{pmatrix}&#xa;=&#xa;\begin{pmatrix} 7 \\ 5 \end{pmatrix}&#xa;\]" ID="ID_786170841" CREATED="1754123649228" MODIFIED="1754123654867">
+<font SIZE="14"/>
+</node>
+</node>
+</node>
+<node TEXT="张成空间（span）" POSITION="bottom_or_right" ID="ID_1728676309" CREATED="1754117853052" MODIFIED="1754117860984">
+<node TEXT="\latex \[&#xa;\operatorname{Span}\{\boldsymbol{v}_1, \boldsymbol{v}_2, \ldots, \boldsymbol{v}_k\}&#xa;= \left\{ x_1\boldsymbol{v}_1 + x_2\boldsymbol{v}_2 + \cdots + x_k\boldsymbol{v}_k&#xa;\,\big|\, x_1, x_2, \ldots, x_k \in \mathbb{R} \right\}&#xa;\]" ID="ID_1605409118" CREATED="1754117861252" MODIFIED="1754122975755" MAX_WIDTH="20 cm">
+<font SIZE="14"/>
+</node>
+<node TEXT="张成空间是一个向量集合：它包含了给定向量组通过线性组合能得到的所有向量" ID="ID_1199490023" CREATED="1754117936446" MODIFIED="1754117936756"/>
+</node>
 </node>
 </node>
 <node TEXT="其他" POSITION="bottom_or_right" ID="ID_212954455" CREATED="1752926365767" MODIFIED="1752926367849">

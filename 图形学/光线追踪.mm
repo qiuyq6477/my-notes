@@ -80,7 +80,7 @@
 <node TEXT="全局光照" ID="ID_943025734" CREATED="1750490463748" MODIFIED="1750490467739"/>
 <node TEXT="BRDF，镜面反射" ID="ID_258218421" CREATED="1750493956734" MODIFIED="1750493969289"/>
 </node>
-<node TEXT="光线追踪" POSITION="bottom_or_right" ID="ID_655857836" CREATED="1750495318952" MODIFIED="1750495330432">
+<node TEXT="光线追踪" FOLDED="true" POSITION="bottom_or_right" ID="ID_655857836" CREATED="1750495318952" MODIFIED="1750495330432">
 <edge COLOR="#00007c"/>
 <node TEXT="光线追踪基本原理" POSITION="top_or_left" ID="ID_1424533972" CREATED="1750489160143" MODIFIED="1750495339445">
 <node TEXT="球体方程" ID="ID_1214950321" CREATED="1750690193546" MODIFIED="1750690197395">
@@ -168,7 +168,7 @@
 <node TEXT="将相机放置在场景中的任何位置、性能优化、球体以外的图元、使用体素构造表示法对物体进行建模、支持透明表面和超采样" POSITION="bottom_or_right" ID="ID_827753437" CREATED="1750512048992" MODIFIED="1750512054485"/>
 </node>
 </node>
-<node TEXT="光栅化" POSITION="bottom_or_right" ID="ID_634819322" CREATED="1750513464506" MODIFIED="1750513468963">
+<node TEXT="光栅化" FOLDED="true" POSITION="bottom_or_right" ID="ID_634819322" CREATED="1750513464506" MODIFIED="1750513468963">
 <edge COLOR="#007c00"/>
 <node TEXT="绘制直线" ID="ID_689125971" CREATED="1750764165495" MODIFIED="1750764174739">
 <node TEXT="直线方程" ID="ID_1341615430" CREATED="1750764364536" MODIFIED="1750764374066">
@@ -927,7 +927,7 @@
 </node>
 </node>
 </node>
-<node TEXT="光照" ID="ID_1628914802" CREATED="1751111456044" MODIFIED="1751111461717">
+<node TEXT="光照" FOLDED="true" ID="ID_1628914802" CREATED="1751111456044" MODIFIED="1751111461717">
 <node TEXT="光照的影响" FOLDED="true" POSITION="bottom_or_right" ID="ID_1249244803" CREATED="1751111605591" MODIFIED="1751111648388">
 <node TEXT="光源类型及其环境、漫反射和镜面反射特性；" ID="ID_1781206296" CREATED="1751111662462" MODIFIED="1751111662462"/>
 <node TEXT="对象材质的环境、漫反射和镜面反射特征；" POSITION="bottom_or_right" ID="ID_534908070" CREATED="1751111662462" MODIFIED="1751111662462"/>
@@ -1051,7 +1051,7 @@
 </node>
 <node TEXT="Phong着色" POSITION="bottom_or_right" ID="ID_152418855" CREATED="1751116730813" MODIFIED="1751120868574">
 <node TEXT="在片段着色器中计算" ID="ID_422451739" CREATED="1751118560003" MODIFIED="1751118571067"/>
-<node TEXT="流程" ID="ID_847880113" CREATED="1751118991677" MODIFIED="1751120868573">
+<node TEXT="流程" FOLDED="true" ID="ID_847880113" CREATED="1751118991677" MODIFIED="1751120868573">
 <node TEXT="c++代码" ID="ID_1971829827" CREATED="1751118638943" MODIFIED="1751118728759">
 <node TEXT="放入缓冲区：&#xa;1. 模型顶点&#xa;2. 顶点法向量&#xa;放入统一变量：&#xa;1.MV和IPROJ短阵变换&#xa;2. 光照和材质特性" ID="ID_1386780681" CREATED="1751118731002" MODIFIED="1751118732624"/>
 </node>
@@ -1067,7 +1067,7 @@
 </node>
 </node>
 </node>
-<node TEXT="Blinn-Phong着色" POSITION="bottom_or_right" ID="ID_158555555" CREATED="1751119418269" MODIFIED="1751119438302">
+<node TEXT="Blinn-Phong着色" FOLDED="true" POSITION="bottom_or_right" ID="ID_158555555" CREATED="1751119418269" MODIFIED="1751119438302">
 <node TEXT="计算反射向量非常费时，不在计算反射向量，而是通过计算L+V得到角平分线H，计算H和N的夹角，H和N的夹角刚好等于视线和反射向量夹角的一半" ID="ID_669841303" CREATED="1751119488509" MODIFIED="1751119647380"/>
 <node TEXT="顶点着色器" ID="ID_520580790" CREATED="1751119691448" MODIFIED="1751119696725">
 <node TEXT="varyingVertPos = (mv_matrix * vec4(vertPos,1.0)).xyz;&#xa;varyingLightDir = light.position - varyingVertPos;&#xa;varyingNormal = (norm_matrix * vec4(vertNormal,1.0)).xyz;&#xa;         &#xa;varyingHalfVector =&#xa;                  normalize(normalize(varyingLightDir)&#xa;                  + normalize(-varyingVertPos)).xyz;&#xa;&#xa;gl_Position = proj_matrix * mv_matrix * vec4(vertPos,1.0);" ID="ID_1711700303" CREATED="1751119697015" MODIFIED="1751119731347"/>
@@ -1147,7 +1147,7 @@
 </node>
 </node>
 </node>
-<node TEXT="如何把数据发送给OpenGL管线" FOLDED="true" ID="ID_1617799317" CREATED="1751091177566" MODIFIED="1752589989978">
+<node TEXT="如何把数据发送给OpenGL管线" ID="ID_1617799317" CREATED="1751091177566" MODIFIED="1752589989978">
 <node TEXT="通过顶点属性的缓冲区" FOLDED="true" ID="ID_489801058" CREATED="1751091237901" MODIFIED="1751091393392">
 <node TEXT="流程" ID="ID_1526083623" CREATED="1751091393794" MODIFIED="1751091397676">
 <node TEXT="只做一次的步骤" POSITION="bottom_or_right" ID="ID_1912191049" CREATED="1751091307166" MODIFIED="1751091311886">
@@ -1183,11 +1183,28 @@
 <node TEXT="关联的 VBO 和 EBO（索引缓冲对象）。" ID="ID_1563826633" CREATED="1751093480092" MODIFIED="1751093480092"/>
 </node>
 <node TEXT="VAO 可以理解为 “顶点属性配置的容器”，它允许我们在渲染时快速切换不同的顶点数据配置，而无需每次都重新设置所有属性" ID="ID_1467678248" CREATED="1751093508057" MODIFIED="1751093511065"/>
+<node TEXT="相比于VBO，VAO优化了哪些" FOLDED="true" ID="ID_1533974718" CREATED="1757216614283" MODIFIED="1757216625871">
+<node TEXT="减少 OpenGL 状态切换开销" ID="ID_646187905" CREATED="1757216626141" MODIFIED="1757216632902">
+<node TEXT="在没有 VAO 的场景下，渲染多个不同顶点格式的物体时，每次切换物体都需要重复执行全套状态配置代码" ID="ID_1315080249" CREATED="1757217006175" MODIFIED="1757217012906"/>
+<node TEXT="VAO 的核心作用是将某一物体的 “VBO 绑定状态 + 所有顶点属性配置” 打包成一个 “状态快照”，初始化时只需配置 1 次，渲染时仅需 “绑定 VAO” 这 1 步即可恢复全套状态，无需重复配置" ID="ID_321759415" CREATED="1757217038904" MODIFIED="1757217039344"/>
+</node>
+<node TEXT="简化代码、降低出错概率" ID="ID_120115082" CREATED="1757217080134" MODIFIED="1757217080393">
+<node TEXT="没有 VAO 时，顶点属性配置（glVertexAttribPointer、glEnableVertexAttribArray）需要与绘制逻辑强耦合 —— 每次绘制前都要重复编写配置代码，不仅导致代码冗余，还容易因 “属性索引错配”“偏移量计算错误”“忘记启用属性” 等问题引发渲染异常" ID="ID_1217702974" CREATED="1757217094536" MODIFIED="1757217095406"/>
+<node TEXT="VAO 通过 “初始化时配置、渲染时直接复用” 的模式，实现了 “配置与绘制解耦”" ID="ID_1691562443" CREATED="1757217105123" MODIFIED="1757217117104">
+<node TEXT="初始化阶段：集中管理所有物体的 VBO 绑定和顶点属性配置，逻辑更清晰" ID="ID_1458910510" CREATED="1757217124043" MODIFIED="1757217136193"/>
+<node TEXT="渲染阶段：只需调用glBindVertexArray和绘制函数，代码更简洁，避免重复劳动和人为错误" ID="ID_1260995805" CREATED="1757217143727" MODIFIED="1757217144222"/>
+</node>
+</node>
+<node TEXT="强化 VBO 的管理能力（非替代关系）" ID="ID_1811093153" CREATED="1757217157818" MODIFIED="1757217172516">
+<node TEXT="VBO 的核心价值是将顶点数据从 CPU 内存转移到 GPU 显存，避免每次渲染时 CPU 向 GPU 重复传输数据" ID="ID_218833440" CREATED="1757217169275" MODIFIED="1757217182668"/>
+<node TEXT="VAO 解决的是 “多个 VBO 如何高效切换使用” 的问题，二者是 “存储” 与 “管理” 的互补关系" ID="ID_978720365" CREATED="1757217193366" MODIFIED="1757217194166"/>
+</node>
+</node>
 <node TEXT="核心API" ID="ID_259512382" CREATED="1751093537674" MODIFIED="1751093544404">
 <node TEXT="glGenVertexArrays：创建 VAO 对象。" ID="ID_433853011" CREATED="1751093545037" MODIFIED="1751093545037"/>
 <node TEXT="glBindVertexArray：绑定 VAO 以开始 / 结束记录状态。" ID="ID_1617038" CREATED="1751093545037" MODIFIED="1751093545037"/>
 </node>
-<node TEXT="使用方法" FOLDED="true" ID="ID_1482838560" CREATED="1751095582857" MODIFIED="1751095590993">
+<node TEXT="使用方法" ID="ID_1482838560" CREATED="1751095582857" MODIFIED="1751095590993">
 <node TEXT="// 1. 创建 VAO&#xa;GLuint VAO;&#xa;glGenVertexArrays(1, &amp;VAO);&#xa;&#xa;// 2. 绑定 VAO（开始记录顶点属性配置）&#xa;glBindVertexArray(VAO);&#xa;&#xa;// 3. 绑定 VBO 并填充数据（与 VBO 操作相同）&#xa;glBindBuffer(GL_ARRAY_BUFFER, VBO);&#xa;glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);&#xa;&#xa;// 4. 配置顶点属性（位置）&#xa;glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);&#xa;glEnableVertexAttribArray(0);&#xa;&#xa;// 5. 配置顶点属性（颜色）&#xa;glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));&#xa;glEnableVertexAttribArray(1);&#xa;&#xa;// 6. 解绑 VAO（结束记录）&#xa;glBindVertexArray(0);" ID="ID_100903621" CREATED="1751095591651" MODIFIED="1751095594503"/>
 </node>
 </node>
@@ -1195,7 +1212,7 @@
 <node TEXT="VBO 是数据的载体，负责存储顶点数据。" ID="ID_997613152" CREATED="1751093588043" MODIFIED="1751093588043"/>
 <node TEXT="VAO 是配置的载体，负责记录如何解释 VBO 中的数据。" ID="ID_684725752" CREATED="1751093588043" MODIFIED="1751093588043"/>
 <node TEXT="一个 VAO 可以关联多个 VBO（例如，一个 VBO 存储位置，另一个存储颜色）。" ID="ID_1226276766" CREATED="1751093588044" MODIFIED="1751093588044"/>
-<node TEXT="渲染时，只需绑定 VAO 和着色器程序，OpenGL 即可根据 VAO 的配置自动读取 VBO 中的数据并传递给着色器。" FOLDED="true" ID="ID_78101969" CREATED="1751093588044" MODIFIED="1751093588044">
+<node TEXT="渲染时，只需绑定 VAO 和着色器程序，OpenGL 即可根据 VAO 的配置自动读取 VBO 中的数据并传递给着色器。" ID="ID_78101969" CREATED="1751093588044" MODIFIED="1751093588044">
 <node TEXT="不使用VAO，每次渲染时需要重复配置顶点属性：" POSITION="bottom_or_right" ID="ID_1089643811" CREATED="1751095634058" MODIFIED="1751095690726">
 <node TEXT="// 每次渲染时都要重新配置顶点属性&#xa;glUseProgram(shaderProgram);&#xa;&#xa;// 绑定 VBO&#xa;glBindBuffer(GL_ARRAY_BUFFER, VBO);&#xa;&#xa;// 配置顶点属性&#xa;glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);&#xa;glEnableVertexAttribArray(0);&#xa;glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));&#xa;glEnableVertexAttribArray(1);&#xa;&#xa;// 绘制&#xa;glDrawArrays(GL_TRIANGLES, 0, 3);" ID="ID_737564880" CREATED="1751095645147" MODIFIED="1751095668276"/>
 </node>
@@ -1320,8 +1337,22 @@
 <node TEXT="片段着色器的主要目的是计算一个像素的最终颜色，通常所有高级OpenGL特效都在这个阶段发生。通常片段着色器包含有关3D场景的数据，它可以用这些数据来计算最终的像素颜色（比如光照、阴影、光的颜色等等）。" ID="ID_815201378" CREATED="1752298659379" MODIFIED="1752298659812"/>
 <node TEXT="透明度测试与混合阶段。这个阶段会检查片段相应的深度（和模板）值，并利用这些值来判断生成的片段是在其他对象之前还是之后，进而决定是否应该丢弃它。该阶段还会检查透明度值（透明度值定义了对象的不透明度），并相应地对对象进行混合。" ID="ID_802121385" CREATED="1752298681650" MODIFIED="1752298685912"/>
 </node>
+<node TEXT="屏幕缓冲区" ID="ID_1794746503" CREATED="1757217792374" MODIFIED="1757217801365">
+<node TEXT="颜色缓冲区" ID="ID_1156496397" CREATED="1757217801543" MODIFIED="1757217808471"/>
+<node TEXT="深度缓冲区" ID="ID_1502868655" CREATED="1757217808642" MODIFIED="1757217814659"/>
+<node TEXT="模版缓冲区" ID="ID_331219456" CREATED="1757217814787" MODIFIED="1757217822263"/>
+<node TEXT="自定义缓冲区" ID="ID_1998151444" CREATED="1757217832455" MODIFIED="1757217836292"/>
 </node>
-<node TEXT="数学" POSITION="bottom_or_right" ID="ID_1614820575" CREATED="1750776198280" MODIFIED="1750776201448">
+<node TEXT="TODO" ID="ID_1915948659" CREATED="1757217837623" MODIFIED="1757217848645">
+<node TEXT="阴影" ID="ID_131694633" CREATED="1757217862231" MODIFIED="1757217865558">
+<node TEXT="静态阴影" ID="ID_749686605" CREATED="1757217865773" MODIFIED="1757217873009">
+<node TEXT="shadow map" ID="ID_1246559984" CREATED="1757217875169" MODIFIED="1757217877242"/>
+</node>
+<node TEXT="动态阴影" ID="ID_607408659" CREATED="1757217878154" MODIFIED="1757217883622"/>
+</node>
+</node>
+</node>
+<node TEXT="数学" FOLDED="true" POSITION="bottom_or_right" ID="ID_1614820575" CREATED="1750776198280" MODIFIED="1750776201448">
 <edge COLOR="#7c007c"/>
 <node TEXT="矩阵" FOLDED="true" ID="ID_556654557" CREATED="1750776201578" MODIFIED="1751077453988">
 <node TEXT="旋转矩阵" ID="ID_1469351974" CREATED="1750777683012" MODIFIED="1750777689018">
@@ -1538,7 +1569,7 @@
 <node TEXT="非连续性：欧拉角在奇异点附近的微小变化可能导致角度值的剧烈跳变，影响控制稳定性。" ID="ID_992172334" CREATED="1751186099517" MODIFIED="1751186100501"/>
 </node>
 </node>
-<node TEXT="四元数" FOLDED="true" ID="ID_1615181631" CREATED="1751185939897" MODIFIED="1751185945474">
+<node TEXT="四元数" ID="ID_1615181631" CREATED="1751185939897" MODIFIED="1751185945474">
 <node TEXT="3D 图形使用单位四元数，单位四元数是数值大小为1的四元数。四元数具有一个向量分量和一个标量分量。" ID="ID_1613731224" CREATED="1751186285785" MODIFIED="1751186287640">
 <node TEXT="\latex $q = [q_v, q_s]$" ID="ID_389831987" CREATED="1751186324197" MODIFIED="1751186347311">
 <font SIZE="18"/>
@@ -1575,6 +1606,8 @@
 <node TEXT="通过四元数旋转向量" ID="ID_1463050180" CREATED="1751186875613" MODIFIED="1751186882229"/>
 <node TEXT="球面线形插值" ID="ID_1750769200" CREATED="1751186898108" MODIFIED="1751186902349"/>
 <node TEXT="将四元数转换为矩阵" ID="ID_500185545" CREATED="1751186939820" MODIFIED="1751186945924"/>
+<node TEXT="线性插值公式" ID="ID_1277052609" CREATED="1757219018824" MODIFIED="1757219026911"/>
+<node TEXT="球面线性插值公式" ID="ID_188313375" CREATED="1757219027141" MODIFIED="1757219034828"/>
 </node>
 </node>
 </node>
