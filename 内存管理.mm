@@ -594,9 +594,9 @@
 <node TEXT="正确理解对象的销毁顺序对正确使用资源管理机制-析构函数-至关重要" POSITION="bottom_or_right" ID="ID_1224890099" CREATED="1756629458464" MODIFIED="1756629507774"/>
 </node>
 </node>
-<node TEXT="智能指针" FOLDED="true" POSITION="bottom_or_right" ID="ID_1282217000" CREATED="1756630351068" MODIFIED="1756630357682">
+<node TEXT="智能指针" POSITION="bottom_or_right" ID="ID_1282217000" CREATED="1756630351068" MODIFIED="1756630357682">
 <edge COLOR="#ff0000"/>
-<node TEXT="unique_ptr" ID="ID_342203226" CREATED="1756630357850" MODIFIED="1756630361728">
+<node TEXT="unique_ptr" FOLDED="true" ID="ID_342203226" CREATED="1756630357850" MODIFIED="1756630361728">
 <node TEXT="实现了资源单一所有权语义" ID="ID_1861461229" CREATED="1756631221574" MODIFIED="1756815742478"/>
 <node TEXT="对象不可复制" ID="ID_1437141760" CREATED="1756815736930" MODIFIED="1756815737460">
 <node TEXT="拷贝构造和拷贝复制被标记为了删除" POSITION="bottom_or_right" ID="ID_1628893663" CREATED="1756815622925" MODIFIED="1756815637064"/>
@@ -683,7 +683,7 @@
 <node TEXT="数组版本的 make_unique 不支持显式指定每个元素的初始值（只能值初始化），若需自定义数组元素初始化，仍需手动用 new 配合 unique_ptr&lt;T[]&gt;" ID="ID_413662481" CREATED="1756819428219" MODIFIED="1756819428566"/>
 </node>
 </node>
-<node TEXT="为什么优先用 make_unique 而非直接 new" ID="ID_1247354341" CREATED="1756819014650" MODIFIED="1756819015082">
+<node TEXT="为什么优先用 make_unique 而非直接 new" FOLDED="true" ID="ID_1247354341" CREATED="1756819014650" MODIFIED="1756819015082">
 <node TEXT="避免内存泄漏（异常安全）" POSITION="bottom_or_right" ID="ID_1193174908" CREATED="1756819077959" MODIFIED="1756821005914">
 <node TEXT="当在函数参数中同时进行多个动态分配时，new 可能导致内存泄漏，而 make_unique 可避免" POSITION="bottom_or_right" ID="ID_44947912" CREATED="1756821007285" MODIFIED="1756821011043"/>
 <node TEXT="void func(std::unique_ptr&lt;int&gt; p1, std::unique_ptr&lt;int&gt; p2) {}&#xa;// 危险：可能泄漏内存&#xa;func(std::unique_ptr&lt;int&gt;(new int(1)), std::unique_ptr&lt;int&gt;(new int(2)));" POSITION="bottom_or_right" ID="ID_2235033" CREATED="1756819083150" MODIFIED="1756819110773"/>
@@ -770,11 +770,12 @@
 <node TEXT="可以通过make_shared优化，就只需要分配一次内存了" ID="ID_1175693035" CREATED="1756823531366" MODIFIED="1756823549279"/>
 </node>
 </node>
-<node TEXT="make_shared" FOLDED="true" ID="ID_1215779810" CREATED="1756823655622" MODIFIED="1756823655963">
+<node TEXT="make_shared" ID="ID_1215779810" CREATED="1756823655622" MODIFIED="1756823655963">
 <node TEXT="在一次内存分配中同时创建 “资源对象” 和 shared_ptr 所需的 “控制块”（包含引用计数等元数据），并返回持有该资源的 shared_ptr" ID="ID_825287926" CREATED="1756823665694" MODIFIED="1756823666437">
 <node TEXT="解决了两个问题" ID="ID_1138313455" CREATED="1756823682737" MODIFIED="1756823686701"/>
 <node TEXT="内存分配效率低（new 会导致两次分配：一次给资源，一次给控制块）" ID="ID_1510883779" CREATED="1756823675044" MODIFIED="1756823675801"/>
 <node TEXT="异常安全风险（多参数场景下可能泄漏内存）" ID="ID_1510794258" CREATED="1756823679683" MODIFIED="1756823680044"/>
+<node TEXT="一次性分配一块足够大的连续内存，同时容纳 T 对象和引用计数器；最后通过 placement new 在这块内存的不同位置分别构造 T 对象和引用计数器" ID="ID_1997222998" CREATED="1758691987429" MODIFIED="1758691996791"/>
 </node>
 <node TEXT="基本用法" ID="ID_126562342" CREATED="1756823909621" MODIFIED="1756823912522">
 <node TEXT="创建单个对象" ID="ID_1281134184" CREATED="1756823912694" MODIFIED="1756823913309">
@@ -868,19 +869,391 @@
 </node>
 <node TEXT="内存管理机制" POSITION="bottom_or_right" ID="ID_1209667702" CREATED="1757241608455" MODIFIED="1757241713338">
 <edge COLOR="#ff00ff"/>
-<node TEXT="C语言内存分配函数" ID="ID_1434131268" CREATED="1757422883620" MODIFIED="1757422892067">
-<node TEXT="void* malloc (size_t n) ;" ID="ID_1771679356" CREATED="1757422895208" MODIFIED="1757422910002"/>
-<node TEXT="void free (void *p);" ID="ID_1135595774" CREATED="1757422910780" MODIFIED="1757422911116"/>
+<node TEXT="C语言内存分配函数" FOLDED="true" ID="ID_1434131268" CREATED="1757422883620" MODIFIED="1757422892067">
+<node TEXT="void* malloc (size_t n) ;" ID="ID_1771679356" CREATED="1757422895208" MODIFIED="1757422910002">
+<node TEXT="在内存中寻找至少包含 n 个连续字节的可用空间，可能将该空间标记为 “已占用”，最终返回指向该内存块起始位置的void*类型抽象指针。" ID="ID_472752180" CREATED="1758680963787" MODIFIED="1758680965283"/>
+<node TEXT="返回的指针需满足机器最坏自然情况的对齐要求，即符合std::max_align_t的对齐规则，多数机器上该类型是double的别名" ID="ID_1518420179" CREATED="1758680980344" MODIFIED="1758680981246"/>
+<node TEXT="调用malloc(0)合法，但结果由具体实现定义 —— 可能返回空指针（nullptr），也可能返回非空指针；无论返回哪种指针，均不可对其解引用" ID="ID_390299118" CREATED="1758681029209" MODIFIED="1758681029743"/>
+<node TEXT="若内存分配失败，malloc(n)会返回空指针（nullptr），这是因为 C 语言不支持 C++ 式的异常机制。" ID="ID_324117921" CREATED="1758681036282" MODIFIED="1758681036760"/>
+<node TEXT="自 C11 标准起，malloc(n)的实现需保证线程安全，与free()等其他 C 语言内存分配函数并发调用时，需进行适当同步。" ID="ID_1934303406" CREATED="1758681044601" MODIFIED="1758681044974"/>
 </node>
-<node TEXT="重载内存分配操作符" ID="ID_1680267928" CREATED="1757241635924" MODIFIED="1757241649301">
-<node TEXT="全局分配运算符" ID="ID_225706558" CREATED="1757423358405" MODIFIED="1757423365558">
-<node TEXT="void *operator new(std: :size_t) ;&#xa;void *operator new[l (std: :size_t) ;&#xa;void operator delete (void *) noexcept ;&#xa;void operator delete [] (void *) noexcept;&#xa;// since C++14&#xa;void operator delete (void *, std: :size_t) noexcept;&#xa;void operator delete l] (void *, std:: size_t) noexcept;" ID="ID_1106973267" CREATED="1757423366185" MODIFIED="1757423399834"/>
+<node TEXT="void free (void *p);" ID="ID_1135595774" CREATED="1757422910780" MODIFIED="1757422911116">
+<node TEXT="确保p指向的内存块可被后续内存分配请求复用，但需满足前提 ——p必须指向由malloc()等 C 语言内存分配函数分配、且尚未被释放的内存块。" ID="ID_453081209" CREATED="1758681051308" MODIFIED="1758681052233"/>
+<node TEXT="尝试释放未通过malloc()等合法分配函数获取的内存地址，属于未定义行为，严禁操作。" ID="ID_226836846" CREATED="1758681057912" MODIFIED="1758681058261"/>
+<node TEXT="内存被释放后，该内存不再视为 “已分配”，若后续仍对该内存块（或指向它的指针）进行操作（如访问、二次释放等），也会导致未定义行为。" ID="ID_1646297112" CREATED="1758681064178" MODIFIED="1758681064564"/>
+</node>
+<node TEXT="alloc(size_t num, size_t size)" ID="ID_1929387850" CREATED="1758681238442" MODIFIED="1758681238852">
+<node TEXT="分配num个大小为size字节的连续内存块，并将所有字节初始化为 0。" ID="ID_223750483" CREATED="1758681244681" MODIFIED="1758681245594"/>
+</node>
+<node TEXT="realloc(void* ptr, size_t new_size)" ID="ID_290111237" CREATED="1758681250975" MODIFIED="1758681251237">
+<node TEXT="调整已分配内存块（ptr指向）的大小为new_size字节。" ID="ID_1781187996" CREATED="1758681256185" MODIFIED="1758681257025"/>
+<node TEXT="若原内存块后有足够空间，直接扩展，返回原指针；&#xa;否则分配新内存块，复制原数据并释放旧块，返回新指针。" ID="ID_1319795127" CREATED="1758681262451" MODIFIED="1758681263206"/>
+<node TEXT="ptr必须是malloc/calloc/realloc返回的指针，或NULL（此时等价于malloc(new_size)）。&#xa;若调整失败，原内存块仍有效，返回NULL。&#xa;新内存块的内容：原大小内的数据保持不变，新增部分未初始化。&#xa;最终需用free()释放。" ID="ID_59410731" CREATED="1758681288207" MODIFIED="1758681301457"/>
 </node>
 </node>
-<node TEXT="实现内存泄漏检查器" ID="ID_1914214121" CREATED="1757241636745" MODIFIED="1757241668069"/>
-<node TEXT="非典型分配机制" ID="ID_527921335" CREATED="1757241669152" MODIFIED="1757241675724"/>
+<node TEXT="重载内存分配操作符" FOLDED="true" ID="ID_1680267928" CREATED="1757241635924" MODIFIED="1757241649301">
+<node TEXT="全局重载" ID="ID_225706558" CREATED="1757423358405" MODIFIED="1758681419582">
+<node TEXT="operator new 和 operator delete" ID="ID_1957179581" CREATED="1758681435106" MODIFIED="1758681436625">
+<node TEXT="用于单个对象的内存分配与释放。" ID="ID_737510395" CREATED="1758681445156" MODIFIED="1758681446403"/>
+<node TEXT="void* operator new(std::size_t size);                  // 基本版（可能抛出异常）&#xa;void* operator new(std::size_t size, const std::nothrow_t&amp;) noexcept;  // nothrow版（不抛异常）&#xa;void operator delete(void* ptr) noexcept;              // 基本版&#xa;void operator delete(void* ptr, std::size_t size) noexcept;  // C++11后，带大小参数（类成员版常用）&#xa;void operator delete(void* ptr, const std::nothrow_t&amp;) noexcept;  // nothrow版&#xa;void operator delete(void* ptr, std::size_t size, const std::nothrow_t&amp;) noexcept;  // C++14, nothrow版" ID="ID_449536067" CREATED="1758681456984" MODIFIED="1758683495518" MAX_WIDTH="20 cm"/>
+</node>
+<node TEXT="operator new[] 和 operator delete[]" ID="ID_801754689" CREATED="1758681524265" MODIFIED="1758681524752">
+<node TEXT="用于数组的内存分配与释放（注意：数组版会额外分配存储数组长度的空间，由编译器自动处理）。" ID="ID_1365133848" CREATED="1758681533754" MODIFIED="1758681534607"/>
+<node TEXT="void* operator new[](std::size_t size);                // 基本版（可能抛出异常）&#xa;void* operator new[](std::size_t size, const std::nothrow_t&amp;) noexcept;  // nothrow版&#xa;void operator delete[](void* ptr) noexcept;            // 基本版&#xa;void operator delete[](void* ptr, std::size_t size) noexcept;  // C++11后，带大小参数&#xa;void operator delete[](void* ptr, const std::nothrow_t&amp;) noexcept;  // nothrow版&#xa;void operator delete[](void* ptr, std::size_t size, const std::nothrow_t&amp;) noexcept;  // C++14, nothrow版" ID="ID_1890942986" CREATED="1758681539338" MODIFIED="1758683502788" MAX_WIDTH="20 cm"/>
+</node>
+<node TEXT="定位 new 相关的重载" ID="ID_1905202582" CREATED="1758681546416" MODIFIED="1758681546746">
+<node TEXT="定位 new（placement new）本身不可重载，但可以重载带额外参数的 operator new，用于在指定内存地址构造对象（需包含 &lt;new&gt; 头文件）。" ID="ID_1346698005" CREATED="1758681558135" MODIFIED="1758681558974"/>
+</node>
+<node TEXT="带额外参数的 operator new 重载规则" ID="ID_342323051" CREATED="1758688471929" MODIFIED="1758688472298">
+<node TEXT="重载的 operator new 必须以 std::size_t 作为第一个参数（表示分配的字节数，由编译器自动传递），后续可以添加任意数量、任意类型的额外参数" ID="ID_56078491" CREATED="1758688473201" MODIFIED="1758688481523">
+<node TEXT="// 带两个额外参数的operator new重载&#xa;void* operator new(std::size_t size, int param1, double param2) {&#xa;    // 分配size字节内存，使用param1和param2辅助处理&#xa;    // ...&#xa;}" ID="ID_1759432677" CREATED="1758688486009" MODIFIED="1758688487346"/>
+</node>
+<node TEXT="使用带额外参数的 new 时，需在 new 关键字后用括号指定参数（类似函数调用）" ID="ID_428398872" CREATED="1758688495635" MODIFIED="1758688495928">
+<node TEXT="T* ptr = new (param1, param2) T(构造参数);" POSITION="bottom_or_right" ID="ID_948172173" CREATED="1758688499340" MODIFIED="1758688500397"/>
+</node>
+<node TEXT="额外参数仅用于 operator new 的内存分配过程，与对象的构造函数参数无关（两者在语法上通过不同的括号区分）" ID="ID_323727012" CREATED="1758688531585" MODIFIED="1758688532690"/>
+<node TEXT="若带额外参数的 operator new 分配内存后，对象的构造函数抛出异常，编译器会自动查找参数匹配的 operator delete 来释放内存。若未定义，则可能导致内存泄漏。" ID="ID_682013618" CREATED="1758688544920" MODIFIED="1758688550868">
+<node TEXT="释放时仍用普通delete（额外参数仅用于分配）" ID="ID_1886436384" CREATED="1758688634835" MODIFIED="1758688635687"/>
+</node>
+<node TEXT="标准库已定义 operator new(std::size_t, void*)（用于在指定地址构造对象），自定义重载时需避免参数列表与之完全相同，否则会引发冲突" ID="ID_1859681221" CREATED="1758688571990" MODIFIED="1758688572327"/>
+</node>
+<node TEXT="作用于所有未自定义内存分配运算符的类型。重载后会替换标准库的默认实现" ID="ID_1475814651" CREATED="1758681662299" MODIFIED="1758681663311"/>
+<node TEXT="析构函数和operator delete都不应该抛出异常，如果抛出，程序基本上会终止" ID="ID_1778599715" CREATED="1758683056612" MODIFIED="1758683079337"/>
+</node>
+<node TEXT="类成员重载" FOLDED="true" ID="ID_1051831928" CREATED="1758681419917" MODIFIED="1758681421265">
+<node TEXT="仅作用于该类及其派生类（派生类未重载时会继承基类的版本）。类成员版本的 operator new/delete 隐含为 static（即使未声明），不能访问非静态成员（无 this 指针）" ID="ID_856655297" CREATED="1758681677804" MODIFIED="1758681678890"/>
+</node>
+<node TEXT="placement new" FOLDED="true" ID="ID_452050345" CREATED="1758690245368" MODIFIED="1758699465721">
+<node TEXT="placement new 是 C++ 中一种特殊的 new 操作符形式，其核心特点是不在堆上分配新内存，而是在已有的、预先分配的内存块上构造对象。它的本质是 “利用已有内存初始化对象”，而非 “分配内存”，因此也被称为 “定位 new”。" ID="ID_25526430" CREATED="1758690248623" MODIFIED="1758690265461"/>
+<node TEXT="函数签名" ID="ID_1553589153" CREATED="1758690272121" MODIFIED="1758690277100">
+<node TEXT="void *operator new (std: : size_t, void *p) | return p: }&#xa;void *operator new[l (std: : size_t, void *p) { return p: }&#xa;void operator delete (void*, void*) noexcept {}&#xa;void operator delete I] (void*, void*) noexcept { }" ID="ID_1869172435" CREATED="1758690277239" MODIFIED="1758690323543"/>
+<node TEXT="size:" ID="ID_1021351834" CREATED="1758690338648" MODIFIED="1758690341715">
+<node TEXT="表示需要构造的对象的大小（字节数），由编译器自动传递（通常等于 sizeof(T)，T 是对象类型）。" ID="ID_696882870" CREATED="1758690349223" MODIFIED="1758690350975"/>
+</node>
+<node TEXT="ptr:" ID="ID_1593633253" CREATED="1758690342027" MODIFIED="1758690344078">
+<node TEXT="指向一块已分配的内存块的指针（必须非空，且内存大小至少为 size 字节，对齐要求满足 T 类型）。" ID="ID_815918710" CREATED="1758690355754" MODIFIED="1758690357422"/>
+</node>
+</node>
+<node TEXT="用法" ID="ID_1590597099" CREATED="1758690377495" MODIFIED="1758690381046">
+<node TEXT="准备内存块：提前通过 malloc、new 或全局数组等方式分配一块足够大的内存（大小 ≥ sizeof(T)，且对齐正确）" ID="ID_1197238103" CREATED="1758690381543" MODIFIED="1758690389341"/>
+<node TEXT="用 placement new：用 new (ptr) T(...) 语法在该内存上构造对象（自动调用 T 的构造函数）。" ID="ID_731232547" CREATED="1758690393089" MODIFIED="1758690393361"/>
+<node TEXT="使用对象：通过 ptr 指针（需转换为 T* 类型）访问构造好的对象。" ID="ID_1542907595" CREATED="1758690396834" MODIFIED="1758690397061"/>
+<node TEXT="手动析构对象：对象生命周期结束时，需显式调用析构函数（ptr-&gt;~T();），因为 placement new 不会自动触发析构。" ID="ID_1257601234" CREATED="1758690402117" MODIFIED="1758690402399"/>
+<node TEXT="释放原始内存：若内存是通过 malloc 或 new 分配的，最后需用 free 或 delete 释放（注意匹配原始分配方式）" ID="ID_881901470" CREATED="1758690406636" MODIFIED="1758690406907"/>
+</node>
+<node TEXT="用途" ID="ID_727848440" CREATED="1758690418723" MODIFIED="1758690421241">
+<node TEXT="内存池管理" ID="ID_593255947" CREATED="1758690421458" MODIFIED="1758690427990">
+<node TEXT="预先分配一块大内存（内存池），然后通过 placement new 反复在上面构造 / 析构对象，避免频繁调用 new/delete 导致的内存碎片和性能开销（常见于高性能服务器、游戏引擎等场景）" ID="ID_1768969016" CREATED="1758690433943" MODIFIED="1758690434996"/>
+</node>
+<node TEXT="固定地址构造对象" ID="ID_1342744703" CREATED="1758690438268" MODIFIED="1758690438511">
+<node TEXT="在硬件编程或嵌入式系统中，有时需要在特定的内存地址（如硬件寄存器映射的地址）上构造对象，placement new 可强制在指定地址初始化对象。" ID="ID_1700355204" CREATED="1758690455684" MODIFIED="1758690459650"/>
+</node>
+<node TEXT="性能敏感场景" ID="ID_812923779" CREATED="1758690446076" MODIFIED="1758690446296">
+<node TEXT="内存分配（new/malloc）是相对耗时的操作，若某类对象需要频繁创建销毁，可预先分配内存，用 placement new 快速构造，提升性能。" ID="ID_887183540" CREATED="1758690460192" MODIFIED="1758690477856"/>
+</node>
+<node TEXT="容器实现" ID="ID_500129909" CREATED="1758690450328" MODIFIED="1758690450596">
+<node TEXT="标准容器（如 std::vector）内部使用类似机制：预先分配一块连续内存（容量 capacity），当插入元素时，用 placement new 在未使用的内存上构造对象，避免每次插入都重新分配内存" ID="ID_159433087" CREATED="1758690478346" MODIFIED="1758690479289"/>
+</node>
+<node TEXT="optional&lt;T&gt;（可选对象）" FOLDED="true" ID="ID_1632936863" CREATED="1758691010782" MODIFIED="1758691011172">
+<node TEXT="optional&lt;T&gt; 的功能是 “可能存储一个 T 对象，也可能不存储”（类似 “有值 / 无值” 的状态）" ID="ID_1041820940" CREATED="1758691022343" MODIFIED="1758691023436">
+<node TEXT="std::optional&lt;int&gt; opt;  // 初始无值&#xa;opt = 42;  // 变为有值状态（存储int对象）" ID="ID_447589612" CREATED="1758691026619" MODIFIED="1758691037787">
+<font BOLD="false"/>
+</node>
+</node>
+<node TEXT="要实现这种功能，optional&lt;T&gt; 内部会预留一块足够容纳 T 对象的内存（但不会一开始就构造 T）。当需要存储 T 时（如赋值时），通过 placement new 在这块预留内存上构造 T 对象；当需要清空值时，显式调用 T 的析构函数（而非释放内存，因为内存是 optional 自身的一部分）" ID="ID_814040388" CREATED="1758691059230" MODIFIED="1758691059715"/>
+<node TEXT="如果不用 placement new，optional&lt;T&gt; 可能需要每次赋值时都通过 new 分配内存、析构时 delete，这会带来额外的性能开销和内存碎片，而 placement new 直接复用内部预留内存，效率更高" ID="ID_629678536" CREATED="1758691065302" MODIFIED="1758691065558"/>
+</node>
+<node TEXT="variant&lt;T0, T1, ..., Tn&gt;（变体类型）" FOLDED="true" ID="ID_205569065" CREATED="1758691070945" MODIFIED="1758691071225">
+<node TEXT="variant 用于存储 “多种类型中的某一种”（例如 variant&lt;int, string, double&gt; 可存储 int、string 或 double）。其内部会预留一块大小等于 “最大类型尺寸” 的内存（确保能容纳任何一种类型）" ID="ID_1009688801" CREATED="1758691077194" MODIFIED="1758691080339"/>
+<node TEXT="当存储不同类型的对象时（如从 int 改为 string），variant 会" ID="ID_1076915610" CREATED="1758691085292" MODIFIED="1758691085544">
+<node TEXT="先显式析构当前存储的对象（如调用 int 的析构函数）；" ID="ID_1756303858" CREATED="1758691089121" MODIFIED="1758691092672"/>
+<node TEXT="再通过 placement new 在同一块预留内存上构造新类型的对象（如 string）。" ID="ID_1642467370" CREATED="1758691093809" MODIFIED="1758691094110"/>
+</node>
+<node TEXT="这种方式避免了为每种可能的类型单独分配内存，而是复用同一块空间，大幅节省内存并简化管理" ID="ID_1941711065" CREATED="1758691099220" MODIFIED="1758691099482"/>
+</node>
+<node TEXT="小对象优化（SOO）：std::string 和 std::function" FOLDED="true" ID="ID_1937289589" CREATED="1758691103897" MODIFIED="1758691104158">
+<node TEXT="小对象优化是指：当对象存储的数据较小时，直接使用类型自身的内部内存（而非分配外部堆内存）；当数据较大时，才分配外部内存" ID="ID_1270915314" CREATED="1758691114587" MODIFIED="1758691115551"/>
+<node TEXT="td::string 的 SOO" ID="ID_6961409" CREATED="1758691125319" MODIFIED="1758691125732">
+<node TEXT="大多数实现中，std::string 会包含一个小型内部缓冲区（例如 16 字节）。当字符串长度较短（如 &quot;hello&quot;）时，字符直接存储在内部缓冲区中，通过 placement new 在缓冲区上构造字符串数据（无需 new 分配堆内存）；当字符串很长时，才会在堆上分配内存并存储数据" ID="ID_620057270" CREATED="1758691130719" MODIFIED="1758691131605"/>
+</node>
+<node TEXT="td::function 的 SOO" ID="ID_473278359" CREATED="1758691136307" MODIFIED="1758691136553">
+<node TEXT="std::function 用于存储任意可调用对象（函数、lambda、函数对象等）。当存储的可调用对象较小时（如无捕获的 lambda），std::function 会用内部内存存储它（通过 placement new 构造）；当对象较大时，才会分配堆内存" ID="ID_751071499" CREATED="1758691144847" MODIFIED="1758691146276"/>
+</node>
+<node TEXT="SOO 的核心是 “复用内部内存”，而 placement new 正是实现 “在固定内部内存上动态构造不同大小 / 类型对象” 的关键工具，避免了小对象场景下的不必要堆分配，提升性能并减少内存碎片" ID="ID_1262186195" CREATED="1758691154716" MODIFIED="1758691154977"/>
+</node>
+</node>
+<node TEXT="注意事项" ID="ID_953501807" CREATED="1758690488230" MODIFIED="1758690488568">
+<node TEXT="内存大小与对齐" ID="ID_1928319772" CREATED="1758690492946" MODIFIED="1758690500781">
+<node TEXT="必须确保传入 placement new 的内存块大小 ≥ sizeof(T)，且对齐方式满足 T 类型的要求（如 double 需要 8 字节对齐）。否则会导致未定义行为（崩溃、数据错乱等）" ID="ID_1811517909" CREATED="1758690501661" MODIFIED="1758690505998"/>
+</node>
+<node TEXT="手动析构" ID="ID_1116598553" CREATED="1758690506805" MODIFIED="1758690507067"/>
+<node TEXT="禁止用 delete 释放" ID="ID_1030637252" CREATED="1758690508461" MODIFIED="1758690512901"/>
+<node TEXT="异常处理" ID="ID_706694268" CREATED="1758690527706" MODIFIED="1758690527969">
+<node TEXT="若 placement new 中对象的构造函数抛出异常，标准库会自动调用对应的 operator delete(void*, void*)（placement delete）释放资源（但该函数默认无操作，通常无需用户重载）" ID="ID_1836980083" CREATED="1758690544186" MODIFIED="1758690545207"/>
+</node>
+</node>
+</node>
+<node TEXT="“对齐感知” 的分配运算符" FOLDED="true" ID="ID_461089933" CREATED="1758693045170" MODIFIED="1758693045608">
+<node TEXT="为需要超出默认对齐要求的类型（如 SIMD 数据、硬件寄存器映射类型等）分配内存，确保内存地址满足严格的对齐约束，避免因对齐错误导致的未定义行为（如硬件访问效率低下、程序崩溃等）。" ID="ID_1992995639" CREATED="1758693113441" MODIFIED="1758693116890"/>
+<node TEXT="内存对齐是硬件和编译器对数据存储地址的约束（例如：int通常需要 4 字节对齐，double需要 8 字节对齐，SIMD 指令中的__m256需要 32 字节对齐）。默认情况下" ID="ID_1543889841" CREATED="1758693129824" MODIFIED="1758693130083">
+<node TEXT="普通operator new或malloc只能保证 “最大基本对齐”（std::max_align_t，通常为 8 或 16 字节，取决于系统）" ID="ID_1049608538" CREATED="1758693134839" MODIFIED="1758693135692"/>
+<node TEXT="当类型需要更大的对齐要求（如alignas(32) struct A { ... };）时，普通分配函数可能返回不符合对齐的内存地址，导致未定义行为。" ID="ID_1545485081" CREATED="1758693139783" MODIFIED="1758693140034"/>
+</node>
+</node>
+<node TEXT="destroying delete" FOLDED="true" ID="ID_70078046" CREATED="1758693207348" MODIFIED="1758693634420">
+<node TEXT="C++17" ID="ID_50376462" CREATED="1758693452655" MODIFIED="1758693453262"/>
+<node TEXT="template &lt;typename T&gt;&#xa;void operator delete(T* ptr, std::destroying_delete_t) noexcept {&#xa;    // 1. 在释放内存前，手动调用析构函数（销毁对象）&#xa;    ptr-&gt;~T();&#xa;    // 2. 释放内存（例如归还给内存池）&#xa;    my_memory_pool.deallocate(ptr);&#xa;}" ID="ID_1741827705" CREATED="1758693485674" MODIFIED="1758693486574"/>
+<node TEXT="对象的销毁（调用析构函数）和内存的释放（回收内存块）合并到同一个操作中，通过重载特定版本的 operator delete 实现" ID="ID_654064944" CREATED="1758693304934" MODIFIED="1758693305872"/>
+<node TEXT="这一机制主要用于优化内存管理效率，尤其适合自定义分配器（allocator）、内存池等场景，避免传统 “先析构再释放” 两步操作带来的额外开销。" ID="ID_1727035457" CREATED="1758693314657" MODIFIED="1758693314911"/>
+<node TEXT="当对一个对象执行 delete 操作时，若该类型存在 destroying delete 重载，编译器会自动选择该版本，从而合并销毁与释放步骤" ID="ID_1129010511" CREATED="1758693358134" MODIFIED="1758693634419"/>
+<node TEXT="合并操作，减少开销" ID="ID_170757719" CREATED="1758693375490" MODIFIED="1758693375741">
+<node TEXT="传统 delete 会先调用析构函数（编译器插入代码），再调用 operator delete；而 destroying delete 将这两步合并到 operator delete 重载中，减少一次函数调用，尤其对性能敏感的场景（如高频创建 / 销毁对象）更高效" ID="ID_159641640" CREATED="1758693435772" MODIFIED="1758693437171"/>
+</node>
+<node TEXT="依赖特殊标签 std::destroying_delete_t" ID="ID_1356045853" CREATED="1758693382428" MODIFIED="1758693382675">
+<node TEXT="该标签是一个空结构体（struct destroying_delete_t {};），仅用于区分 destroying delete 重载版本，无实际数据意义" ID="ID_614337217" CREATED="1758693391357" MODIFIED="1758693392552"/>
+</node>
+<node TEXT="需手动调用析构函数" ID="ID_738190593" CREATED="1758693396461" MODIFIED="1758693396701">
+<node TEXT="在 destroying delete 重载中，必须显式调用对象的析构函数（ptr-&gt;~T()），否则会导致资源泄漏（因为编译器不会再单独插入析构调用）" ID="ID_1607304021" CREATED="1758693403856" MODIFIED="1758693407582"/>
+</node>
+<node TEXT="兼容传统释放逻辑" ID="ID_649408600" CREATED="1758693411440" MODIFIED="1758693411713">
+<node TEXT="仍需提供普通版本的 operator delete，以应对特殊场景（如对象构造函数抛出异常时，编译器需要调用普通 operator delete 释放内存，此时对象尚未构造完成，无需析构）" ID="ID_1315863906" CREATED="1758693424419" MODIFIED="1758693425393"/>
+</node>
+</node>
+<node TEXT="内存分配的核心要求" ID="ID_1324113994" CREATED="1758681706775" MODIFIED="1758681707689">
+<node TEXT="分配足够的内存且满足对齐要求" ID="ID_762764926" CREATED="1758681741526" MODIFIED="1758681751304">
+<node TEXT="分配足够的内存：operator new/operator new[] 必须返回一块连续的、大小至少为 size 字节的内存，且内存对齐需满足该类型的对齐要求（可通过 std::align_val_t 处理自定义对齐，C++17 起支持）。" POSITION="bottom_or_right" ID="ID_1867815649" CREATED="1758681716760" MODIFIED="1758681717604"/>
+</node>
+<node TEXT="处理分配失败" ID="ID_685326700" CREATED="1758681732584" MODIFIED="1758681732983">
+<node TEXT="基本版（无 nothrow）分配失败时必须抛出 std::bad_alloc 异常（或其派生类），不能返回 nullptr。" ID="ID_1967052385" CREATED="1758681800012" MODIFIED="1758681801490"/>
+<node TEXT="nothrow 版分配失败时必须返回 nullptr，且不抛出异常" ID="ID_1940247942" CREATED="1758681807199" MODIFIED="1758681807767"/>
+</node>
+</node>
+<node TEXT="释放函数的特殊行为" ID="ID_795041223" CREATED="1758681859840" MODIFIED="1758681860207">
+<node TEXT="operator delete 被传入 nullptr 时应无操作（标准库默认实现已保证，自定义时需遵循）。" ID="ID_930524184" CREATED="1758681894190" MODIFIED="1758681894514"/>
+<node TEXT="带 size 参数的版本（C++11 起）：类成员的 operator delete 可额外接受 std::size_t size 参数（表示待释放对象的大小），便于区分基类与派生类对象的释放（避免切片问题）" ID="ID_242186607" CREATED="1758681909060" MODIFIED="1758681909429"/>
+</node>
+<node TEXT="若重载了 operator new[]，必须同时重载对应的 operator delete[]；同理，operator new 需与 operator delete 配对。" ID="ID_1937914789" CREATED="1758681943478" MODIFIED="1758681943980">
+<node TEXT="如果构造函数抛出异常（此时对象未完全构造成功），operator new 分配的内存必须被释放（否则会内存泄漏）。C++ 运行时会自动查找与 “分配时使用的 operator new 签名匹配” 的 operator delete，用它释放已分配的内存，如果没有找到，就会导致内存泄漏" POSITION="bottom_or_right" ID="ID_72715073" CREATED="1758688898504" MODIFIED="1758689384224">
+<node TEXT="“匹配” 的核心是函数签名的对应关系：除了第一个参数（operator new 的第一个参数是 size_t，operator delete 的第一个参数是 void*），其余参数的类型和顺序必须完全一致" ID="ID_41234501" CREATED="1758688960057" MODIFIED="1758688961184"/>
+<node TEXT="若分配时使用 operator new[](size_t, const std::nothrow_t&amp;)（数组版 + nothrow 标记），则异常时会调用 operator delete[](void*, const std::nothrow_t&amp;)" ID="ID_1871539615" CREATED="1758688985037" MODIFIED="1758688985381"/>
+</node>
+</node>
+<node TEXT="重载了不抛出异常的new和delete之后，为什么还要重载会抛出异常的版本" ID="ID_1278901585" CREATED="1758689787667" MODIFIED="1758689814142">
+<node TEXT="用户代码中，用 new（正常版本）创建的对象，最终会用 delete 释放（调用正常版本 operator delete）" POSITION="bottom_or_right" ID="ID_1161458860" CREATED="1758689744239" MODIFIED="1758689745253"/>
+<node TEXT="用 new (nothrow) 创建的对象，若构造成功，用户也会用 delete 释放（此时调用的是正常版本 operator delete，而非 nothrow 版本）" POSITION="bottom_or_right" ID="ID_1519156960" CREATED="1758689752332" MODIFIED="1758689752612"/>
+<node TEXT="因此，正常版本和 nothrow 版本的内存分配 / 释放逻辑必须一致（例如，都使用同一内存池），否则会导致内存管理混乱（如用 nothrow new 从内存池分配的内存，被 normal delete 错误地归还给操作系统）" POSITION="bottom_or_right" ID="ID_1872639014" CREATED="1758689767393" MODIFIED="1758689767677"/>
+</node>
+<node TEXT="数组版的 size 参数是数组的总字节数（包括编译器添加的数组长度信息），而非元素个数" ID="ID_1391176053" CREATED="1758681954153" MODIFIED="1758681954493"/>
+<node TEXT="operator delete(void*, const std::nothrow_t&amp;) 是 **“异常安全保障专用”** 的版本，仅在 nothrow new 分配后构造函数抛出异常时被自动调用，用户无法通过 delete 显式触发" ID="ID_1458290739" CREATED="1758689690507" MODIFIED="1758689691206"/>
+<node TEXT="所有显式的 delete 操作（针对已成功构造的对象），无论对象最初是通过普通 new 还是 nothrow new 分配的，都只会调用普通版本的 operator delete" ID="ID_1000979862" CREATED="1758689698913" MODIFIED="1758689699266"/>
+</node>
+<node TEXT="构造和析构一个对象的底层过程" FOLDED="true" ID="ID_585452285" CREATED="1758682443338" MODIFIED="1758682456826">
+<node TEXT="new 构造对象的底层过程" ID="ID_1181441844" CREATED="1758682457093" MODIFIED="1758682458260">
+<node TEXT="T* ptr = new T(构造参数)" ID="ID_1287563723" CREATED="1758682471666" MODIFIED="1758682472608"/>
+<node TEXT="1. 调用 operator new 分配内存" ID="ID_787306575" CREATED="1758682482837" MODIFIED="1758682483303">
+<node TEXT="new 操作符首先会调用内存分配函数 operator new（注意：不是 new 操作符本身），其作用是分配一块足够容纳 T 类型对象的原始内存（未初始化的字节）" ID="ID_1056476103" CREATED="1758682495222" MODIFIED="1758682496286"/>
+<node TEXT="分配函数的选择" ID="ID_6980442" CREATED="1758682544427" MODIFIED="1758682544689">
+<node TEXT="若类 T 重载了成员函数 operator new，则调用该类的版本；" ID="ID_1211933732" CREATED="1758682550070" MODIFIED="1758682556188"/>
+<node TEXT="否则调用全局的 ::operator new（标准库默认实现，通常基于 malloc 实现）" ID="ID_380699421" CREATED="1758682556885" MODIFIED="1758682558246"/>
+</node>
+<node TEXT="内存分配的要求" ID="ID_651497625" CREATED="1758682563410" MODIFIED="1758682563693">
+<node TEXT="分配的内存必须满足 T 类型的对齐要求（如 double 需要 8 字节对齐），否则会导致未定义行为" ID="ID_60085716" CREATED="1758682569277" MODIFIED="1758682574268"/>
+</node>
+<node TEXT="分配失败的处理" ID="ID_870168999" CREATED="1758682578579" MODIFIED="1758682579577">
+<node POSITION="bottom_or_right" ID="ID_478181534" CREATED="1758682588413" MODIFIED="1758682588413"><richcontent TYPE="NODE">
+
+<html>
+  <head>
+    
+  </head>
+  <body>
+    <span style="color: rgba(0, 0, 0, 0.85); font-family: Inter, -apple-system, BlinkMacSystemFont, Segoe UI, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Helvetica Neue, Helvetica, Arial, sans-serif; font-size: 16px; font-style: normal; font-weight: 400; letter-spacing: normal; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px; background-color: rgb(255, 255, 255); text-decoration: none; display: inline !important; float: none;">标准的</span><span class="Apple-converted-space" style="color: rgba(0, 0, 0, 0.85); font-family: Inter, -apple-system, BlinkMacSystemFont, Segoe UI, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Helvetica Neue, Helvetica, Arial, sans-serif; font-size: 16px; font-style: normal; font-weight: 400; letter-spacing: normal; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px; background-color: rgb(255, 255, 255); text-decoration: none; display: inline !important; float: none;">&#xa0;</span><code style="border-top-width: medium; border-right-width: medium; border-bottom-width: medium; border-left-width: medium; border-top-style: none; border-right-style: none; border-bottom-style: none; border-left-style: none; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; font-family: var(--md-box-global-font-family-mono); font-size: var(--md-box-inline-code-relative-font-size); color: black; font-style: normal; font-weight: 400; letter-spacing: normal; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px; text-decoration: none"><span style="border-top-width: medium; border-right-width: medium; border-bottom-width: medium; border-left-width: medium; border-top-style: none; border-right-style: none; border-bottom-style: none; border-left-style: none; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; font-family: var(--md-box-global-font-family-mono); font-size: var(--md-box-inline-code-relative-font-size); color: black; font-style: normal; font-weight: 400; letter-spacing: normal; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px; text-decoration: none;">operator new</span></code><span class="Apple-converted-space" style="color: rgba(0, 0, 0, 0.85); font-family: Inter, -apple-system, BlinkMacSystemFont, Segoe UI, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Helvetica Neue, Helvetica, Arial, sans-serif; font-size: 16px; font-style: normal; font-weight: 400; letter-spacing: normal; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px; background-color: rgb(255, 255, 255); text-decoration: none; display: inline !important; float: none;">&#xa0;</span><span style="color: rgba(0, 0, 0, 0.85); font-family: Inter, -apple-system, BlinkMacSystemFont, Segoe UI, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Helvetica Neue, Helvetica, Arial, sans-serif; font-size: 16px; font-style: normal; font-weight: 400; letter-spacing: normal; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px; background-color: rgb(255, 255, 255); text-decoration: none; display: inline !important; float: none;">分配失败时会抛出</span><span class="Apple-converted-space" style="color: rgba(0, 0, 0, 0.85); font-family: Inter, -apple-system, BlinkMacSystemFont, Segoe UI, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Helvetica Neue, Helvetica, Arial, sans-serif; font-size: 16px; font-style: normal; font-weight: 400; letter-spacing: normal; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px; background-color: rgb(255, 255, 255); text-decoration: none; display: inline !important; float: none;">&#xa0;</span><code style="border-top-width: medium; border-right-width: medium; border-bottom-width: medium; border-left-width: medium; border-top-style: none; border-right-style: none; border-bottom-style: none; border-left-style: none; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; font-family: var(--md-box-global-font-family-mono); font-size: var(--md-box-inline-code-relative-font-size); color: black; font-style: normal; font-weight: 400; letter-spacing: normal; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px; text-decoration: none"><span style="border-top-width: medium; border-right-width: medium; border-bottom-width: medium; border-left-width: medium; border-top-style: none; border-right-style: none; border-bottom-style: none; border-left-style: none; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; font-family: var(--md-box-global-font-family-mono); font-size: var(--md-box-inline-code-relative-font-size); color: black; font-style: normal; font-weight: 400; letter-spacing: normal; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px; text-decoration: none;">std::bad_alloc</span></code><span class="Apple-converted-space" style="color: rgba(0, 0, 0, 0.85); font-family: Inter, -apple-system, BlinkMacSystemFont, Segoe UI, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Helvetica Neue, Helvetica, Arial, sans-serif; font-size: 16px; font-style: normal; font-weight: 400; letter-spacing: normal; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px; background-color: rgb(255, 255, 255); text-decoration: none; display: inline !important; float: none;">&#xa0;</span><span style="color: rgba(0, 0, 0, 0.85); font-family: Inter, -apple-system, BlinkMacSystemFont, Segoe UI, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Helvetica Neue, Helvetica, Arial, sans-serif; font-size: 16px; font-style: normal; font-weight: 400; letter-spacing: normal; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px; background-color: rgb(255, 255, 255); text-decoration: none; display: inline !important; float: none;">异常；若使用</span><span class="Apple-converted-space" style="color: rgba(0, 0, 0, 0.85); font-family: Inter, -apple-system, BlinkMacSystemFont, Segoe UI, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Helvetica Neue, Helvetica, Arial, sans-serif; font-size: 16px; font-style: normal; font-weight: 400; letter-spacing: normal; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px; background-color: rgb(255, 255, 255); text-decoration: none; display: inline !important; float: none;">&#xa0;</span><code style="border-top-width: medium; border-right-width: medium; border-bottom-width: medium; border-left-width: medium; border-top-style: none; border-right-style: none; border-bottom-style: none; border-left-style: none; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; font-family: var(--md-box-global-font-family-mono); font-size: var(--md-box-inline-code-relative-font-size); color: black; font-style: normal; font-weight: 400; letter-spacing: normal; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px; text-decoration: none"><span style="border-top-width: medium; border-right-width: medium; border-bottom-width: medium; border-left-width: medium; border-top-style: none; border-right-style: none; border-bottom-style: none; border-left-style: none; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; font-family: var(--md-box-global-font-family-mono); font-size: var(--md-box-inline-code-relative-font-size); color: black; font-style: normal; font-weight: 400; letter-spacing: normal; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px; text-decoration: none;">nothrow</span></code><span class="Apple-converted-space" style="color: rgba(0, 0, 0, 0.85); font-family: Inter, -apple-system, BlinkMacSystemFont, Segoe UI, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Helvetica Neue, Helvetica, Arial, sans-serif; font-size: 16px; font-style: normal; font-weight: 400; letter-spacing: normal; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px; background-color: rgb(255, 255, 255); text-decoration: none; display: inline !important; float: none;">&#xa0;</span><span style="color: rgba(0, 0, 0, 0.85); font-family: Inter, -apple-system, BlinkMacSystemFont, Segoe UI, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Helvetica Neue, Helvetica, Arial, sans-serif; font-size: 16px; font-style: normal; font-weight: 400; letter-spacing: normal; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px; background-color: rgb(255, 255, 255); text-decoration: none; display: inline !important; float: none;">版本（</span><code style="border-top-width: medium; border-right-width: medium; border-bottom-width: medium; border-left-width: medium; border-top-style: none; border-right-style: none; border-bottom-style: none; border-left-style: none; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; font-family: var(--md-box-global-font-family-mono); font-size: var(--md-box-inline-code-relative-font-size); color: black; font-style: normal; font-weight: 400; letter-spacing: normal; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px; text-decoration: none"><span style="border-top-width: medium; border-right-width: medium; border-bottom-width: medium; border-left-width: medium; border-top-style: none; border-right-style: none; border-bottom-style: none; border-left-style: none; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; font-family: var(--md-box-global-font-family-mono); font-size: var(--md-box-inline-code-relative-font-size); color: black; font-style: normal; font-weight: 400; letter-spacing: normal; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px; text-decoration: none;">new (std::nothrow) T</span></code><span style="color: rgba(0, 0, 0, 0.85); font-family: Inter, -apple-system, BlinkMacSystemFont, Segoe UI, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Helvetica Neue, Helvetica, Arial, sans-serif; font-size: 16px; font-style: normal; font-weight: 400; letter-spacing: normal; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px; background-color: rgb(255, 255, 255); text-decoration: none; display: inline !important; float: none;">），则返回</span><span class="Apple-converted-space" style="color: rgba(0, 0, 0, 0.85); font-family: Inter, -apple-system, BlinkMacSystemFont, Segoe UI, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Helvetica Neue, Helvetica, Arial, sans-serif; font-size: 16px; font-style: normal; font-weight: 400; letter-spacing: normal; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px; background-color: rgb(255, 255, 255); text-decoration: none; display: inline !important; float: none;">&#xa0;</span><code style="border-top-width: medium; border-right-width: medium; border-bottom-width: medium; border-left-width: medium; border-top-style: none; border-right-style: none; border-bottom-style: none; border-left-style: none; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; font-family: var(--md-box-global-font-family-mono); font-size: var(--md-box-inline-code-relative-font-size); color: black; font-style: normal; font-weight: 400; letter-spacing: normal; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px; text-decoration: none"><span style="border-top-width: medium; border-right-width: medium; border-bottom-width: medium; border-left-width: medium; border-top-style: none; border-right-style: none; border-bottom-style: none; border-left-style: none; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; font-family: var(--md-box-global-font-family-mono); font-size: var(--md-box-inline-code-relative-font-size); color: black; font-style: normal; font-weight: 400; letter-spacing: normal; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px; text-decoration: none;">nullptr</span></code><span class="Apple-converted-space" style="color: rgba(0, 0, 0, 0.85); font-family: Inter, -apple-system, BlinkMacSystemFont, Segoe UI, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Helvetica Neue, Helvetica, Arial, sans-serif; font-size: 16px; font-style: normal; font-weight: 400; letter-spacing: normal; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px; background-color: rgb(255, 255, 255); text-decoration: none; display: inline !important; float: none;">&#xa0;</span><span style="color: rgba(0, 0, 0, 0.85); font-family: Inter, -apple-system, BlinkMacSystemFont, Segoe UI, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Helvetica Neue, Helvetica, Arial, sans-serif; font-size: 16px; font-style: normal; font-weight: 400; letter-spacing: normal; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px; background-color: rgb(255, 255, 255); text-decoration: none; display: inline !important; float: none;">而不抛异常</span>
+  </body>
+</html>
+</richcontent>
+</node>
+</node>
+</node>
+<node TEXT="2. 调用对象的构造函数初始化内存" ID="ID_141372960" CREATED="1758682502953" MODIFIED="1758682503686">
+<node TEXT="内存分配成功后，new 操作符会自动在这块内存上调用 T 的构造函数，将原始内存转换为一个 “活的” 对象" ID="ID_542529715" CREATED="1758682605161" MODIFIED="1758682606091"/>
+<node TEXT="构造函数的调用形式" ID="ID_117406028" CREATED="1758682610614" MODIFIED="1758682610896">
+<node TEXT="相当于执行 new (ptr) T(构造参数);（定位 new 的语法），其中 ptr 是第一步分配的内存地址" ID="ID_1628172511" CREATED="1758682619063" MODIFIED="1758682619870"/>
+</node>
+<node TEXT="构造函数的作用" ID="ID_1260863802" CREATED="1758682623952" MODIFIED="1758682624226">
+<node TEXT="初始化对象的成员变量、申请资源（如动态内存、文件句柄等），使对象进入可用状态" ID="ID_145309501" CREATED="1758682628584" MODIFIED="1758682629455"/>
+</node>
+</node>
+<node TEXT="3. 返回指向对象的指针" ID="ID_729114774" CREATED="1758682509670" MODIFIED="1758682510100">
+<node TEXT="构造函数执行完成后，new 操作符返回指向该对象的指针（类型为 T*），供用户使用" ID="ID_1451384232" CREATED="1758682636305" MODIFIED="1758682637189"/>
+</node>
+<node TEXT="如果构造函数在执行过程中抛出异常，new 操作符会自动执行回滚操作" ID="ID_600547538" CREATED="1758682649319" MODIFIED="1758682649576">
+<node TEXT="调用对应的 operator delete 释放第一步分配的内存（避免内存泄漏）" ID="ID_1189953548" CREATED="1758682654687" MODIFIED="1758682656179"/>
+<node TEXT="异常被传递给 new 的调用者，此时不会返回任何指针（因为对象未成功构造）" ID="ID_1483647670" CREATED="1758682661215" MODIFIED="1758682661580"/>
+</node>
+</node>
+<node TEXT="delete 析构对象的底层过程" ID="ID_224325042" CREATED="1758682687186" MODIFIED="1758682687540">
+<node TEXT="delete ptr;" ID="ID_1172879155" CREATED="1758682696475" MODIFIED="1758682698140"/>
+<node TEXT="1. 调用对象的析构函数清理资源" ID="ID_632938023" CREATED="1758682703488" MODIFIED="1758682708809">
+<node TEXT="delete 操作符首先会调用 T 的析构函数，清理对象持有的资源。" ID="ID_1646153895" CREATED="1758682722680" MODIFIED="1758682723622"/>
+<node TEXT="仅当 ptr 不是 nullptr 时才会调用（delete nullptr 是安全的，无任何操作）" ID="ID_1991197581" CREATED="1758682733776" MODIFIED="1758682734069"/>
+</node>
+<node TEXT="2. 调用 operator delete 释放内存" ID="ID_110441376" CREATED="1758682713385" MODIFIED="1758682713703">
+<node TEXT="析构函数执行完成后，delete 操作符会调用内存释放函数 operator delete，回收对象占用的内存" ID="ID_1876467615" CREATED="1758682741646" MODIFIED="1758682742535"/>
+<node TEXT="释放函数的选择" ID="ID_500026279" CREATED="1758682745812" MODIFIED="1758682746061">
+<node TEXT="若类 T 重载了成员函数 operator delete，则调用该类的版本" ID="ID_230915741" CREATED="1758682750811" MODIFIED="1758682751544"/>
+<node TEXT="否则调用全局的 ::operator delete（标准库默认实现通常基于 free 实现）" ID="ID_1438385777" CREATED="1758682755994" MODIFIED="1758682756327"/>
+</node>
+</node>
+<node TEXT="若 ptr 是 nullptr，delete 不执行任何操作（安全）" ID="ID_416056106" CREATED="1758682769969" MODIFIED="1758682770275"/>
+<node TEXT="若 ptr 是野指针（如已被释放的指针、未初始化的指针），delete 会导致未定义行为（崩溃、内存损坏等）" ID="ID_793875985" CREATED="1758682776238" MODIFIED="1758682776544"/>
+</node>
+<node TEXT="数组的 new[] 与 delete[] 额外行为" ID="ID_1173843699" CREATED="1758682788928" MODIFIED="1758682789322">
+<node TEXT="T* arr = new T[N];" ID="ID_1126277781" CREATED="1758682799042" MODIFIED="1758682804878">
+<node TEXT="new[] 会先分配一块内存（大小为 N * sizeof(T) + 额外空间），额外空间用于存储数组元素数量（由编译器管理）" ID="ID_772480496" CREATED="1758682817158" MODIFIED="1758682818005"/>
+<node TEXT="分配后，new[] 会为每个元素调用构造函数（从第 0 个到第 N-1 个）" ID="ID_787642291" CREATED="1758682823203" MODIFIED="1758682823485"/>
+</node>
+<node TEXT="delete[] arr;" ID="ID_1906524070" CREATED="1758682805258" MODIFIED="1758682805718">
+<node TEXT="delete[] 会先根据额外空间记录的元素数量，为每个元素调用析构函数（从最后一个到第 0 个），再释放整个内存块" ID="ID_1716161541" CREATED="1758682832224" MODIFIED="1758682833087"/>
+</node>
+</node>
+</node>
+<node TEXT="实现内存泄漏检查器" FOLDED="true" ID="ID_1914214121" CREATED="1757241636745" MODIFIED="1757241668069">
+<node TEXT="C++14版本之前" ID="ID_1538190161" CREATED="1758698972383" MODIFIED="1758698977846">
+<node TEXT="void *operator new(std::size_t n) {&#xa;   // allocate n bytes plus enough space to hide n&#xa;   void *p = std::malloc(n + sizeof n); // 问题1&#xa;   // signal failure to meet postconditions if needed&#xa;   if(!p) throw std::bad_alloc{};&#xa;   // hide n at the beginning of the allocated block&#xa;   auto q = static_cast&lt;std::size_t*&gt;(p);&#xa;   *q = n; // 问题2&#xa;   // inform the Accountant of the allocation&#xa;   Accountant::get().take(n);&#xa;   // return the beginning of the requested block memory&#xa;   return q + 1; // 问题1&#xa;}" POSITION="bottom_or_right" ID="ID_1250785264" CREATED="1758697549444" MODIFIED="1758698813173">
+<node TEXT="" ID="ID_558693263" CREATED="1758698171579" MODIFIED="1758698171579">
+<node TEXT="问题1：返回的指针可能不满足类型对齐要求" POSITION="bottom_or_right" ID="ID_1822998677" CREATED="1758697354650" MODIFIED="1758698179006">
+<node TEXT="前提条件" POSITION="bottom_or_right" ID="ID_429717900" CREATED="1758697809427" MODIFIED="1758697817575">
+<node TEXT="自然对齐（Natural Alignment）" POSITION="bottom_or_right" ID="ID_563833706" CREATED="1758697700857" MODIFIED="1758697701815">
+<node TEXT="指数据类型的存储地址必须是其自身大小的整数倍（例如：4 字节的 int 需对齐到 4 的倍数地址，8 字节的 double 需对齐到 8 的倍数地址）。硬件和编译器强制要求自然对齐，否则可能导致未定义行为（效率低、崩溃等）。" ID="ID_1182421000" CREATED="1758697713287" MODIFIED="1758697714258"/>
+</node>
+<node TEXT="std::max_align_t" POSITION="bottom_or_right" ID="ID_218717818" CREATED="1758697718733" MODIFIED="1758697720107">
+<node TEXT="C++ 编译器定义的一个 “占位类型”，其 对齐要求等于机器上所有基本类型的最大自然对齐要求" ID="ID_64933910" CREATED="1758697736814" MODIFIED="1758697739708"/>
+<node TEXT="它的作用是 “标记最严格的对齐标准”—— 任何满足 std::max_align_t 对齐的内存，都能安全存储机器上的所有基本类型（如 int、double、指针等）。" ID="ID_1911319555" CREATED="1758697752662" MODIFIED="1758697753179"/>
+</node>
+<node TEXT="std::malloc 返回的内存块地址，一定满足 std::max_align_t 的对齐要求" POSITION="bottom_or_right" ID="ID_1672490466" CREATED="1758697764938" MODIFIED="1758697782073">
+<node ID="ID_945074138" CREATED="1758697794254" MODIFIED="1758697794254"><richcontent TYPE="NODE">
+
+<html>
+  <head>
+    
+  </head>
+  <body>
+    <code style="border-top-width: medium; border-right-width: medium; border-bottom-width: medium; border-left-width: medium; border-top-style: none; border-right-style: none; border-bottom-style: none; border-left-style: none; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; font-family: var(--md-box-global-font-family-mono); font-size: 16px; color: rgba(0, 0, 0, 0.85); font-weight: 400; line-height: var(--md-box-samantha-normal-text-line-height); font-style: normal; letter-spacing: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px; text-decoration: none"><span style="border-top-width: medium; border-right-width: medium; border-bottom-width: medium; border-left-width: medium; border-top-style: none; border-right-style: none; border-bottom-style: none; border-left-style: none; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; font-family: var(--md-box-global-font-family-mono); font-size: 16px; color: rgba(0, 0, 0, 0.85); font-weight: 400; line-height: var(--md-box-samantha-normal-text-line-height); font-style: normal; letter-spacing: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px; text-decoration: none;">malloc</span></code><span class="Apple-converted-space" style="color: rgba(0, 0, 0, 0.85); font-family: Inter, -apple-system, BlinkMacSystemFont, Segoe UI, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Helvetica Neue, Helvetica, Arial, sans-serif; font-size: 16px; font-style: normal; font-weight: 400; letter-spacing: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px; background-color: rgb(255, 255, 255); text-decoration: none; display: inline !important; float: none;">&#xa0;</span><span style="color: rgba(0, 0, 0, 0.85); font-family: Inter, -apple-system, BlinkMacSystemFont, Segoe UI, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Helvetica Neue, Helvetica, Arial, sans-serif; font-size: 16px; font-style: normal; font-weight: 400; letter-spacing: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px; background-color: rgb(255, 255, 255); text-decoration: none; display: inline !important; float: none;">是 “无类型” 的内存分配函数 —— 它不知道用户会用这块内存存储什么（是</span><span class="Apple-converted-space" style="color: rgba(0, 0, 0, 0.85); font-family: Inter, -apple-system, BlinkMacSystemFont, Segoe UI, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Helvetica Neue, Helvetica, Arial, sans-serif; font-size: 16px; font-style: normal; font-weight: 400; letter-spacing: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px; background-color: rgb(255, 255, 255); text-decoration: none; display: inline !important; float: none;">&#xa0;</span><code style="border-top-width: medium; border-right-width: medium; border-bottom-width: medium; border-left-width: medium; border-top-style: none; border-right-style: none; border-bottom-style: none; border-left-style: none; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; font-family: var(--md-box-global-font-family-mono); font-size: 16px; color: rgba(0, 0, 0, 0.85); font-weight: 400; line-height: var(--md-box-samantha-normal-text-line-height); font-style: normal; letter-spacing: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px; text-decoration: none"><span style="border-top-width: medium; border-right-width: medium; border-bottom-width: medium; border-left-width: medium; border-top-style: none; border-right-style: none; border-bottom-style: none; border-left-style: none; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; font-family: var(--md-box-global-font-family-mono); font-size: 16px; color: rgba(0, 0, 0, 0.85); font-weight: 400; line-height: var(--md-box-samantha-normal-text-line-height); font-style: normal; letter-spacing: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px; text-decoration: none;">int</span></code><span style="color: rgba(0, 0, 0, 0.85); font-family: Inter, -apple-system, BlinkMacSystemFont, Segoe UI, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Helvetica Neue, Helvetica, Arial, sans-serif; font-size: 16px; font-style: normal; font-weight: 400; letter-spacing: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px; background-color: rgb(255, 255, 255); text-decoration: none; display: inline !important; float: none;">、</span><code style="border-top-width: medium; border-right-width: medium; border-bottom-width: medium; border-left-width: medium; border-top-style: none; border-right-style: none; border-bottom-style: none; border-left-style: none; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; font-family: var(--md-box-global-font-family-mono); font-size: 16px; color: rgba(0, 0, 0, 0.85); font-weight: 400; line-height: var(--md-box-samantha-normal-text-line-height); font-style: normal; letter-spacing: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px; text-decoration: none"><span style="border-top-width: medium; border-right-width: medium; border-bottom-width: medium; border-left-width: medium; border-top-style: none; border-right-style: none; border-bottom-style: none; border-left-style: none; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; font-family: var(--md-box-global-font-family-mono); font-size: 16px; color: rgba(0, 0, 0, 0.85); font-weight: 400; line-height: var(--md-box-samantha-normal-text-line-height); font-style: normal; letter-spacing: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px; text-decoration: none;">double</span></code><span class="Apple-converted-space" style="color: rgba(0, 0, 0, 0.85); font-family: Inter, -apple-system, BlinkMacSystemFont, Segoe UI, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Helvetica Neue, Helvetica, Arial, sans-serif; font-size: 16px; font-style: normal; font-weight: 400; letter-spacing: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px; background-color: rgb(255, 255, 255); text-decoration: none; display: inline !important; float: none;">&#xa0;</span><span style="color: rgba(0, 0, 0, 0.85); font-family: Inter, -apple-system, BlinkMacSystemFont, Segoe UI, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Helvetica Neue, Helvetica, Arial, sans-serif; font-size: 16px; font-style: normal; font-weight: 400; letter-spacing: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px; background-color: rgb(255, 255, 255); text-decoration: none; display: inline !important; float: none;">还是自定义结构体），因此必须确保内存能兼容所有可能的基本类型的对齐需求。只有满足</span><span class="Apple-converted-space" style="color: rgba(0, 0, 0, 0.85); font-family: Inter, -apple-system, BlinkMacSystemFont, Segoe UI, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Helvetica Neue, Helvetica, Arial, sans-serif; font-size: 16px; font-style: normal; font-weight: 400; letter-spacing: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px; background-color: rgb(255, 255, 255); text-decoration: none; display: inline !important; float: none;">&#xa0;</span><code style="border-top-width: medium; border-right-width: medium; border-bottom-width: medium; border-left-width: medium; border-top-style: none; border-right-style: none; border-bottom-style: none; border-left-style: none; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; font-family: var(--md-box-global-font-family-mono); font-size: 16px; color: rgba(0, 0, 0, 0.85); font-weight: 400; line-height: var(--md-box-samantha-normal-text-line-height); font-style: normal; letter-spacing: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px; text-decoration: none"><span style="border-top-width: medium; border-right-width: medium; border-bottom-width: medium; border-left-width: medium; border-top-style: none; border-right-style: none; border-bottom-style: none; border-left-style: none; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; font-family: var(--md-box-global-font-family-mono); font-size: 16px; color: rgba(0, 0, 0, 0.85); font-weight: 400; line-height: var(--md-box-samantha-normal-text-line-height); font-style: normal; letter-spacing: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px; text-decoration: none;">std::max_align_t</span></code><span style="color: rgba(0, 0, 0, 0.85); font-family: Inter, -apple-system, BlinkMacSystemFont, Segoe UI, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Helvetica Neue, Helvetica, Arial, sans-serif; font-size: 16px; font-style: normal; font-weight: 400; letter-spacing: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px; background-color: rgb(255, 255, 255); text-decoration: none; display: inline !important; float: none;">，才能保证任何基本类型都能在上面正确构造，避免对齐错误</span>
+  </body>
+</html>
+</richcontent>
+</node>
+</node>
+</node>
+<node TEXT="sizeof(std::size_t) 与 sizeof(std::max_align_t) 不一定相等" POSITION="bottom_or_right" ID="ID_1917382083" CREATED="1758697840276" MODIFIED="1758697840637">
+<node TEXT="若两者相等（例如：都是 8 字节，64 位系统常见情况）：&#xa;跳过 8 字节后，地址仍满足 8 字节对齐（std::max_align_t 的要求），没问题。" ID="ID_580957375" CREATED="1758697855882" MODIFIED="1758697856912"/>
+<node TEXT="若两者不相等（例如：size_t 是 4 字节，max_align_t 是 8 字节）：&#xa;跳过 4 字节后，地址可能变成 “4 的倍数” 而非 “8 的倍数”—— 此时内存地址不满足 max_align_t 的对齐要求，后续构造需要 8 字节对齐的类型（如 double）就会出问题" ID="ID_1935298156" CREATED="1758697870526" MODIFIED="1758697870876"/>
+</node>
+<node TEXT="对齐错误的三种后果：从 “隐藏错误” 到 “直接崩溃”" POSITION="bottom_or_right" ID="ID_1016852416" CREATED="1758697884557" MODIFIED="1758697884849">
+<node TEXT="如果用户恰好要构造的类型，其对齐要求低于当前地址的对齐（例如：地址是 4 字节对齐，要构造的是 int（4 字节对齐）），程序暂时能运行。" ID="ID_1949471174" CREATED="1758697903721" MODIFIED="1758697904603"/>
+<node TEXT="部分硬件（如 x86）支持 “未对齐访问”，但会付出巨大代价：" ID="ID_885949856" CREATED="1758697917734" MODIFIED="1758697918009">
+<node TEXT="性能损耗：硬件需要将 “一次未对齐访问” 拆分为多次对齐访问（例如：读取一个未对齐的 8 字节 double，需要先读低 4 字节，再读高 4 字节，然后通过位运算合并），执行速度显著变慢" ID="ID_966181848" CREATED="1758697929541" MODIFIED="1758697930601"/>
+<node TEXT="多线程撕裂（Tearing）：多线程环境下，一个线程可能读取 “部分构造的对象”（撕裂读取），或写入 “部分更新的对象”（撕裂写入）。例如：线程 A 写 double 的低 4 字节时，线程 B 读取整个 double，得到的是 “一半旧值、一半新值” 的错误数据，这种问题极难复现和调试。" ID="ID_1878983656" CREATED="1758697943783" MODIFIED="1758697944134"/>
+</node>
+<node TEXT="直接崩溃（硬件不支持未对齐访问）" ID="ID_1546272550" CREATED="1758697954548" MODIFIED="1758697954848">
+<node ID="ID_1225248668" CREATED="1758697964284" MODIFIED="1758697964284"><richcontent TYPE="NODE">
+
+<html>
+  <head>
+    
+  </head>
+  <body>
+    <span style="color: rgba(0, 0, 0, 0.85); font-family: Inter, -apple-system, BlinkMacSystemFont, Segoe UI, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Helvetica Neue, Helvetica, Arial, sans-serif; font-size: 16px; font-style: normal; font-weight: 400; letter-spacing: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px; background-color: rgb(255, 255, 255); text-decoration: none; display: inline !important; float: none;">许多嵌入式平台、游戏主机（如某些 ARM 架构设备）</span><strong style="border-top-style: solid; border-top-width: 0px; border-right-style: solid; border-right-width: 0px; border-bottom-style: solid; border-bottom-width: 0px; border-left-style: solid; border-left-width: 0px; margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px; padding-top: 0px; padding-right: 0px; padding-bottom: 0px; padding-left: 0px; font-weight: normal; color: black; font-size: 16px; line-height: var(--md-box-samantha-normal-text-line-height); font-family: Inter, -apple-system, BlinkMacSystemFont, Segoe UI, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Helvetica Neue, Helvetica, Arial, sans-serif; font-style: normal; letter-spacing: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px; text-decoration: none"><span style="border-top-style: solid; border-top-width: 0px; border-right-style: solid; border-right-width: 0px; border-bottom-style: solid; border-bottom-width: 0px; border-left-style: solid; border-left-width: 0px; margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px; padding-top: 0px; padding-right: 0px; padding-bottom: 0px; padding-left: 0px; font-weight: normal; color: black; font-size: 16px; line-height: var(--md-box-samantha-normal-text-line-height); font-family: Inter, -apple-system, BlinkMacSystemFont, Segoe UI, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Helvetica Neue, Helvetica, Arial, sans-serif; font-style: normal; letter-spacing: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px; text-decoration: none;">完全不支持未对齐访问</span></strong><span style="color: rgba(0, 0, 0, 0.85); font-family: Inter, -apple-system, BlinkMacSystemFont, Segoe UI, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Helvetica Neue, Helvetica, Arial, sans-serif; font-size: 16px; font-style: normal; font-weight: 400; letter-spacing: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px; background-color: rgb(255, 255, 255); text-decoration: none; display: inline !important; float: none;">—— 一旦访问未对齐地址，硬件会直接触发异常（如 “对齐故障”），程序立即崩溃。</span>
+  </body>
+</html>
+</richcontent>
+</node>
+</node>
+</node>
+<node TEXT="解决方法" POSITION="bottom_or_right" ID="ID_1599326668" CREATED="1758697976088" MODIFIED="1758697980054">
+<node TEXT="即使多分配了 “隐藏 n 的额外内存”，跳过这部分内存后，返回的地址仍需满足 std::max_align_t 的对齐要求" ID="ID_1856704885" CREATED="1758697991963" MODIFIED="1758697992886"/>
+<node TEXT="void *p = std::malloc(n + sizeof(std::max_align_t));" ID="ID_1195481821" CREATED="1758698091694" MODIFIED="1758698203929"/>
+<node TEXT="return static_cast&lt;std::max_align_t*&gt;(p) + 1;&#xd;" ID="ID_1473151258" CREATED="1758698825312" MODIFIED="1758698828402"/>
+</node>
+</node>
+<node TEXT="问题2：未构造对象却直接赋值，为什么没出错？" FOLDED="true" POSITION="bottom_or_right" ID="ID_1757228186" CREATED="1758698467556" MODIFIED="1758698475816">
+<node TEXT="什么是 “隐式生命周期类型”？" ID="ID_337188291" CREATED="1758698484419" MODIFIED="1758698485807">
+<node TEXT="C++ 标准定义了一类特殊类型，称为 “隐式生命周期类型”（implicit lifetime types），它们的对象生命周期可以被 “隐式启动”，无需显式调用构造函数。包括：" ID="ID_701320197" CREATED="1758698500320" MODIFIED="1758698501219"/>
+<node TEXT="标量类型：如指针、成员指针、算术类型（int、double 等）、枚举类型、std::nullptr_t，以及它们的 const/volatile 修饰版本（如 const int）。" POSITION="bottom_or_right" ID="ID_1758407954" CREATED="1758698507990" MODIFIED="1758698508928"/>
+<node TEXT="隐式生命周期类：满足特定条件的类类型（如聚合类型，没有用户提供的析构函数，有至少一个符合条件的平凡构造函数，且析构函数是平凡且非删除的）。" POSITION="bottom_or_right" ID="ID_1599820484" CREATED="1758698513565" MODIFIED="1758698513881"/>
+</node>
+<node TEXT="哪些操作会 “隐式启动” 这类对象的生命周期？" ID="ID_145301668" CREATED="1758698566715" MODIFIED="1758698594623">
+<node ID="ID_472314226" CREATED="1758698576059" MODIFIED="1758698576059"><richcontent TYPE="NODE">
+
+<html>
+  <head>
+    
+  </head>
+  <body>
+    <span style="color: rgba(0, 0, 0, 0.85); font-family: Inter, -apple-system, BlinkMacSystemFont, Segoe UI, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Helvetica Neue, Helvetica, Arial, sans-serif; font-size: 16px; font-style: normal; font-weight: 400; letter-spacing: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px; background-color: rgb(255, 255, 255); text-decoration: none; display: inline !important; float: none;">对于隐式生命周期类型，某些标准库函数在分配内存后，会</span><strong style="border-top-style: solid; border-top-width: 0px; border-right-style: solid; border-right-width: 0px; border-bottom-style: solid; border-bottom-width: 0px; border-left-style: solid; border-left-width: 0px; margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px; padding-top: 0px; padding-right: 0px; padding-bottom: 0px; padding-left: 0px; font-weight: normal; color: black; font-size: 16px; line-height: var(--md-box-samantha-normal-text-line-height); font-family: Inter, -apple-system, BlinkMacSystemFont, Segoe UI, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Helvetica Neue, Helvetica, Arial, sans-serif; font-style: normal; letter-spacing: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px; text-decoration: none"><span style="border-top-style: solid; border-top-width: 0px; border-right-style: solid; border-right-width: 0px; border-bottom-style: solid; border-bottom-width: 0px; border-left-style: solid; border-left-width: 0px; margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px; padding-top: 0px; padding-right: 0px; padding-bottom: 0px; padding-left: 0px; font-weight: normal; color: black; font-size: 16px; line-height: var(--md-box-samantha-normal-text-line-height); font-family: Inter, -apple-system, BlinkMacSystemFont, Segoe UI, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Helvetica Neue, Helvetica, Arial, sans-serif; font-style: normal; letter-spacing: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px; text-decoration: none;">自动隐式启动对象的生命周期</span></strong><span style="color: rgba(0, 0, 0, 0.85); font-family: Inter, -apple-system, BlinkMacSystemFont, Segoe UI, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Helvetica Neue, Helvetica, Arial, sans-serif; font-size: 16px; font-style: normal; font-weight: 400; letter-spacing: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px; background-color: rgb(255, 255, 255); text-decoration: none; display: inline !important; float: none;">，即使没有显式调用构造函数。这些函数包括：</span>
+  </body>
+</html>
+</richcontent>
+</node>
+<node TEXT="C 风格内存函数：std::malloc、std::calloc、std::realloc（分配内存）；std::memcpy、std::memmove（内存复制）。" ID="ID_727012510" CREATED="1758698583499" MODIFIED="1758698583907"/>
+<node TEXT="C++23 新增函数：std::start_lifetime_as、std::start_lifetime_as_array（专门用于启动对象生命周期）。" ID="ID_1097567337" CREATED="1758698588735" MODIFIED="1758698594622"/>
+<node TEXT="其他：如 std::bit_cast、分配器（allocator）中的某些函数等。" ID="ID_396435533" CREATED="1758698595881" MODIFIED="1758698596166"/>
+<node TEXT="在这些函数分配的内存上（需满足正确对齐），对隐式生命周期类型进行 “写入操作”（如赋值 *p = 42）时，C++ 标准认为这会隐式创建对象，因此赋值操作是合法的" ID="ID_1356776939" CREATED="1758698608003" MODIFIED="1758698608249"/>
+</node>
+<node TEXT="这种 “直接赋值” 的做法只对隐式生命周期类型安全。如果换成非隐式生命周期类型（如大多数自定义类），后果会很严重" ID="ID_256086047" CREATED="1758698629172" MODIFIED="1758698629446">
+<node TEXT="若类型有非平凡构造函数（如需要初始化成员的类）：直接赋值会跳过构造函数，导致对象处于 “未初始化” 状态（成员可能是随机值），后续使用会触发未定义行为（崩溃、数据错乱等）" ID="ID_47110110" CREATED="1758698645332" MODIFIED="1758698648392"/>
+<node TEXT="编译器可能无法检测：对于非隐式生命周期类型，直接对未构造的内存赋值，编译器可能不报错（无法识别这种逻辑错误），但运行时会出问题" ID="ID_1736270925" CREATED="1758698657033" MODIFIED="1758698657465"/>
+</node>
+<node TEXT="为了避免依赖 “隐式生命周期” 的特殊规则（尤其是代码可能扩展到非隐式类型的情况），更通用、更安全的方式是显式调用构造函数，即使用 placement new" POSITION="bottom_or_right" ID="ID_1237538890" CREATED="1758698674162" MODIFIED="1758698675152"/>
+<node TEXT="解决方法" POSITION="bottom_or_right" ID="ID_219289304" CREATED="1758698721764" MODIFIED="1758698724341">
+<node TEXT="new (p) std::size_t{ n };&#xd;" POSITION="bottom_or_right" ID="ID_824442026" CREATED="1758698712704" MODIFIED="1758698715809"/>
+</node>
+</node>
+</node>
+</node>
+<node TEXT="void operator delete(void *p) noexcept {&#xd;&#xa;   // delete on a null pointer is a no-op&#xd;&#xa;   if(!p) return;&#xd;&#xa;   // find the beginning of the block that was allocated&#xd;&#xa;   auto q = static_cast&lt;std::size_t*&gt;(p) - 1; // to revisit&#xd;&#xa;   // inform the Accountant of the deallocation&#xd;&#xa;   Accountant::get().give_back(*q);&#xd;&#xa;   // free the memory&#xd;&#xa;   std::free(q);&#xd;&#xa;}" POSITION="bottom_or_right" ID="ID_47769422" CREATED="1758698968572" MODIFIED="1758698968962">
+<node TEXT="p = static_cast&lt;std::max_align_t*&gt;(p) - 1;&#xa;Accountant::get().give_back(*static_cast&lt;std::size_t*&gt;(p))" ID="ID_468776678" CREATED="1758699000052" MODIFIED="1758699042838"/>
+</node>
+</node>
+<node TEXT="C++14版本之后" FOLDED="true" ID="ID_937972719" CREATED="1758698939161" MODIFIED="1758698947484">
+<node TEXT="void operator delete(void *p, std::size_t n) noexcept {&#xd;&#xa;   // delete on a null pointer is a no-op&#xd;&#xa;   if(!p) return;&#xd;&#xa;   // inform the Accountant of the deallocation&#xd;&#xa;   Accountant::get().give_back(n);&#xd;&#xa;   // free the memory&#xd;&#xa;   std::free(p);&#xd;&#xa;}" POSITION="bottom_or_right" ID="ID_599545892" CREATED="1758698929632" MODIFIED="1758698931731"/>
+<node TEXT="void *operator new(std::size_t n) {&#xd;&#xa;   // allocate n bytes (no need for more!)&#xd;&#xa;   void *p = std::malloc(n);&#xd;&#xa;   // signal failure to meet postconditions if needed&#xd;&#xa;   if(!p) throw std::bad_alloc{};&#xd;&#xa;   // inform the Accountant of the allocation&#xd;&#xa;   Accountant::get().take(n);&#xd;&#xa;   // return the beginning of the requested block memory&#xd;&#xa;   return p;&#xd;&#xa;}" POSITION="bottom_or_right" ID="ID_1166946238" CREATED="1758698936201" MODIFIED="1758698937293"/>
+</node>
+</node>
+<node TEXT="非典型分配机制" ID="ID_527921335" CREATED="1757241669152" MODIFIED="1757241675724">
+<node TEXT="简化nothrow new的使用" ID="ID_1504432253" CREATED="1758699252995" MODIFIED="1758699254480">
+<node TEXT="template &lt;class T, class ... Args&gt;&#xd;&#xa;   auto try_new(Args &amp;&amp;... args) {&#xd;&#xa;      auto p = new (std::nothrow) T(std::forward&lt;Args&gt;(args)...);&#xd;&#xa;      if(!p) std::abort();&#xd;&#xa;      return p;&#xd;&#xa;   }" ID="ID_163662908" CREATED="1758699801342" MODIFIED="1758699803137"/>
+</node>
+<node TEXT="内存不足情况和 new_handler" ID="ID_692135499" CREATED="1758699819501" MODIFIED="1758699823665"/>
+</node>
 <node TEXT="基于Arena的内存管理及优化" ID="ID_242251365" CREATED="1757241676241" MODIFIED="1757241700954"/>
-<node TEXT="延迟回收" ID="ID_1660372226" CREATED="1757241678451" MODIFIED="1757241683503"/>
+<node TEXT="延迟回收" ID="ID_1660372226" CREATED="1757241678451" MODIFIED="1757241683503">
+<node TEXT="回收（Reclamation）" ID="ID_486797498" CREATED="1759038432168" MODIFIED="1759038433919">
+<node TEXT="释放对象占用的底层存储空间（内存），让内存可被重新分配" ID="ID_1282890301" CREATED="1759038445824" MODIFIED="1759038446711"/>
+</node>
+<node TEXT="终结（Finalization）" ID="ID_87489583" CREATED="1759038450563" MODIFIED="1759038450862">
+<node TEXT="对象被回收前执行的 “清理操作”（如关闭文件、释放网络连接）" ID="ID_1893806536" CREATED="1759038455085" MODIFIED="1759038455794"/>
+</node>
+<node TEXT="延迟回收（Deferred Reclamation）&#x9;" ID="ID_349324650" CREATED="1759038459547" MODIFIED="1759038460137">
+<node TEXT="不立即回收 “不再被引用” 的对象，而是推迟到某个确定时机（如函数结束、一组操作完成）再回收" ID="ID_781718493" CREATED="1759038464555" MODIFIED="1759038465373"/>
+</node>
+<node TEXT="为什么需要延迟回收" ID="ID_315901677" CREATED="1759038475239" MODIFIED="1759038475569">
+<node TEXT="循环引用导致 “无法判断是否可回收”" ID="ID_528816319" CREATED="1759038476435" MODIFIED="1759038489214">
+<node TEXT="例如 “根节点与叶节点互相引用的树”：如果即时回收（如简单的引用计数），会因为 “每个对象都有一个引用” 而误判为 “不可回收”，但实际上整棵树已脱离客户端代码的引用范围。此时需延迟回收 —— 直到确定 “不会使用这棵树的代码已执行完毕”（如函数结束），再将整组对象作为一个整体回收。" ID="ID_517363832" CREATED="1759038535729" MODIFIED="1759038536530"/>
+</node>
+<node TEXT="“对象是否可回收” 依赖代码执行结果" ID="ID_828000289" CREATED="1759038511542" MODIFIED="1759038511803">
+<node TEXT="有些场景中，对象暂时不被引用，但 “未来是否会被引用” 取决于后续代码逻辑（如条件分支中的复用）。此时立即回收可能导致后续代码 “找不到对象”，而延迟回收（等后续代码执行完毕、确定无需复用）能避免这一问题。" ID="ID_45268179" CREATED="1759038531038" MODIFIED="1759038531890"/>
+</node>
+</node>
+<node TEXT="回收与终结的 “顺序难题”" ID="ID_303181294" CREATED="1759038563025" MODIFIED="1759038563337">
+<node TEXT="终结需要顺序，回收不需要顺序" POSITION="bottom_or_right" ID="ID_1194603433" CREATED="1759038552925" MODIFIED="1759038553231"/>
+<node TEXT="垃圾回收语言（如 Java、C#）的妥协" POSITION="bottom_or_right" ID="ID_1033390116" CREATED="1759038569837" MODIFIED="1759038570068">
+<node TEXT="大多数垃圾回收语言 “只回收，不终结”：&#xa;因为 GC 无法保证 “终结顺序”—— 如果 A 和 B 互相引用（循环），先终结 A 会导致 B 的终结代码无法访问 A，反之亦然。为了简化回收逻辑，GC 直接跳过终结，只释放内存。" ID="ID_865406247" CREATED="1759038601469" MODIFIED="1759038602308"/>
+<node TEXT="如何处理 “需要终结的对象”（如管理文件的对象）？&#xa;语言提供特殊接口（Java 的Closeable、C# 的Disposable），把 “终结责任交给客户端代码”：客户端必须显式调用close()/Dispose()（或通过try-with-resources/using块自动调用），本质是 “人类手动保证终结顺序”，GC 只负责后续的内存回收。" ID="ID_741503519" CREATED="1759038615006" MODIFIED="1759038615260"/>
+</node>
+<node TEXT="C++的不同思路：RAII 惯用法" POSITION="bottom_or_right" ID="ID_473453742" CREATED="1759038620668" MODIFIED="1759038624196"/>
+</node>
+</node>
 </node>
 <node TEXT="元编程" POSITION="bottom_or_right" ID="ID_1848570532" CREATED="1757172853823" MODIFIED="1757172869504">
 <edge COLOR="#00ff00"/>
@@ -898,14 +1271,14 @@
 <node TEXT="constexpr（常量表达式）的核心是 “在编译期可计算且行为确定”，因此constexpr 上下文严格禁止 UB，否则编译失败。" ID="ID_1756643954" CREATED="1756219853917" MODIFIED="1756219854667"/>
 </node>
 </node>
-<node TEXT="标准布局类型（Standard-Layout Types）" POSITION="bottom_or_right" ID="ID_1886052848" CREATED="1756219994926" MODIFIED="1756219995206">
+<node TEXT="标准布局类型（Standard-Layout Types）" FOLDED="true" POSITION="bottom_or_right" ID="ID_1886052848" CREATED="1756219994926" MODIFIED="1758706297564">
 <edge COLOR="#ff00ff"/>
 <node TEXT="没有虚函数或虚基类；" ID="ID_730102717" CREATED="1756220001738" MODIFIED="1756220005566"/>
 <node TEXT="所有非静态成员有相同的访问控制（如全为public）；" ID="ID_1109226263" CREATED="1756220006523" MODIFIED="1756220013140"/>
-<node TEXT="继承关系简单（如没有非标准布局的基类，或只有一个基类且其成员在派生类成员之后）；" ID="ID_1173347932" CREATED="1756220014039" MODIFIED="1756220019461"/>
+<node TEXT="继承关系简单（如没有非标准布局的基类，或只有一个基类且其成员在派生类成员之后）；" ID="ID_1173347932" CREATED="1756220014039" MODIFIED="1758706297564"/>
 <node TEXT="没有引用类型的成员。" ID="ID_653331405" CREATED="1756220020139" MODIFIED="1756220020418"/>
 </node>
-<node TEXT="共同初始序列（Common Initial Sequence）" POSITION="bottom_or_right" ID="ID_683137533" CREATED="1756220048283" MODIFIED="1756220048527">
+<node TEXT="共同初始序列（Common Initial Sequence）" FOLDED="true" POSITION="bottom_or_right" ID="ID_683137533" CREATED="1756220048283" MODIFIED="1756220048527">
 <edge COLOR="#00ffff"/>
 <node TEXT="对于两个标准布局结构体，如果它们的成员序列中，前若干个成员的类型完全相同且顺序一致，则这部分成员构成 “共同初始序列”。" ID="ID_456618565" CREATED="1756220064348" MODIFIED="1756220065196"/>
 <node TEXT="struct A的成员序列：int n0 → char c0；&#xa;struct B的成员序列：int n1 → char c1 → float x。" ID="ID_1854816209" CREATED="1756220081913" MODIFIED="1756220083812"/>

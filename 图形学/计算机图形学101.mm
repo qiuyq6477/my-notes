@@ -266,7 +266,7 @@
 </node>
 </node>
 <node TEXT="Projection（投影）Transformation" FOLDED="true" ID="ID_1885194828" CREATED="1752412461365" MODIFIED="1752414082005">
-<node TEXT="正交投影，把立方体变换到NDC空间" ID="ID_328012446" CREATED="1752412482282" MODIFIED="1752412483167">
+<node TEXT="正交投影，把立方体变换到NDC空间" FOLDED="true" ID="ID_328012446" CREATED="1752412482282" MODIFIED="1752412483167">
 <node TEXT="Orthographic（正交）Projection" POSITION="bottom_or_right" ID="ID_1440204909" CREATED="1752244175923" MODIFIED="1752244204692"/>
 <node TEXT="相机离得无限远，导致远近平面看到的效果一样，相当于把z轴扔掉了，无论z大于0还是小于0" POSITION="bottom_or_right" ID="ID_1607800453" CREATED="1752330768065" MODIFIED="1752331719553"/>
 <node TEXT="正交立方体定义，可以在任意位置" POSITION="bottom_or_right" ID="ID_617353032" CREATED="1752331734964" MODIFIED="1752331759280">
@@ -318,10 +318,10 @@
 <node TEXT="第一种推导方式" POSITION="bottom_or_right" ID="ID_610607206" CREATED="1752411669862" MODIFIED="1752411674989">
 <node TEXT="将frustum挤压成cuboid，然后使用正交投影" POSITION="bottom_or_right" ID="ID_1978822353" CREATED="1752373208759" MODIFIED="1752374414698">
 <node TEXT="f平面中心坐标不变，所有点的z坐标不变" ID="ID_212960791" CREATED="1752373281244" MODIFIED="1752377189471">
-<arrowlink DESTINATION="ID_1977316882" STARTINCLINATION="20.66667 pt;11.33333 pt;" ENDINCLINATION="462 pt;-58 pt;"/>
+<arrowlink DESTINATION="ID_1977316882" STARTINCLINATION="20.66667 pt;11.33333 pt;" ENDINCLINATION="462 pt;-56.66667 pt;"/>
 </node>
 <node TEXT="因为n平面所有坐标在挤压后不会改变" ID="ID_1907645723" CREATED="1752373312470" MODIFIED="1752377196136">
-<arrowlink DESTINATION="ID_78110571" STARTINCLINATION="224 pt;0 pt;" ENDINCLINATION="83.33333 pt;-33.33333 pt;"/>
+<arrowlink DESTINATION="ID_78110571" STARTINCLINATION="224 pt;0 pt;" ENDINCLINATION="83.33333 pt;-32 pt;"/>
 </node>
 <node TEXT="四维齐次坐标同时乘一个数，3d坐标不变" ID="ID_818778094" CREATED="1752374676327" MODIFIED="1752374715209"/>
 </node>
@@ -510,6 +510,7 @@
 <node TEXT="\latex $ {k_d} = {\text{diffuse coefficient (color)}} $" ID="ID_654562013" CREATED="1752763027260" MODIFIED="1752763084314" MAX_WIDTH="20 cm">
 <font SIZE="16"/>
 <node TEXT="可以直接是纹理颜色" ID="ID_767234318" CREATED="1752896458195" MODIFIED="1752896462620"/>
+<node TEXT="漫反射贴图" ID="ID_1188243120" CREATED="1759477995291" MODIFIED="1759477999927"/>
 </node>
 <node TEXT="\latex ${I/r^2} = {\text{energy arrived at the shading point}}$" ID="ID_211156188" CREATED="1752763048972" MODIFIED="1752763084314" MAX_WIDTH="20 cm">
 <font SIZE="16"/>
@@ -533,6 +534,7 @@
 </node>
 <node TEXT="\latex ${k_s} = {\text{specular coefficient}}$" ID="ID_67287164" CREATED="1752764838100" MODIFIED="1752764880565">
 <font SIZE="16"/>
+<node TEXT="高光贴图" ID="ID_875053797" CREATED="1759477988077" MODIFIED="1759477993051"/>
 </node>
 <node TEXT="\latex $ {\mathbf{n} \cdot \mathbf{h}} = {\text{dot product for specular term}} $" ID="ID_451794264" CREATED="1752764845259" MODIFIED="1752764876716">
 <font SIZE="16"/>
@@ -559,6 +561,90 @@
 <node TEXT="\latex $L&#xa;= L_a + L_d + L_s \\&#xa;= k_a \, I_a + k_d \left( \frac{I}{r^2} \right) \max(0, \mathbf{n} \cdot \mathbf{l}) + k_s \left( \frac{I}{r^2} \right) \max(0, \mathbf{n} \cdot \mathbf{h})^p $" ID="ID_201535555" CREATED="1752764939738" MODIFIED="1752765104839" MAX_WIDTH="20 cm">
 <font SIZE="16"/>
 </node>
+<node TEXT="举例说明" ID="ID_867630368" CREATED="1759450827238" MODIFIED="1759450831641">
+<node TEXT="// 表面反射率&#xa;vec3 Ks = vec3 （1.0, 1.0, 1.0）；// 完全反射镜面光vec3 Kd = vec3 （1.0, 0.5, 0.0）； / 橙色漫反射表面反射率vec3 Ka = vec3 （1.0, 1.0, 1.0）；1/ 完全反射环境光float specular_exponent = 100.0； /| 镜面反射”强度”" ID="ID_1831669006" CREATED="1759450831826" MODIFIED="1759450832882"/>
+</node>
+<node TEXT="片元着色代码实现" FOLDED="true" ID="ID_397453478" CREATED="1759451713222" MODIFIED="1759451740342">
+<node TEXT="顶点着色器需要将顶点位置和法线输出（插值）到片段着色器。" ID="ID_1978237799" CREATED="1759451719962" MODIFIED="1759451790770">
+<node TEXT="in layout (location = 0) vec3 vertex_position;&#xa;in layout (location = 1) vec3 vertex_normal;&#xa;uniform mat4 projection_mat, view_mat, model_mat;&#xa;out vec3 position_eye, normal_eye;&#xa;void main 0 {&#xa;    position_eye = vec3 (view_mat * model_mat * vec4 (vertex _position, 1.0));&#xa;    normal_eye = vec3 (view_mat * model_mat * vec4 (vertex_normal, 0.0));&#xa;    g|_Position = projection_mat * vec4 (position_eye, 1.0);&#xa;}" ID="ID_167669147" CREATED="1759451813554" MODIFIED="1759451851637" MAX_WIDTH="20 cm"/>
+<node TEXT="在视图空间中进行计算，使用哪个空间无关紧要，视图空间更加方便，计算镜面高光时，不用传递摄像机位置，省去了一个unniform变量" ID="ID_1237989264" CREATED="1759451864858" MODIFIED="1759452786201"/>
+<node TEXT="法线的w分量为0" ID="ID_479780864" CREATED="1759451931476" MODIFIED="1759451941583"/>
+<node TEXT="重要说明：如果在模型矩阵中对不同轴进行任何缩放（例如水平拉伸），那么模型矩阵将错误地缩放法线。在这种情况下，需要使用一个新的“法线矩阵”，它是“视图矩阵*模型矩阵&quot;的逆转置，以纠正这个问题。" ID="ID_975976127" CREATED="1759451928955" MODIFIED="1759451964700"/>
+</node>
+<node TEXT="环境光" ID="ID_766357283" CREATED="1759452403797" MODIFIED="1759452407585">
+<node TEXT="vec3 La = vec3 (0.2, 0.2, 0.2); // grey ambient colour" ID="ID_1028007491" CREATED="1759452407813" MODIFIED="1759452976523" MAX_WIDTH="20 cm">
+<node TEXT="光源属性" ID="ID_293872032" CREATED="1759454135796" MODIFIED="1759454138229"/>
+<node TEXT="光源的 “环境光颜色”（Ambient Light Color）" ID="ID_1932507199" CREATED="1759454171978" MODIFIED="1759454176938"/>
+<node TEXT="模拟场景中 “间接光照”（如光线经过多次反射后形成的柔和背景光），避免物体背光面完全变黑" ID="ID_828442228" CREATED="1759454177774" MODIFIED="1759454178336"/>
+</node>
+<node TEXT="vec3 Ka = vec3 (1.0, 1.0, 1.0); // fully reflect ambient light" ID="ID_352979191" CREATED="1759452414424" MODIFIED="1759452976524" MAX_WIDTH="20 cm">
+<node TEXT="表面反射属性" ID="ID_1918489785" CREATED="1759454192880" MODIFIED="1759454200885"/>
+<node TEXT="表面的 “环境光反射率”（Ambient Reflectivity）。" ID="ID_240723356" CREATED="1759454252146" MODIFIED="1759454257387"/>
+<node TEXT="定义表面反射环境光的能力" ID="ID_98792350" CREATED="1759454257542" MODIFIED="1759454257847"/>
+<node TEXT="(1.0, 1.0, 1.0) 表示表面能 “完全反射” 环境光（三个通道均 100% 反射），因此环境光照射到表面时，会完全保留环境光的颜色和强度" ID="ID_1640215967" CREATED="1759454267360" MODIFIED="1759454267575"/>
+</node>
+<node TEXT="// ambient intensity&#xa;vec3 Ia = La * Ka;" ID="ID_1951993415" CREATED="1759452419057" MODIFIED="1759452976524" MAX_WIDTH="20 cm"/>
+</node>
+<node TEXT="漫反射" ID="ID_631238205" CREATED="1759452442899" MODIFIED="1759452445903">
+<node TEXT="// raise light position to eye space&#xa;vec3 light_position_eye = vec3 (view_mat * vec4 (light_position_world, 1.0));&#xa;vec3 distance_to_light_eye = light_position_eye - position_eye;&#xa;vec3 direction_to_light_eye = normalize (distance_to_light_eye);&#xa;float dot_prod = dot (direction_to_light_eye, n_eye);&#xa;dot_prod = max (dot_prod, 0.0);" ID="ID_1792994996" CREATED="1759453424979" MODIFIED="1759453443496" MAX_WIDTH="20 cm"/>
+<node TEXT="vec3 Ld = vec3 (0.7, 0.7, 0.7); // dull white diffuse light colour" ID="ID_1885398639" CREATED="1759452453837" MODIFIED="1759452976525" MAX_WIDTH="20 cm">
+<node TEXT="光源属性" ID="ID_1636185180" CREATED="1759454135796" MODIFIED="1759454138229"/>
+<node TEXT="光源的 “漫反射颜色”（Diffuse Light Color）" ID="ID_8472209" CREATED="1759454148407" MODIFIED="1759454149532"/>
+<node TEXT="定义光源发出的 “漫反射成分” 的颜色和强度（漫反射是光线照射到粗糙表面后向各个方向均匀散射的光）。" ID="ID_1406303202" CREATED="1759454154158" MODIFIED="1759454154378"/>
+</node>
+<node TEXT="vec3 Kd = vec3 (1.0, 0.5, 0.0); // orange diffuse surface reflectance" ID="ID_1811944443" CREATED="1759452461386" MODIFIED="1759452976525" MAX_WIDTH="20 cm">
+<node TEXT="表面反射属性" ID="ID_491298253" CREATED="1759454192880" MODIFIED="1759454200885"/>
+<node TEXT="表面的 “漫反射反射率”（Diffuse Reflectivity）" ID="ID_1239749398" CREATED="1759454221753" MODIFIED="1759454224515"/>
+<node TEXT="定义表面反射光源漫反射成分的能力，同时决定物体的基础颜色（漫反射是物体表面的主要颜色来源）。" ID="ID_1556444107" CREATED="1759454229028" MODIFIED="1759454229261"/>
+<node TEXT="(1.0, 0.5, 0.0) 中，红色通道（R）反射率 100%，绿色通道（G）50%，蓝色通道（B）0%，因此表面会呈现 “橙色”（红色 + 部分绿色，无蓝色）。" ID="ID_1054974748" CREATED="1759454239033" MODIFIED="1759454239285"/>
+</node>
+<node TEXT="&#x9;vec3 Id = Ld * Kd * dot_prod; // final diffuse intensity" ID="ID_587270065" CREATED="1759452468773" MODIFIED="1759452976525" MAX_WIDTH="20 cm"/>
+</node>
+<node TEXT="镜面高光" ID="ID_653725588" CREATED="1759452659578" MODIFIED="1759452664057">
+<node TEXT="float specular_exponent = 100.0; // specular &apos;power&apos;" ID="ID_1561837538" CREATED="1759452934642" MODIFIED="1759452934930">
+<node TEXT="高光的 “shininess”（光泽度）或 “幂次”" ID="ID_1956877348" CREATED="1759454279417" MODIFIED="1759454283598"/>
+<node TEXT="控制高光区域的 “集中程度”—— 值越大，高光区域越狭窄、越锐利（类似镜面反射的 “焦点”）；值越小，高光区域越分散、越柔和。" ID="ID_699528068" CREATED="1759454284729" MODIFIED="1759454284973"/>
+</node>
+<node TEXT="vec3 Ls = vec3 (1.0, 1.0, 1.0); // white specular colour" ID="ID_472790295" CREATED="1759452961094" MODIFIED="1759452961523">
+<node TEXT="光源属性" ID="ID_1727580119" CREATED="1759454135796" MODIFIED="1759454138229"/>
+<node TEXT="光源的 “高光颜色”（Specular Light Color）。" ID="ID_1749408578" CREATED="1759454087217" MODIFIED="1759454094088"/>
+<node TEXT="定义光源发出的 “高光成分” 的颜色和强度" ID="ID_597145325" CREATED="1759454094504" MODIFIED="1759454094908"/>
+<node TEXT="(1.0, 1.0, 1.0) 是纯白色，表示光源发出的高光成分是最亮的白色（RGB 三个通道均为最大强度）" ID="ID_1026215650" CREATED="1759454107546" MODIFIED="1759454107825"/>
+</node>
+<node TEXT="vec3 Ks = vec3 (1.0, 1.0, 1.0); // fully reflect specular light" ID="ID_1201077" CREATED="1759452965304" MODIFIED="1759452969883" MAX_WIDTH="20 cm">
+<node TEXT="表面反射属性" ID="ID_941962024" CREATED="1759454192880" MODIFIED="1759454200885"/>
+<node TEXT="表面的 “高光反射率”（Specular Reflectivity）" ID="ID_419933402" CREATED="1759454201109" MODIFIED="1759454201413"/>
+<node TEXT="定义表面反射光源高光成分的能力（值越大，反射的高光越强）" ID="ID_415392221" CREATED="1759454207321" MODIFIED="1759454207520"/>
+<node TEXT="(1.0, 1.0, 1.0) 表示表面能 “完全反射” 光源的高光成分（三个通道均 100% 反射），因此高光效果会非常明显。" ID="ID_302598294" CREATED="1759454214082" MODIFIED="1759454214284"/>
+</node>
+<node TEXT="// specular intensity&#xa;vec3 surface_to_viewer_eye = normalize (-position_eye);" ID="ID_1861966455" CREATED="1759452830539" MODIFIED="1759452874999" MAX_WIDTH="20 cm">
+<node TEXT="视图空间，摄像机位置在(0, 0, 0)，不用通过额外的uniform变量传递了" ID="ID_329745872" CREATED="1759452881605" MODIFIED="1759452905212"/>
+</node>
+<node TEXT="第一种方式" ID="ID_1498840154" CREATED="1759453904678" MODIFIED="1759453909452">
+<node TEXT="vec3 reflection_eye = reflect (-direction_to_light_eye, n_eye);&#xa;float dot_prod_specular = dot (reflection_eye, surface_to_viewer_eye);&#xa;dot_prod_specular = max (dot_prod_specular, 0.0);&#xa;float specular_factor = pow (dot_prod_specular, specular_exponent);" POSITION="bottom_or_right" ID="ID_1855290631" CREATED="1759452875437" MODIFIED="1759452921029" MAX_WIDTH="20 cm">
+<node TEXT="vec3 reflect(vec3 incident, vec3 normal);" ID="ID_535437172" CREATED="1759453578348" MODIFIED="1759453579579"/>
+<node TEXT="第一个参数incident：入射光线向量，必须是从外部指向表面的方向（即 “光源→表面” 的方向）。" ID="ID_1397160943" CREATED="1759453586003" MODIFIED="1759453586285"/>
+<node TEXT="第二个参数normal：表面的法向量（已归一化）。" ID="ID_399184531" CREATED="1759453590517" MODIFIED="1759453590779"/>
+</node>
+</node>
+<node TEXT="第二种方式" ID="ID_403893601" CREATED="1759453909675" MODIFIED="1759453913256">
+<node TEXT="// blinn&#xa;vec3 half_way_eye = normalize (surface_to_viewer_eye + direction_to_light_eye);&#xa;float dot_prod_specular = max (dot (half_way_eye, n_eye), 0.0);&#xa;float specular_factor = pow (dot_prod_specular, specular_exponent);" POSITION="bottom_or_right" ID="ID_304365152" CREATED="1759453894107" MODIFIED="1759453899949" MAX_WIDTH="20 cm"/>
+<node TEXT="效率更高" POSITION="bottom_or_right" ID="ID_1744319566" CREATED="1759453922378" MODIFIED="1759453926451"/>
+</node>
+<node TEXT="vec3 Is = Ls * Ks * specular_factor; // final specular intensity" POSITION="bottom_or_right" ID="ID_1954097652" CREATED="1759452948015" MODIFIED="1759452955109" MAX_WIDTH="20 cm"/>
+</node>
+<node TEXT="最终颜色" ID="ID_390371101" CREATED="1759452997651" MODIFIED="1759453001033">
+<node TEXT="// final colour&#xa;fragment_colour = vec4 (Is + Id + Ia, 1.0);" ID="ID_795747479" CREATED="1759453001313" MODIFIED="1759453002361"/>
+</node>
+<node TEXT="常见错误" ID="ID_755139621" CREATED="1759453663347" MODIFIED="1759453744703">
+<node TEXT="向量计算时不在同一个空间中" ID="ID_1419818203" CREATED="1759453667811" MODIFIED="1759453757765"/>
+<node TEXT="方向向量（xyzw）的 w 分量被设为 1（注：齐次坐标中，方向向量的 w 应设为 0，设为 1 会错误当作位置向量处理）" ID="ID_206536348" CREATED="1759453694092" MODIFIED="1759453715715"/>
+<node TEXT="位置向量（xyzw）的 w 分量被设为 0（注：齐次坐标中，位置向量的 w 应设为 1，设为 0 会错误当作方向向量处理）" ID="ID_1491728038" CREATED="1759453716024" MODIFIED="1759453716429"/>
+<node TEXT="点积运算中，一个向量是方向向量而另一个是距离向量（需对距离向量进行归一化，将其转换为方向向量后再计算）" ID="ID_461606659" CREATED="1759453730244" MODIFIED="1759453731089"/>
+<node TEXT="未通过逆转置矩阵或均匀缩放的世界视图矩阵，将法线转换到正确空间（注：非均匀缩放时必须用逆转置矩阵，否则法线方向会失真）" ID="ID_1056200756" CREATED="1759453775514" MODIFIED="1759453775809"/>
+<node TEXT="vec3 与 vec4（或 vec4 与 vec3）之间的转换不合法（注：如直接截断 vec4 的 w 分量而未处理齐次除法，或给 vec3 补 w 分量时赋值错误）" ID="ID_494581876" CREATED="1759453797015" MODIFIED="1759453797282"/>
+</node>
+</node>
 </node>
 <node TEXT="着色频率" ID="ID_107366112" CREATED="1752765442416" MODIFIED="1752765445641">
 <node TEXT="面片着色（flat shading)" ID="ID_1056263502" CREATED="1752765445913" MODIFIED="1752765554643">
@@ -572,17 +658,271 @@
 </node>
 <node TEXT="最终的效果取决于物体的面数，面数越多，三者的区别越小。如果面数超过了像素数量，面片着色的效率反而比片元着色的效率低了" ID="ID_1043431874" CREATED="1752765970849" MODIFIED="1752766032590"/>
 </node>
-<node TEXT="如何计算顶点的法线" POSITION="bottom_or_right" ID="ID_786883190" CREATED="1752766148397" MODIFIED="1752766154139">
-<node TEXT="球模型" ID="ID_1350384805" CREATED="1752766154357" MODIFIED="1752766164581"/>
-<node TEXT="连接这个顶点的所有平面的法线的加权平均" ID="ID_337424367" CREATED="1752766164989" MODIFIED="1752766191593"/>
+<node TEXT="如何计算法线" POSITION="bottom_or_right" ID="ID_786883190" CREATED="1752766148397" MODIFIED="1759451150835">
+<node TEXT="计算面法线（Face Normal）（适用于复杂形状的单个面）" ID="ID_473108274" CREATED="1759451156948" MODIFIED="1759451157996">
+<node TEXT="对于一个面（如三角形面），通过叉积计算其法线：" ID="ID_363327090" CREATED="1759451163641" MODIFIED="1759451165045"/>
+<node TEXT="根据三角形的两个边计算叉积" ID="ID_116455745" CREATED="1759451184997" MODIFIED="1759451194998"/>
+</node>
+<node TEXT="平面着色（Flat Shaded）" ID="ID_1298039815" CREATED="1759451259873" MODIFIED="1759451260909">
+<node TEXT="对于应呈现 “平坦感” 的面（如房屋的墙面）" POSITION="bottom_or_right" ID="ID_92515704" CREATED="1759451277580" MODIFIED="1759451279790"/>
+<node TEXT="将计算出来的法线复制到该面的所有顶点上，使每个顶点的法线方向与面法线一致" POSITION="bottom_or_right" ID="ID_643136505" CREATED="1759451225031" MODIFIED="1759451253968"/>
+</node>
+<node TEXT="光滑着色（Smooth Shaded）" ID="ID_1978146289" CREATED="1759451270928" MODIFIED="1759451271226">
+<node TEXT="对于应呈现 “弯曲感” 的面（如球体、圆柱体等曲面 / 有机形状）" ID="ID_1292374130" CREATED="1759451289307" MODIFIED="1759451290346"/>
+<node TEXT="每个顶点的法线，取周围所有面的法线的平均值。这样光照时，顶点间的法线会平滑过渡，从而模拟出 “曲面弯曲” 的视觉效果。" ID="ID_410041738" CREATED="1759451297211" MODIFIED="1759451297515"/>
+</node>
+<node TEXT="3D工具导出" ID="ID_17191340" CREATED="1759451484778" MODIFIED="1759451490064"/>
 </node>
 <node TEXT="如何插值顶点间的法线" POSITION="bottom_or_right" ID="ID_859719726" CREATED="1752766249122" MODIFIED="1752766261033">
 <node TEXT="重心坐标" ID="ID_1613725017" CREATED="1752766261182" MODIFIED="1752766266926"/>
 </node>
 <node TEXT="材质和着色的关系" POSITION="bottom_or_right" ID="ID_1698444349" CREATED="1752843754726" MODIFIED="1752843762524"/>
+<node TEXT="多光源" POSITION="bottom_or_right" ID="ID_1790584893" CREATED="1759486149751" MODIFIED="1759486154095"/>
 </node>
-<node TEXT="纹理映射" ID="ID_1155156813" CREATED="1752843234856" MODIFIED="1757214852116">
+<node TEXT="纹理映射" FOLDED="true" ID="ID_1155156813" CREATED="1752843234856" MODIFIED="1757214852116">
 <node TEXT="如何将三维空间的上的点映射到纹理上，将三维模型展开到平面上" ID="ID_1805144587" CREATED="1752843239660" MODIFIED="1752843350608"/>
+<node TEXT="术语说明" ID="ID_183248146" CREATED="1759456480268" MODIFIED="1759456485701">
+<node TEXT="纹理（Texture）" ID="ID_916574354" CREATED="1759456485891" MODIFIED="1759456501559">
+<node TEXT="是一种通常从文件中加载的图像，可映射到（3D 物体的）表面上，并能根据表面的 3D 透视效果进行绘制，以匹配其透视关系" ID="ID_1446812228" CREATED="1759456524237" MODIFIED="1759456525128"/>
+</node>
+<node TEXT="纹理坐标" ID="ID_1398275560" CREATED="1759465181351" MODIFIED="1759465184144">
+<node TEXT="纹理坐标是对纹理图像（通常是2D）中的像素的引用。纹理图像中的像素被称为纹素（Texel）" POSITION="bottom_or_right" ID="ID_829047486" CREATED="1751107471371" MODIFIED="1751107474740"/>
+<node TEXT="纹理坐标用于将3D模型上的点映射到纹理中的位置" POSITION="bottom_or_right" ID="ID_1650509460" CREATED="1751107483269" MODIFIED="1751107484374"/>
+<node TEXT="2D纹理图像被设定为矩形，左下角的位置坐标为(0,0)，右上角的位置坐标为(1,1)，纹理坐标应该在[0…1]范围内取值" POSITION="bottom_or_right" ID="ID_629946225" CREATED="1751107545975" MODIFIED="1751107580360"/>
+</node>
+<node TEXT="像素（Pixels）" ID="ID_651154921" CREATED="1759456505699" MODIFIED="1759456505922">
+<node TEXT="全称为 “图像元素（picture elements）”，是最终渲染到视口中、显示在屏幕上的带色点。例如， OpenGL（GL）视口分辨率可能为 1024×768 像素（即横向 1024 个像素、纵向 768 个像素）" ID="ID_1193322276" CREATED="1759456539031" MODIFIED="1759456544256"/>
+</node>
+<node TEXT="片段（Fragments）" ID="ID_1138951751" CREATED="1759456510680" MODIFIED="1759456510938">
+<node TEXT="指表面上与像素大小一致的区域（可见表面会被划分为像素大小的 2D 片段）。当一个 3D 三角形离相机越近时，其表面包含的片段数量会越来越多（因为三角形在屏幕上的投影面积变大，需要更多像素大小的片段来呈现）" ID="ID_1787161003" CREATED="1759456559688" MODIFIED="1759456561125"/>
+<node TEXT="片段之间可能会重叠，我们可以通过混合（blend）它们来实现半透明（partial-transparency）等效果，但最终每个屏幕位置只会渲染出 1 个像素。" ID="ID_1896681824" CREATED="1759456575523" MODIFIED="1759456575737"/>
+</node>
+<node TEXT="纹素（Texels）" ID="ID_1110177539" CREATED="1759456515661" MODIFIED="1759456515893">
+<node TEXT="全称为 “纹理元素（texture elements）”，指从图像中加载的像素（即纹理图像本身的像素）。例如，若将 512×512 分辨率的纹理映射到某个表面上，而该表面在视口中仅占据 30 个像素的面积，此时纹素数量会多于片段数量（纹理本身的像素数多于表面在屏幕上对应的片段数）。" ID="ID_1209470149" CREATED="1759456594352" MODIFIED="1759456596738"/>
+</node>
+</node>
+<node TEXT="opengl处理纹理" ID="ID_282184012" CREATED="1751099103262" MODIFIED="1759477867318">
+<node TEXT="需要的原材料" FOLDED="true" ID="ID_246732317" CREATED="1751107154034" MODIFIED="1751107201504">
+<node TEXT="用于保存纹理图像的纹理对象，GLuint类型" ID="ID_724308578" CREATED="1751107160381" MODIFIED="1751107410608"/>
+<node TEXT="一个特殊的统一采样器变量，以便顶点着色器可以访问纹理；" POSITION="bottom_or_right" ID="ID_1259005808" CREATED="1751107160381" MODIFIED="1751107160381"/>
+<node TEXT="用于保存纹理坐标的缓冲区；" POSITION="bottom_or_right" ID="ID_657446708" CREATED="1751107160381" MODIFIED="1751107160381"/>
+<node TEXT="用于将纹理坐标传递给管线的顶点属性；" POSITION="bottom_or_right" ID="ID_548228478" CREATED="1751107160381" MODIFIED="1751107160381">
+<node TEXT="为模型中的每个顶点指定纹理坐标，光栅化时会自动给顶点属性线性插值" ID="ID_632798787" CREATED="1751107454826" MODIFIED="1751107660338"/>
+</node>
+<node TEXT="显卡上的纹理单元。" POSITION="bottom_or_right" ID="ID_985494309" CREATED="1751107160381" MODIFIED="1751107160381">
+<node TEXT="要使用某个纹理时，需先激活一个纹理单元（如 GL_TEXTURE0），再将纹理 “绑定” 到该纹理单元。纹理会一直保留在纹理单元中，直到有新纹理绑定进来。" POSITION="bottom_or_right" ID="ID_635024587" CREATED="1759463172455" MODIFIED="1759463517121"/>
+<node TEXT="若程序只有 1 个纹理，只需绑定一次到 ** 默认活动纹理单元（编号 0，即 GL_TEXTURE0）** 即可。" POSITION="bottom_or_right" ID="ID_1948340010" CREATED="1759463181349" MODIFIED="1759463524609"/>
+<node TEXT="渲染不同物体需不同纹理时，需手动在活动纹理单元之间 “交换” 纹理（将需要的纹理放入纹理单元，不需要的暂时移出）" POSITION="bottom_or_right" ID="ID_240219319" CREATED="1759463198407" MODIFIED="1759463535224"/>
+<node TEXT="可用纹理单元的数量取决于图形卡上提供的数量" POSITION="bottom_or_right" ID="ID_1882057969" CREATED="1751108024206" MODIFIED="1751108026137"/>
+<node TEXT="OpenGL 4.5版要求每个着色器阶段至少有16个，所有阶段总共至少80个单元" POSITION="bottom_or_right" ID="ID_1921116957" CREATED="1751108041697" MODIFIED="1751108042936"/>
+</node>
+</node>
+<node TEXT="使用方法" ID="ID_704468718" CREATED="1751108991820" MODIFIED="1751108995918">
+<node TEXT="1. 纹理数据加载并生成纹理对象" ID="ID_1750775690" CREATED="1751109361781" MODIFIED="1751109764176">
+<node TEXT="加载图像" POSITION="bottom_or_right" ID="ID_1548898369" CREATED="1759462523036" MODIFIED="1759462544903">
+<node TEXT="不能对只有RGB三个通道的纹理采样，加载纹理时强制将RGB图片转换为RGBA图片" POSITION="bottom_or_right" ID="ID_1462382340" CREATED="1759456702373" MODIFIED="1759456745320"/>
+<node TEXT="int x, y, n;&#xa;int force_channels = 4;&#xa;unsigned char* image_data = stbi_load( file_name, &amp;x, &amp;y, &amp;n, force_channels );&#xa;if ( !image_data ) {&#xa;  fprintf( stderr, &quot;ERROR: could not load %s\n&quot;, file_name );&#xa;  return false;&#xa;}" POSITION="bottom_or_right" ID="ID_1980675914" CREATED="1759457029965" MODIFIED="1759462572244" MAX_WIDTH="20 cm"/>
+</node>
+<node TEXT="检查纹理尺寸" FOLDED="true" POSITION="bottom_or_right" ID="ID_288936214" CREATED="1759462638772" MODIFIED="1759462644323">
+<node TEXT="较旧的显卡只能处理宽度和高度为2的幂次方的纹理。大多数较新的显卡可以处理不规则的纹理尺寸，将不规则的纹理尺寸打印出来，让美术人员去修改" POSITION="bottom_or_right" ID="ID_1865981595" CREATED="1759457102173" MODIFIED="1759457141841">
+<node TEXT="// NPOT check&#xa;if ( ( x &amp; ( x - 1 ) ) != 0 || ( y &amp; ( y - 1 ) ) != 0 ) {&#xa;  fprintf( stderr, &quot;WARNING: texture %s is not power-of-2 dimensions\n&quot;, file_name );&#xa;}" ID="ID_1602057326" CREATED="1759457164326" MODIFIED="1759457184672" MAX_WIDTH="20 cm"/>
+</node>
+</node>
+<node TEXT="图像上下翻转" FOLDED="true" POSITION="bottom_or_right" ID="ID_236080055" CREATED="1759457620028" MODIFIED="1759457721557">
+<node TEXT="绝大多数图像格式（如 PNG、JPG、BMP）和图像加载库（如stb_image、FreeType）在存储像素数据时，默认以 “左上角为原点”" ID="ID_273534497" CREATED="1759457734666" MODIFIED="1759457785085"/>
+<node TEXT="OpenGL 的 2D 纹理坐标系统（s,t）默认以左下角为原点（(0,0)在左下，(1,1)在右上）" ID="ID_86727035" CREATED="1759457741929" MODIFIED="1759457782296"/>
+<node TEXT="方案 1：加载时反转图像数据（CPU 端处理）" ID="ID_1470720829" CREATED="1759457795403" MODIFIED="1759457795620">
+<node TEXT="int width_in_bytes = x * 4;" ID="ID_1559020251" CREATED="1759457826336" MODIFIED="1759457827351">
+<node TEXT="图像采用 RGBA 格式（每个像素由红、绿、蓝、Alpha 四个通道组成，每个通道占 1 字节），因此一行图像的总字节数为「宽度 x × 4」" ID="ID_1024203775" CREATED="1759457843269" MODIFIED="1759457845058"/>
+</node>
+<node TEXT="unsigned char *top = NULL;&#xa;unsigned char *bottom = NULL;&#xa;unsigned char temp = 0;&#xa;int half_height = y / 2;" ID="ID_1622030864" CREATED="1759457858074" MODIFIED="1759457866685"/>
+<node TEXT="for (int row = 0; row &lt; half_height; row++) {&#xa;    top = image_data + row * width_in_bytes;&#xa;    bottom = image_data + (y - row - 1) * width_in_bytes;&#xa;    for (int col = 0; col &lt; width_in_bytes; col++) {&#xa;        temp = *top;&#xa;        *top = *bottom;&#xa;       *bottom = temp;&#xa;        top++;&#xa;        bottom++;&#xa;    }&#xa;}" ID="ID_689199162" CREATED="1759457872824" MODIFIED="1759457919746"/>
+<node TEXT="加载前调用：stbi_set_flip_vertically_on_load( true );" ID="ID_827634748" CREATED="1759462578053" MODIFIED="1759462592225"/>
+</node>
+<node TEXT="方案 2：着色器中反转纹理坐标（GPU 端处理）" ID="ID_709474264" CREATED="1759457799942" MODIFIED="1759457800141"/>
+</node>
+<node TEXT="将图像数据复制到OpenGL纹理中" POSITION="bottom_or_right" ID="ID_1496439765" CREATED="1759462157185" MODIFIED="1759462157611">
+<node TEXT="生成纹理对象" POSITION="bottom_or_right" ID="ID_1067712145" CREATED="1751108996652" MODIFIED="1751109797509">
+<node TEXT="GLuint textureID;&#xa;glGenTextures(1, &amp;textureID);  // 生成1个纹理对象，返回ID" ID="ID_1807786213" CREATED="1751109223947" MODIFIED="1751109226413">
+<node TEXT="glGenTextures 创建纹理对象并分配唯一 ID，类似 VBO、VAO 的创建方式" POSITION="bottom_or_right" ID="ID_739242364" CREATED="1751109256155" MODIFIED="1751109257110"/>
+</node>
+</node>
+<node TEXT="激活纹理单元" POSITION="bottom_or_right" ID="ID_1404622703" CREATED="1759463403465" MODIFIED="1759463407825">
+<node TEXT="glActiveTexture( GL_TEXTURE0 );" ID="ID_171899969" CREATED="1759463407954" MODIFIED="1759463408770">
+<node TEXT="texture：纹理单元的编号，格式为 GL_TEXTUREi（如 GL_TEXTURE0、GL_TEXTURE1），i 为非负整数（从 0 开始）" POSITION="bottom_or_right" ID="ID_530586630" CREATED="1759463297254" MODIFIED="1759463298285"/>
+</node>
+</node>
+<node TEXT="绑定纹理对象" POSITION="bottom_or_right" ID="ID_406482402" CREATED="1751109231002" MODIFIED="1759463384246">
+<node TEXT="glBindTexture(GL_TEXTURE_2D, textureID);  // 绑定为2D纹理" ID="ID_253781115" CREATED="1751109236475" MODIFIED="1751109238674">
+<node TEXT="将一个纹理对象（由glGenTextures生成）绑定到当前激活的纹理单元的目标纹理类型（如GL_TEXTURE_2D）" POSITION="bottom_or_right" ID="ID_973906566" CREATED="1759463324461" MODIFIED="1759463325593"/>
+<node TEXT="纹理对象是存储纹理数据和参数的 OpenGL 对象。绑定操作将纹理对象与当前激活的纹理单元关联，后续对该target的操作（如设置过滤模式）将作用于该纹理对象。" POSITION="bottom_or_right" ID="ID_1969476640" CREATED="1751108728048" MODIFIED="1751108793343"/>
+<node TEXT="target：纹理目标（如GL_TEXTURE_2D、GL_TEXTURE_CUBE_MAP）" POSITION="bottom_or_right" ID="ID_1861216973" CREATED="1759463339904" MODIFIED="1759463340152">
+<node TEXT="GL_TEXTURE_2D：二维纹理（最常见）。" POSITION="bottom_or_right" ID="ID_384288206" CREATED="1751108745548" MODIFIED="1751108745548"/>
+<node TEXT="GL_TEXTURE_CUBE_MAP：立方体贴图（如天空盒）。" POSITION="bottom_or_right" ID="ID_146606285" CREATED="1751108745548" MODIFIED="1751108745548"/>
+<node TEXT="GL_TEXTURE_3D：三维纹理（如体数据）。" POSITION="bottom_or_right" ID="ID_1232822614" CREATED="1751108745548" MODIFIED="1751108745548"/>
+</node>
+<node TEXT="texture：要绑定的纹理对象 ID（由glGenTextures生成）" POSITION="bottom_or_right" ID="ID_1545038856" CREATED="1759463345811" MODIFIED="1759463346062"/>
+</node>
+<node TEXT="绑定后，后续对 GL_TEXTURE_2D 的操作将作用于该纹理对象" ID="ID_1749980812" CREATED="1751109264113" MODIFIED="1751109272107"/>
+</node>
+<node TEXT="上传数据到gpu" POSITION="bottom_or_right" ID="ID_1604019828" CREATED="1751109382445" MODIFIED="1751109391310">
+<node TEXT="if (image_data) {&#xa;    // 上传图像数据到当前绑定的纹理对象，此时data也可以释放了&#xa;    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);&#xa;   &#xa;    // 生成多级渐远纹理（Mipmaps）&#xa;    glGenerateMipmap(GL_TEXTURE_2D);&#xa;}&#xa;stbi_image_free(data);  // 释放CPU端图像数据" ID="ID_1118443944" CREATED="1751109391877" MODIFIED="1759463425180" MAX_WIDTH="20 cm"/>
+<node TEXT="glTexImage2D 参数说明：" POSITION="bottom_or_right" ID="ID_1622118056" CREATED="1751109412867" MODIFIED="1751109416790">
+<node ID="ID_863742960" CREATED="1751109417584" MODIFIED="1751109417584"><richcontent TYPE="NODE">
+
+<html>
+  <head>
+    
+  </head>
+  <body>
+    <p>
+      target：GL_TEXTURE_2D。
+    </p>
+  </body>
+</html>
+</richcontent>
+<node TEXT="纹理目标" ID="ID_1458251325" CREATED="1759463024500" MODIFIED="1759463028880"/>
+<node TEXT="指定纹理类型为 2D 纹理（还有 3D、立方体贴图等其他类型）。" ID="ID_1620471414" CREATED="1759463038374" MODIFIED="1759463038620"/>
+</node>
+<node ID="ID_1198991360" CREATED="1751109417585" MODIFIED="1751109417585"><richcontent TYPE="NODE">
+
+<html>
+  <head>
+    
+  </head>
+  <body>
+    <p>
+      level：Mipmap 级别（0 为基础级别）。
+    </p>
+  </body>
+</html>
+</richcontent>
+</node>
+<node ID="ID_732713786" CREATED="1751109417587" MODIFIED="1751109417587"><richcontent TYPE="NODE">
+
+<html>
+  <head>
+    
+  </head>
+  <body>
+    <p>
+      internalFormat：纹理在 GPU 中的存储格式（如 GL_RGB、GL_RGBA）。
+    </p>
+  </body>
+</html>
+</richcontent>
+</node>
+<node ID="ID_1924770004" CREATED="1751109417588" MODIFIED="1751109417588"><richcontent TYPE="NODE">
+
+<html>
+  <head>
+    
+  </head>
+  <body>
+    <p>
+      width/height：纹理宽度 / 高度。
+    </p>
+  </body>
+</html>
+</richcontent>
+</node>
+<node ID="ID_1653572452" CREATED="1751109417589" MODIFIED="1751109417589"><richcontent TYPE="NODE">
+
+<html>
+  <head>
+    
+  </head>
+  <body>
+    <p>
+      format：输入数据的格式（需与 internalFormat 匹配）。
+    </p>
+  </body>
+</html>
+</richcontent>
+</node>
+<node ID="ID_1326144007" CREATED="1751109417590" MODIFIED="1751109417590"><richcontent TYPE="NODE">
+
+<html>
+  <head>
+    
+  </head>
+  <body>
+    <p>
+      type：输入数据的类型（如 GL_UNSIGNED_BYTE）。
+    </p>
+  </body>
+</html>
+</richcontent>
+</node>
+<node ID="ID_8854190" CREATED="1751109417591" MODIFIED="1751109417591"><richcontent TYPE="NODE">
+
+<html>
+  <head>
+    
+  </head>
+  <body>
+    <p>
+      data：指向图像数据的指针。
+    </p>
+  </body>
+</html>
+</richcontent>
+</node>
+</node>
+</node>
+</node>
+<node TEXT="使用SOIL2来加载图像" POSITION="bottom_or_right" ID="ID_1767255513" CREATED="1751109805567" MODIFIED="1751109819537">
+<node TEXT="GLuint SOIL_load_OGL_texture(&#xa;    const char *filename,         // 图像文件路径&#xa;    int force_channels,           // 强制通道数 (0=自动检测)&#xa;    GLuint reuse_texture_ID,      // 重用纹理ID (0=创建新ID)&#xa;    unsigned int flags            // 配置标志位&#xa;);" ID="ID_1577838699" CREATED="1751109884834" MODIFIED="1751109887389"/>
+</node>
+</node>
+<node TEXT="2. 纹理参数设置" ID="ID_138326954" CREATED="1751109273939" MODIFIED="1759463563795">
+<node TEXT="设置过滤模式" ID="ID_1239585364" CREATED="1751109284910" MODIFIED="1751109288397">
+<node TEXT="// 缩小过滤（纹理比屏幕像素小时）&#xa;glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);&#xa;&#xa;// 放大过滤（纹理比屏幕像素大时）&#xa;glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);" ID="ID_1874029005" CREATED="1751109294661" MODIFIED="1751109297199">
+<node TEXT="GL_NEAREST：最近邻采样（像素化效果）。" ID="ID_163335579" CREATED="1751109339358" MODIFIED="1751109339358"/>
+<node TEXT="GL_LINEAR：线性插值（平滑效果）。" ID="ID_882390165" CREATED="1751109339358" MODIFIED="1751109339358"/>
+</node>
+</node>
+<node TEXT="设置环绕模式" ID="ID_1497773579" CREATED="1751109301915" MODIFIED="1751109303022">
+<node TEXT="// S/T 方向均使用重复环绕&#xa;glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);&#xa;glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);" ID="ID_1528133934" CREATED="1751109303504" MODIFIED="1759464081677" MAX_WIDTH="20 cm">
+<node TEXT="GL_REPEAT：重复纹理。" ID="ID_1756350093" CREATED="1751109349488" MODIFIED="1751109349488"/>
+<node TEXT="GL_CLAMP_TO_EDGE：边缘拉伸。" ID="ID_1388897560" CREATED="1751109349488" MODIFIED="1751109349488"/>
+<node TEXT="GL_MIRRORED_REPEAT：镜像重复。" ID="ID_1715920367" CREATED="1751109349488" MODIFIED="1751109349488"/>
+</node>
+</node>
+</node>
+<node TEXT="3. 设置着色器中的采样器与纹理单元关联" ID="ID_1286087897" CREATED="1751109549012" MODIFIED="1759464065844">
+<node TEXT="// 获取采样器的uniform位置&#xa;GLint texLocation = glGetUniformLocation(shaderProgram, &quot;texture1&quot;);&#xa;// 设置采样器使用纹理单元0&#xa;glUniform1i(texLocation, 0);  // 0对应GL_TEXTURE0" ID="ID_60944531" CREATED="1751109555593" MODIFIED="1759463669772" MAX_WIDTH="20 cm"/>
+<node TEXT="layout (binding = 0) uniform sampler2D basic_texture;" ID="ID_1266786313" CREATED="1759463695992" MODIFIED="1759463711539">
+<node TEXT="统一采样器变量" ID="ID_1337503176" CREATED="1751107859012" MODIFIED="1751107862537"/>
+<node TEXT="OpenGL 4.2及以上版本可以用“binding”布局显式声明采样器变量应从激活纹理槽0读取" ID="ID_548372214" CREATED="1759463712595" MODIFIED="1759463747037"/>
+<node TEXT="用于指示显卡上的纹理单元，从加载的纹理对象中提取或“采样”哪个纹素" POSITION="bottom_or_right" ID="ID_1785315376" CREATED="1751107873364" MODIFIED="1751107875929"/>
+<node TEXT="layout (binding=0)”指定此采样器与纹理单元0相关联" POSITION="bottom_or_right" ID="ID_253782002" CREATED="1751107911178" MODIFIED="1751107915650"/>
+</node>
+</node>
+<node TEXT="4. 着色器配置" ID="ID_1760266217" CREATED="1751109457529" MODIFIED="1759463632253">
+<node TEXT="顶点着色器" ID="ID_997875862" CREATED="1751109470139" MODIFIED="1751109487794">
+<node TEXT="#version 330 core&#xa;layout (location = 0) in vec3 aPos;&#xa;layout (location = 1) in vec2 aTexCoord;&#xa;&#xa;out vec2 TexCoord;&#xa;&#xa;uniform mat4 model;&#xa;uniform mat4 view;&#xa;uniform mat4 projection;&#xa;&#xa;void main() {&#xa;    gl_Position = projection * view * model * vec4(aPos, 1.0);&#xa;    TexCoord = aTexCoord;  // 传递纹理坐标&#xa;}" ID="ID_1991113336" CREATED="1751109488077" MODIFIED="1751109491114"/>
+</node>
+<node TEXT="片段着色器" ID="ID_448795724" CREATED="1751109498916" MODIFIED="1751109503502">
+<node TEXT="#version 330 core&#xa;in vec2 TexCoord;&#xa;out vec4 FragColor;&#xa;&#xa;uniform sampler2D texture1;  // 纹理采样器&#xa;&#xa;void main() {&#xa;    FragColor = texture(texture1, TexCoord);  // 从纹理采样颜色&#xa;}" ID="ID_1359332115" CREATED="1751109504119" MODIFIED="1751109505505"/>
+</node>
+</node>
+</node>
+<node TEXT="TODO" ID="ID_799979864" CREATED="1751110948701" MODIFIED="1759477867318">
+<node TEXT="使用纹理单元来存储“高度图”以生成地形，以及存储“阴影贴图”以有效地为场景添加阴影" ID="ID_1207361849" CREATED="1751110973267" MODIFIED="1751110973267"/>
+<node TEXT="着色器还可以向纹理写入数据，允许着色器修改纹理图像，甚至将一个纹理的一部分复制到另一个纹理的某个部分" ID="ID_1271706941" CREATED="1751110984581" MODIFIED="1751110985688"/>
+<node TEXT="多级渐远纹理贴图和各向异性过滤不是减少纹理中的叠影伪影的唯一工具。例如，全屏抗锯齿（Full-scene anti-aliasing，FSAA）和其他超采样方法也可以改善3D场景中纹理的外观。虽然不是OpenGL核心的一部分，但它们通过OpenGL的扩展机制[OE16]在许多显卡上得到支持。" ID="ID_1986418809" CREATED="1751110997816" MODIFIED="1751110999147"/>
+<node TEXT="还有一种用于配置和管理纹理和采样器的替代机制。OpenGL 3.3版引入了采样器对象（有时称为“采样器状态”——不要与采样器变量混淆），可用于保存一组独立于实际纹理对象的纹理设置。采样器对象附加到纹理单元，可以方便有效地更改纹理设置。" ID="ID_1935496148" CREATED="1751111014038" MODIFIED="1751111015553"/>
+</node>
+<node TEXT="透视变形" FOLDED="true" ID="ID_571839500" CREATED="1751110268753" MODIFIED="1751110578695">
+<node TEXT="当纹理坐标从顶点着色器传递到片段着色器时，它们通过光栅着色器并被插值，这是自动线性插值的结果，总是在顶点属性上执行，然而，在纹理坐标的情况下，线性插值可能导致具有透视投影的3D场景中的可以察觉的失真" ID="ID_1453563024" CREATED="1751110281594" MODIFIED="1751110300289"/>
+<node TEXT="默认情况下，OpenGL在光栅化期间会应用透视校正算法" ID="ID_321277839" CREATED="1751110323534" MODIFIED="1751110578695"/>
+<node TEXT="可以通过在包含纹理坐标的顶点属性的声明中添加关键字“noperspective”来禁用OpenGL的透视校正。必须在顶点着色器和片段着色器中都这样添加" ID="ID_727275684" CREATED="1751110344772" MODIFIED="1751110346461">
+<node TEXT="顶点着色器：noperspective out vec2 texCoord;" ID="ID_966137401" CREATED="1751110356562" MODIFIED="1751110376576"/>
+<node TEXT="片段着色器：noperspective in vec2 texCoord;" ID="ID_1195984316" CREATED="1751110351410" MODIFIED="1751110381358"/>
+</node>
+</node>
+</node>
 <node TEXT="纹理可以被一个模型重复使用，不同的顶点映射到了相同的纹理坐标，需要纹理在设立时上下和左右衔接，这种纹理称为tiled，（使用算法wang tiled生成）" ID="ID_1810154265" CREATED="1752843519570" MODIFIED="1752843602618"/>
 <node TEXT="纹理坐标" ID="ID_822408061" CREATED="1752897872253" MODIFIED="1752897882142">
 <node TEXT="纹理坐标是连续的浮点值，用于描述纹理空间中的任意位置。例如，u=0.3 表示纹理宽度的 30% 处，v=0.7 表示纹理高度的 70% 处。" ID="ID_445073535" CREATED="1752897889497" MODIFIED="1752897902820"/>
@@ -625,20 +965,26 @@
 <node TEXT="纹理坐标到 Texel 坐标的转换" ID="ID_913199474" CREATED="1752897316219" MODIFIED="1752897316512"/>
 <node TEXT="根据 Texel 坐标计算颜色值" ID="ID_1119842256" CREATED="1752897320236" MODIFIED="1752897320597"/>
 </node>
-<node TEXT="纹理放大（Texture Magnification）" ID="ID_813644292" CREATED="1752898403464" MODIFIED="1752898695141">
-<node TEXT="当 3D 模型的表面在屏幕上占据的像素数多于纹理图像本身的像素数时（例如，模型靠近相机时），就会出现纹理放大的需求" ID="ID_1289213164" CREATED="1752896894920" MODIFIED="1752896895705"/>
-<node TEXT="当纹理被放大时，屏幕上的一个像素可能对应纹理中的多个 Texel" ID="ID_247064120" CREATED="1752898579470" MODIFIED="1752898581318"/>
+<node TEXT="纹理走样" ID="ID_760570700" CREATED="1759464844072" MODIFIED="1759464846934">
+<node TEXT="纹理放大走样（Texture Magnification Aliasing）" POSITION="bottom_or_right" ID="ID_813644292" CREATED="1752898403464" MODIFIED="1759464760401">
+<node TEXT="当 3D 表面离相机很近时，纹理被过度 “放大”—— 屏幕上的像素数量多于纹理的纹素（Texel）数量（一个纹素被拉伸覆盖多个像素）" ID="ID_1289213164" CREATED="1752896894920" MODIFIED="1759464662526"/>
+<node TEXT="画面出现 “大块方块感”（同一个纹素被重复用于一整块像素）" ID="ID_630634240" CREATED="1759464682489" MODIFIED="1759464682936"/>
 <node TEXT="纹理太小导致" ID="ID_976031040" CREATED="1752904609568" MODIFIED="1752904615158"/>
 </node>
-<node TEXT="纹理缩小" ID="ID_45107336" CREATED="1752904589218" MODIFIED="1752904596104">
+<node TEXT="纹理缩小走样（Texture Minification Aliasing）" POSITION="bottom_or_right" ID="ID_45107336" CREATED="1752904589218" MODIFIED="1759464761568">
 <node TEXT="像素在纹理上的覆盖范围" ID="ID_1413457895" CREATED="1752904616674" MODIFIED="1752905308769">
 <node TEXT="在一个texel的范围内，直接查询即可，（point query）" ID="ID_342945627" CREATED="1752905309088" MODIFIED="1752905330768"/>
 <node TEXT="像素覆盖了很多的texel（range query），需要去范围内所有的texel的平均值" ID="ID_977542996" CREATED="1752905331241" MODIFIED="1752905354645">
 <node TEXT="range query分了很多种，有求平均值的，也有求最大最小值的" ID="ID_1686733551" CREATED="1752905355811" MODIFIED="1752905379050"/>
 </node>
 </node>
+<node TEXT="当 3D 表面离相机很远时，纹理被过度 “缩小”—— 纹理的纹素数量多于屏幕的像素数量（多个纹素需要压缩到一个像素）" ID="ID_1135416886" CREATED="1759464706714" MODIFIED="1759464715302"/>
+<node TEXT="若用 “最近邻采样（Nearest Neighbour）”，采样器会随机选择 “最近的纹素”，导致画面闪烁（如远处的树在 “透明背景” 和 “绿叶” 间随机切换颜色），呈现 “像素化、破碎感”。" ID="ID_1549992992" CREATED="1759464724463" MODIFIED="1759464724834"/>
 </node>
-<node TEXT="纹理过滤方法" ID="ID_1244553171" CREATED="1752906528221" MODIFIED="1752906532610">
+</node>
+<node TEXT="抗锯齿与纹理过滤（Anti-Aliasing &amp; Filters）" ID="ID_1715298452" CREATED="1759464772710" MODIFIED="1759464773455">
+<node TEXT="为解决 “走样”，OpenGL 通过纹理过滤来优化采样过程，核心思路是 “混合多个纹素的颜色，而非只取单个纹素”" ID="ID_987838364" CREATED="1759464786209" MODIFIED="1759464787486"/>
+<node TEXT="纹理过滤方法" POSITION="bottom_or_right" ID="ID_1244553171" CREATED="1752906528221" MODIFIED="1752906532610">
 <node TEXT="最近邻采样（Nearest Neighbor Sampling）" POSITION="bottom_or_right" ID="ID_1084994325" CREATED="1752896911553" MODIFIED="1752896913883">
 <node TEXT="直接选择离目标点最近的整数 Texel" POSITION="bottom_or_right" ID="ID_335159476" CREATED="1752896918995" MODIFIED="1752898752478"/>
 <node TEXT="当 Texel 坐标为非整数时，结果可能跳变，导致锯齿或像素块效应" POSITION="bottom_or_right" ID="ID_1274433922" CREATED="1752898758814" MODIFIED="1752898759093"/>
@@ -678,9 +1024,11 @@
 <node TEXT="各向异性过滤（Anisotropic Filtering）" POSITION="bottom_or_right" ID="ID_1956683422" CREATED="1752896959865" MODIFIED="1752896967016">
 <node TEXT="当纹理倾斜显示时，使用椭圆区域内的多个 Texel 样本进行加权平均" ID="ID_1685337549" CREATED="1752898804793" MODIFIED="1752898823764"/>
 <node TEXT="放大且倾斜的纹理（如地面、墙面），需处理非整数 Texel 坐标在长轴方向的密集分布" ID="ID_1091571609" CREATED="1752898828973" MODIFIED="1752898829332"/>
+<node TEXT="GLfloat max_aniso = 0.0f;&#xa;glGetFloatv( GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT, &amp;max_aniso );&#xa;// set the maximum!&#xa;glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY_EXT, max_aniso );" ID="ID_816007530" CREATED="1759464960730" MODIFIED="1759464973744" MAX_WIDTH="20 cm"/>
 </node>
 </node>
 <node TEXT="Mipmap" POSITION="bottom_or_right" ID="ID_40839415" CREATED="1752905399386" MODIFIED="1752905401543">
+<node TEXT="多级渐远纹理贴图" ID="ID_744484613" CREATED="1759465040240" MODIFIED="1759465040665"/>
 <node TEXT="可以用来做范围查询" ID="ID_609502305" CREATED="1752905408563" MODIFIED="1752905455569"/>
 <node TEXT="特点" ID="ID_442135854" CREATED="1752905457603" MODIFIED="1752905470276">
 <node TEXT="查询速度非常快" POSITION="bottom_or_right" ID="ID_185402938" CREATED="1752905416198" MODIFIED="1752905479592"/>
@@ -688,6 +1036,12 @@
 <node TEXT="只能做正方形的查询" POSITION="bottom_or_right" ID="ID_1365839212" CREATED="1752905431794" MODIFIED="1752905448974"/>
 </node>
 <node TEXT="比没有使用mipmap的纹理的大小之多了1/3" ID="ID_228390820" CREATED="1752905826599" MODIFIED="1752905848671"/>
+<node TEXT="它需要用各种分辨率创建纹理图像的不同版本。然后，OpenGL使用最适合正在处理的这一点处的分辨率的纹理图像进行纹理贴图。更好的是，可以为被贴图的区域使用最适合的分辨率的纹理图像的平均颜色" POSITION="bottom_or_right" ID="ID_24966653" CREATED="1751110163946" MODIFIED="1751110166500"/>
+<node TEXT="传统纹理渲染中，当物体远离摄像机时，若直接使用高分辨率纹理会导致两大问题" POSITION="bottom_or_right" ID="ID_1926252896" CREATED="1751110766339" MODIFIED="1751110767577">
+<node TEXT="采样走样（Aliasing）：纹理被缩小时，像素采样频率不足，导致锯齿、摩尔纹等失真现象。" ID="ID_371456259" CREATED="1751110785383" MODIFIED="1751110785383"/>
+<node TEXT="性能浪费：远距离物体在屏幕上占据的像素少，使用高分辨率纹理会增加不必要的计算量（如纹理采样次数）。" ID="ID_994152902" CREATED="1751110785383" MODIFIED="1751110785383"/>
+</node>
+</node>
 </node>
 <node TEXT="纹理混合" POSITION="bottom_or_right" ID="ID_702033235" CREATED="1757218821372" MODIFIED="1757218824496"/>
 <node TEXT="alpha预乘" POSITION="bottom_or_right" ID="ID_1287819807" CREATED="1757218836058" MODIFIED="1757218846037"/>

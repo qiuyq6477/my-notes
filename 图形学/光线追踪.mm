@@ -80,7 +80,7 @@
 <node TEXT="全局光照" ID="ID_943025734" CREATED="1750490463748" MODIFIED="1750490467739"/>
 <node TEXT="BRDF，镜面反射" ID="ID_258218421" CREATED="1750493956734" MODIFIED="1750493969289"/>
 </node>
-<node TEXT="光线追踪" FOLDED="true" POSITION="bottom_or_right" ID="ID_655857836" CREATED="1750495318952" MODIFIED="1750495330432">
+<node TEXT="光线追踪" POSITION="bottom_or_right" ID="ID_655857836" CREATED="1750495318952" MODIFIED="1750495330432">
 <edge COLOR="#00007c"/>
 <node TEXT="光线追踪基本原理" POSITION="top_or_left" ID="ID_1424533972" CREATED="1750489160143" MODIFIED="1750495339445">
 <node TEXT="球体方程" ID="ID_1214950321" CREATED="1750690193546" MODIFIED="1750690197395">
@@ -180,14 +180,17 @@
 </node>
 </node>
 <node TEXT="代码实现" ID="ID_161868930" CREATED="1750764578581" MODIFIED="1750764585247">
-<node TEXT="第一版" FOLDED="true" ID="ID_1055691351" CREATED="1750764691105" MODIFIED="1750764696042">
+<node TEXT="第一版" ID="ID_1055691351" CREATED="1750764691105" MODIFIED="1750764696042">
 <node TEXT="DrawLine(P0, P1, color) {&#xa;    a = (y1 - y0) / (x1 - x0)&#xa;    b = y0 - a * x0&#xa;    for x = x0 to x1 {&#xa;        y = a * x + b&#xa;        canvas.PutPixel(x, y, color)&#xa;    }&#xa;}" POSITION="bottom_or_right" ID="ID_483654019" CREATED="1750764585483" MODIFIED="1750764600421"/>
 </node>
-<node TEXT="第二版" FOLDED="true" ID="ID_975654346" CREATED="1750764699668" MODIFIED="1750764744510">
+<node TEXT="第二版" ID="ID_975654346" CREATED="1750764699668" MODIFIED="1750764744510">
 <node TEXT="DrawLine(P0, P1, color) {&#xa;    a = (y1 - y0) / (x1 - x0)&#xa;    y = y0&#xa;    for x = x0 to x1 {&#xa;        canvas.PutPixel(x, y, color)&#xa;        y = y + a&#xa;    }&#xa;}" ID="ID_935993460" CREATED="1750764717233" MODIFIED="1750764746143"/>
 </node>
-<node TEXT="第三版" FOLDED="true" ID="ID_59606696" CREATED="1750764817323" MODIFIED="1750764820493">
+<node TEXT="第三版" ID="ID_59606696" CREATED="1750764817323" MODIFIED="1750764820493">
 <node TEXT="DrawLine(P0, P1, color) {&#xa;    dx = x1 - x0&#xa;    dy = y1 - y0&#xa;    if abs(dx) &gt; abs(dy) {&#xa;        // 直线偏向水平情况&#xa;        // 确保 x0 &lt; x1&#xa;        if x0 &gt; x1 {&#xa;            swap(P0, P1)&#xa;        }&#xa;        a = dy / dx&#xa;        y = y0&#xa;        for x = x0 to x1 {&#xa;            canvas.PutPixel(x, y, color)&#xa;            y = y + a&#xa;        }&#xa;    } else {&#xa;        // 直线偏向垂直情况 &#xa;        // 确保 y0 &lt; y1&#xa;        if y0 &gt; y1 {&#xa;            swap(P0, P1)&#xa;        }&#xa;        a = dx / dy&#xa;        x = x0&#xa;        for y = y0 to y1 {&#xa;            canvas.PutPixel(x, y, color)&#xa;            x = x + a&#xa;        }&#xa;    }&#xa;}" ID="ID_450284008" CREATED="1750764820938" MODIFIED="1750764826856"/>
+</node>
+<node TEXT="bresenhan算法" ID="ID_250021387" CREATED="1759402615707" MODIFIED="1759402623578">
+<node TEXT="https://haqr.eu/tinyrenderer/bresenham/" ID="ID_979195489" CREATED="1759402623810" MODIFIED="1759402624756"/>
 </node>
 </node>
 </node>
@@ -352,13 +355,30 @@
 </node>
 <node TEXT="API" ID="ID_1896332690" CREATED="1751072123219" MODIFIED="1751072128078">
 <node TEXT="Shader相关" FOLDED="true" ID="ID_1671831043" CREATED="1751073974513" MODIFIED="1751073980502">
-<node TEXT="使用流程" ID="ID_77828901" CREATED="1751075589874" MODIFIED="1751075600880">
+<node TEXT="shader版本" ID="ID_784337889" CREATED="1759390999769" MODIFIED="1759391005068">
+<node TEXT="OpenGL 1.2 - no GLSL - no tag&#xa;OpenGL 2.0 - GLSL 1.10.59 - #version 110&#xa;OpenGL 2.1 - GLSL 1.20.8 - #version 120&#xa;OpenGL 3.0 - GLSL 1.30.10 - #version 130&#xa;OpenGL 3.1 - GLSL 1.40.08 - #version 140&#xa;OpenGL 3.2 - GLSL 1.50.11 - #version 150&#xa;OpenGL 3.3 - GLSL 3.30.6 - #version 330&#xa;OpenGL 4.0 - GLSL 4.00.9 - #version 400&#xa;OpenGL 4.1 - GLSL 4.10.6 - #version 410&#xa;OpenGL 4.2 - GLSL 4.20.6 - #version 420&#xa;OpenGL 4.3 - GLSL 4.30.6 - #version 430" ID="ID_603454094" CREATED="1759391005283" MODIFIED="1759391006758"/>
+</node>
+<node TEXT="顶点着色器" ID="ID_1631347825" CREATED="1759391262729" MODIFIED="1759391271368">
+<node TEXT="将顶点位置转换到裁剪空间" ID="ID_1671532023" CREATED="1759391266346" MODIFIED="1759391284149"/>
+<node TEXT="gl_Position变量是一个内置的GLSL变量，用于设置每个顶点的最终裁剪空间位置。" ID="ID_574226825" CREATED="1759391312623" MODIFIED="1759391321335"/>
+<node TEXT="顶点缓冲区的输入（in变量）称为顶点属性，来自图形硬件内存中的一块内存，称为顶点缓冲区。通常在运行主循环之前将顶点位置复制到顶点缓冲区。" ID="ID_515845522" CREATED="1759391337426" MODIFIED="1759391374388"/>
+<node TEXT="顶点着色器将为顶点缓冲区中的每个顶点运行一次实例。" ID="ID_542782126" CREATED="1759391375131" MODIFIED="1759391378456"/>
+</node>
+<node TEXT="片段着色器" ID="ID_951599951" CREATED="1759391387680" MODIFIED="1759391393445">
+<node TEXT="片段着色器会为顶点之间每个像素大小的空间（片段）运行一次。" ID="ID_1375372997" CREATED="1759391393616" MODIFIED="1759391431227"/>
+<node TEXT="片段着色器负责设置每个片段的颜色" ID="ID_1243841180" CREATED="1759391431880" MODIFIED="1759391432103"/>
+<node TEXT="uniform关键字表示从CPU向着色器程序传入一个变量。该变量对程序内所有着色器都是全局的，如果需要，也可以在顶点着色器中访问它。" ID="ID_1944457961" CREATED="1759391501479" MODIFIED="1759391519988"/>
+</node>
+<node TEXT="使用流程" FOLDED="true" POSITION="bottom_or_right" ID="ID_77828901" CREATED="1751075589874" MODIFIED="1751075600880">
 <node TEXT="glCreateShader" POSITION="bottom_or_right" ID="ID_1325747072" CREATED="1751073980994" MODIFIED="1751073989971">
 <node TEXT="GL_VERTEX_SHADER：顶点着色器（处理顶点位置、颜色等）" ID="ID_616267138" CREATED="1751073996868" MODIFIED="1751074106075"/>
 <node TEXT="GL_FRAGMENT_SHADER：片段着色器（处理像素颜色输出）" ID="ID_656926080" CREATED="1751074004848" MODIFIED="1751074114498"/>
 <node TEXT="GL_GEOMETRY_SHADER：几何着色器（可选，处理图元几何变换）" ID="ID_1167489765" CREATED="1751074120568" MODIFIED="1751074121610"/>
 <node TEXT="返回新创建的着色器对象 ID（非 0 值），若失败返回 0" ID="ID_866131234" CREATED="1751074133065" MODIFIED="1751074138940"/>
 <node TEXT="着色器对象创建后需通过glShaderSource填充代码，最终由glDeleteShader释放" ID="ID_746164092" CREATED="1751074155132" MODIFIED="1751074156115"/>
+</node>
+<node TEXT="glDeleteShader" POSITION="bottom_or_right" ID="ID_1669251922" CREATED="1759391974137" MODIFIED="1759391987767">
+<node TEXT="shader - 要删除的着色器对象 ID" ID="ID_849146253" CREATED="1759391984108" MODIFIED="1759391989805"/>
 </node>
 <node TEXT="glShaderSource" POSITION="bottom_or_right" ID="ID_1331004860" CREATED="1751074010763" MODIFIED="1751074012013">
 <node TEXT="shader：目标着色器对象 ID。" ID="ID_1641335665" CREATED="1751074162531" MODIFIED="1751074163635"/>
@@ -396,28 +416,94 @@
 <node TEXT="将指定的着色器程序对象设置为当前渲染状态的一部分。一旦激活，后续的所有绘图命令（如 glDrawArrays、glDrawElements）都会使用这个程序对象中的着色器来处理顶点和片段数据" ID="ID_1194968348" CREATED="1751074619231" MODIFIED="1751074619907"/>
 <node TEXT="频繁切换着色器程序（glUseProgram 调用）会引入一定开销，因为 GPU 需要重新配置渲染状态。在实际应用中，应尽量批量处理使用相同着色器的绘制命令，减少状态切换次数。" ID="ID_678362324" CREATED="1751074595266" MODIFIED="1751074596593"/>
 </node>
+<node TEXT="shader错误处理" POSITION="bottom_or_right" ID="ID_33093678" CREATED="1759391900879" MODIFIED="1759392061286">
+<node TEXT="glGetShaderiv" POSITION="bottom_or_right" ID="ID_1751814153" CREATED="1759391860229" MODIFIED="1759391861458">
+<node TEXT="shader - 目标着色器对象 ID" ID="ID_245742971" CREATED="1759391870635" MODIFIED="1759391871503"/>
+<node TEXT="pname - 要查询的参数，如GL_COMPILE_STATUS（编译状态）、GL_INFO_LOG_LENGTH（日志长度）等" ID="ID_1469950904" CREATED="1759391877512" MODIFIED="1759391877750"/>
+<node TEXT="params - 存储查询结果的指针" ID="ID_480073959" CREATED="1759391882072" MODIFIED="1759391888404"/>
+</node>
+<node TEXT="glGetShaderInfoLog" POSITION="bottom_or_right" ID="ID_1482008429" CREATED="1759391898528" MODIFIED="1759391898777">
+<node TEXT="shader - 目标着色器对象 ID" ID="ID_1370122356" CREATED="1759391925411" MODIFIED="1759391931054"/>
+<node TEXT="maxLength - 日志缓冲区最大长度" ID="ID_1111985243" CREATED="1759391932050" MODIFIED="1759391932267"/>
+<node TEXT="length - 实际日志长度（可传NULL）" ID="ID_620402310" CREATED="1759391936482" MODIFIED="1759391939705"/>
+<node TEXT="infoLog - 存储日志的缓冲区" ID="ID_541689007" CREATED="1759391944416" MODIFIED="1759391944650"/>
+</node>
+</node>
+<node TEXT="shader程序错误处理" POSITION="bottom_or_right" ID="ID_171812078" CREATED="1759392061569" MODIFIED="1759392082084">
+<node TEXT="glValidateProgram" ID="ID_1994663014" CREATED="1759392082346" MODIFIED="1759392089234"/>
+<node TEXT="glGetProgramiv" ID="ID_120222311" CREATED="1759392091892" MODIFIED="1759392092214"/>
+<node TEXT="glGetProgramInfoLog" ID="ID_44214150" CREATED="1759392095763" MODIFIED="1759392096057"/>
+</node>
 </node>
 <node TEXT="向shader传递数据" POSITION="bottom_or_right" ID="ID_1459192719" CREATED="1751075574100" MODIFIED="1751075588516">
-<node TEXT="glGetUniformLocation" ID="ID_46052873" CREATED="1751075622011" MODIFIED="1751075629350">
-<node TEXT="在已编译链接的着色器程序中查找名为samp的 uniform 变量，并返回其位置索引。" ID="ID_1789443633" CREATED="1751108289172" MODIFIED="1751108296372"/>
-<node TEXT="Uniform 变量在着色器中是全局且只读的，OpenGL 通过位置索引而非名称来快速访问它们。此函数建立了从名称到索引的映射。" ID="ID_1816390365" CREATED="1751108541234" MODIFIED="1751108543136"/>
-<node TEXT="初始化阶段查询所有需要的 uniform 变量位置，避免重复查询。" ID="ID_694218050" CREATED="1751108552854" MODIFIED="1751108553944"/>
-<node TEXT="调试时检查变量是否正确链接（若返回-1，可能是变量名拼写错误或未被使用）" ID="ID_317665084" CREATED="1751108563906" MODIFIED="1751108564792"/>
-<node TEXT="program：着色器程序 ID（由glCreateProgram生成）" ID="ID_1211857998" CREATED="1751108495355" MODIFIED="1751108505165"/>
-<node TEXT="name：uniform 变量名" ID="ID_1525267156" CREATED="1751108507187" MODIFIED="1751108511234"/>
-<node TEXT="成功返回非负整数，失败返回-1" ID="ID_765479561" CREATED="1751108515504" MODIFIED="1751108527983"/>
-</node>
-<node TEXT="glProgramUniform1f" ID="ID_552268787" CREATED="1751075630581" MODIFIED="1751075631615"/>
-<node TEXT="glUniform1i" ID="ID_1568492559" CREATED="1751108331747" MODIFIED="1751108332843">
-<node TEXT="将指定位置的 uniform 变量设置为整数值。" ID="ID_1124856073" CREATED="1751108348739" MODIFIED="1751108576395"/>
-<node TEXT="在纹理操作中，v0通常对应纹理单元编号（如0对应GL_TEXTURE0）。此函数告诉着色器：“使用编号为v0的纹理单元来采样该 uniform 对应的纹理”。" ID="ID_1313093892" CREATED="1751108623035" MODIFIED="1751108624241"/>
-<node TEXT="location：由glGetUniformLocation返回的变量位置。" ID="ID_1089681468" CREATED="1751108593273" MODIFIED="1751108593273"/>
-<node TEXT="v0：要设置的整数值。" ID="ID_690787052" CREATED="1751108593273" MODIFIED="1751108593273"/>
-</node>
 <node TEXT="uniform缓冲对象(UBO)" ID="ID_1495327880" CREATED="1751183098297" MODIFIED="1751183126784">
 <node TEXT="可以将着⾊器中的多个uniform组合在⼀起，并⼀次将它们都发送出去。对于具有许多uniform的着⾊器程序，这样做通常会⽐单独设置每个uniform值更加有效" ID="ID_1393390107" CREATED="1751183134672" MODIFIED="1751183169662"/>
 <node TEXT="使用 uniform缓冲对象，可以将 uniform分成多个组。例如，可以有用于每帧更新一次的 uniform，以及每个对象更新一次的 uniform。每帧的视图投影变化不会超过一次，然而每个 actor 都会有一个不同的世界变换矩阵。这样，可以在帧的开头只在一次函数调用中更新所有针对此帧的uniform。同样，也可以针对每个对象分别更新所有针对此对象的 uniform。要实现这一点，必须更改在着色器中声明 uniform的方式，以及在C++代码中镜像该数据的方式" ID="ID_1500856441" CREATED="1751183226857" MODIFIED="1751183229075"/>
 </node>
+<node TEXT="glGetActiveAttrib" ID="ID_1913064223" CREATED="1759392204148" MODIFIED="1759392204430"/>
+<node TEXT="glGetAttribLocation" ID="ID_1861779197" CREATED="1759392130601" MODIFIED="1759392132874">
+<node TEXT="program - 目标程序对象 ID" ID="ID_1389861391" CREATED="1759392136517" MODIFIED="1759392138052"/>
+<node TEXT="name - 属性变量的名称" ID="ID_1233345133" CREATED="1759392142959" MODIFIED="1759392143359"/>
+<node TEXT="返回值 ：GLint - 属性的位置索引（-1 表示未找到）" ID="ID_1263407996" CREATED="1759392148635" MODIFIED="1759392148912"/>
+</node>
+<node TEXT="glGetUniformLocation" ID="ID_904970723" CREATED="1759392156602" MODIFIED="1759392157024">
+<node TEXT="program - 目标程序对象 ID" ID="ID_260631183" CREATED="1759392169286" MODIFIED="1759392173605"/>
+<node TEXT="name - 统一变量的名称" ID="ID_43013405" CREATED="1759392174686" MODIFIED="1759392175226"/>
+<node TEXT="返回值 ：GLint - 统一变量的位置索引（-1 表示未找到）" ID="ID_1864572692" CREATED="1759392179737" MODIFIED="1759392180023"/>
+<node TEXT="在已编译链接的着色器程序中查找名为samp的 uniform 变量，并返回其位置索引。" POSITION="bottom_or_right" ID="ID_1789443633" CREATED="1751108289172" MODIFIED="1751108296372"/>
+<node TEXT="Uniform 变量在着色器中是全局且只读的，OpenGL 通过位置索引而非名称来快速访问它们。此函数建立了从名称到索引的映射。" POSITION="bottom_or_right" ID="ID_1816390365" CREATED="1751108541234" MODIFIED="1751108543136"/>
+<node TEXT="初始化阶段查询所有需要的 uniform 变量位置，避免重复查询。" POSITION="bottom_or_right" ID="ID_694218050" CREATED="1751108552854" MODIFIED="1751108553944"/>
+<node TEXT="调试时检查变量是否正确链接（若返回-1，可能是变量名拼写错误或未被使用）" POSITION="bottom_or_right" ID="ID_317665084" CREATED="1751108563906" MODIFIED="1751108564792"/>
+</node>
+<node TEXT="glGetActiveUniform" ID="ID_376611748" CREATED="1759392192771" MODIFIED="1759392193027"/>
+<node TEXT="glUniform[1234][ifd]" ID="ID_675555225" CREATED="1759392237697" MODIFIED="1759392238129">
+<node TEXT="location - 统一变量的位置索引" ID="ID_289336609" CREATED="1759392242571" MODIFIED="1759392247962"/>
+<node TEXT="value(s) - 要设置的值（根据维度和类型变化）" ID="ID_1989662707" CREATED="1759392248639" MODIFIED="1759392249062"/>
+<node TEXT="// 设置1个浮点数（如alpha值）&#xa;glUniform1f(alphaLocation, 0.5f);" ID="ID_1592517917" CREATED="1759392254305" MODIFIED="1759392254877"/>
+<node TEXT="// 设置3个整数（如光源位置）&#xa;glUniform3i(lightPosLocation, 10, 20, 30);" ID="ID_1079268056" CREATED="1759392259535" MODIFIED="1759392259887"/>
+</node>
+<node TEXT="glUniform[1234][ifd]v" ID="ID_363720416" CREATED="1759392268929" MODIFIED="1759392269227">
+<node TEXT="location - 统一变量的位置索引" ID="ID_771179791" CREATED="1759392273185" MODIFIED="1759392277785"/>
+<node TEXT="count - 数组元素数量" ID="ID_1715752082" CREATED="1759392278079" MODIFIED="1759392278428"/>
+<node TEXT="value - 指向数组的指针" ID="ID_1223104693" CREATED="1759392282337" MODIFIED="1759392282761"/>
+<node TEXT="float color[3] = {1.0f, 0.5f, 0.2f};&#xa;// 通过数组设置3个浮点数&#xa;glUniform3fv(colorLocation, 1, color);" ID="ID_1132870966" CREATED="1759392303911" MODIFIED="1759392304281"/>
+</node>
+<node TEXT="glUniformMatrix[234][fd]v" ID="ID_1126966292" CREATED="1759392328827" MODIFIED="1759392329158">
+<node TEXT="location - 统一变量的位置索引" ID="ID_1079666896" CREATED="1759392333472" MODIFIED="1759392339343"/>
+<node TEXT="count - 矩阵数量" ID="ID_354034937" CREATED="1759392342785" MODIFIED="1759392343077"/>
+<node TEXT="transpose - 是否转置矩阵（通常为GL_FALSE）" ID="ID_792991229" CREATED="1759392347391" MODIFIED="1759392355662"/>
+<node TEXT="value - 指向矩阵数据的指针" ID="ID_746990592" CREATED="1759392356748" MODIFIED="1759392357100"/>
+</node>
+</node>
+<node TEXT="最佳实践" FOLDED="true" POSITION="bottom_or_right" ID="ID_1156521087" CREATED="1759392833508" MODIFIED="1759392837450">
+<node TEXT="显式初始化所有用到的 uniform变量" ID="ID_606281526" CREATED="1759392837705" MODIFIED="1759393005910"/>
+<node TEXT="减少 glUniform 的调用频率" ID="ID_671494609" CREATED="1759393021784" MODIFIED="1759393022349">
+<node TEXT="glUniform调用需要与 GPU 通信，涉及状态同步，频繁调用会产生显著开销（尤其是每帧多次调用时）。" ID="ID_469493362" CREATED="1759393040040" MODIFIED="1759393041325"/>
+<node TEXT="仅在 uniform 的值发生变化时才调用glUniform" ID="ID_109722999" CREATED="1759393046765" MODIFIED="1759393047165"/>
+</node>
+<node TEXT="缓存 glGetUniformLocation 的结果" ID="ID_1840616023" CREATED="1759393052073" MODIFIED="1759393052327">
+<node TEXT="glGetUniformLocation需要查询着色器程序的内部状态，涉及 OpenGL 驱动的查表操作，开销较高（尤其每帧调用时）" ID="ID_469482636" CREATED="1759393062844" MODIFIED="1759393063773"/>
+<node TEXT="在程序初始化阶段（如着色器链接完成后）调用一次glGetUniformLocation，将返回的位置（location）存储在变量中，后续直接使用该变量调用glUniform" ID="ID_673755008" CREATED="1759393084290" MODIFIED="1759393084739"/>
+</node>
+<node TEXT="检查 glGetUniformLocation 的返回值（-1）" ID="ID_1532920188" CREATED="1759393095537" MODIFIED="1759393096673">
+<node TEXT="返回 - 1 的两种常见情况" ID="ID_606397275" CREATED="1759393098170" MODIFIED="1759393105306">
+<node TEXT="着色器中 uniform 变量名拼写错误" ID="ID_708158000" CREATED="1759393111387" MODIFIED="1759393112143"/>
+<node TEXT="uniform 变量在着色器中声明但未被实际使用（被编译器 / 链接器优化移除）" ID="ID_952191010" CREATED="1759393119359" MODIFIED="1759393119725"/>
+</node>
+</node>
+<node TEXT="避免运行时频繁修改顶点缓冲区" ID="ID_1671861128" CREATED="1759393125387" MODIFIED="1759393125648">
+<node TEXT="顶点缓冲区（VBO）的数据存储在 GPU 内存中，运行时修改需要通过 CPU 向 GPU 传输数据（如glBufferSubData）或映射缓冲区（glMapBuffer），这两种操作都有较高开销（尤其频繁执行时）" ID="ID_849780553" CREATED="1759393135735" MODIFIED="1759393136549"/>
+<node TEXT="静态数据（如地形、建筑）使用GL_STATIC_DRAW模式，加载后不再修改；" ID="ID_439889121" CREATED="1759393141528" MODIFIED="1759393141824"/>
+<node TEXT="动态数据（如粒子系统）使用GL_DYNAMIC_DRAW或GL_STREAM_DRAW，并批量更新以减少传输次数" ID="ID_1009352386" CREATED="1759393148621" MODIFIED="1759393148910"/>
+</node>
+<node TEXT="合并小对象以减少绘制调用" ID="ID_177603120" CREATED="1759393181720" MODIFIED="1759393181992">
+<node TEXT="每次绘制调用（如glDrawArrays、glDrawElements）会产生固定开销（如状态验证、绘制命令提交），且小对象绘制时 GPU 的并行单元利用率极低（多数核心空闲）。" ID="ID_301491026" CREATED="1759393188580" MODIFIED="1759393189342"/>
+<node TEXT="合并多个小对象的顶点数据到一个缓冲区，通过索引区分不同对象" ID="ID_534930288" CREATED="1759393194973" MODIFIED="1759393195241"/>
+<node TEXT="使用实例化渲染（glDrawArraysInstanced）批量绘制相同类型的对象（如树木、粒子）。" ID="ID_718251044" CREATED="1759393200736" MODIFIED="1759393201064"/>
+</node>
+</node>
+<node TEXT="可能的扩展" FOLDED="true" POSITION="bottom_or_right" ID="ID_515167549" CREATED="1759393268992" MODIFIED="1759393272713">
+<node TEXT="可能的扩展&#xa;•创建一个日志文件系统，而不是打印输出系统，这样你可以扫描每个加载的着色器的大量信息。&#xa;•较大的项目会使用许多不同的着色器程序。建立一个着色器管理器（Shader Manager）接口或类来加载着色器，并确保着色器被重复使用，而不是多次加载，是有意义的。&#xa;• 未来我们有时会使用几何着色器和细分着色器，因此我们可以考虑升级我们的着色器功能，以处理不仅仅是顶点和片段着色器。&#xa;我们只需设置一些布尔标志为真或假，以指示加载了哪些类型的着色器，然后再进行附加和链接。&#xa;• 如果你有一个着色器管理器，并且已经编写了类似setUniform（shader_index, value）的函数，那么它可以先检查该着色器是否正在使用（这是常见的错误原因）。" ID="ID_976578804" CREATED="1759393272923" MODIFIED="1759393274029"/>
 </node>
 </node>
 <node TEXT="顶点相关" FOLDED="true" ID="ID_750711262" CREATED="1751074725278" MODIFIED="1751074736514">
@@ -636,7 +722,7 @@
 </node>
 </node>
 </node>
-<node TEXT="支持的图元类型" FOLDED="true" POSITION="bottom_or_right" ID="ID_390197041" CREATED="1751097957625" MODIFIED="1751097973863">
+<node TEXT="支持的图元类型" POSITION="bottom_or_right" ID="ID_390197041" CREATED="1751097957625" MODIFIED="1751097973863">
 <node TEXT="GL_TRIANGLES" ID="ID_1234373526" CREATED="1751097974260" MODIFIED="1751097993203">
 <node TEXT="顶点按 (0,1,2), (3,4,5), (6,7,8)... 分组绘制三角形" ID="ID_990615396" CREATED="1751098004667" MODIFIED="1751098007594"/>
 <node TEXT="每三个顶点构成独立三角形" ID="ID_298899363" CREATED="1751098091800" MODIFIED="1751098092802"/>
@@ -662,6 +748,23 @@
 <node TEXT=" 顶点依次连接成闭合环（最后一点与第一点连接）     " ID="ID_1102605703" CREATED="1751098186618" MODIFIED="1751098189396"/>
 <node TEXT="  顶点按 0→1→2→...→n→0 顺序连接，形成闭合折线       " ID="ID_289713482" CREATED="1751098192353" MODIFIED="1751098197098"/>
 <node TEXT="环形进度条、雷达图边框" ID="ID_520435639" CREATED="1751098198205" MODIFIED="1751098199107"/>
+</node>
+</node>
+<node TEXT="如何渲染线框模式" POSITION="bottom_or_right" ID="ID_1126091139" CREATED="1759393419031" MODIFIED="1759393419410">
+<node ID="ID_1399849361" CREATED="1759393429557" MODIFIED="1759393436789"><richcontent TYPE="NODE">
+
+<html>
+  <head>
+    
+  </head>
+  <body>
+    <p>
+      <content ename="content"/>
+      glPolygonMode(GL_FRONT, GL_LINE);
+    </p>
+  </body>
+</html>
+</richcontent>
 </node>
 </node>
 </node>
@@ -716,7 +819,7 @@
 </node>
 <node TEXT="显卡上的纹理单元。" POSITION="bottom_or_right" ID="ID_985494309" CREATED="1751107160381" MODIFIED="1751107160381"/>
 </node>
-<node TEXT="使用方法" ID="ID_704468718" CREATED="1751108991820" MODIFIED="1751108995918">
+<node TEXT="使用方法" FOLDED="true" ID="ID_704468718" CREATED="1751108991820" MODIFIED="1751108995918">
 <node TEXT="1. 纹理数据加载并生成纹理对象" ID="ID_1750775690" CREATED="1751109361781" MODIFIED="1751109764176">
 <node ID="ID_796966857" CREATED="1751109399071" MODIFIED="1751109781122"><richcontent TYPE="NODE">
 
@@ -902,7 +1005,7 @@
 </node>
 </node>
 </node>
-<node TEXT="多级渐远纹理贴图" ID="ID_1374973511" CREATED="1751110101546" MODIFIED="1751110107484">
+<node TEXT="多级渐远纹理贴图" FOLDED="true" ID="ID_1374973511" CREATED="1751110101546" MODIFIED="1751110107484">
 <node TEXT="它需要用各种分辨率创建纹理图像的不同版本。然后，OpenGL使用最适合正在处理的这一点处的分辨率的纹理图像进行纹理贴图。更好的是，可以为被贴图的区域使用最适合的分辨率的纹理图像的平均颜色" ID="ID_24966653" CREATED="1751110163946" MODIFIED="1751110166500"/>
 <node TEXT="传统纹理渲染中，当物体远离摄像机时，若直接使用高分辨率纹理会导致两大问题" ID="ID_1926252896" CREATED="1751110766339" MODIFIED="1751110767577">
 <node TEXT="采样走样（Aliasing）：纹理被缩小时，像素采样频率不足，导致锯齿、摩尔纹等失真现象。" ID="ID_371456259" CREATED="1751110785383" MODIFIED="1751110785383"/>
@@ -927,7 +1030,7 @@
 </node>
 </node>
 </node>
-<node TEXT="光照" FOLDED="true" ID="ID_1628914802" CREATED="1751111456044" MODIFIED="1751111461717">
+<node TEXT="光照" ID="ID_1628914802" CREATED="1751111456044" MODIFIED="1751111461717">
 <node TEXT="光照的影响" FOLDED="true" POSITION="bottom_or_right" ID="ID_1249244803" CREATED="1751111605591" MODIFIED="1751111648388">
 <node TEXT="光源类型及其环境、漫反射和镜面反射特性；" ID="ID_1781206296" CREATED="1751111662462" MODIFIED="1751111662462"/>
 <node TEXT="对象材质的环境、漫反射和镜面反射特征；" POSITION="bottom_or_right" ID="ID_534908070" CREATED="1751111662462" MODIFIED="1751111662462"/>
@@ -1147,8 +1250,8 @@
 </node>
 </node>
 </node>
-<node TEXT="如何把数据发送给OpenGL管线" ID="ID_1617799317" CREATED="1751091177566" MODIFIED="1752589989978">
-<node TEXT="通过顶点属性的缓冲区" FOLDED="true" ID="ID_489801058" CREATED="1751091237901" MODIFIED="1751091393392">
+<node TEXT="如何把数据发送给OpenGL管线" FOLDED="true" ID="ID_1617799317" CREATED="1751091177566" MODIFIED="1752589989978">
+<node TEXT="通过顶点属性的缓冲区" ID="ID_489801058" CREATED="1751091237901" MODIFIED="1751091393392">
 <node TEXT="流程" ID="ID_1526083623" CREATED="1751091393794" MODIFIED="1751091397676">
 <node TEXT="只做一次的步骤" POSITION="bottom_or_right" ID="ID_1912191049" CREATED="1751091307166" MODIFIED="1751091311886">
 <node TEXT="创建一个缓冲区" POSITION="bottom_or_right" ID="ID_1460783287" CREATED="1751091276367" MODIFIED="1751091276367"/>
@@ -1205,7 +1308,7 @@
 <node TEXT="glBindVertexArray：绑定 VAO 以开始 / 结束记录状态。" ID="ID_1617038" CREATED="1751093545037" MODIFIED="1751093545037"/>
 </node>
 <node TEXT="使用方法" ID="ID_1482838560" CREATED="1751095582857" MODIFIED="1751095590993">
-<node TEXT="// 1. 创建 VAO&#xa;GLuint VAO;&#xa;glGenVertexArrays(1, &amp;VAO);&#xa;&#xa;// 2. 绑定 VAO（开始记录顶点属性配置）&#xa;glBindVertexArray(VAO);&#xa;&#xa;// 3. 绑定 VBO 并填充数据（与 VBO 操作相同）&#xa;glBindBuffer(GL_ARRAY_BUFFER, VBO);&#xa;glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);&#xa;&#xa;// 4. 配置顶点属性（位置）&#xa;glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);&#xa;glEnableVertexAttribArray(0);&#xa;&#xa;// 5. 配置顶点属性（颜色）&#xa;glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));&#xa;glEnableVertexAttribArray(1);&#xa;&#xa;// 6. 解绑 VAO（结束记录）&#xa;glBindVertexArray(0);" ID="ID_100903621" CREATED="1751095591651" MODIFIED="1751095594503"/>
+<node TEXT="// 1. 创建 VAO&#xa;GLuint VAO;&#xa;glGenVertexArrays(1, &amp;VAO);&#xa;&#xa;// 2. 绑定 VAO（开始记录顶点属性配置）&#xa;glBindVertexArray(VAO);&#xa;&#xa;// 3. 绑定 VBO 并填充数据（与 VBO 操作相同）&#xa;glBindBuffer(GL_ARRAY_BUFFER, VBO);&#xa;glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);&#xa;&#xa;// 4. 配置顶点属性（位置）&#xa;glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);&#xa;glEnableVertexAttribArray(0);&#xa;&#xa;// 5. 配置顶点属性（颜色）&#xa;glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));&#xa;glEnableVertexAttribArray(1);&#xa;&#xa;// 6. 启用属性&#xa;glEnableVertexAttribArray( 0 );&#xa;glEnableVertexAttribArray( 1 );&#xa;&#xa;// 7. 解绑 VAO（结束记录）&#xa;glBindVertexArray(0);" ID="ID_100903621" CREATED="1751095591651" MODIFIED="1759395358154"/>
 </node>
 </node>
 <node TEXT="VAO和VBO的对比" ID="ID_1360119625" CREATED="1751093573685" MODIFIED="1751093578994">
@@ -1290,6 +1393,24 @@
 <node TEXT="着色器存储块，它本质上是一个着色器可以写入的缓冲区" ID="ID_1916048576" CREATED="1751098951621" MODIFIED="1751098952634"/>
 </node>
 </node>
+<node TEXT="如何为单个 3D 对象使用多个顶点缓冲区" FOLDED="true" ID="ID_1985341126" CREATED="1759395526634" MODIFIED="1759395542883">
+<node TEXT="顶点缓冲区（VBO）的作用不只是存储 3D 顶点的位置信息（比如(x,y,z)坐标），还可以存储其他与顶点相关的数据，比如2D 纹理坐标，3D法向量" ID="ID_1462521593" CREATED="1759395561779" MODIFIED="1759395588158"/>
+<node TEXT="这些数据会按 “顶点” 为单位被读取" ID="ID_1351062559" CREATED="1759395599361" MODIFIED="1759395599729">
+<node TEXT="假设你有一个包含 3 个顶点的对象，并且为它创建了 3 个顶点缓冲区，分别存储" ID="ID_238497563" CREATED="1759395608070" MODIFIED="1759395611125">
+<node TEXT="3D 位置（[P1, P2, P3]）；" ID="ID_1246793856" CREATED="1759395614157" MODIFIED="1759395617970"/>
+<node TEXT="2D 纹理坐标（[T1, T2, T3]）；" ID="ID_1221915434" CREATED="1759395618191" MODIFIED="1759395618529"/>
+<node TEXT="3D 法向量（[N1, N2, N3]）。" ID="ID_1167517293" CREATED="1759395622570" MODIFIED="1759395622842"/>
+</node>
+<node TEXT="当你通过顶点数组对象（VAO）告诉 OpenGL 绘制这 3 个顶点时，OpenGL 会并行启动 3 个顶点着色器（每个顶点对应一个）" ID="ID_1987407348" CREATED="1759395631821" MODIFIED="1759395632082">
+<node TEXT="第 1 个顶点着色器会接收 P1（位置）、T1（纹理坐标）、N1（法向量）；" ID="ID_1931819112" CREATED="1759395636970" MODIFIED="1759395640372"/>
+<node TEXT="第 2 个顶点着色器会接收 P2、T2、N2" ID="ID_1793141840" CREATED="1759395641005" MODIFIED="1759395641275"/>
+<node TEXT="第 3 个顶点着色器会接收 P3、T3、N3" ID="ID_982411929" CREATED="1759395644483" MODIFIED="1759395644741"/>
+</node>
+</node>
+<node TEXT="多个顶点缓冲区的数据如何 “对应” 到每个顶点？" ID="ID_932916796" CREATED="1759395662259" MODIFIED="1759395662610">
+<node TEXT="VAO 会记录每个顶点缓冲区中数据的 “布局”—— 比如每个变量的类型（是 3D 向量还是 2D 向量）、每个变量占用的内存大小等，确保不同缓冲区中属于同一顶点的数据能被正确匹配并传递给顶点着色器。" ID="ID_237480503" CREATED="1759395684776" MODIFIED="1759395685798"/>
+</node>
+</node>
 <node TEXT="核心模式和立即模式" ID="ID_1616515229" CREATED="1752288247893" MODIFIED="1752288291638">
 <node TEXT="核心模式" ID="ID_181473830" CREATED="1752288291886" MODIFIED="1752288302243">
 <node TEXT="调用函数可直接绘图，如 glBegin/glEnd 包裹顶点绘制，简单易上手" ID="ID_1132759479" CREATED="1752288322214" MODIFIED="1752288323858"/>
@@ -1352,7 +1473,7 @@
 </node>
 </node>
 </node>
-<node TEXT="数学" FOLDED="true" POSITION="bottom_or_right" ID="ID_1614820575" CREATED="1750776198280" MODIFIED="1750776201448">
+<node TEXT="数学" POSITION="bottom_or_right" ID="ID_1614820575" CREATED="1750776198280" MODIFIED="1750776201448">
 <edge COLOR="#7c007c"/>
 <node TEXT="矩阵" FOLDED="true" ID="ID_556654557" CREATED="1750776201578" MODIFIED="1751077453988">
 <node TEXT="旋转矩阵" ID="ID_1469351974" CREATED="1750777683012" MODIFIED="1750777689018">
